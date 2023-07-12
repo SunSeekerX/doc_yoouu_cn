@@ -49,7 +49,23 @@ set http_proxy=http://127.0.0.1:7890 & set https_proxy=http://127.0.0.1:7890
 set http_proxy=http://127.0.0.1:10809 & set https_proxy=http://127.0.0.1:10809
 ```
 
-## Mac shell
+### WSL
+
+首先在 powershell 查看 wsl 网卡信息
+
+```powershell
+ipconfig /all
+```
+
+把下面的 ip 改成 wsl 的网卡 ip 地址
+
+```shell
+export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
+```
+
+## Mac 
+
+### shell
 
 ```shell
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
