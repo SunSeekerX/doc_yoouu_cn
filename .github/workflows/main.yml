@@ -1,0 +1,64 @@
+name: note build
+# 触发workflow的条件
+on:
+  push:
+    # 只有master分支发生push事件时，才会触发workflow
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  SERVER_HOST: ${{ secrets.SERVER_HOST }} # 服务器IP地址
+  SERVER_PORT: ${{ secrets.SERVER_PORT }} # 服务器端口
+  USER_NAME: ${{ secrets.USER_NAME }} # 服务器用户名
+  SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器私钥
+  cache-name: note
+
+# jobs表示执行的一项或多项任务
+jobs:
+  build: # 任务的job_id，具体名称自定义，这里build代表打包
+    runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 16
+          cache: 'yarn'
+      #缓存依赖
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        env:
+          cache-name: cache-node-modules
+        with:
+          # 需要缓存的文件的路径
+          path: ./node_modules
+          # 对缓存的文件指定的唯一标识
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package.json') }}
+          # 用于没有再找目标key的缓存的backup选项
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      # 装依赖
+      - name: Install
+        run: yarn
+
+      # 打包
+      - name: Build
+        run: yarn docs:build
+
+      # 上传打包资源
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v4.1.8
+        env:
+          SSH_PRIVATE_KEY: ${{ env.SERVER_PRIVATE_KEY }}
+          ARGS: '-avz'
+          SOURCE: 'docs/.vuepress/dist/'
+          REMOTE_HOST: ${{ env.SERVER_HOST }}
+          REMOTE_USER: ${{ env.USER_NAME }}
+          REMOTE_PORT: ${{ env.SERVER_PORT }}
+          TARGET: /www/wwwroot/doc.yoouu.cn

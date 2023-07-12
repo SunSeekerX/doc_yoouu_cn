@@ -1,0 +1,46 @@
+{
+  "name": "sunseekerx-notebook",
+  "version": "2.0.0",
+  "private": true,
+  "description": "sunseekerx's notebook.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "docs:build": "cross-env NODE_OPTIONS=--max_old_space_size=4096 vuepress build docs",
+    "docs:clean-dev": "vuepress dev docs --clean-cache",
+    "docs:dev": "vuepress dev docs",
+    "gc": "git add -A && git-cz && git pull && git push",
+    "postinstall": "husky install",
+    "lint:lint-staged": "lint-staged",
+    "lint:prettier": "prettier --write --loglevel warn \"./**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "pkg:sort": "npx sort-package-json",
+    "serve": "vuepress dev docs"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ],
+    "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
+      "prettier --write--parser json"
+    ],
+    "package.json": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@vuepress/client": "2.0.0-beta.64",
+    "@vuepress/plugin-google-analytics": "2.0.0-beta.64",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^2.8.8",
+    "vue": "3.3.4",
+    "vuepress": "2.0.0-beta.64",
+    "vuepress-plugin-search-pro": "2.0.0-beta.230",
+    "vuepress-theme-hope": "2.0.0-beta.230"
+  },
+  "packageManager": "yarn@3.6.1"
+}
