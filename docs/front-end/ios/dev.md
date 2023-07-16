@@ -1,9 +1,5 @@
 # Ios - 开发
 
-## 信息
-
-开发者官网：[https://developer.apple.com/account/](https://developer.apple.com/account/)
-
 ## uniapp ios 原生插件集成 cocoapods
 
 [https://cocoapods.org/](https://cocoapods.org/)
@@ -61,6 +57,236 @@ gem sources -l
 # 更新 gem
 sudo gem update --system -V --http-proxy=http://127.0.0.1:7890
 ```
+
+### uniapp cocoapods 插件包使用
+
+#### 1.初始化
+
+```shell
+# 项目根目录执行
+pod init
+# 安装一下
+pod install
+```
+
+Podfile 参考
+
+```ruby
+platform :ios, '11.0'
+
+# 忽略所有警告
+inhibit_all_warnings!
+
+workspace 'uni-plugin-ios-starter'
+
+target 'uni-plugin-ios-starter' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  # Pods for uni-plugin-ios-starter
+  # 重要： 导入自定义组件库
+  pod 'sm-boc-aas-pay', :path =>'./super-modules/sm-boc-aas-pay'
+  pod 'sm-pod-lib-starter', :path =>'./super-modules/sm-pod-lib-starter'
+end
+
+# 关闭 bitcode，不关闭上传 appstore 报错
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+    end
+  end
+end
+
+```
+
+#### 2.创建一个库
+
+```shell
+# 示例，需要在库所在的文件夹下执行，例如我的在项目根目录下的 super-modules
+pod lib create sm-pod-lib-starter
+```
+
+#### 3.删除不需要的东西
+
+默认创建的库是一个完成的项目里面包含了一些 git example 这样的东西可以删除掉。
+
+#### 4.修改库的 sm-pod-lib-starter.podspec 文件
+
+```ruby
+#
+# Be sure to run `pod lib lint sm-pod-lib-starter.podspec' to ensure this is a
+# valid spec before submitting.
+#
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
+#
+
+Pod::Spec.new do |s|
+  s.name             = 'sm-pod-lib-starter'
+  s.version          = '0.1.0'
+  s.summary          = 'A short description of sm-pod-lib-starter.'
+
+# This description is used to generate tags and improve search results.
+#   * Think: What does it do? Why did you write it? What is the focus?
+#   * Try to keep it short, snappy and to the point.
+#   * Write the description between the DESC delimiters below.
+#   * Finally, don't worry about the indent, CocoaPods strips it!
+
+  s.description      = <<-DESC
+TODO: Add long description of the pod here.
+                       DESC
+
+  s.homepage         = 'https://github.com/SunSeekerX/sm-pod-lib-starter'
+  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'SunSeekerX' => '1647800606@qq.com' }
+  s.source           = { :git => 'https://github.com/SunSeekerX/sm-pod-lib-starter.git', :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+
+  s.ios.deployment_target = '11.0'
+
+  s.source_files = 'sm-pod-lib-starter/Classes/**/*'
+  s.static_framework = true
+  s.xcconfig         = {
+    'USER_HEADER_SEARCH_PATHS' => [
+        '"$(SRCROOT)/../../SDK/inc"/**'
+    ]
+  }
+  s.user_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
+
+  # s.resource_bundles = {
+  #   'sm-pod-lib-starter' => ['sm-pod-lib-starter/Assets/*.png']
+  # }
+
+  # s.public_header_files = 'Pod/Classes/**/*.h'
+  # s.frameworks = 'UIKit', 'MapKit'
+  # s.dependency 'AFNetworking', '~> 2.3'
+end
+
+```
+
+#### 5.主项目添加库依赖
+
+在主项目的 Podfile 田添加库依赖，类似于
+
+```ruby
+target 'uni-plugin-ios-starter' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  # Pods for uni-plugin-ios-starter
+  # 重要： 导入自定义组件库
+  pod 'sm-boc-aas-pay', :path =>'./super-modules/sm-boc-aas-pay'
+  pod 'sm-pod-lib-starter', :path =>'./super-modules/sm-pod-lib-starter'
+end
+```
+
+#### 6.重新安装
+
+```shell
+rm -rf Pods
+rm -rf Podfile.lock
+```
+
+#### 7.添加其他链接标识
+
+否则主项目无法找到 pod 创建的库
+
+在主项目的 build settings 里面搜索 Other linker Flags 添加 $(inherited)，否则无法加载pod lib
+
+#### 8.打开 uni-plugin-ios-starter.xcworkspace 进行开发
+
+#### 9.编译项目测试
+
+### uniapp cocoapods 插件包一些问题
+
+#### 如果插件类找不到可以输出一下
+
+在 AppDelegate.m 里面 didFinishLaunchingWithOptions 输出以下测试 log
+
+```c
+NSLog(@"SsxSuperModuleCrisp=%@", NSClassFromString(@"SsxSuperModuleCrisp"));
+```
+
+#### 添加了新的类如果出现一些找不到的问题可以使用
+
+```shell
+# 更新下 pod 依赖
+pod update
+```
+
+## 完美修改项目名
+
+### 1.修改工程名字
+
+打开工程 点击工程名称 回车 直接修改
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast.png)
+
+此时会弹出一个对话框，点击 Rename
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130547926.png)
+
+### 2.修改 scheme 名称
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130615698.png)
+
+弹出对话框 会车直接修改 修改完成之后 点击 Close
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130638915.png)
+
+### 3.修改目录名称
+
+点击工程内需要修改名字的目录 回车直接修改
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130820602.png)
+
+点击 Find 选择 查找替换
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130839907.png)
+
+点击全部替换
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130859173.png)
+
+部分替换不了的 手动点进去修改
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130914340.png)
+
+### 4.修改实体文件夹名称
+
+在文件夹内 将对应的文件夹回车直接修改
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131000048.png)
+
+### 5.修改.xcodeproj 右键显示包内容
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131057710.png)
+
+双击打开.pbxproj 文件
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131118418.png)
+
+查找替换全部
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131206417.png)
+
+### 6.如果有 pod (无 pod 忽略)
+
+删除原来的 pod 对应的三项
+
+![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131238030.png)
+
+重新 pod install （注意 不要用 pod install --verbose --no-repo-update ）
+
+### 7.修改 target 名称
+
+选中 target 名称按回车就能修改。
+
+### 8.总结
+
+1. 修改完成搜索原来的名称应该是没有结果的，建议用 `vscode` 搜索项目下所有的文件，比如我的关键词是 `HBuilder`
+2. 全局替换习惯用 `vscode` 会比较方便和直观一点
+3. 全局替换应该要在 `xcode` 内修改好其他可以直接修改名字的地方之后进行
 
 ## xcode
 
