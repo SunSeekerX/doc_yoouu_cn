@@ -1,8 +1,66 @@
-# Ios
+# Ios - 开发
 
 ## 信息
 
 开发者官网：[https://developer.apple.com/account/](https://developer.apple.com/account/)
+
+## uniapp ios 原生插件集成 cocoapods
+
+[https://cocoapods.org/](https://cocoapods.org/)
+
+### ruby 安装和卸载
+
+mac 自带了一个 ruby 版本比较低，不用它的 🤫
+
+```shell
+# 查看 ruby 的安装目录
+which -a ruby
+# 输出两行说明已安装过
+# 路径为/usr/bin/ruby 是 Mac 自带的【切记勿删！】
+# 路径为/usr/local/opt/ruby/bin/ruby 是Homebrew 安装的
+# 安装命令
+brew install ruby
+# 查看 ruby 版本
+ruby -v
+# 如果 ruby 版本仍然是 Mac 自带的版本，执行以下两条命令
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+# 查看是否替换
+ruby -v
+# 可以使用以下命令来删除所有 gem 包
+sudo gem uninstall --all
+# 可以使用以下命令来删除 gem 包的安装目录
+sudo rm -rf /usr/local/lib/ruby/gems
+```
+
+### cocoapods 安装和卸载
+
+```shell
+sudo gem install -n /usr/local/bin cocoapods -V
+
+# 代理安装，升级也是一样的命令
+sudo gem install -n /usr/local/bin cocoapods -V --http-proxy=http://127.0.0.1:7890
+
+# 检查安装
+pod --version
+
+# 使用淘宝镜像
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+gem sources -l
+
+# 使用清华大学镜像
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+gem sources -l
+
+# 换回官方的源
+gem sources --remove https://gems.ruby-china.com/
+gem sources --clear-all
+gem sources -a https://rubygems.org/
+gem sources -l
+
+# 更新 gem
+sudo gem update --system -V --http-proxy=http://127.0.0.1:7890
+```
 
 ## xcode
 

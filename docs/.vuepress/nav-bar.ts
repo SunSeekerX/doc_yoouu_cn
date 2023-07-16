@@ -108,11 +108,15 @@ export const zhNavbar = navbar([
         children: [
           {
             text: 'IOS - 概览',
-            link: '/front-end/ios',
+            link: '/front-end/ios/',
+          },
+          {
+            text: 'IOS - 开发',
+            link: '/front-end/ios/dev',
           },
           {
             text: 'IOS - 问题',
-            link: '/front-end/ios-issue',
+            link: '/front-end/ios/issue',
           },
         ],
       },
