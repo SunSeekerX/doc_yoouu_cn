@@ -88,13 +88,21 @@ target 'uni-plugin-ios-starter' do
   pod 'sm-pod-lib-starter', :path =>'./super-modules/sm-pod-lib-starter'
 end
 
-# 关闭 bitcode，不关闭上传 appstore 报错
 post_install do |installer|
+  # 关闭 bitcode，不关闭上传 appstore 报错
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['ENABLE_BITCODE'] = 'NO'
     end
   end
+  # 改变 cocopods 安装的库不支持 11.0 以前的 ios 系统
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+    end
+ end
 end
 
 ```
