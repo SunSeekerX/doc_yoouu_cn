@@ -220,38 +220,49 @@ brew --version
    export JENV_ROOT=/usr/local/opt/jenv
    ```
 
-4. To make sure `JAVA_HOME` is set, make sure to enable the `export` plugin:
+4. 添加安装的 JAVA 到 jEnv然后就可以了，如果没添加会出现类似下面的结果
+
+   ```
+   $ jenv doctor                                                                                                     ‹system: ruby 2.6.10p210›
+   [OK]	No JAVA_HOME set
+   [ERROR]	Java binary in path is not in the jenv shims.
+   [ERROR]	Please check your path, or try using /path/to/java/home is not a valid path to java installation.
+   	PATH : /usr/local/Cellar/jenv/0.5.6/libexec/libexec:/Users/ssx/.jenv/shims:/Users/ssx/.jenv/bin:/Users/ssx/.nvm/versions/node/v18.17.0/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+   [OK]	Jenv is correctly loaded
+   ```
+
+5. To make sure `JAVA_HOME` is set, make sure to enable the `export` plugin:
 
    ```shell
    jenv enable-plugin export
    exec $SHELL -l
    ```
 
-5. jEnv 命令
+6. jEnv 命令
 
    ```shell
    # 检查运行是否正常
    jenv doctor
-   
+
    # 添加到 jEnv
    jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_321.jdk/Contents/Home
-   
+
    # 显示已经添加的版本
    jenv versions
-   
+
    # 查看版本
    jenv --version
-   
+
    # 设置全局 jdk 版本
    jenv global oracle64-1.6.0.39
    # 设置文件夹版本 // Configure local version (per directory)
    jenv local oracle64-1.6.0.39
    # 设置当前会话版本
    jenv shell oracle64-1.6.0.39
-   
+
    # 查看安装的 jdk 版本
    /usr/libexec/java_home -V
-   
+
    # 输出
     ssx@ssxdeMac-mini  ~  /usr/libexec/java_home -V
    Matching Java Virtual Machines (3):
