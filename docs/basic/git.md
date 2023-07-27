@@ -36,6 +36,8 @@ git config --global color.ui true # 显示git相关颜色
 ssh-keygen -t rsa -b 4096 -C "sunseekerxi@gmail.com"
 # 把密钥放在剪贴板
 clip < ~/.ssh/id_rsa.pub
+# mac
+cat ~/.ssh/id_rsa.pub | pbcopy
 
 # 添加所有目录为安全目录
 git config --global --add safe.directory "*"
