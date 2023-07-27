@@ -97,6 +97,15 @@ git config --global -e
 git config --global --add safe.directory "*"
 ```
 
+## mac 安装 git 验证中心
+
+解决 mac git 无法使用账号密码登录
+
+```
+brew tap microsoft/git
+brew install --cask git-credential-manager-core
+```
+
 ## 多个 git 账号
 
 C:\Users\ssx\.ssh\config
