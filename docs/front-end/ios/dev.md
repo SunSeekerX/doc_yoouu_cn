@@ -205,6 +205,14 @@ rm -rf Podfile.lock
 
 #### 9.编译项目测试
 
+### uniapp ios 原生插件依赖 framework 问题
+
+插件库搜索头文件
+
+```
+FRAMEWORK_SEARCH_PATHS
+```
+
 ### uniapp cocoapods 插件包一些问题
 
 #### 如果插件类找不到可以输出一下
