@@ -19,6 +19,16 @@ git config --global -l
 git config --global -e
 ```
 
+ssh clone 代理
+
+找到你的 ssh 配置文件，没有就新建，例如 Windows -> C:\Users\your-username\\.ssh\config
+
+```
+ProxyCommand connect -S 127.0.0.1:7890 -a none %h %p
+
+...others
+```
+
 ## Windows
 
 ```powershell
@@ -63,7 +73,7 @@ ipconfig /all
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
 ```
 
-## Mac 
+## Mac
 
 ### shell
 
