@@ -123,7 +123,7 @@ Host alias
     HostName github.com
     User git
     PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_zkkrt001@gmail.com
+    IdentityFile ~/.ssh/id_rsa_your_eamil@gmail.com
 ```
 
 如果 git 地址是 `git clone git@github.com:xxxxxx/yyyyyyyyy.git`
