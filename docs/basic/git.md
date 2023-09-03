@@ -110,31 +110,53 @@ brew install --cask git-credential-manager-core
 
 ## 多个 git 账号
 
-C:\Users\ssx\.ssh\config
+1. 生成不同的 ssh key
 
-```
-Host github.com
-    HostName github.com
-    User git
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa
+   ```
+   # 创建一个`ssh key`，直接回车，文件存在，不用的直接删除目录，有用的就直接复制`ssh key`
+   ssh-keygen -t rsa -b 4096 -C "sunseekerxi@gmail.com"
+   # 把密钥放在剪贴板
+   clip < ~/.ssh/id_rsa.pub
+   # mac
+   cat ~/.ssh/id_rsa.pub | pbcopy
+   ```
 
-Host alias
-    HostName github.com
-    User git
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_zkkrt001@gmail.com
-```
+2. 配置 ssh 文件
 
-如果 git 地址是 `git clone git@github.com:xxxxxx/yyyyyyyyy.git`
+   **注意这里配置的是私钥，gihub 添加的是公钥**
 
-换成用
+   C:\Users\your-username\\.ssh\config
 
-```
-git clone git@alias:xxxxxx/yyyyyyyyy.git
-```
+   `ProxyCommand connect -S 127.0.0.1:7890 -a none %h %p` 这一段是 ssh 代理，不用可以不添加
 
-就可以 clone 代码了
+   ```
+   ProxyCommand connect -S 127.0.0.1:7890 -a none %h %p
+
+   # default 默认 git 账户
+
+   Host github.com
+   HostName github.com
+   User git
+   IdentityFile ~/.ssh/id_rsa
+
+   # your_eamil@gmail.com
+   Host two.github.com
+   HostName github.com
+   User zkkrt001@gmail.com
+   IdentityFile ~/.ssh/id_rsa_your_eamil@gmail.com
+   ```
+
+   如果 git 地址是 `git clone git@github.com:xxxxxx/yyyyyyyyy.git`
+
+   换成用
+
+   ```
+   git clone git@alias:xxxxxx/yyyyyyyyy.git
+   ```
+
+   就可以 clone 代码了
+
+3. 到 github 添加 ssh 公钥
 
 ## 常用操作
 
