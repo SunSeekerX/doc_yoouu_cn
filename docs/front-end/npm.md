@@ -274,7 +274,7 @@ pnpm install
 ### 快捷安装
 
 ```shell
-npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 -g --registry=https://registry.npmmirror.com
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog -g --registry=https://registry.npmmirror.com
 ```
 
 ### tbify
