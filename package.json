@@ -9,6 +9,7 @@
     "docs:build": "cross-env NODE_OPTIONS=--max_old_space_size=4096 vuepress build docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache",
     "docs:dev": "vuepress dev docs",
+    "dev": "vuepress dev docs",
     "gc": "git add -A && git-cz && git pull && git push",
     "postinstall": "husky install",
     "lint:lint-staged": "lint-staged",
