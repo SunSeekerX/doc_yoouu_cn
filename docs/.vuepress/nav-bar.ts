@@ -153,6 +153,7 @@ export const zhNavbar = navbar([
           { text: 'Kotlin', link: '/back-end/kotlin' },
           { text: 'Golang', link: '/back-end/golang' },
           { text: 'Rust', link: '/back-end/rust' },
+          { text: 'Python', link: '/back-end/python' },
         ],
       },
       // {

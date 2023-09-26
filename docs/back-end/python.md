@@ -1,5 +1,28 @@
 # Python
 
+[https://www.python.org/](https://www.python.org/)
+
+## 安装
+
+### mac
+
+```shell
+brew install python
+```
+
+### win
+
+```
+
+```
+
+## 常用命令
+
+```shell
+# 检查版本
+python3 --version
+```
+
 ## 三、安装pyenv
 
 1. 在家目录里clone项目:
