@@ -10,14 +10,24 @@
 
 国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器。Docker 官方和国内很多云服务商都提供了国内加速器服务，例如：
 
-- 科大镜像：**https://docker.mirrors.ustc.edu.cn/**
-- 网易：**https://hub-mirror.c.163.com/**
+- 科大镜像：https://docker.mirrors.ustc.edu.cn
+- 网易：https://hub-mirror.c.163.com
 - 阿里云：**https://<你的 ID>.mirror.aliyuncs.com**
-- 七牛云加速器：**https://reg-mirror.qiniu.com**
+- 七牛云加速器：https://reg-mirror.qiniu.com
 
 当配置某一个加速器地址之后，若发现拉取不到镜像，请切换到另一个加速器地址。国内各大云服务商均提供了 Docker 镜像加速服务，建议根据运行 Docker 的云平台选择对应的镜像加速服务。
 
 阿里云镜像获取地址：https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors，登陆后，左侧菜单选中镜像加速器就可以看到你的专属地址了：
+
+### Docker desktop
+
+```json
+"registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com",
+  "https://reg-mirror.qiniu.com"
+  ]
+```
 
 ## 📌 常用命令
 
@@ -562,6 +572,10 @@ mkdir -p /root/app/docker-data/redis && cd /root/app/docker-data/redis
 
 ```bash
 wget http://download.redis.io/redis-stable/redis.conf
+# 配置绑定 ip
+bind 0.0.0.0
+# 密码
+requirepass my-secret-pw
 ```
 
 4、权限
@@ -603,7 +617,15 @@ docker run --name redis \
 --log-opt max-size=100m --log-opt max-file=2 \
 -v /root/app/docker-data/redis/redis.conf:/etc/redis/redis.conf \
 -v /root/app/docker-data/redis:/data \
--d redis:7.0.11 redis-server /etc/redis/redis.conf --appendonly yes
+-d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
+
+# mac
+docker run --name redis7x \
+-p 63799:6379 \
+--log-opt max-size=100m --log-opt max-file=2 \
+-v ~/work/data/redis7x/redis.conf:/etc/redis/redis.conf \
+-v ~/work/data/redis7x:/data \
+-d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
 ```
 
 **说明：**
@@ -654,8 +676,6 @@ docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=
 **mysql 8.x**
 
 ```shell
-docker run --name --restart=always mysql8x -p 33077:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:8.0
-
 docker run  -d  \
 --name mysql8x \
 --privileged=true \
@@ -665,10 +685,26 @@ docker run  -d  \
 -v /home/mysql8/config:/etc/mysql/conf.d  \
 -v /home/mysql8/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
--e TZ=Asia/Shanghai mysql:8.0
+-e TZ=Asia/Shanghai mysql:8.1
 
+# mac
+docker run  -d  \
+--name mysql8x \
+--privileged=true \
+--restart=always \
+-p 33077:3306 \
+-v ~/work/data/mysql8/data:/var/lib/mysql \
+-v ~/work/data/mysql8/config:/etc/mysql/conf.d  \
+-v ~/work/data/logs:/logs \
+-e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e TZ=Asia/Shanghai mysql:8.1
+
+# 开放远程访问
+# 登录 mysql
+mysql -u root -p
+# 开放权限
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'my-secret-pw';
-
+# 刷新权限
 flush privileges;
 ```
 
