@@ -572,9 +572,9 @@ mkdir -p /root/app/docker-data/redis && cd /root/app/docker-data/redis
 
 ```bash
 wget http://download.redis.io/redis-stable/redis.conf
-# 配置绑定 ip
+# 配置绑定 ip，搜索 bind 127.0.0.1 -::1
 bind 0.0.0.0
-# 密码
+# 密码，搜索 requirepass foobared
 requirepass my-secret-pw
 ```
 
@@ -605,6 +605,7 @@ appendonly yes
 
 ```bash
 docker run --name redis \
+--restart=always \
 -p 63799:6379 \
 --log-opt max-size=100m --log-opt max-file=2 \
 -v /root/app/docker-data/redis/redis.conf:/etc/redis/redis.conf \
@@ -613,14 +614,19 @@ docker run --name redis \
 
 # 7.x
 docker run --name redis \
+--restart=always \
 -p 63799:6379 \
 --log-opt max-size=100m --log-opt max-file=2 \
 -v /root/app/docker-data/redis/redis.conf:/etc/redis/redis.conf \
 -v /root/app/docker-data/redis:/data \
 -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
 
+# win
+docker run --name redis7x --restart=always -p 63799:6379 --log-opt max-size=100m --log-opt max-file=2 -v D:\data\redis7x\redis.conf:/etc/redis/redis.conf -v D:\data\redis7x\:/data -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
+
 # mac
 docker run --name redis7x \
+--restart=always \
 -p 63799:6379 \
 --log-opt max-size=100m --log-opt max-file=2 \
 -v ~/work/data/redis7x/redis.conf:/etc/redis/redis.conf \
@@ -686,6 +692,9 @@ docker run  -d  \
 -v /home/mysql8/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
 -e TZ=Asia/Shanghai mysql:8.1
+
+# win
+docker run  -d --name mysql8x --privileged=true --restart=always -p 33077:3306 -v D:\data\mysql8\data:/var/lib/mysql -v D:\data\mysql8\config:/etc/mysql/conf.d -v D:\data\mysql8\logs:/logs -e MYSQL_ROOT_PASSWORD=my-secret-pw -e TZ=Asia/Shanghai mysql:8.1
 
 # mac
 docker run  -d  \
