@@ -810,3 +810,24 @@ docker run -d \
     --restart=always \
     artalk/artalk-go
 ```
+
+### 0x19 Docker 安装 gitness
+
+```shell
+# mac
+docker run -d \
+  -p 3456:3000 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v ~/work/data/gitness:/data \
+  --name gitness \
+  --restart always \
+  harness/gitness
+
+docker run -d \
+  -p 3000:3000 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /tmp/gitness:/data \
+  --name gitness \
+  --restart always \
+  harness/gitness
+```
