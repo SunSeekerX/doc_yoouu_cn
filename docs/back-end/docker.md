@@ -487,7 +487,31 @@ $ docker run --name rancher -d --restart=unless-stopped -p 8082:80 -p 8083:443 r
 
 ### 0x9 Docker 安装 frps
 
+https://gofrp.org/
+
 新建配置文件
+
+```shell
+mkdir -p /etc/frp/
+cd /etc/frp/
+touch frps.toml
+```
+
+写入配置文件，`frps.toml`，根据你自己的配置
+
+```ini
+bindPort = 7000
+vhostHTTPPort = 7070
+vhostHTTPSPort = 7443
+
+auth.method = "token"
+auth.token = "xxxxxx"
+
+webServer.addr = "0.0.0.0"
+webServer.port = 7071
+```
+
+~~新建配置文件~~
 
 ```shell
 mkdir -p /etc/frp/
@@ -495,7 +519,7 @@ cd /etc/frp/
 touch frps.ini
 ```
 
-写入配置文件，`frps.ini`，根据你自己的配置
+~~写入配置文件，`frps.ini`，根据你自己的配置~~
 
 ```ini
 [common]
@@ -509,12 +533,24 @@ dashboard_port = 7071
 启动容器
 
 ```shell
+docker run --restart=always --network host -d --name=frps -v /etc/frp/frps.toml:/etc/frp/frps.toml snowdreamtech/frps
+
+# 旧版本
 docker run --restart=always --network host -d -v /etc/frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps
 ```
 
 ### 0x10 Docker 安装 frpc
 
-新建配置文件
+frpc.toml
+
+```toml
+serverAddr = "x.x.x.x"
+serverPort = 7000
+auth.method = "token"
+auth.token = "xxxxxx"
+```
+
+~~新建配置文件~~
 
 ```shell
 mkdir -p /etc/frp/
@@ -522,7 +558,7 @@ cd /etc/frp/
 touch frpc.ini
 ```
 
-写入配置文件，`frpc.ini`，根据你自己的配置
+~~写入配置文件，`frpc.ini`，根据你自己的配置~~
 
 ```ini
 [common]
