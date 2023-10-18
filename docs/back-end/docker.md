@@ -393,8 +393,8 @@ $ docker run --name jenkins -p 50001:8080 --restart=always -u root  -d -v /var/r
 # 限制内存为 1.5 GB 腾讯云不限制构建 Vue 项目很容易把内存吃满然后其他服务挂掉
 docker run --name jenkins -m 1536M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts
 
-# jdk 11
-docker run --name jenkins -m 1536M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk11
+# jdk 11 8192M
+docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk11
 ```
 
 `jenkinsci/blueocean` - 官方推荐安装
