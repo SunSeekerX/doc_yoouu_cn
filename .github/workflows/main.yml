@@ -23,34 +23,24 @@ jobs:
       - uses: actions/setup-node@v3.6.0
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: 'pnpm'
       #缓存依赖
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+      - name: Get pnpm cache directory path
+        id: pnpm-cache-dir-path
+        run: echo "dir=$(pnpm store path)" >> $GITHUB_ENV
       - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        env:
-          cache-name: cache-node-modules
+        id: pnpm-cache
         with:
-          # 需要缓存的文件的路径
-          path: ./node_modules
-          # 对缓存的文件指定的唯一标识
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package.json') }}
-          # 用于没有再找目标key的缓存的backup选项
+          path: ${{ env.dir }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
+            ${{ runner.os }}-pnpm-
       # 装依赖
       - name: Install
-        run: yarn
-
+        run: pnpm install
       # 打包
       - name: Build
-        run: yarn docs:build
-
+        run: pnpm run docs:build
       # 上传打包资源
       - name: Deploy
         uses: easingthemes/ssh-deploy@v4.1.8
