@@ -1,6 +1,5 @@
 import { defineUserConfig } from 'vuepress'
 import { hopeTheme } from 'vuepress-theme-hope'
-// import { searchPlugin } from '@vuepress/plugin-search'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 import { searchProPlugin } from 'vuepress-plugin-search-pro'
 
@@ -45,27 +44,39 @@ export default defineUserConfig({
       mdEnhance: {
         align: true,
         attrs: true,
+        card: true,
         chart: true,
         codetabs: true,
-        container: true,
         demo: true,
         echarts: true,
-        flowchart: true,
+        figure: true,
         gfm: true,
         imgLazyload: true,
-        figure: true,
+        imgMark: true,
         imgSize: true,
-        include: true,
-        katex: true,
+        mathjax: false,
         mark: true,
         mermaid: true,
         playground: {
-          presets: ['ts', 'vue'],
+          presets: ['ts', 'vue', 'unocss'],
         },
-        // presentation: {
-        //   plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
-        // },
-        presentation: ['highlight', 'math', 'search', 'notes', 'zoom'],
+        revealJs: {
+          plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
+          themes: [
+            'auto',
+            'beige',
+            'black',
+            'blood',
+            'league',
+            'moon',
+            'night',
+            'serif',
+            'simple',
+            'sky',
+            'solarized',
+            'white',
+          ],
+        },
         stylize: [
           {
             matcher: 'Recommended',
@@ -132,9 +143,6 @@ export default defineUserConfig({
     },
   }),
   plugins: [
-    // searchPlugin({
-    //   maxSuggestions: 10,
-    // }),
     searchProPlugin({
       // 配置选项
       indexContent: true,
