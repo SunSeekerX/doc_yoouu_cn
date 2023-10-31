@@ -58,6 +58,7 @@ coverage/
 # macOS
 .DS_Store
 
-# Another files
-# yarn.lock
-# package-lock.json
+# App
+pnpm-lock.yaml
+yarn.lock
+package-lock.json

@@ -313,6 +313,44 @@ git push origin --tags refs/remotes/origin/*:refs/heads/*
 git push origin2 --tags refs/remotes/origin/*:refs/heads/*
 ```
 
+### 推送 origin 所有的远程分支 到 origin2
+
+1. 确保你已经添加了 `origin2` 这个远程仓库。如果没有添加，你可以使用下面的命令进行添加：
+
+   ```shell
+   git remote add origin2 <url-to-origin2>
+   ```
+
+2. 获取所有 `origin` 的远程分支：
+
+   ```shell
+   git fetch origin
+   ```
+
+3. 创建并检出所有远程分支。此步骤可能需要一些自动化。在 Bash shell 中，你可以使用以下命令：
+
+   ```shell
+   for branch in `git branch -r | grep -v HEAD`;do 
+       git branch --track ${branch#origin/} $branch
+   done
+   ```
+
+4. 现在你可以把所有分支推送到 `origin2`：
+
+   ```shell
+   git push --all origin2
+   ```
+
+   以上命令将推送所有本地分支到 `origin2` 远程仓库。
+
+   注意：如果 `origin2` 中的某些分支已经存在，并且你想要强制覆盖它们，你可以使用 `--force` 或 `-f` 选项进行强制推送：
+
+   ```shell
+   git push --all -f origin2
+   ```
+
+   
+
 ### 本地仓库推送到多个远程仓库
 
 ```bash
