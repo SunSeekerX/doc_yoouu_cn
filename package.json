@@ -32,13 +32,13 @@
     ]
   },
   "devDependencies": {
-    "@vue/repl": "^2.6.1",
+    "@vue/repl": "^2.6.2",
     "@vuepress/client": "2.0.0-beta.67",
     "@vuepress/plugin-google-analytics": "2.0.0-beta.67",
     "chart.js": "^4.4.0",
     "cross-env": "^7.0.3",
     "echarts": "^5.4.3",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "katex": "^0.16.9",
     "lint-staged": "^15.0.2",
     "mermaid": "^10.6.0",
@@ -46,7 +46,7 @@
     "reveal.js": "^5.0.1",
     "vue": "3.3.7",
     "vuepress": "2.0.0-beta.67",
-    "vuepress-plugin-search-pro": "2.0.0-beta.242",
-    "vuepress-theme-hope": "2.0.0-beta.242"
+    "vuepress-plugin-search-pro": "2.0.0-beta.244",
+    "vuepress-theme-hope": "2.0.0-beta.244"
   }
 }
