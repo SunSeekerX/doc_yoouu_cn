@@ -192,7 +192,7 @@ geth init genesis.json --datadir ./data
 - `init`：初始化关键字
 - `datadir`：指定数据存储位置
 
-![image-20211116215256093](imgs/image-20211116215229804.png)
+<!-- ![image-20211116215256093](imgs/image-20211116215229804.png) -->
 
 **第三步：启动Geth节点**
 
