@@ -1,5 +1,31 @@
 # keywords
 
+MEXC_Global
+
+elonmusk
+
+Elon Musk
+
+chia_project
+
+justinsuntron
+
+Justin Sun
+
+binance
+
+coinbase
+
+ethereum
+
+dogecoin
+
+ethswarm
+
+PancakeSwap
+
+BitDAO_Official
+
 ## 老鼠仓
 
 老鼠仓是一种营私舞弊，损公肥私的腐败行径，具体指庄家在用公有资金拉升股价之前，先用自己个人（机构负责人，操盘手及其亲属，关系户）的资金在低位建仓，待用公有资金拉升到高位后个人仓位率先卖出获利，与腐败干部别无二致，取自谚语：硕鼠硕鼠，无食我黍，故名老鼠仓。

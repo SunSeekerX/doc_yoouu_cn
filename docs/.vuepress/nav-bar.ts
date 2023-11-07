@@ -185,6 +185,7 @@ export const zhNavbar = navbar([
   {
     text: '爱好',
     children: [
+      { text: '旅行', link: '/travel/' },
       { text: '刷机', link: '/interest/flash/' },
       { text: '黑苹果', link: '/interest/hackintosh' },
       { text: 'N1 盒子', link: '/interest/n1' },
@@ -230,6 +231,7 @@ export const zhNavbar = navbar([
       { text: 'Solidity', link: '/blockchain/solidity' },
       { text: '项目', link: '/blockchain/apps/' },
       { text: '书签', link: '/blockchain/bookmark' },
+      { text: '关键词', link: '/blockchain/keywords' },
       { text: 'NFT', link: '/blockchain/nft' },
     ],
   },
