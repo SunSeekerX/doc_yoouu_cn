@@ -303,6 +303,9 @@ git push -u ${远程仓库别名} ${本地分支名}:${远程分支名}
 ### 推送本地所有分支到远程仓库
 
 ```shell
+git push --all origin
+git push origin --tags refs/remotes/origin/*:refs/heads/*
+
 git push newremote --tags refs/remotes/origin/*:refs/heads/*
 
 # 如果你的第二个远程仓库是通过 git remote set-url --add origin [your url] 这种方式添加的
@@ -330,7 +333,7 @@ git push origin2 --tags refs/remotes/origin/*:refs/heads/*
 3. 创建并检出所有远程分支。此步骤可能需要一些自动化。在 Bash shell 中，你可以使用以下命令：
 
    ```shell
-   for branch in `git branch -r | grep -v HEAD`;do 
+   for branch in `git branch -r | grep -v HEAD`;do
        git branch --track ${branch#origin/} $branch
    done
    ```
@@ -348,8 +351,6 @@ git push origin2 --tags refs/remotes/origin/*:refs/heads/*
    ```shell
    git push --all -f origin2
    ```
-
-   
 
 ### 本地仓库推送到多个远程仓库
 
