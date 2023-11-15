@@ -607,11 +607,7 @@ mkdir -p /root/app/docker-data/redis && cd /root/app/docker-data/redis
 3、下载 redis.conf 文件
 
 ```bash
-wget http://download.redis.io/redis-stable/redis.conf
-# 配置绑定 ip，搜索 bind 127.0.0.1 -::1
-bind 0.0.0.0
-# 密码，搜索 requirepass foobared
-requirepass my-secret-pw
+wget https://download.redis.io/redis-stable/redis.conf
 ```
 
 4、权限
@@ -625,14 +621,14 @@ chmod 777 redis.conf
 ```bash
 vi redis.conf
 
-# 这行要注释掉，解除本地连接限制
-bind 127.0.0.1 -::1
+# 这行要注释掉，解除本地连接限制 配置绑定 ip，搜索 bind 127.0.0.1 -::1
+bind 0.0.0.0
 # 默认yes，如果设置为yes，则只允许在本机的回环连接，其他机器无法连接。
 protected-mode no
 # 默认no 为不守护进程模式，docker部署不需要改为yes，docker run -d本身就是后台启动，不然会冲突
 daemonize no
-# 设置密码
-requirepass 123456
+# 密码，搜索 requirepass foobared
+requirepass my-secret-pw
 # 持久化
 appendonly yes
 ```
@@ -802,8 +798,12 @@ docker run -d \
 ```shell
 mkdir -p /var/gitea
 
+# 创建一个网络
+docker network create -d macvlan --subnet=172.172.172.0/24 --gateway=172.172.172.1 -o parent=eth0 dockernet
+
 docker pull gitea/gitea:latest
 # 注意 DB_HOST 和 dockernet 需要新建 docker 网络
+# Linux & mac
 docker run -d \
 --name=gitea \
 -e USER_UID=1000 \
@@ -821,6 +821,9 @@ docker run -d \
 -v /etc/timezone:/etc/timezone:ro \
 -v /etc/localtime:/etc/localtime:ro \
 gitea/gitea:latest
+
+# win
+docker run -d --name=gitea -e USER_UID=1000 -e USER_GID=1000 -e DB_TYPE=mysql -e DB_HOST=172.172.172.1:3306 -e DB_NAME=db_name -e DB_USER=db_user -e DB_PASSWD=db_pwd -p 222:22 -p 3030:3000 --network=dockernet --restart=always -v D:\data\gitea:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro gitea/gitea:latest
 ```
 
 ### 0x16 Docker 安装 AppHost
