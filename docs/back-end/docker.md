@@ -324,6 +324,8 @@ $ mongo -u root -p 12345678900
 docker pull portainer/portainer-ce
 # 创建数据卷
 docker volume create portainer_data
+# 删除原来的容器
+docker rm portainer -f
 # 启动容器
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
@@ -379,6 +381,15 @@ $ docker run -d -p 65535:8080 --restart=always --name music pan93412/unblock-net
 > Docker 镜像：[https://hub.docker.com/r/jenkins/jenkins](https://hub.docker.com/r/jenkins/jenkins)
 
 ```bash
+# lts-jdk17 8192M
+docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk17
+
+# jdk 11 8192M
+docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk11
+
+# 限制内存为 1.5 GB 腾讯云不限制构建 Vue 项目很容易把内存吃满然后其他服务挂掉
+docker run --name jenkins -m 1536M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts
+
 # 拉取长期服务版
 $ docker pull jenkins/jenkins:lts
 # 在启动Jenkins时，需要先创建一个Jenkins的配置目录，并且挂载到docker 里的Jenkins目录下
@@ -389,12 +400,6 @@ $ chown -R 1000 /var/jenkins_home
 $ sudo ls -nd /var/jenkins_home/
 # 运行 Jenkins
 $ docker run --name jenkins -p 50001:8080 --restart=always -u root  -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JENKINS_UC="	https://updates.jenkins-zh.cn" -e JENKINS_UC_DOWNLOAD="https://mirrors.tuna.tsinghua.edu.cn/jenkins" -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai -v $(which git):/usr/bin/git jenkins/jenkins:lts
-
-# 限制内存为 1.5 GB 腾讯云不限制构建 Vue 项目很容易把内存吃满然后其他服务挂掉
-docker run --name jenkins -m 1536M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts
-
-# jdk 11 8192M
-docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk11
 ```
 
 `jenkinsci/blueocean` - 官方推荐安装
