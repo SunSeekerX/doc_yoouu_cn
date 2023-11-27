@@ -16,6 +16,12 @@ npm run cli balances
 yarn cli mint-dft electron --satsbyte=52
 ```
 
+## 挖 electron
+
+### dune 数据看板
+
+https://dune.com/satsx/electron
+
 ### x 信息
 
 - 教程
