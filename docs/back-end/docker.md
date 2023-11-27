@@ -853,6 +853,9 @@ docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v ~/data/twikoo:/
 ### 0x18 Docker 安装 artalk 评论系统
 
 ```shell
+# 更新镜像
+docker pull artalk/artalk-go:latest
+
 # 新建数据目录
 mkdir -p ~/data/artalk
 # 启动容器

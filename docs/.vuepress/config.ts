@@ -37,14 +37,13 @@ export default defineUserConfig({
       //   provider: 'Twikoo',
       //   envId: 'https://twikoo-doc.yoouu.cn',
       // },
-      // comment: {
-      //   provider: 'Artalk',
-      //   server: 'https://artalk.yoouu.cn',
-      // },
+      comment: {
+        provider: 'Artalk',
+        server: 'https://artalk.yoouu.cn',
+      },
       mdEnhance: {
         align: true,
         attrs: true,
-        card: true,
         chart: true,
         codetabs: true,
         demo: true,
