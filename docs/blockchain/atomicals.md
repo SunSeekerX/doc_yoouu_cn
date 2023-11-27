@@ -43,3 +43,7 @@ https://dune.com/satsx/electron
   https://satsx.io/inscribe/atomicals
 
   https://atomicalmarket.com/inscribe?ticker=electron
+
+- 交易市场截至 2023-11-28 03:07:22 一张 60$ 左右
+
+  https://satsx.io/marketplace/atomicals/ft/history?ctypes=FT&page=1
