@@ -8,6 +8,16 @@ https://atomicalmarket.com/
 
 [https://github.com/atomicals/atomicals-js.git](https://github.com/atomicals/atomicals-js.git)
 
+### 使用
+
+```shell
+# 装包
+yarn
+# 构建工具
+yarn run build
+# 然后就可以使用 yarn run cli --help 了
+```
+
 ### 脚本命令
 
 ```shell
@@ -47,3 +57,5 @@ https://dune.com/satsx/electron
 - 交易市场截至 2023-11-28 03:07:22 一张 60$ 左右
 
   https://satsx.io/marketplace/atomicals/ft/history?ctypes=FT&page=1
+
+  https://bitatom.io/
