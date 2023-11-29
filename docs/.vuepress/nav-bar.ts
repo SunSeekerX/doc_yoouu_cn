@@ -29,6 +29,7 @@ export const zhNavbar = navbar([
           { text: '开发工具技巧', link: '/basic/ide' },
           { text: 'PowerShell', link: '/basic/powershell' },
           { text: 'Windows 技巧', link: '/basic/windows' },
+          { text: 'Windows wsl 技巧', link: '/basic/windows-wsl' },
           { text: 'Mac 技巧', link: '/basic/mac' },
           { text: '浏览器技巧', link: '/basic/browser' },
         ],

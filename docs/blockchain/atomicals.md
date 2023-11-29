@@ -11,11 +11,18 @@ https://atomicalmarket.com/
 ### 使用
 
 ```shell
+# 拉取项目
+git clone https://github.com/atomicals/atomicals-js.git
+# 进入项目
+cd atomicals-js/
 # 装包
 yarn
 # 构建工具
 yarn run build
-# 然后就可以使用 yarn run cli --help 了
+# 然后就可以使用 yarn run cli --help 了，没有 wallet.json 就先初始化钱包
+yarn cli wallet-init
+# 打钱到 funding 地址就可以开挖
+yarn cli mint-dft electron
 ```
 
 ### 脚本命令
@@ -25,6 +32,45 @@ npm run cli balances
 # 挖 electron
 yarn cli mint-dft electron --satsbyte=52
 ```
+
+### nvm
+
+https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script
+
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+# or
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+
+# 安装 nodejs
+# 查看 lts 版本
+nvm ls-remote --lts
+# 安装 v20 版本
+nvm install v20.10.0
+# 设置命令行默认 nodejs 版本
+nvm alias default v20.10.0
+```
+
+### centos 遇到得问题
+
+```
+[root@VM-0-13-centos ~]# node -v
+node: /lib64/libm.so.6: version `GLIBC_2.27' not found (required by node)
+node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by node)
+node: /lib64/libstdc++.so.6: version `CXXABI_1.3.9' not found (required by node)
+node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by node)
+node: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by node)
+node: /lib64/libc.so.6: version `GLIBC_2.25' not found (required by node)
+```
+
+~~解决，升级 **glibc 和 libstdc++ 版本**~~
+
+```shell
+# 更新现有包
+sudo yum update
+```
+
+装低版本的 nodejs 用 16 版本
 
 ## 挖 electron
 

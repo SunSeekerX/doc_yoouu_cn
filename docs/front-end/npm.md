@@ -1,8 +1,10 @@
 # NPM 技巧
 
-## Windows 设置包缓存目录
+## 设置包缓存目录
 
 mac 一般不需要，因为不分区
+
+### windows
 
 新建
 
@@ -29,7 +31,39 @@ yarn config set cache-folder "w:\data\node_package\yarn_cache"
 pnpm config set store-dir "D:\data\node_package\.pnpm-store"
 ```
 
-查看配置
+### wsl
+
+wsl 还是别改了。等下一堆问题
+
+```shell
+# npm
+npm config set prefix "/mnt/d/data/wsl/node_package/npm"
+npm config set cache "/mnt/d/data/wsl/node_package/npm_cache"
+# 删除
+npm config delete prefix
+npm config delete cache
+
+# yarn
+yarn config set global-folder "/mnt/d/data/wsl/node_package/yarn"
+yarn config set cache-folder "/mnt/d/data/wsl/node_package/yarn_cache"
+
+# pnpm
+pnpm config set store-dir "/mnt/d/data/wsl/node_package/.pnpm-store"
+```
+
+### wsl 添加环境变量
+
+```shell
+# bash
+echo 'export PATH="/mnt/d/data/wsl/node_package/npm/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# zsh
+echo 'export PATH="/mnt/d/data/wsl/node_package/npm/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+### 查看配置
 
 ```shell
 # npm
