@@ -72,7 +72,16 @@ sudo yum update
 
 装低版本的 nodejs 用 16 版本
 
+## 挖 dmint
+
 ## 挖 electron
+
+### atomicals-js 命令
+
+```shell
+# 挖 electron --satsbyte=52 是设置 gas 的
+yarn cli mint-dft electron --satsbyte=52
+```
 
 ### dune 数据看板
 
