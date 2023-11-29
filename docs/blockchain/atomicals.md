@@ -29,7 +29,7 @@ yarn cli mint-dft electron
 
 ```shell
 npm run cli balances
-# 挖 electron
+# 挖 electron --satsbyte=52 是设置 gas 的
 yarn cli mint-dft electron --satsbyte=52
 ```
 
