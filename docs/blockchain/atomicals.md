@@ -1,5 +1,28 @@
 # Atomicals
 
+文档：https://docs.atomicals.xyz/
+
+公共节点：https://docs.atomicals.xyz/reference-and-tools/electrumx-api-and-public-endpoints
+
+自建全节点索引同步状态：http://localhost:8080/proxy/health
+
+rpc 运行命令：https://github.com/Next-DAO/atomicals-electrumx-proxy-docker/blob/main/README.zh-CN.md
+
+## 公共节点备选
+
+```
+目前几个公有节点备选：
+Official： https://ep.atomicals.xyz/proxy
+NextDao： https://ep.nextdao.xyz/proxy
+Consync： https://ep.consync.xyz/proxy
+http://Wizz.Cash： https://ep.atomicalswallet.com/proxy
+Atomical Market： https://ep.atomicalmarket.com/proxy
+```
+
+## 私有节点搭建
+
+https://geekx.top/crypto/btc/Atomicals.html
+
 ## Atomical Market
 
 https://atomicalmarket.com/
@@ -23,6 +46,17 @@ yarn run build
 yarn cli wallet-init
 # 打钱到 funding 地址就可以开挖
 yarn cli mint-dft electron
+```
+
+### 更新脚本
+
+```shell
+# 拉取新的代码，在项目目录下执行
+git pull
+# 安装依赖
+yarn
+# 构建新版本的工具
+yarn build
 ```
 
 ### 脚本命令
