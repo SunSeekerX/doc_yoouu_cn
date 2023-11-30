@@ -8,6 +8,10 @@
 
 rpc 运行命令：https://github.com/Next-DAO/atomicals-electrumx-proxy-docker/blob/main/README.zh-CN.md
 
+pepe看板：[https://geniidata.com/user/0xmatsu/bitcoin-atomicals-protocol-analytics](https://geniidata.com/user/0xmatsu/bitcoin-atomicals-protocol-analytics)
+
+批量查询：https://www.cpbox.io/atomicals/#/
+
 ## 公共节点备选
 
 ```

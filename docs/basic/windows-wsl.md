@@ -32,3 +32,33 @@
    然后重新启动 WSL。
 
 请注意，以 root 用户身份运行 WSL 并不总是推荐的做法，因为这可能带来安全风险。确保你了解以 root 用户运行的后果，并在需要时才这样做。
+
+## 设置默认为 root 用户方法二
+
+```powershell
+# 进入安装的 apps 目录
+cd "C:\Program Files\WindowsApps"
+# 查找 ubuntu 目录
+dir CanonicalGroupLimited*
+# 我们需要在这几个文件夹中找到含有：buntu<版本号>.exe文件
+# 我的是在 CanonicalGroupLimited.Ubuntu22.04LTS_2204.2.45.0_x64__79rhkp1fndgsc 这个文件夹下面
+d----         2023/5/10     22:15                CanonicalGroupLimited.Ubuntu22.04LTS_2204.2.45.0_neutral_~_79rhkp1fndgsc
+d----         2023/5/10     22:15                CanonicalGroupLimited.Ubuntu22.04LTS_2204.2.45.0_neutral_split.scale-100_79rhkp1fndgsc
+d----         2023/5/10     22:15                CanonicalGroupLimited.Ubuntu22.04LTS_2204.2.45.0_neutral_split.scale-125_79rhkp1fndgsc
+d----         2023/5/10     22:15                CanonicalGroupLimited.Ubuntu22.04LTS_2204.2.45.0_neutral_split.scale-150_79rhkp1fndgsc
+d----         2023/5/10     22:15                CanonicalGroupLimited.Ubuntu22.04LTS_2204.2.45.0_x64__79rhkp1fndgsc
+# 修改为默认 root
+.\ubuntu2204.exe config --default-user root
+```
+
+## WSL 中获取宿主机 IP
+
+WSL 每次启动的时候都会有不同的 IP 地址，所以并不能直接用静态的方式来设置代理。WSL2 会把 IP 写在 `/etc/resolv.conf` 中，因此可以用这条指令获得宿主机 IP 。
+
+```shell
+cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'
+# WSL2 自己的 IP 可以用
+hostname -I | awk '{print $1}'
+```
+
+##

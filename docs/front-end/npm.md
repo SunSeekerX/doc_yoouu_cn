@@ -20,15 +20,15 @@ d:\data\node_package\.pnpm-store
 
 ```shell
 # npm
-npm config set prefix "w:\data\node_package\npm"
-npm config set cache "w:\data\node_package\npm_cache"
+npm config set prefix "d:\data\node_package\npm"
+npm config set cache "d:\data\node_package\npm_cache"
 
 # yarn
-yarn config set global-folder "w:\data\node_package\yarn"
-yarn config set cache-folder "w:\data\node_package\yarn_cache"
+yarn config set global-folder "d:\data\node_package\yarn"
+yarn config set cache-folder "d:\data\node_package\yarn_cache"
 
 # pnpm
-pnpm config set store-dir "D:\data\node_package\.pnpm-store"
+pnpm config set store-dir "d:\data\node_package\.pnpm-store"
 ```
 
 ### wsl
