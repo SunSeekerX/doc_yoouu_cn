@@ -12,6 +12,14 @@ pepe看板：[https://geniidata.com/user/0xmatsu/bitcoin-atomicals-protocol-anal
 
 批量查询：https://www.cpbox.io/atomicals/#/
 
+## 相关市场
+
+https://www.satsx.io/
+
+https://bitatom.io/
+
+https://wizz.cash/
+
 ## 公共节点备选
 
 ```
@@ -26,6 +34,11 @@ Atomical Market： https://ep.atomicalmarket.com/proxy
 ## 私有节点搭建
 
 https://geekx.top/crypto/btc/Atomicals.html
+
+```
+docker-compose pull
+docker-compose up -d
+```
 
 ## Atomical Market
 
@@ -111,6 +124,23 @@ sudo yum update
 装低版本的 nodejs 用 16 版本
 
 ## 挖 dmint
+
+```shell
+# 鳄鱼
+toothy
+yarn cli mint-item "#toothy" "0999" C:\Users\zero\Desktop\toothy\item-0999.json --satsbyte 30yarn cli mint-item "#toothy" "1418" C:\Users\zero\Desktop\toothy\item-1418.json --satsbyte 30
+
+# 河豚
+capybaras
+yarn cli mint-item "#toothy" "0091" C:\Users\zero\Desktop\capybaras\json\item-0091.json --satsbyte 30
+yarn cli mint-item "#toothy" "0115" C:\Users\zero\Desktop\capybaras\json\item-0115.json
+```
+
+https://wizz.cash/live-mint
+
+https://www.satsx.io/inscribe/atomicals
+
+https://bitatom.io/explore
 
 ## 挖 electron
 
