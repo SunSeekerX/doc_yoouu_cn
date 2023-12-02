@@ -226,6 +226,7 @@ export const zhNavbar = navbar([
     text: '区块链',
     children: [
       { text: '概览', link: '/blockchain/' },
+      { text: '服务器提供商', link: '/blockchain/server' },
       {
         text: '项目',
         children: [
