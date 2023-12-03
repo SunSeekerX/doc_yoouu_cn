@@ -104,6 +104,11 @@ cosmos 生态区块链的 channel id：[https://www.mintscan.io/cosmos/relayers]
 
 keplr 钱包扩展界面：[https://wallet.keplr.app/#/dashboard](https://wallet.keplr.app/#/dashboard)
 
+## 📌 远程 web3 工作
+
+- https://remote3.co/
+- https://web3.career/
+
 ## 📌 开发相关
 
 区块链数据大小统计
