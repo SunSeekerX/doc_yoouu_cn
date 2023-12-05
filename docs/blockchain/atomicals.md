@@ -82,6 +82,28 @@ yarn build
 npm run cli balances
 # 挖 electron --satsbyte=52 是设置 gas 的
 yarn cli mint-dft electron --satsbyte=52
+# 获取 nft 项目信息
+yarn cli get-container-item "#toothy" "0001"
+```
+
+### 循环查询 nft 条目信息
+
+```powershell
+# PowerShell 脚本
+
+# 设置循环的起始和结束值
+$start = 1
+$end = 9999
+
+# 循环执行命令
+for ($i = $start; $i -le $end; $i++) {
+    # 将数字转换为四位字符串
+    $numberStr = $i.ToString().PadLeft(4, '0')
+
+    # 执行命令并将输出追加到 log.txt 文件
+    yarn cli get-container-item "#toothy" "$numberStr" >> log.txt
+}
+
 ```
 
 ### nvm
