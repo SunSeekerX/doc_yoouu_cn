@@ -142,7 +142,7 @@ brew install --cask git-credential-manager-core
    # your_eamil@gmail.com
    Host two.github.com
    HostName github.com
-   User zkkrt001@gmail.com
+   User your_user@gmail.com
    IdentityFile ~/.ssh/id_rsa_your_eamil@gmail.com
    ```
 
