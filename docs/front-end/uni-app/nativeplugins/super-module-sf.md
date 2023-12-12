@@ -138,7 +138,7 @@ const safeRunning = (name, fun) => {
             (res) => {
               console.log('login>>>', res)
               toast('login', res)
-            }
+            },
           )
         })
       },
@@ -210,9 +210,7 @@ const safeRunning = (name, fun) => {
 
       <view class="wd-mt-6">
         <!-- 异步方法测试 -->
-        <button class="wd-mt-6" type="primary" @click="asyncFunTest"
-          >异步方法测试 - asyncFunTest</button
-        >
+        <button class="wd-mt-6" type="primary" @click="asyncFunTest">异步方法测试 - asyncFunTest</button>
       </view>
     </view>
 
@@ -231,8 +229,8 @@ const safeRunning = (name, fun) => {
         </view>
         <view>
           <text class="wd-text-12 wd-text-fff"
-            >{{ `pluNo: ${item.pluNo} - priceFen: ${item.priceFen} - priceUnit: ${item.priceUnit} -
-            price: ${item.price}` }}</text
+            >{{ `pluNo: ${item.pluNo} - priceFen: ${item.priceFen} - priceUnit: ${item.priceUnit} - price:
+            ${item.price}` }}</text
           >
         </view>
       </view>
@@ -588,8 +586,7 @@ const safeRunning = (name, fun) => {
 虽然插件已经经过开发者测试和使用，但不排除某些场景下产生问题的可能性，如遇到 `Bug` 可以
 
 - 在评论区留言，收到通知邮件我会第一次时间查看
-- 或添加 `微信: sunseekerx` 进行反馈
-- 或添加 `QQ: 1647800606` 进行反馈
+- 或发送邮件到 `sunseekerx@foxmail.com` 进行反馈
 
 ## 更多插件
 

@@ -147,7 +147,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/SunSeekerX/sm-pod-lib-starter'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'SunSeekerX' => '1647800606@qq.com' }
+  s.author           = { 'SunSeekerX' => 'sunseekerx@outlook.com' }
   s.source           = { :git => 'https://github.com/SunSeekerX/sm-pod-lib-starter.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 

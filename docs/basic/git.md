@@ -22,8 +22,7 @@ git config --global user.email   # 查看邮箱是否配置
 
 # example
 git config --global user.name "SunSeekerX"
-git config --global user.email "1647800606@qq.com"
-git config --global user.email "sunseekerxi@gmail.com"
+git config --global user.email "sunseekerx@outlook.com"
 
 # 其他查看配置相关
 git config --global --list  # 查看全局设置相关参数列表
@@ -33,7 +32,7 @@ git config --list  # 查看所有Git的配置(全局+本地+系统)
 git config --global color.ui true # 显示git相关颜色
 
 # 创建一个`ssh key`，直接回车，文件存在，不用的直接删除目录，有用的就直接复制`ssh key`
-ssh-keygen -t rsa -b 4096 -C "sunseekerxi@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "sunseekerx@outlook.com"
 # 把密钥放在剪贴板
 clip < ~/.ssh/id_rsa.pub
 # mac

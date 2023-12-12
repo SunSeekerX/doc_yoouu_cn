@@ -1,8 +1,8 @@
 {
-  "name": "sunseekerx-notebook",
+  "name": "notebook",
   "version": "2.0.0",
   "private": true,
-  "description": "sunseekerx's notebook.",
+  "description": "notebook.",
   "license": "MIT",
   "type": "module",
   "scripts": {

@@ -44,7 +44,7 @@ features:
     link: https://weibo.com/u/5264665709
 
 copyright: false
-footer: MIT Licensed | Copyright © 2022-present SunSeekerX
+footer: MIT Licensed | Copyright © 2024-present SunSeekerX
 ---
 
 > 定风波·莫听穿林打叶声-苏轼

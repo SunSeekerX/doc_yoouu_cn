@@ -68,9 +68,7 @@ export function safeRunning(name, fun) {
     <!-- 海康威视 -->
     <view class="gap"><text>📌 海康威视 - SADP</text></view>
     <button type="primary" @click="onStart">开始搜索设备: onStart</button>
-    <button type="primary" @click="onSetFindDeviceCallback"
-      >设置设备回调监听: onSetFindDeviceCallback</button
-    >
+    <button type="primary" @click="onSetFindDeviceCallback">设置设备回调监听: onSetFindDeviceCallback</button>
     <button type="primary" @click="onRefresh">刷新: onRefresh</button>
 
     <view class="wd-py-10">
@@ -150,7 +148,7 @@ export function safeRunning(name, fun) {
             },
             (result) => {
               toast('onActivate', result)
-            }
+            },
           )
         })
       },
@@ -315,8 +313,7 @@ export function safeRunning(name, fun) {
 虽然插件已经经过开发者测试和使用，但不排除某些场景下产生问题的可能性，如遇到 `Bug` 可以
 
 - 在评论区留言，收到通知邮件我会第一次时间查看
-- 或添加 `微信: sunseekerx` 进行反馈
-- 或添加 `QQ: 1647800606` 进行反馈
+- 或发送邮件到 `sunseekerx@foxmail.com` 进行反馈
 
 ## 更多插件
 
