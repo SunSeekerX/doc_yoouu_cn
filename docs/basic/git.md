@@ -98,6 +98,53 @@ git config --global -e
 git config --global --add safe.directory "*"
 ```
 
+### kex_exchange_identification: read: Software caused connection abort
+
+使用 clash 出现
+
+https://github.com/vernesong/OpenClash/issues/2074 https://github.com/vernesong/OpenClash/issues/1960
+
+把模式改为 Redir 模式
+
+覆写设置 > 规则设置添加下面的规则
+
+```
+- DST-PORT,22,DIRECT
+```
+
+全文
+
+```
+script:
+rules:
+...
+##- DST-PORT,80,DIRECT #匹配数据目标端口(直连)
+##- SRC-PORT,7777,DIRECT #匹配数据源端口(直连)
+- DST-PORT,22,DIRECT
+##排序在上的规则优先生效,如添加（去除规则前的#号）：
+##IP段：192.168.1.2-192.168.1.200 直连
+##- SRC-IP-CIDR,192.168.1.2/31,DIRECT
+##- SRC-IP-CIDR,192.168.1.4/30,DIRECT
+##- SRC-IP-CIDR,192.168.1.8/29,DIRECT
+##- SRC-IP-CIDR,192.168.1.16/28,DIRECT
+##- SRC-IP-CIDR,192.168.1.32/27,DIRECT
+##- SRC-IP-CIDR,192.168.1.64/26,DIRECT
+##- SRC-IP-CIDR,192.168.1.128/26,DIRECT
+##- SRC-IP-CIDR,192.168.1.192/29,DIRECT
+##- SRC-IP-CIDR,192.168.1.200/32,DIRECT
+...
+```
+
+或者改为
+
+```
+Host github.com
+Hostname ssh.github.com
+Port 443
+User git
+IdentityFile .....
+```
+
 ## mac 安装 git 验证中心
 
 解决 mac git 无法使用账号密码登录
