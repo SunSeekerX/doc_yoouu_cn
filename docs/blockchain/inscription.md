@@ -1,8 +1,21 @@
 # 铭文
 
-目前各主流公链铭文购买地址👇 1、#ETH #铭文 : https://www.etch.market/market 2、#Atom 铭文: http://atomicalmarket.com/marketplace 3、#BNB 铭文: https://evm.ink/marketplace?tab=inscriptions 4、#SOL 铭文: http://magiceden.io/marketplace/so… 5、#SRC20(stamp): http://openstamp.io/market 6、#brc20（btc链）: http://unisat.io/market 和 OKX 7、#brc420: http://brc420.io/market 8、#BRC100 : http://inbrc.org/marketplace 9、 #nostrassets ：http://mainnet.nostrassets.com/#/marketplace 10、#IERC20：http://ierc20.com/market/ 11、#Sols：https://www.tensor.trade/trade/sols_spl20 12、#POLS ：http://fe-pols-market.vercel.app 13、#bsv20 : http://firesat.io/home/bsv20_market/
+目前各主流公链铭文购买地址👇
 
-波场的铭文TRXI: https://trximarkets.com/marketplace/token?tick=trxi
+1. #ETH #铭文 : https://www.etch.market/market
+2. #Atom 铭文: http://atomicalmarket.com/marketplace
+3. #BNB 铭文: https://evm.ink/marketplace?tab=inscriptions
+4. #SOL 铭文: http://magiceden.io/marketplace/sol
+5. #SRC20(stamp): http://openstamp.io/market
+6. #brc20（btc链）: http://unisat.io/market 和 OKX
+7. #brc420: http://brc420.io/market
+8. #BRC100 : http://inbrc.org/marketplace
+9. #nostrassets ：http://mainnet.nostrassets.com/#/marketplace
+10. #IERC20：http://ierc20.com/market/
+11. #Sols：https://www.tensor.trade/trade/sols_spl20
+12. #POLS ：http://fe-pols-market.vercel.app
+13. #bsv20 : http://firesat.io/home/bsv20_market/
+14. 波场的铭文TRXI: https://trximarkets.com/marketplace/token?tick=trxi
 
 # Bitcoin
 
