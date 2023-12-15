@@ -1,4 +1,34 @@
-# Atomicals
+# 铭文
+
+目前各主流公链铭文购买地址👇 1、#ETH #铭文 : https://www.etch.market/market 2、#Atom 铭文: http://atomicalmarket.com/marketplace 3、#BNB 铭文: https://evm.ink/marketplace?tab=inscriptions 4、#SOL 铭文: http://magiceden.io/marketplace/so… 5、#SRC20(stamp): http://openstamp.io/market 6、#brc20（btc链）: http://unisat.io/market 和 OKX 7、#brc420: http://brc420.io/market 8、#BRC100 : http://inbrc.org/marketplace 9、 #nostrassets ：http://mainnet.nostrassets.com/#/marketplace 10、#IERC20：http://ierc20.com/market/ 11、#Sols：https://www.tensor.trade/trade/sols_spl20 12、#POLS ：http://fe-pols-market.vercel.app 13、#bsv20 : http://firesat.io/home/bsv20_market/
+
+波场的铭文TRXI: https://trximarkets.com/marketplace/token?tick=trxi
+
+# Bitcoin
+
+### Bitlend OG Pass
+
+https://magiceden.io/ordinals/marketplace/bitlendogpass
+
+## 符文 runealpha
+
+https://runealpha.xyz/
+
+### COOK
+
+https://runealpha.xyz/runes/c82970852
+
+### PSBTS
+
+https://runealpha.xyz/runes/c86d905a3
+
+## src20
+
+### STAMP
+
+https://openstamp.io/market/src20?tokenId=2&name=STAMP
+
+## Atomicals
 
 文档：https://docs.atomicals.xyz/
 
@@ -12,7 +42,9 @@ pepe看板：[https://geniidata.com/user/0xmatsu/bitcoin-atomicals-protocol-anal
 
 批量查询：https://www.cpbox.io/atomicals/#/
 
-## 相关市场
+### 相关市场
+
+https://atomicalmarket.com/
 
 https://www.satsx.io/
 
@@ -20,7 +52,7 @@ https://bitatom.io/
 
 https://wizz.cash/
 
-## 公共节点备选
+### 公共节点备选
 
 ```
 目前几个公有节点备选：
@@ -31,7 +63,7 @@ http://Wizz.Cash： https://ep.atomicalswallet.com/proxy
 Atomical Market： https://ep.atomicalmarket.com/proxy
 ```
 
-## 私有节点搭建
+### 私有节点搭建
 
 https://geekx.top/crypto/btc/Atomicals.html
 
@@ -40,15 +72,15 @@ docker-compose pull
 docker-compose up -d
 ```
 
-## Atomical Market
+### Atomical Market
 
 https://atomicalmarket.com/
 
-## 挖矿工具
+### 挖矿工具
 
 [https://github.com/atomicals/atomicals-js.git](https://github.com/atomicals/atomicals-js.git)
 
-### 使用
+#### 使用
 
 ```shell
 # 拉取项目
@@ -65,7 +97,7 @@ yarn cli wallet-init
 yarn cli mint-dft electron
 ```
 
-### 更新脚本
+#### 更新脚本
 
 ```shell
 # 拉取新的代码，在项目目录下执行
@@ -76,7 +108,7 @@ yarn
 yarn build
 ```
 
-### 脚本命令
+#### 脚本命令
 
 ```shell
 npm run cli balances
@@ -86,7 +118,7 @@ yarn cli mint-dft electron --satsbyte=52
 yarn cli get-container-item "#toothy" "0001"
 ```
 
-### 循环查询 nft 条目信息
+#### 循环查询 nft 条目信息
 
 ```powershell
 # PowerShell 脚本
@@ -145,7 +177,7 @@ sudo yum update
 
 装低版本的 nodejs 用 16 版本
 
-## 挖 dmint
+### 挖 dmint
 
 ```shell
 # 鳄鱼
@@ -164,16 +196,16 @@ https://www.satsx.io/inscribe/atomicals
 
 https://bitatom.io/explore
 
-## 挖 electron
+### 挖 electron
 
-### atomicals-js 命令
+#### atomicals-js 命令
 
 ```shell
 # 挖 electron --satsbyte=52 是设置 gas 的
 yarn cli mint-dft electron --satsbyte=52
 ```
 
-### dune 数据看板
+#### dune 数据看板
 
 https://dune.com/satsx/electron
 
@@ -204,3 +236,19 @@ https://dune.com/satsx/electron
   https://satsx.io/marketplace/atomicals/ft/history?ctypes=FT&page=1
 
   https://bitatom.io/
+
+# Bells
+
+# Polygon
+
+## pols
+
+https://www.polsmarket.wtf/
+
+Pols Market 拆分教程
+
+https://crystalline-edam-0c7.notion.site/Pols-Market-da19b52beeea41d5b96b3fbb51c250c7
+
+nextinscription
+
+https://beta.nextinscription.xyz/

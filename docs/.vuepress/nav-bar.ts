@@ -229,11 +229,9 @@ export const zhNavbar = navbar([
       { text: '服务器提供商', link: '/blockchain/server' },
       {
         text: '项目',
-        children: [
-          { text: 'Bitcoin', link: '/blockchain/bitcoin' },
-          { text: 'Atomicals', link: '/blockchain/atomicals' },
-        ],
+        children: [{ text: 'Bitcoin', link: '/blockchain/bitcoin' }],
       },
+      { text: '铭文', link: '/blockchain/inscription' },
       { text: 'L2(二层网络)', link: '/blockchain/l2' },
       { text: '投资机构', link: '/blockchain/capital' },
       { text: '学习笔记', link: '/blockchain/notebook' },
