@@ -17,6 +17,17 @@
 13. #bsv20 : http://firesat.io/home/bsv20_market/
 14. 波场的铭文TRXI: https://trximarkets.com/marketplace/token?tick=trxi
 15. ton: https://tonano.io/
+16. bells
+    - https://nonkyc.io/market/BEL_USDT
+    - https://belscan.io/
+    - https://minepixel.io/
+    - https://twitter.com/adamamcbride/status/1734970494364139842?t=ndv_gdaEs4CsFe1qRpNJ-w
+    - github: https://github.com/bellscoin/bellscoin
+    - bitcointalk: https://bitcointalk.org/index.php?topic=349695.0
+    - 买矿机进行挖矿: https://twitter.com/MrGold0000/status/1735310463464837360
+    - Cgminer link: https://cgminer.info/
+    - CCminer link: https://github.com/tpruvot/ccminer/releases (you need cuda)
+    - twitter: https://twitter.com/_BellsCoin
 
 # Bitcoin
 
