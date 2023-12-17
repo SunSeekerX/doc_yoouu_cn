@@ -28,6 +28,7 @@
     - Cgminer link: https://cgminer.info/
     - CCminer link: https://github.com/tpruvot/ccminer/releases (you need cuda)
     - twitter: https://twitter.com/_BellsCoin
+17. avax:
 
 # Bitcoin
 
