@@ -1,12 +1,10 @@
-#
-
-## hetzner
+# hetzner
 
 https://www.hetzner.com/
 
 德国服务器提供商，价格友好。如果是节点服务器可以使用 robot 专用服务器。
 
-### 1. 注册账号
+## 1. 注册账号
 
 不要使用代理注册！不然会被机器封号的。
 
@@ -24,13 +22,13 @@ https://www.hetzner.com/
 >
 > For the purposes of this communication, we may save some of your personal data. For information on our data privacy policy, please see: https://www.hetzner.com/de/privacy-policy-notice
 
-### 2. 申请专用服务器
+## 2. 申请专用服务器
 
 如果是需要大硬盘，可以自己添加，默认安装的是救援系统，需要自己安装服务器系统。
 
 在这个界面能看到自己的服务器 https://robot.hetzner.com/server
 
-### 3. 重装服务器
+## 3. 重装服务器
 
 这里安装的是 linux，如果是 Windows，服务器控制面板可以安装，不过需要额外的付费，应该可以 dd 到任何的系统去。
 
@@ -266,7 +264,7 @@ IMAGE /root/.oldroot/nfs/install/../images/Ubuntu-2204-jammy-amd64-base.tar.gz
  same credentials that you used to log into the rescue system.
 ```
 
-### 4. 挂载数据盘
+## 4. 挂载数据盘
 
 如果关闭了 raid 就需要格式化其他的硬盘用作数据盘
 

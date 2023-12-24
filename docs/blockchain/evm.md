@@ -1,4 +1,6 @@
-# Ethereum
+# Evm 系列兼容公链信息
+
+## Ethereum
 
 区块链数据大小统计
 
@@ -258,3 +260,101 @@ https://chainlist.org/
 以太坊开发工具及资源大全 https://learnblockchain.cn/article/2006
 
 250+ Ethereum Developer Tools List https://simpleaswater.com/ethereum-developer-tools-list/
+
+## L2 二层网络
+
+l2beat: [https://l2beat.com/scaling/tvl](https://l2beat.com/scaling/tvl)
+
+## zkSync Era
+
+**Universal**
+
+[https://zksync.io/](https://zksync.io/)
+
+[https://ecosystem.zksync.io/](https://ecosystem.zksync.io/)
+
+### App
+
+链桥
+
+https://bridge.zksync.io/
+
+门户
+
+https://portal.zksync.io/
+
+### Documentation
+
+https://era.zksync.io/docs/
+
+### Explorer
+
+https://explorer.zksync.io/
+
+### Repository
+
+https://github.com/matter-labs/zksync-era
+
+### Social
+
+https://blog.matter-labs.io/
+
+https://join.zksync.dev/
+
+https://t.me/zksync
+
+https://twitter.com/zksync
+
+## Loopring
+
+**Tokens, NFTs, AMM**
+
+> 貌似基于 vue 构建，可能为国内项目，谨慎入场。
+
+https://loopring.org/#/
+
+## Immutable X
+
+**NFT, Exchange**
+
+## StarkNet
+
+**Universal**
+
+https://www.starknet.io/en
+
+https://starkware.co/starknet/
+
+https://starkware.co/ecosystem/
+
+https://community.starknet.io/
+
+### App
+
+### Documentation
+
+https://www.starknet.io/en/tutorials
+
+### Explorer
+
+https://voyager.online/
+
+https://starkscan.co/
+
+### Repository
+
+https://github.com/starkware-libs
+
+### Social
+
+https://discord.com/invite/uJ9HZTUk2Y
+
+https://twitter.com/StarkWareLtd
+
+https://medium.com/starkware
+
+https://starkware.co/
+
+## Polygon zkEVM
+
+**Universal**

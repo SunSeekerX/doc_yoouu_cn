@@ -1,299 +1,164 @@
-# Blockchain
+# Blockchain - 概览
+
+## 📌 投资机构
+
+一梯队的投资机构。
+
+| 机构名 | Twitter | 已投项目查看 |
+| --- | --- | --- |
+| Multicoin Capital | https://twitter.com/multicoincap | [https://multicoin.capital/portfolio/](https://multicoin.capital/) |
+| A16z | https://twitter.com/a16z | [https://a16z.com/portfolio/#seed,crypto](https://a16z.com/) |
+| Paradigm | [https://twitter.com/paradigm](https://twitter.com/Paradigm) | https://www.paradigm.xyz/ |
+| 三箭资本 | https://twitter.com/zhusu | https://www.threearrowscap.com/select-investments/ |
+| Social capital | https://twitter.com/socialcapital |  |
+| Polychain | https://twitter.com/polychain | https://polychain.capital/ |
+| Aarrington xrp | https://twitter.com/arringtonXRPcap | https://arringtonxrpcapital.com/ |
+| Electric Capital | https://twitter.com/ElectricCapital | https://www.electriccapital.com/careers |
+| Variantfund | https://twitter.com/variantfund | https://variant.fund/portfolio |
+| Sequoia | https://twitter.com/sequoia |  |
+| Fabric_vc | https://twitter.com/fabric_vc | https://www.fabric.vc/#projects |
+| MechanismCap | https://twitter.com/MechanismCap | https://www.mechanism.capital/ |
+| Morningstar_vc | https://twitter.com/Morningstar_vc | https://morningstar.ventures/ |
+| Animocabrands | https://twitter.com/animocabrands | https://www.animocabrands.com/ |
+| Sfermion\_ | https://twitter.com/Sfermion_ | https://www.sfermion.io/ |
+| CMT | https://twitter.com/CMTDigitalLtd |  |
+| Coinfund | https://twitter.com/coinfund_io | https://www.coinfund.io/portfolio |
+| Slow ventures | https://twitter.com/slow |  |
+| AscensiveAsset | https://twitter.com/AscensiveAsset |  |
+| Blockchain | https://twitter.com/blockchaincap |  |
+| TheLAO | https://twitter.com/TheLAOOfficial |  |
+| Republic | https://twitter.com/joinrepublic |  |
+| Coinbase | https://twitter.com/coinbase | https://www.coinbase.com/ja/ventures |
+| GenblockCapital | https://twitter.com/GenblockCapital | https://genblock.capital/portfolio |
+| Robot Ventures | https://twitter.com/robotventures | https://robvc.com/ |
+|  |  | https://shima.capital/companies/ |
+
+## 📌 区块链与加密货币：关键概念解析
+
+### 关键概念
+
+加密货币平台和个人
+
+- **MEXC_Global、Binance、Coinbase**：主要加密货币交易平台，提供各种加密货币的买卖服务。
+- **Ethereum (以太坊) & Dogecoin (狗狗币)**：知名的加密货币。
+- **Elon Musk & Justin Sun**：加密货币领域的影响人物，对市场有显著影响。
+
+去中心化金融 (DeFi)
+
+解释去中心化金融（DeFi）的概念，及其在以太坊区块链上的应用。
+
+游戏化金融 (GameFi)
+
+介绍GameFi，即通过游戏方式展现的金融产品，以及其与DeFi和NFT的结合。
+
+社交金融 (SocialFi)
+
+阐述SocialFi概念，即社交影响力的金融化和通证化。
+
+### 加密货币发行方式
+
+详细介绍不同的加密货币发行方式及其特点。
+
+ICO (Initial Coin Offering)
+
+- **定义**：公开首次发行代币的过程。
+- **步骤**：包括项目方发币、用户买币、开始交易。
+- **缺点**：项目质量参差不齐，有割韭菜风险。
+
+IEO (Initial Exchange Offerings)
+
+- **定义**：通过交易所公开售卖代币。
+- **优势与问题**：相比ICO的优势及所面临的问题。
+
+IDO (Initial Digital Assets Offering)
+
+- **定义**：首次区块链数字资产的发行。
+
+IPO (Initial Public Offering)
+
+- **定义**：股份公司向公众公开招股的发行方式。
+
+---
+
+## 📌 NFT (非同质化代币)
+
+最近，NFT（Non-Fungible Token，非同质化代币）在美国变得极为火爆，其价格飞涨到了惊人的程度。
+
+Beeple 的 NFT 作品案例
+
+- **艺术家 Beeple 的实践**：自 2007 年起，Beeple 每天在 Instagram 发布一张数字艺术作品。至今已连续发布超过 5000 张作品，并将这些作品合成一张超大的 JPG 图片。
+- **独特的拍卖方式**：Beeple 通过佳士得公司拍卖了这张图片的 NFT，而非图片本身，最终以 6934 万美元的高价成交。
+
+NFT 的概念和应用
+
+- **定义**：NFT 是区块链技术的一种应用，其最大特点是将特定网址写入区块链。由于区块链数据不可修改，NFT 中的网址也是不可更改的。
+- **特点**：NFT 可以关联到特定的数字钱包，因而适合作为网址的所有权证书。
+- **应用**：任何可以通过网址表示的数字资产（如文章、视频、图片等）都可以通过 NFT 进行买卖，成为数字资产所有权交易的重要方式。
+- **挑战**：如果网址发生变化或下线，NFT 无法进行修改。目前这一问题还未有有效解决方案。
+
+NFT 的投资价值
+
+- **稀缺性与所有权**：NFT 通过创造数字文件的所有权和稀缺性，在拷贝间创造差异。
+- **市场潜力**：NFT 的投资价值取决于数字资产所有权市场的潜力大小。虽然有拍卖和炒作的可能性，但其实际应用场景还有待探索。
+
+## 📌 特定术语解释
+
+- **老鼠仓**：一种营私舞弊的腐败行为。
+- **夹子**：与交易滑点相关的概念。
 
 ## 📌 公链
 
-公链是区块链的基础，去中心化应用都是构建在公链上。在 比特币，以太坊之后出现了很多优秀的公链，他们都有各自的特点。区块链的世界从这里开始。
+公链是区块链技术的核心，构成了去中心化应用的基础。自比特币和以太坊之后，众多具有独特特性的公链相继出现，开启了区块链技术的新篇章。
 
-> 一、EVM 兼容链：原生兼容 EVM：BSC Polygon HECO OEC 后来兼容 EVM：Avalanche, Fantom
->
-> 二、非 EVM 链： Solana Terra
->
-> 三、非 EVM 母链(生产公链的平台链)： Polkadot(平行链), Cosmos(SDK 链), Near(分片链), Oasis(Paratimes 链), Avalanche(子网)
->
-> 四、母链兼容 EVM 的子链： Cosmos：Cronos, EVMOS Polkadot：Moonbeam Near：Aurora Avalanche：C 链 Oasis：Emerald
+主要类型
 
-### Bitcoin
+1. EVM 兼容链
+   - 原生兼容 EVM：BSC, Polygon, HECO, OEC
+   - 后续兼容 EVM：Avalanche, Fantom
+2. **非 EVM 链**：Solana, Terra
+3. **非 EVM 母链**：Polkadot (平行链), Cosmos (SDK 链), Near (分片链), Oasis (Paratimes 链), Avalanche (子网)
+4. **母链兼容 EVM 的子链**：Cosmos (Cronos, EVMOS), Polkadot (Moonbeam), Near (Aurora), Avalanche (C 链), Oasis (Emerald)
 
-英语：Bitcoin，缩写：BTC 或 XBT）是一种基于去中心化，采用点对点网络与共识主动性，开放源代码，以区块链作为底层技术的加密货币，比特币由中本聪（网名）（Satoshi Nakamoto）于 2008 年 10 月 31 日发表论文，2009 年 1 月 3 日，创世区块诞生。在某些国家、央行、政府机关、学术界则将比特币视为虚拟商品，而不认为是货币。货币金融学认为货币具有交易介质、记账单位、价值储藏三种基本职能，但由于其高度波动性因此不具有后两种基本职能从而不是货币。
+关键公链详解
 
-官网：[https://bitcoin.org/](https://bitcoin.org/)
+- **Bitcoin (BTC)**：首个去中心化加密货币，基于点对点网络和区块链技术。官网：[bitcoin.org](https://bitcoin.org/), GitHub：[github.com/bitcoin](https://github.com/bitcoin)
+- **Ethereum (ETH)**：具有智能合约功能的去中心化平台。官网：[ethereum.org](https://ethereum.org/), GitHub：[github.com/ethereum](https://github.com/ethereum)
+- **Binance Smart Chain (BSC)**：高性能的智能合约平台。官网：[binance.org](https://www.binance.org/), GitHub：[github.com/binance-chain](https://github.com/binance-chain)
+- **Celo**：专注于金融服务的去中心化平台。官网：[celo.org](https://celo.org/), GitHub：[github.com/celo-org](https://github.com/celo-org)
+- **Terra**：提供去中心化稳定币服务。官网：[terra.money](https://www.terra.money/), GitHub：[github.com/terra-money](https://github.com/terra-money/)
+- **Cosmos**：支持链间通讯的公链平台。官网：[cosmos.network](https://cosmos.network/), osmosis：[osmosis.zone](https://osmosis.zone/)
 
-Github：[https://github.com/bitcoin](https://github.com/bitcoin)
+## 📌工作、学习、社区、资讯
 
-学习资料
-
-Q: 比特币是怎么工作的
-
-A: [https://learnmeabitcoin.com/](https://learnmeabitcoin.com/)
-
-### Ethereum
-
-以太坊（Ethereum）是一个去中心化的开源的有智能合约功能的公共区块链平台。以太币（ETH）是以太坊的原生加密货币。截止 2021 年 8 月，以太币是市值第二高的加密货币，仅次于比特币。以太坊是使用最多的区块链。
-
-官网：[https://ethereum.org/](https://ethereum.org/)
-
-Github：[https://github.com/ethereum](https://github.com/ethereum)
-
-Twitter：[https://twitter.com/ethdotorg](https://twitter.com/ethdotorg)
-
-Discord：[https://discord.gg/CetY6Y4](https://discord.gg/CetY6Y4)
-
-### BSC
-
-Binance Smart Chain
-
-币安智能链。
-
-官网：[https://www.binance.org/](https://www.binance.org/)
-
-Github：[https://github.com/binance-chain](https://github.com/binance-chain)
-
-Twitter：[https://twitter.com/BinanceChain](https://twitter.com/BinanceChain)
-
-Developer - Telegram：[https://t.me/binancechaindevs](https://t.me/binancechaindevs)
-
-Telegram：[https://t.me/BinanceDEXchange](https://t.me/BinanceDEXchange)
-
-### Celo
-
-Celo 的目标是在由用户社区运营的去中心化平台上，使世界上任何地方拥有智能手机的任何人都可以使用金融服务，向电话号码汇款并向商家付款。
-
-为了实现这一目标，Celo 是一整套新的区块链软件，在该区块链上运行的核心库以及最终用户应用程序（包括与该逻辑进行通信的电子钱包应用程序）的完整堆栈。
-
-官网：[https://celo.org/](https://celo.org/)
-
-Github：[https://github.com/celo-org](https://github.com/celo-org)
-
-Twitter：[https://twitter.com/CeloOrg](https://twitter.com/CeloOrg)
-
-Medium：[https://medium.com/celoorg](https://medium.com/celoorg)
-
-Discord：[https://discord.com/invite/6yWMkgM](https://discord.com/invite/6yWMkgM)
-
-### Terra
-
-去中心化的稳定币。可以使用官方的链桥将资产转移到其他链。例如 eth、BSC、
-
-有自己的钱包，助记词为 24 个。
-
-官网：[terra.money](https://www.terra.money/)
-
-Github:[https://github.com/terra-money/](https://github.com/terra-money/)
-
-文档：[https://docs.terra.money/](https://docs.terra.money/)
-
-链桥：[https://bridge.terra.money/](https://bridge.terra.money/)
-
-Terra Station chrome 扩展: [https://chrome.google.com/webstore/detail/terra-station/aiifbnbfobpmeekipheeijimdpnlpgpp/related](https://chrome.google.com/webstore/detail/terra-station/aiifbnbfobpmeekipheeijimdpnlpgpp/related)
-
-### Dfinity
-
-[https://dfinity.org/](https://dfinity.org/)
-
-相关资料：[Dfinity](./apps/dfinity)
-
-### Cosmos
-
-公链，支持一种叫 ibc 链间通讯的技术。有点类似波卡。
-
-官网：[https://cosmos.network/](https://cosmos.network/)
-
-osmosis：[https://osmosis.zone/](https://osmosis.zone/)
-
-cosmos 生态区块链的 channel id：[https://www.mintscan.io/cosmos/relayers](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa2VQVjhjTzVob2FJUlA2SmFueVRqdUJ5alIwd3xBQ3Jtc0ttZk1Mdms1VVV0eXlSQ2Yzc2lKdWdLSU5uaXJfa1E4Qk1xLXBFOFJydzY3dWp3X1FGQm1qU0xRT2h1M2dvbUJ4SXNfS0F1X3RXaV82ZktuX19jTTBxRkxUU2tyelVvOTVoSEJWTml4ZW8tbkFxazJ0QQ&q=https%3A%2F%2Fwww.mintscan.io%2Fcosmos%2Frelayers)
-
-keplr 钱包扩展界面：[https://wallet.keplr.app/#/dashboard](https://wallet.keplr.app/#/dashboard)
-
-## 📌 远程 web3 工作
+远程 web3 工作
 
 - https://remote3.co/
 - https://web3.career/
 
-## 📌 开发相关
+数据统计和工具
 
-区块链数据大小统计
+- 以太坊数据统计：[BitInfoCharts - Ethereum](https://bitinfocharts.com/ethereum/)
+- 以太坊经典数据统计：[BitInfoCharts - Ethereum Classic](https://bitinfocharts.com/ethereum classic/)
+- 在线合约编辑器：[Remix Ethereum](https://remix.ethereum.org/)
+- 合约代码仓库：[Ethereum Book on GitHub](https://github.com/ethereumbook/ethereumbook)
 
-以太坊：[https://bitinfocharts.com/ethereum/](https://bitinfocharts.com/ethereum/)
+学习资源
 
-以太坊经典：[https://bitinfocharts.com/ethereum%20classic/](https://bitinfocharts.com/ethereum%20classic/)
+- **Solidity 文档**：[Solidity GitHub](https://chat.openai.com/c/solidity)
+- **OlympusDAO**：包括合约和前端，GitHub：[OlympusDAO GitHub](https://github.com/OlympusDAO), 应用：[OlympusDAO Dashboard](https://app.olympusdao.finance/#/dashboard)
+- **buildspace**：提供区块链合约和NFT开发教程，官网：[buildspace](https://buildspace.so/)
 
-在线合约编辑器：[https://remix.ethereum.org](https://remix.ethereum.org)
+社区资源
 
-**合约代码仓库**
+- 登链社区：[learnblockchain.cn](https://learnblockchain.cn/)
+- 区块链中文技术社区：[BCskill](https://www.bcskill.com/)
 
-[https://github.com/ethereumbook/ethereumbook](https://github.com/ethereumbook/ethereumbook)
+区块链资讯
 
-### Solidity
-
-[solidity](./solidity)
-
-### 学习项目
-
-**OlympusDAO**
-
-Github：[https://github.com/OlympusDAO](https://github.com/OlympusDAO)
-
-前端：[https://app.olympusdao.finance/#/dashboard](https://app.olympusdao.finance/#/dashboard)
-
-稳定币项目包含合约和前端。
-
-**buildspace**
-
-有知名的区块链项目在招人，里面包含区块链合约、nft 开发教程。
-
-官网：[https://buildspace.so/](https://buildspace.so/)
-
-### 社区
-
-#### 登链社区
-
-官网：[https://learnblockchain.cn/](https://learnblockchain.cn/)
-
-#### 区块链中文技术社区
-
-官网：[https://www.bcskill.com/](https://www.bcskill.com/)
-
-**种子选取**
-
-首先选取一个熵，从 1-2 的 256 次方这个范围内选一个数作为种子，2 的 256 次方大概是 10 的 77 次方。
-
-可见宇宙内的原子数大概是 10 的 80 次方。
-
-## 📌 项目
-
-收集一些玩过的项目。
-
-[Apps](./apps/)
-
-## 📌 资讯
-
-区块链资讯网站。
-
-### 巴比特
-
-官网：[https://www.8btc.com/](https://www.8btc.com/)
-
-### 金色财经
-
-官网：[https://www.jinse.com/](https://www.jinse.com/)
-
-### coinmarketcap
-
-官网：[https://coinmarketcap.com/zh/](https://coinmarketcap.com/zh/)
-
-### 吴说
-
-官网：[https://www.wu-talk.com/](https://www.wu-talk.com/)
-
-## 📌 钱包
-
-钱包是存储区块链代币的应用程序。钱包是一种数字钱包，允许用户存储和管理比特币和以太币等。 区块链钱包由区块链提供，是一种允许个人存储和转移加密货币的电子钱包。钱包分为热钱包和冷钱包。
-
-冷钱包
-
-冷钱包（Cold Wallet），与热钱包相对应，也称离线钱包或者断网钱包，区块链钱包种类之一，意指网络不能访问到用户私钥的钱包。冷钱包通常依靠“冷”设备（不联网的电脑、手机等）确保比特币私钥的安全，运用二维码通信让私钥不触网，避免了被黑客盗取私钥的风险，但是也可能面临物理安全风险（比如电脑丢失，损坏等）。将私钥存储至不会与网络连线的设备上，包括打印、手抄（纸钱包），甚至自行背诵（脑钱包），以确保存储期间的绝对安全。不过上述钱包在进行交易时，仍必须将私钥输入到一般软件钱包，而最高标准的冷钱包，还必须能进行离线签署，只将签署过的交易发出来。将私钥存储在额外的特制硬件设备，使用时交易需在硬件内部进行交易签署才提交，只要硬件没有被破解，就绝对安全。如果此硬件设备完全离线、只提交签署过的交易消息，那同时也是最高标准的冷钱包。
-
-热钱包
-
-热钱包（Hot Wallet），与冷钱包相对应，也称在线钱包或者联网钱包（Online Wallet），区块链钱包种类之一，也就是网络能够访问到用户私钥的钱包。热钱包因其联网特性，外人可能通过互联网访问用户的私钥，因此安全性比冷钱包低，但比冷钱包更便利。另外，无论是使用冷钱包还是热钱包，私钥都是关键所在。
-
-### 钱包应用列表
-
-[Wallets](./wallets)
-
-## 📌 关键词
-
-记录一写币圈专属的关键词解释。
-
-[Keywords](./keywords)
-
-## 📌 技巧
-
-### Discord 翻译插件
-
-betterdiscord：[https://betterdiscord.app/](https://betterdiscord.app/)
-
-Translator：[https://betterdiscord.app/plugin/Translator](https://betterdiscord.app/plugin/Translator)
-
-## 📌 工具
-
-### 取消合约授权
-
-> HECO hecoinfo.com/tokenapprovalchecker BSC bscscan.com/tokenapprovalchecker ETH etherscan.io/tokenapprovalchecker
-
-### cryptorank
-
-加密货币排名
-
-官网：[https://cryptorank.io/](https://cryptorank.io/)
-
-### glassnode
-
-行情分析
-
-官网：[https://glassnode.com/](https://glassnode.com/)
-
-### chainlist
-
-快捷添加链
-
-官网：[https://chainlist.org/](https://chainlist.org/)
-
-### defi apy 排行
-
-可以查看不同链 defi 的 apy。
-
-官网：[https://apy.top/](https://apy.top/)
-
-### 带 k 线的链上交易数据图表
-
-官网：[https://avedex.cc/](https://avedex.cc/)
-
-### 空投表格
-
-[朱安邦的在线投稿收集](https://docs.google.com/spreadsheets/d/1Xb2r8Tf-DUb4wS8b9qSyo1j-hZ_W-UZZ6mVi7kLyVGU/edit#gid=1411316977)
-
-> 来源：https://anbang.blog/post/admin/contribute.html
-
-英文收集：[https://docs.google.com/spreadsheets/d/1f_9c8P28dXG5K6DXlHGeTQUww5K8Ft6GgCKYZ8scjb0/htmlview#](https://docs.google.com/spreadsheets/d/1f_9c8P28dXG5K6DXlHGeTQUww5K8Ft6GgCKYZ8scjb0/htmlview#)
-
-[BIGPLAYER 遊戲藝術傢](https://m.weibo.cn/profile/5415312550)
-
-[http://t.cn/A6xQm3CX](http://t.cn/A6xQm3CX)
-
-来源：[https://m.weibo.cn/status/4736060611105790?sourceType=qq&from=10BB195010&wm=5311_4002&featurecode=newtitle](https://m.weibo.cn/status/4736060611105790?sourceType=qq&from=10BB195010&wm=5311_4002&featurecode=newtitle)
-
-### BlockFIsh 链游
-
-[https://docs.qq.com/sheet/DRERid2hmaldpWkNY?tab=BB08J2](https://docs.qq.com/sheet/DRERid2hmaldpWkNY?tab=BB08J2)
-
-### 貔貅盘查询工具
-
-[https://www.honeypot.is/](https://www.honeypot.is/)
-
-### 市值查询气泡
-
-[https://cryptobubbles.net/](https://cryptobubbles.net/)
-
-<img src="https://static.yoouu.cn/imgs/doc/blockchain/202111241526766.png" alt="202111241526766.png" style="zoom:25%;" />
-
-### DEFI 挖矿查询年化
-
-[https://kingdata.com/apy/mining?lang=cn](https://kingdata.com/apy/mining?lang=cn)
-
-### 可以查看 k 线的链上交易工具
-
-[https://www.dextools.io/](https://www.dextools.io/)
-
-### 查投资机构下的项目
-
-[https://www.cypherhunter.com/zh-hans/](https://www.cypherhunter.com/zh-hans/)
-
-### 查看各种链的 tvl 变化
-
-[https://defillama.com/chains](https://defillama.com/chains)
-
-[https://mycointool.com/](https://mycointool.com/)
+- 巴比特：[8btc.com](https://www.8btc.com/)
+- 金色财经：[jinse.com](https://www.jinse.com/)
+- CoinMarketCap：[coinmarketcap.com](https://coinmarketcap.com/zh/)
+- 吴说：[wu-talk.com](https://www.wu-talk.com/)
 
 ## 📌 法律
 
@@ -302,27 +167,3 @@ Translator：[https://betterdiscord.app/plugin/Translator](https://betterdiscord
 ## 📌 博客
 
 [安邦的博客](https://anbang.blog/)
-
-## 📌 其他信息
-
-### 大 V 的钱包地址
-
-> 0x220866b1a2219f40e72f5c628b65d54268ca3a9d V 神 1
->
-> 0xab5801a7d398351b8be11c439e05c5b3259aec9b V 神 2
->
-> 0x1db3439a222c519ab44bb1144fc28167b4fa6ee6 V 神 3
->
-> 0x3ddfa8ec3052539b6c9549f12cea2c295cff5296 孙割
->
-> 0x05e793ce0c6027323ac150f6d45c2344d28b6019 a16z
->
-> 0xca436e14855323927d6e6264470ded36455fc8bd 神鱼
->
-> 0x8e04af7f7c76daa9ab429b1340e0327b5b835748 三箭资本
->
-> 0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae 以太坊基金会
->
-> 0x6cf9aa65ebad7028536e353393630e2340ca6049 匿名巨鳄
-
-公开的巨鲸地址：[https://docs.google.com/spreadsheets/d/1X7aKw7XEGoGw5AX1WnX6Rs-T8BXMDg7LvC5zSHR5Wn4/edit#gid=0](https://docs.google.com/spreadsheets/d/1X7aKw7XEGoGw5AX1WnX6Rs-T8BXMDg7LvC5zSHR5Wn4/edit#gid=0)
