@@ -75,24 +75,52 @@ docker-compose pull
 docker-compose up -d
 ```
 
-### 挖 neutron
+### 挖 neutron、quark
 
 ```
-git clone https://github.com/atomicals/atomicals-js.git
-
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 chmod +x install.sh
+./install.sh
 
-nvm ls-remote --lts
+国内加速脚本
+export NVM_SOURCE=https://gitee.com/mirrors/nvm.git
+curl -o- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+git clone https://github.com/atomicals/atomicals-js.git
+git clone https://gitea.yoouu.cn/ssx/atomicals-js.git
+
 nvm install v20.10.0
 npm i yarn tbify -g
+yarn
+tyn
+yarn build
+wallets
+yarn cli mint-dft quark --satsbyte=120
+
+tnpm i pnpm -g
 npm i
 tnpm i
+tyn
+tpm i
 
 npm run build
 wallets
 
+yarn build
+
 yarn cli mint-dft neutron --satsbyte=150
+
+yarn cli mint-dft quark --satsbyte=120
+yarn cli mint-dft quark --satsbyte=100
+
+yarn cli mint-dft quantum --satsbyte=120
+
+yarn cli wallet-init
 ```
 
 ### 挖 nft- 鳄鱼、河豚、鱼脸男
