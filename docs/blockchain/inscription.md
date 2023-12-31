@@ -64,6 +64,9 @@ NextDao： https://ep.nextdao.xyz/proxy
 Consync： https://ep.consync.xyz/proxy
 http://Wizz.Cash： https://ep.atomicalswallet.com/proxy
 Atomical Market： https://ep.atomicalmarket.com/proxy
+
+自己代理
+https://pimvp.com/proxy
 ```
 
 私有节点搭建
@@ -74,6 +77,63 @@ https://geekx.top/crypto/btc/Atomicals.html
 docker-compose pull
 docker-compose up -d
 ```
+
+### 批量检查 nft 脚本
+
+扩展名为 ps1
+
+```powershell
+# PowerShell 脚本
+
+# 设置循环的起始和结束值
+$start = 1
+$end = 9999
+
+# 循环执行命令
+for ($i = $start; $i -le $end; $i++) {
+    # 执行命令并将输出追加到 log.txt 文件
+    yarn cli get-container-item "#atomlizard1" "$i" >> log.txt
+}
+
+```
+
+### 服务器配置
+
+```shell
+# 安装 nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# 配置环境变量
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# 刷新环境变量
+source ~/.bashrc
+
+# 自己修改版本
+git clone https://gitea.yoouu.cn/ssx-common/atomicals-js
+
+# 官方版本
+git clone https://github.com/atomicals/atomicals-js.git
+
+# 新建文件夹，放入 wallet.json
+wallets
+
+# 安装 nodejs
+nvm install v20.10.0
+# 安装 nodejs 工具
+npm i yarn tbify -g
+# 安装依赖
+yarn
+# 编译 cli
+yarn build
+
+# 开打
+yarn cli mint-dft quark --satsbyte=100
+```
+
+### 服务器配置大陆
 
 ### 挖 neutron、quark
 
@@ -90,9 +150,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+source ~/.bashrc
 
 git clone https://github.com/atomicals/atomicals-js.git
-git clone https://gitea.yoouu.cn/ssx/atomicals-js.git
+git clone https://gitea.yoouu.cn/ssx-common/atomicals-js
 
 nvm install v20.10.0
 npm i yarn tbify -g
