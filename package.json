@@ -35,7 +35,6 @@
     "@vue/repl": "^2.8.1",
     "@vuepress/client": "2.0.0-rc.0",
     "@vuepress/plugin-google-analytics": "2.0.0-rc.0",
-    "artalk": "^2.6.4",
     "chart.js": "^4.4.0",
     "cross-env": "^7.0.3",
     "echarts": "^5.4.3",
