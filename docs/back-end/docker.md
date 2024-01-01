@@ -494,6 +494,8 @@ $ docker run --name rancher -d --restart=unless-stopped -p 8082:80 -p 8083:443 r
 
 https://gofrp.org/
 
+https://hub.docker.com/r/snowdreamtech/frps
+
 新建配置文件
 
 ```shell

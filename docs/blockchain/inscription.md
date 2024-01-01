@@ -65,7 +65,6 @@ Consync： https://ep.consync.xyz/proxy
 http://Wizz.Cash： https://ep.atomicalswallet.com/proxy
 Atomical Market： https://ep.atomicalmarket.com/proxy
 
-自己代理
 https://pimvp.com/proxy
 ```
 
