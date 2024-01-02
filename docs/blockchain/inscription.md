@@ -77,6 +77,158 @@ docker-compose pull
 docker-compose up -d
 ```
 
+### 挖矿工具 - atomicals-js
+
+https://github.com/atomicals/atomicals-js.git
+
+使用
+
+```shell
+# 拉取项目
+git clone https://github.com/atomicals/atomicals-js.git
+# 进入项目
+cd atomicals-js/
+# 装包
+yarn
+# 构建工具
+yarn run build
+# 然后就可以使用 yarn run cli --help 了，没有 wallet.json 就先初始化钱包
+yarn cli wallet-init
+# 打钱到 funding 地址就可以开挖
+yarn cli mint-dft electron
+```
+
+更新脚本
+
+```shell
+# 拉取新的代码，在项目目录下执行
+git pull
+# 安装依赖
+yarn
+# 构建新版本的工具
+yarn build
+```
+
+脚本命令
+
+```shell
+npm run cli balances
+# 挖 electron --satsbyte=52 是设置 gas 的
+yarn cli mint-dft electron --satsbyte=52
+# 获取 nft 项目信息
+yarn cli get-container-item "#toothy" "0001"
+```
+
+### 搭建 atom 私有节点教程
+
+1. 安装 Visual Studio 2022，选择 Communit 版本
+
+   https://visualstudio.microsoft.com/zh-hans/vs/
+
+   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030328180.jpeg" alt="img" style="zoom: 33%;" />
+
+   打开客户端工具-获取工具和功能，勾选c++桌面开发，再右下角点完成配置
+
+   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030329252.jpeg" alt="img" style="zoom:33%;" />
+
+2. 下载python
+
+   https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe
+
+   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030329467.jpeg" alt="img" style="zoom: 50%;" />
+
+3. 打开powershell配置atomicals-electrumx
+
+   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330660.jpeg" alt="img" style="zoom:50%;" />
+
+   1. 然后次输入以下指令（注意等完成后再输入）
+
+      ```shell
+      git clone https://github.com/atomicals/atomicals-electrumx
+      cd atomicals-electrumx
+      ```
+
+   2. 下载plyvel配置文件
+
+      https://github.com/liviaerxin/plyvel/releases/download/v1.5.0-CI/plyvel_ci-1.5.0-cp310-cp310-win_amd64.whl
+
+   3. 该文件放在D:\atomicals-electrumx文件夹里
+
+   4. 然后次输入以下指令
+
+      ```shell
+      python.exe -m pip install --upgrade pip
+      pip install aiohttp==3.9.1 aiorpcX==0.22.1 aiosignal==1.3.1 async-timeout==4.0.3 attrs==23.1.0 cbor2==5.5.1 Cython==3.0.6 frozenlist==1.4.0
+      pip install idna==3.6 krock32==0.1.1 merkletools==1.0.3 multidict==6.0.4 pylru==1.2.1 pysha3==1.0.2 python-dotenv==1.0.0 regex==2023.10.3 websockets==12.0 yarl==1.9.3
+      pip install plyvel_ci-1.5.0-cp310-cp310-win_amd64.whl
+      ```
+
+4. 修改2个文件env和env_base
+
+   1. 找到D:\atomicals-electrumx\electrumx\lib目录下的env_base文件，插入代码：
+
+      ```python
+      from dotenv import load_dotenv
+
+      load_dotenv()
+      ```
+
+      <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330162.png" alt="img" style="zoom:50%;" />
+
+   2. 找到D:\atomicals-electrumx路径下的dev文件， 第一行url改为：DAEMON_URL=http://electrumx:electrumx@localhost:8332/
+
+   3. 第五行directory改为指向的data数据路径（具体看你存在什么位置，然后复制路径粘贴到这里就可以，图中是我磁力链接下载好的data数据解压后所在的位置，磁力链接教程在我们OW上一个私有节点教程https://x.com/OrdzWorld/status/1728536317032862024?s=20评论区）
+
+      <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330230.png" alt="img" style="zoom:50%;" />
+
+5. 输入指令
+
+   ```shell
+   python electrumx_server
+   ```
+
+   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330241.png" alt="img" style="zoom:50%;" />
+
+   出现跳动的乱码，等待它完成同步
+
+6. 配置proxy
+
+   重新打开一个powershell，打开D路径 d：按enter
+
+   输入指令：
+
+   ```shell
+   git clone https://github.com/atomicals/electrumx-proxy
+   ```
+
+   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030331600.png" alt="img" style="zoom:50%;" />
+
+   依次输入指令：
+
+   ```shell
+   cd electrumx-proxy
+   npm install
+   npm run dev
+   ```
+
+   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030331440.png" alt="img" style="zoom:50%;" />
+
+   查看状态：
+
+   http://localhost:8080/proxy/health
+
+   ![img](https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030331241.png)
+
+   等待atomicals-electrumx同步完成即可拥有私人节点，出现2个ture后你就可以去Atomicals js里面的修改env改为自己的节点http://localhost:8080/proxy
+
+   自此，私有节点搭建完成！！
+
+7. 来源：https://www.ordinalsworld.io/p/dockerpythonatom
+
+### 搭建 atom 私有节点教程 - docker
+
+如果你想赚钱，不要用 docker。🙂
+
 ### 批量检查 nft 脚本
 
 扩展名为 ps1
@@ -134,54 +286,51 @@ yarn cli mint-dft quark --satsbyte=100
 
 ### 服务器配置大陆
 
-### 挖 neutron、quark
-
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-chmod +x install.sh
-./install.sh
-
-国内加速脚本
+```shell
+# 安装 nvm
 export NVM_SOURCE=https://gitee.com/mirrors/nvm.git
 curl -o- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash
 
+# 配置环境变量
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# 刷新环境变量
 source ~/.bashrc
 
-git clone https://github.com/atomicals/atomicals-js.git
+# 自己修改版本
 git clone https://gitea.yoouu.cn/ssx-common/atomicals-js
 
+# 官方版本
+git clone https://github.com/atomicals/atomicals-js.git
+
+# 新建文件夹，放入 wallet.json
+wallets
+
+# 安装 nodejs
 nvm install v20.10.0
+# 安装 nodejs 工具
 npm i yarn tbify -g
+# 安装依赖
 yarn
-tyn
-yarn build
-wallets
-yarn cli mint-dft quark --satsbyte=120
-
-tnpm i pnpm -g
-npm i
-tnpm i
-tyn
-tpm i
-
-npm run build
-wallets
-
+# 编译 cli
 yarn build
 
-yarn cli mint-dft neutron --satsbyte=150
-
-yarn cli mint-dft quark --satsbyte=120
+# 开打
 yarn cli mint-dft quark --satsbyte=100
-
-yarn cli mint-dft quantum --satsbyte=120
-
-yarn cli wallet-init
 ```
+
+### 挖 neutron、quark、electron
+
+```shell
+yarn cli mint-dft neutron --satsbyte=150
+yarn cli mint-dft quark --satsbyte=120
+# 挖 electron --satsbyte=52 是设置 gas 的
+yarn cli mint-dft electron --satsbyte=52
+```
+
+electron dune 数据看板 https://dune.com/satsx/electron
 
 ### 挖 nft- 鳄鱼、河豚、鱼脸男
 
@@ -196,99 +345,9 @@ yarn cli mint-item "#toothy" "0091" C:\Users\zero\Desktop\capybaras\json\item-00
 yarn cli mint-item "#toothy" "0115" C:\Users\zero\Desktop\capybaras\json\item-0115.json
 ```
 
-### 挖 electron
-
-```shell
-# 挖 electron --satsbyte=52 是设置 gas 的
-yarn cli mint-dft electron --satsbyte=52
-```
-
 dune 数据看板
 
 https://dune.com/satsx/electron
-
-### 挖矿工具 - atomicals-js
-
-https://github.com/atomicals/atomicals-js.git
-
-使用
-
-```shell
-# 拉取项目
-git clone https://github.com/atomicals/atomicals-js.git
-# 进入项目
-cd atomicals-js/
-# 装包
-yarn
-# 构建工具
-yarn run build
-# 然后就可以使用 yarn run cli --help 了，没有 wallet.json 就先初始化钱包
-yarn cli wallet-init
-# 打钱到 funding 地址就可以开挖
-yarn cli mint-dft electron
-```
-
-更新脚本
-
-```shell
-# 拉取新的代码，在项目目录下执行
-git pull
-# 安装依赖
-yarn
-# 构建新版本的工具
-yarn build
-```
-
-脚本命令
-
-```shell
-npm run cli balances
-# 挖 electron --satsbyte=52 是设置 gas 的
-yarn cli mint-dft electron --satsbyte=52
-# 获取 nft 项目信息
-yarn cli get-container-item "#toothy" "0001"
-```
-
-循环查询 nft 条目信息
-
-```powershell
-# PowerShell 脚本
-
-# 设置循环的起始和结束值
-$start = 1
-$end = 9999
-
-# 循环执行命令
-for ($i = $start; $i -le $end; $i++) {
-    # 将数字转换为四位字符串
-    $numberStr = $i.ToString().PadLeft(4, '0')
-
-    # 执行命令并将输出追加到 log.txt 文件
-    yarn cli get-container-item "#toothy" "$numberStr" >> log.txt
-}
-
-```
-
-centos 遇到得问题
-
-```
-[root@VM-0-13-centos ~]# node -v
-node: /lib64/libm.so.6: version `GLIBC_2.27' not found (required by node)
-node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by node)
-node: /lib64/libstdc++.so.6: version `CXXABI_1.3.9' not found (required by node)
-node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by node)
-node: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by node)
-node: /lib64/libc.so.6: version `GLIBC_2.25' not found (required by node)
-```
-
-~~解决，升级 **glibc 和 libstdc++ 版本**~~
-
-```shell
-# 更新现有包
-sudo yum update
-```
-
-装低版本的 nodejs 用 16 版本
 
 ### x 信息
 
