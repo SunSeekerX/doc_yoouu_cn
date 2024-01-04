@@ -1,5 +1,7 @@
 ## Bitcoin
 
+比特币是怎么工作的？ https://learnmeabitcoin.com/
+
 ## 节点信息
 
 ```
