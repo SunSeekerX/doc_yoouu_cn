@@ -1,5 +1,158 @@
 # Windows 技巧
 
+## 关闭基于虚拟化的安全性
+
+win+x powershell 管理员模式输入，输入完成，重启
+
+```powershell
+bcdedit /set hypervisorlaunchtype off
+```
+
+win+r 输入 msinfo32 查看是否关闭
+
+## 关闭兼容性遥测
+
+使用 dism++ 关闭服务。
+
+## 微软拼音输入自定义时间
+
+Windows 10：`设置`→`时间和语言`→`区域和语言`→`中文(中华人民共和国)`→`选项`→`微软拼音`→`选项`→`词库和自学习`→`添加新的或编辑现有的用户自定义短语`→`添加`。
+
+然后在短语里面输入以下代码：
+
+```
+%yyyy%-%MM%-%dd% %HH%:%mm%:%ss% +0800
+```
+
+## 右下角时间显示秒
+
+[http://iknow.lenovo.com.cn/detail/dc_173611.html](http://iknow.lenovo.com.cn/detail/dc_173611.html)
+
+## 清除 Dns 缓存
+
+用于更新域名后，访问域名解析到老的 ip 地址。
+
+1：首先清除 Windows 的 dns 缓存。powershell 执行
+
+```powershell
+# 清除
+ipconfig /flushdns
+
+# 查看
+ipconfig /displaydns
+```
+
+2：chrome 或 egde 地址栏输入
+
+```
+chrome://net-internals/#dns
+```
+
+点击 `Clear host cache`
+
+找到 `Sockets`
+
+点击 `Flush socket pools` 刷新试试
+
+## PDF 压缩
+
+[https://zh.pdf24.org/](https://zh.pdf24.org/)
+
+## EDGE 多开
+
+快捷方式添加参数
+
+```
+--user-data-dir="D:\edge\user1"
+```
+
+## 查看端口占用
+
+**查看被占用端口对应的 PID**
+
+```powershell
+netstat -aon|findstr "49157"
+```
+
+**查看是哪个进程或者程序占用了`2720`端口**
+
+```powershell
+tasklist|findstr "2720"
+```
+
+输入 tasklist|findstr "2720"
+
+## Win10
+
+### 删除资源管理器左边用户文件夹
+
+```
+Windows Registry Editor Version 5.00
+
+;使用说明
+;
+;如果不想删除某个快捷方式则在中括号前面加上英文半角的 ; 分号
+;
+;如果想要恢复的话则把前面的 - 减号去除即可
+
+;取消文件资源管理器左侧 下载 文件夹
+;[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}]
+
+;取消文件资源管理器左侧 3D对象 文件夹
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+;取消文件资源管理器左侧 图片 文件夹
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}]
+
+;取消文件资源管理器左侧 音乐 文件夹
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}]
+
+;取消文件资源管理器左侧 桌面 文件夹
+;[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}]
+
+;取消文件资源管理器左侧 文档 文件夹
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}]
+
+;取消文件资源管理器左侧 视频 文件夹
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}]
+```
+
+### 休眠唤醒后，所有的窗口都跑到了左上角，如何解决？
+
+1、按下 Win+R 打开运行，输入 regedit 回车，打开注册表；
+
+2、打开注册表定位到：HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Configuration。查找 NOEDID 开头的项（我的电脑是最后一个），查找的项展开有个 00 项，00 项展开又还有个 00 项；会发现 PrimSurfSize.cx 和 PrimSurfSize.cy 不像其他几个跟屏幕分辨率一致。小一些。
+
+![win10-window-error.png](https://static.yoouu.cn/imgs/doc/issue/win10-window-error.png)
+
+3、两个 00 项都要修改两个键值：PrimSurfSize.cx 和 PrimSurfSize.cy，把这两个键值双击修改，输入你电脑对应的正常分辨率数值，比如 PrimSurfSize.cx 为宽度 1920，PrimSurfSize.cy 为高度 1080。十进制十六进制随意，看其他几个的 00 下的“数据”一栏，都能看到对应的十进制和十六进制，0x780（1920），0x438（1080）
+
+重点就是这两个 00 都有这个名称，两个都要改，我之前只改了第二层的 00，重启后发现没解决。仔细看了是要两个都改，又把第一层 00 的这两个值改了，重启后就解决了。
+
+当然，我看到 HWP 开头的也不是这个分辨率，手快了，同时改了。不过按照他人的经验应该不用吧。但已经忘了原先的值，只记得跟最后这个 NOEDID 的不一样。
+
+另据说“在使用 HDMI 输出线时正常，只有在使用 Display Port 输出线才发现有此问题。” 而我的显示屏就是 DP 输出线，所以遇到此问题。这个只当做扩展小知识了解吧。
+
+## Win11
+
+### 恢复 Win10 经典文件资源管理器样式
+
+[https://finance.sina.com.cn/tech/2021-08-05/doc-ikqcfncc1009508.shtml](https://finance.sina.com.cn/tech/2021-08-05/doc-ikqcfncc1009508.shtml)
+
+### 恢复 Win10 右键菜单
+
+https://www.sordum.org/14479/windows-11-classic-context-menu-v1-0/
+
+### 关闭客户体验改善计划
+
+该条目会造成一个 Microsoft 兼容性遥测的程序大量占用 cpu 造成 卡顿
+
+1.按“Windows+R”键，打开“运行”，输入“gpedit.msc”，点击“确定”，打开“本地组策略编辑器”。
+
+![](https://static.yoouu.cn/imgs/doc/basic/windows/202202091034151.png)
+
+[完全禁用 Microsoft Compatibility Telemetry](https://blog.csdn.net/m0_49448331/article/details/113824078)
+
 ## 常用电脑软件（重装）
 
 Win10 系统联网后会自动下载安装驱动，已经没必要用第三方的驱动更新软件。如果确实需要也可以使用 [驱动精灵纯净版单文件](https://pan.lanzoui.com/iIv3Ahiyo5i)、[鲁大师去广告单文件](https://pan.lanzoui.com/ibRIBkug9sd)
@@ -147,153 +300,6 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 ### Adobe 系列软件
 
 偶尔也会用 PR 编辑一下视频，Adobe 系列软件： https://cloud.189.cn/t/reaU73RvQji2
-
-## 关闭虚拟内存释放空间
-
-我的电脑 右键属性，然后高级系统设置 -> 系统属性 -> 高级 -> 设置(性能) 无分页文件
-
-## 关闭兼容性遥测
-
-使用 dism++ 关闭服务。
-
-## 微软拼音输入自定义时间
-
-Windows 10：`设置`→`时间和语言`→`区域和语言`→`中文(中华人民共和国)`→`选项`→`微软拼音`→`选项`→`词库和自学习`→`添加新的或编辑现有的用户自定义短语`→`添加`。
-
-然后在短语里面输入以下代码：
-
-```
-%yyyy%-%MM%-%dd% %HH%:%mm%:%ss% +0800
-```
-
-## 右下角时间显示秒
-
-[http://iknow.lenovo.com.cn/detail/dc_173611.html](http://iknow.lenovo.com.cn/detail/dc_173611.html)
-
-## 清除 Dns 缓存
-
-用于更新域名后，访问域名解析到老的 ip 地址。
-
-1：首先清除 Windows 的 dns 缓存。powershell 执行
-
-```powershell
-# 清除
-ipconfig /flushdns
-
-# 查看
-ipconfig /displaydns
-```
-
-2：chrome 或 egde 地址栏输入
-
-```
-chrome://net-internals/#dns
-```
-
-点击 `Clear host cache`
-
-找到 `Sockets`
-
-点击 `Flush socket pools` 刷新试试
-
-## PDF 压缩
-
-[https://zh.pdf24.org/](https://zh.pdf24.org/)
-
-## EDGE 多开
-
-快捷方式添加参数
-
-```
---user-data-dir="D:\edge\user1"
-```
-
-## 查看端口占用
-
-**查看被占用端口对应的 PID**
-
-```powershell
-netstat -aon|findstr "49157"
-```
-
-**查看是哪个进程或者程序占用了`2720`端口**
-
-```powershell
-tasklist|findstr "2720"
-```
-
-输入 tasklist|findstr "2720"
-
-## Win10
-
-### 删除资源管理器左边用户文件夹
-
-```
-Windows Registry Editor Version 5.00
-
-;使用说明
-;
-;如果不想删除某个快捷方式则在中括号前面加上英文半角的 ; 分号
-;
-;如果想要恢复的话则把前面的 - 减号去除即可
-
-;取消文件资源管理器左侧 下载 文件夹
-;[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}]
-
-;取消文件资源管理器左侧 3D对象 文件夹
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-
-;取消文件资源管理器左侧 图片 文件夹
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}]
-
-;取消文件资源管理器左侧 音乐 文件夹
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}]
-
-;取消文件资源管理器左侧 桌面 文件夹
-;[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}]
-
-;取消文件资源管理器左侧 文档 文件夹
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}]
-
-;取消文件资源管理器左侧 视频 文件夹
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}]
-```
-
-### 休眠唤醒后，所有的窗口都跑到了左上角，如何解决？
-
-1、按下 Win+R 打开运行，输入 regedit 回车，打开注册表；
-
-2、打开注册表定位到：HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Configuration。查找 NOEDID 开头的项（我的电脑是最后一个），查找的项展开有个 00 项，00 项展开又还有个 00 项；会发现 PrimSurfSize.cx 和 PrimSurfSize.cy 不像其他几个跟屏幕分辨率一致。小一些。
-
-![win10-window-error.png](https://static.yoouu.cn/imgs/doc/issue/win10-window-error.png)
-
-3、两个 00 项都要修改两个键值：PrimSurfSize.cx 和 PrimSurfSize.cy，把这两个键值双击修改，输入你电脑对应的正常分辨率数值，比如 PrimSurfSize.cx 为宽度 1920，PrimSurfSize.cy 为高度 1080。十进制十六进制随意，看其他几个的 00 下的“数据”一栏，都能看到对应的十进制和十六进制，0x780（1920），0x438（1080）
-
-重点就是这两个 00 都有这个名称，两个都要改，我之前只改了第二层的 00，重启后发现没解决。仔细看了是要两个都改，又把第一层 00 的这两个值改了，重启后就解决了。
-
-当然，我看到 HWP 开头的也不是这个分辨率，手快了，同时改了。不过按照他人的经验应该不用吧。但已经忘了原先的值，只记得跟最后这个 NOEDID 的不一样。
-
-另据说“在使用 HDMI 输出线时正常，只有在使用 Display Port 输出线才发现有此问题。” 而我的显示屏就是 DP 输出线，所以遇到此问题。这个只当做扩展小知识了解吧。
-
-## Win11
-
-### 恢复 Win10 经典文件资源管理器样式
-
-[https://finance.sina.com.cn/tech/2021-08-05/doc-ikqcfncc1009508.shtml](https://finance.sina.com.cn/tech/2021-08-05/doc-ikqcfncc1009508.shtml)
-
-### 恢复 Win10 右键菜单
-
-https://www.sordum.org/14479/windows-11-classic-context-menu-v1-0/
-
-### 关闭客户体验改善计划
-
-该条目会造成一个 Microsoft 兼容性遥测的程序大量占用 cpu 造成 卡顿
-
-1.按“Windows+R”键，打开“运行”，输入“gpedit.msc”，点击“确定”，打开“本地组策略编辑器”。
-
-![](https://static.yoouu.cn/imgs/doc/basic/windows/202202091034151.png)
-
-[完全禁用 Microsoft Compatibility Telemetry](https://blog.csdn.net/m0_49448331/article/details/113824078)
 
 ## Windows 文件夹结构
 
