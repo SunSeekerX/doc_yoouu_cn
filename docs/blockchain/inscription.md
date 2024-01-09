@@ -64,6 +64,7 @@ NextDao： https://ep.nextdao.xyz/proxy
 Consync： https://ep.consync.xyz/proxy
 http://Wizz.Cash： https://ep.atomicalswallet.com/proxy
 Atomical Market： https://ep.atomicalmarket.com/proxy
+中子团队：https://ep.atomicalneutron.com/proxy
 
 https://pimvp.com/proxy
 ```
@@ -118,6 +119,12 @@ yarn cli mint-dft electron --satsbyte=52
 # 获取 nft 项目信息
 yarn cli get-container-item "#toothy" "0001"
 ```
+
+### elex-proxy
+
+**EleX Proxy** 代理是一个轻量级的 Rust 实现，用于代理与 [Atomicals ElectrumX](https://github.com/atomicals/atomicals-electrumx) 服务器的通信。该项目旨在为处理 ElectrumX 请求提供简单而高效的解决方案。、
+
+https://github.com/WizzWallet/elex-proxy
 
 ### 搭建 atom 私有节点教程
 
