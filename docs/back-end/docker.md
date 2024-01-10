@@ -840,6 +840,42 @@ docker run -d --name=gitea -e USER_UID=1000 -e USER_GID=1000 -e DB_TYPE=mysql -e
 mkdir -p ~/data/app-host
 
 docker run --name app_host --restart=always -v ~/data/app-host:/app/shared -p 3001:8686 -d tinyc/app-host:lastest
+docker run --name app_host --restart=always -v ~/shared:/app/shared -p 3000:8686 -d tinyc/app-host:0.2.3
+docker run --name app_host --restart=always -v ~/shared:/app/shared -p 3000:8686 -d tinyc/app-host:0.2.2
+```
+
+测试可以成功访问的 nginx 反向代理配置文件，不按照这个配置可能无法使用
+
+```
+
+#PROXY-START/
+
+location ^~ /
+{
+    proxy_pass http://localhost:3000;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Port $server_port;
+    proxy_set_header REMOTE-HOST $remote_addr;
+    # proxy_hide_header Upgrade;
+
+    add_header X-Cache $upstream_cache_status;
+    #Set Nginx Cache
+
+    set $static_fileK05aa2de 0;
+    if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+    {
+        set $static_fileK05aa2de 1;
+        expires 1m;
+    }
+    if ( $static_fileK05aa2de = 0 )
+    {
+        add_header Cache-Control no-cache;
+    }
+}
+#PROXY-END/
 ```
 
 ### 0x17 Docker 安装 twikoo 评论系统
