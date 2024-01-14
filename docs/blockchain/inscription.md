@@ -8,6 +8,7 @@
    2. https://www.satsx.io/
    3. https://bitatom.io/
    4. https://wizz.cash/
+   5. https://www.coinglass.com/zh/arc20
 3. BNB 铭文: https://evm.ink/marketplace?tab=inscriptions
 4. SOL 铭文: http://magiceden.io/marketplace/sol
 5. SRC20 (stamp): http://openstamp.io/market
@@ -119,6 +120,10 @@ yarn cli mint-dft electron --satsbyte=52
 # 获取 nft 项目信息
 yarn cli get-container-item "#toothy" "0001"
 ```
+
+### 挖矿工具 - atomicalsir
+
+https://github.com/hack-ink/atomicalsir
 
 ### elex-proxy
 
@@ -328,13 +333,16 @@ yarn build
 yarn cli mint-dft quark --satsbyte=100
 ```
 
-### 挖 neutron、quark、electron
+### 挖 darkmatter、neutron、quark、electron
 
 ```shell
 yarn cli mint-dft neutron --satsbyte=150
 yarn cli mint-dft quark --satsbyte=120
 # 挖 electron --satsbyte=52 是设置 gas 的
 yarn cli mint-dft electron --satsbyte=52
+
+
+yarn cli mint-dft darkmatter --satsbyte=92
 ```
 
 electron dune 数据看板 https://dune.com/satsx/electron
