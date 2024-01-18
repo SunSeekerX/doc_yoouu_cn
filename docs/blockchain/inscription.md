@@ -336,6 +336,9 @@ yarn cli mint-dft quark --satsbyte=100
 ### 挖 darkmatter、neutron、quark、electron
 
 ```shell
+# Sophon
+yarn cli mint-dft --disablechalk sophon --satsbyte=65
+
 yarn cli mint-dft neutron --satsbyte=150
 yarn cli mint-dft quark --satsbyte=120
 # 挖 electron --satsbyte=52 是设置 gas 的
