@@ -355,7 +355,8 @@ electron dune 数据看板 https://dune.com/satsx/electron
 ```shell
 # 鳄鱼
 toothy
-yarn cli mint-item "#toothy" "0999" C:\Users\zero\Desktop\toothy\item-0999.json --satsbyte 30yarn cli mint-item "#toothy" "1418" C:\Users\zero\Desktop\toothy\item-1418.json --satsbyte 30
+yarn cli mint-item "#toothy" "0999" C:\Users\zero\Desktop\toothy\item-0999.json --satsbyte 30
+yarn cli mint-item "#toothy" "1418" C:\Users\zero\Desktop\toothy\item-1418.json --satsbyte 30
 
 # 河豚
 capybaras
