@@ -71,7 +71,7 @@ react-native : 无法加载文件 C:\Users\SunSeekerX\AppData\Roaming\npm\react-
    ```powershell
    # 更改执行策略
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
-
+   
    # 查看执行策略
    Get-ExecutionPolicy
    ```
@@ -173,8 +173,8 @@ PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 
 ```powershell
 # 安装 Scoop
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-irm get.scoop.sh | iex
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 # 安装 curl
 scoop install curl
 
