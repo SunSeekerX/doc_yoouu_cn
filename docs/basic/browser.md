@@ -1,6 +1,8 @@
-#
-
 # 浏览器技巧
+
+## 关闭 chrome 左上角标签页搜索功能
+
+There is no Enable Tab Search in chrome://flags anymore! The **`about:flags/#chrome-refresh-2023 `**solution moves this button to the left side, but no way to disable it for good. Hope google will return this flag back
 
 ## 配置 Firefox 垂直标签栏
 
@@ -8,7 +10,7 @@ Firefox 原生不支持垂直标签栏，但可以通过扩展实现，比如 Si
 
 首先要安装一款垂直标签扩展，推荐 Sidebery，因为 Tree Style Tab 默认不支持暗黑模式。安装之后就会看到左边的标签栏。我们还可以通过快捷键`ctrl-e`打开或关闭标签栏。
 
-​ ![Sidebery 无法隐藏水平标签栏](https://taoshu.in/imgs/firefox-sidebery-default.jpg) Sidebery 无法隐藏水平标签栏
+![Sidebery 无法隐藏水平标签栏](https://taoshu.in/imgs/firefox-sidebery-default.jpg) Sidebery 无法隐藏水平标签栏
 
 现在我们想办法隐藏水平标签栏。
 
@@ -37,13 +39,13 @@ Firefox 支持通过 CSS 定制界面。对应的 CSS 规则需要保存到名�
 
 现在再重启 Firefox，水平标签栏就会被隐藏起来。
 
-​ ![隐藏水平标签栏](https://taoshu.in/imgs/firefox-sidebery-hide-tabbar.jpg) 隐藏水平标签栏
+![隐藏水平标签栏](https://taoshu.in/imgs/firefox-sidebery-hide-tabbar.jpg) 隐藏水平标签栏
 
 这是非常简洁的 UI，我非常喜欢。但是它有两个问题。第一，窗口的关闭、最大、最小按钮也消失了。第二，办法用鼠标移动 Firefox 窗口。
 
 最简单的方案是让 Firefox 显示标题栏。右键地址栏两侧的任意图标，点击[Customize toolbar…]会打开一个新页面，选中左下角的 Title Bar，最后点击右下角的[Done]。如此 Firefox 就会重新展示标题栏，移动窗口的问题也一并解决。
 
-​ ![标题栏显示效果](https://taoshu.in/imgs/firefox-title-bar.jpg) 标题栏显示效果
+![标题栏显示效果](https://taoshu.in/imgs/firefox-title-bar.jpg) 标题栏显示效果
 
 但是，我更喜欢简洁的界面。如果是关闭窗口，可以直接使用`⌘+w`，退出按`⌘+q`，进入全屏用`^+⌘+f`。这些都是 mac 系统的标准快捷键。但窗口移动这个问题不好解决。
 
@@ -61,7 +63,7 @@ Firefox 支持通过 CSS 定制界面。对应的 CSS 规则需要保存到名�
 
 最终的显示效果如下，地址栏两边有空白，侧边栏的标题也已经隐藏：
 
-​ ![极简侧边栏最终显示效果](https://taoshu.in/imgs/firefox-vertical-tap.jpg) 极简侧边栏最终显示效果
+![极简侧边栏最终显示效果](https://taoshu.in/imgs/firefox-vertical-tap.jpg) 极简侧边栏最终显示效果
 
 以上就是全部的配置过程。说起垂直标签栏，最早还是微软在 Edge 浏览器实现的。但 Edge 的标签栏有两个问题。第一，虽然它能隐藏水平标签栏，但原来的 UI 并不会隐藏，只是不显示水平标签罢了。这就没办法扩大垂直方向上的显示区域。第二，也是最大的问题，它不支持全屏模式，一旦进入全屏就会切换成水平标签栏。相比之下，Firefox 的实现虽然不那么方便，却能真正提高屏幕的利用率，完爆 Edge。Chrome 也有类似的插件，但不支持隐藏水平标签，还不如 Edge。所以 Firefox 胜出 ✌️
 
