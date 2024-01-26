@@ -245,13 +245,7 @@ fish 和 nu 用户可以参阅 [官方文档](https://ohmyposh.dev/docs/linux)�
 
 ```powershell
 Install-Module PSColor
-```
-
-就可以了。
-
-如果你想使用普通用户来安装，打开 WIndows PowerShell 控制台，输入：
-
-```
+# 普通用户
 Install-Module PSColor -Scope CurrentUser
 ```
 
@@ -265,7 +259,9 @@ Import-Module PSColor
 
 哪些文件类型可以被加亮显示是可以配置的，在 [PSColor](https://github.com/Davlind/PSColor) 官方的 README 中有介绍，这里就不转述了。不过这个配置方式是 PowerShell 式的，如果能直接像上面使用 itermcolors 文件配置控制台色彩一样，直接用 Linux 平台上的现成的 dircolors 配置文件的话，会不会更方便呢？这个想法很好，而且还真的有人实现了，它就是 [DirColors](https://github.com/DHowett/DirColors)。
 
-```
+```powershell
+Install-Module DirColors
+# 普通用户
 Install-Module DirColors -Scope CurrentUser
 ```
 
