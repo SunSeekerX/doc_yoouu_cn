@@ -71,7 +71,7 @@ react-native : 无法加载文件 C:\Users\SunSeekerX\AppData\Roaming\npm\react-
    ```powershell
    # 更改执行策略
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
-   
+
    # 查看执行策略
    Get-ExecutionPolicy
    ```
@@ -164,6 +164,8 @@ win+x 选择 Windows 终端（管理员）
 PowerShell 与 git 集成，可以在 PowerShell 显示 git 仓库信息，同时提供了 git 命令补全。
 
 ```powershell
+PowerShellGet\Install-Module posh-git -Force
+# 普通用户
 PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 ```
 
@@ -172,8 +174,11 @@ PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 需要使用 [Scoop](https://scoop.sh/) 进行安装
 
 ```powershell
-# 安装 Scoop
+# 设置权限
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+# 普通用户
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+# 安装 Scoop
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 # 安装 curl
 scoop install curl

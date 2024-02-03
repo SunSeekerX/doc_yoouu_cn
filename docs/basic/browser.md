@@ -4,6 +4,10 @@
 
 There is no Enable Tab Search in chrome://flags anymore! The **`about:flags/#chrome-refresh-2023 `**solution moves this button to the left side, but no way to disable it for good. Hope google will return this flag back
 
+```\
+about:flags/#chrome-refresh-2023
+```
+
 ## 配置 Firefox 垂直标签栏
 
 Firefox 原生不支持垂直标签栏，但可以通过扩展实现，比如 Sidebery 或者 Tree Style Tab。装上插件之后确实会展示类似 Edge 的垂直标签栏。但是，原来的水平标签并没有隐藏。也就是说同一个标签会显示在两个地方。这让强迫症晚期的我怎么忍？今天就分享一种在 Firefox 上完美实现垂直标签栏的方案。
