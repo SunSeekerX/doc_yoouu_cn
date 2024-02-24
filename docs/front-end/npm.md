@@ -474,41 +474,11 @@ pnpm dlx husky-init && pnpm install # pnpm
 
 ### ubuntu
 
-由于 linux 特殊的用户系统，如果安装在了 root 用户下，切换到其他的用户是无法使用的。需要重新安装一遍
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
 
-1. 首先修改 /ect/profile 配置 nvm node 的安装地址
-
-   ```shell
-   vim /etc/profile
-   ```
-
-   添加
-
-   ```shell
-   export NVM_BIN="/usr/local/nvm/versions/node" # node安装地址
-   export NVM_DIR="/usr/local/nvm" # nvm安装地址
-   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-   ```
-
-2. 更新配置
-
-   ```shell
-   source /etc/profile # 更新配置
-   ```
-
-3. 创建文件夹
-
-   ```shell
-   mkdir /usr/local/nvm
-   ```
-
-4. 安装 nvm
-
-   ```shell
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-   ```
-
-5. 基本使用
+1. 基本使用
 
    ```shell
    # 查看远程可用
@@ -524,7 +494,7 @@ pnpm dlx husky-init && pnpm install # pnpm
    nvm alias default v16.17.1
    ```
 
-其他用户使用 nvm，需要重新安装一份。
+~~其他用户使用 nvm，需要重新安装一份。~~
 
 ```shell
 # 进入用户文件夹，这里以 ssx 用户为例

@@ -716,21 +716,32 @@ nginx 反向代理无法正常工作，禅道工作目录为 www/
 
 ```shell
 docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:5.7
+
+docker run -d \
+--name mysql57 \
+--privileged=true \
+--restart=always \
+-p 33066:3306 \
+-v ~/data/mysql57/data:/var/lib/mysql \
+-v ~/data/mysql57/config:/etc/mysql/conf.d  \
+-v ~/data/mysql57/logs:/logs \
+-e MYSQL_ROOT_PASSWORD=NeQ46esK8DG0 \
+-e TZ=Asia/Shanghai mysql:5.7
 ```
 
 **mysql 8.x**
 
 ```shell
-docker run  -d  \
+docker run -d \
 --name mysql8x \
 --privileged=true \
 --restart=always \
 -p 33077:3306 \
--v /home/mysql8/data:/var/lib/mysql \
--v /home/mysql8/config:/etc/mysql/conf.d  \
--v /home/mysql8/logs:/logs \
+-v ~/data/mysql8/data:/var/lib/mysql \
+-v ~/data/mysql8/config:/etc/mysql/conf.d  \
+-v ~/data/mysql8/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
--e TZ=Asia/Shanghai mysql:8.1
+-e TZ=Asia/Shanghai mysql:8.3
 
 # win
 docker run  -d --name mysql8x --privileged=true --restart=always -p 33077:3306 -v D:\data\mysql8\data:/var/lib/mysql -v D:\data\mysql8\config:/etc/mysql/conf.d -v D:\data\mysql8\logs:/logs -e MYSQL_ROOT_PASSWORD=my-secret-pw -e TZ=Asia/Shanghai mysql:8.1
@@ -748,6 +759,8 @@ docker run  -d  \
 -e TZ=Asia/Shanghai mysql:8.1
 
 # 开放远程访问
+# 进入容器
+docker exec -it <container_id_or_name> /bin/bash
 # 登录 mysql
 mysql -u root -p
 # 开放权限
