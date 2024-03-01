@@ -602,13 +602,14 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
 ```bash
 docker pull redis
 
+docker pull redis:7.2
 docker pull redis:7.0.11
 ```
 
 2、创建挂载目录
 
 ```bash
-mkdir -p /root/app/docker-data/redis && cd /root/app/docker-data/redis
+mkdir -p /data/docker-data/redis7x && cd /data/docker-data/redis7x
 ```
 
 3、下载 redis.conf 文件
@@ -652,12 +653,12 @@ docker run --name redis \
 -d redis redis-server /etc/redis/redis.conf --appendonly yes
 
 # 7.x
-docker run --name redis \
+docker run --name redis7x \
 --restart=always \
 -p 63799:6379 \
 --log-opt max-size=100m --log-opt max-file=2 \
--v /root/app/docker-data/redis/redis.conf:/etc/redis/redis.conf \
--v /root/app/docker-data/redis:/data \
+-v /data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
+-v /data/docker-data/redis7x:/data \
 -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
 
 # win
@@ -737,9 +738,9 @@ docker run -d \
 --privileged=true \
 --restart=always \
 -p 33077:3306 \
--v ~/data/mysql8/data:/var/lib/mysql \
--v ~/data/mysql8/config:/etc/mysql/conf.d  \
--v ~/data/mysql8/logs:/logs \
+-v /data/docker-data/mysql8x/data:/var/lib/mysql \
+-v /data/docker-data/mysql8x/config:/etc/mysql/conf.d  \
+-v /data/docker-data/mysql8x/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
 -e TZ=Asia/Shanghai mysql:8.3
 
