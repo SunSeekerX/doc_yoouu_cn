@@ -597,82 +597,73 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
 
 ### 0x11 Docker 安装 redis
 
-1、拉取 redis 镜像
+1. 创建挂载目录
 
-```bash
-docker pull redis
+   ```shell
+   mkdir -p /data/docker-data/redis7x && cd /data/docker-data/redis7x
+   ```
 
-docker pull redis:7.2
-docker pull redis:7.0.11
-```
+2. 下载 redis.conf 文件
 
-2、创建挂载目录
+   ```shell
+   wget https://download.redis.io/redis-stable/redis.conf
+   ```
 
-```bash
-mkdir -p /data/docker-data/redis7x && cd /data/docker-data/redis7x
-```
+3. 权限
 
-3、下载 redis.conf 文件
+   ```shell
+   chmod 777 redis.conf
+   ```
 
-```bash
-wget https://download.redis.io/redis-stable/redis.conf
-```
+4. 修改默认配置信息
 
-4、权限
+   ```bash
+   vi redis.conf
 
-```bash
-chmod 777 redis.conf
-```
+   # 这行要注释掉，解除本地连接限制 配置绑定 ip，搜索 bind 127.0.0.1 -::1
+   bind 0.0.0.0
+   # 默认yes，如果设置为yes，则只允许在本机的回环连接，其他机器无法连接。
+   protected-mode no
+   # 默认no 为不守护进程模式，docker部署不需要改为yes，docker run -d本身就是后台启动，不然会冲突
+   daemonize no
+   # 密码，搜索 requirepass foobared
+   requirepass my-secret-pw
+   # 持久化
+   appendonly yes
+   ```
 
-5、修改默认配置信息
+5. docker 启动 redis
 
-```bash
-vi redis.conf
+   ```shell
+   # Linux
+   docker run --name redis7x \
+   --restart=always \
+   -p 63799:6379 \
+   --log-opt max-size=100m --log-opt max-file=2 \
+   -v /data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
+   -v /data/docker-data/redis7x:/data \
+   -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
 
-# 这行要注释掉，解除本地连接限制 配置绑定 ip，搜索 bind 127.0.0.1 -::1
-bind 0.0.0.0
-# 默认yes，如果设置为yes，则只允许在本机的回环连接，其他机器无法连接。
-protected-mode no
-# 默认no 为不守护进程模式，docker部署不需要改为yes，docker run -d本身就是后台启动，不然会冲突
-daemonize no
-# 密码，搜索 requirepass foobared
-requirepass my-secret-pw
-# 持久化
-appendonly yes
-```
+   # Win
+   docker run --name redis7x `
+   --restart=always `
+   -p 63799:6379 `
+   --log-opt max-size=100m `
+   --log-opt max-file=2 `
+   -v D:\data\docker-data\redis7x\redis.conf:/etc/redis/redis.conf `
+   -v D:\data\docker-data\redis7x\:/data `
+   -d redis:7.2 `
+   redis-server /etc/redis/redis.conf --appendonly yes
 
-6、docker 启动 redis
-
-```bash
-docker run --name redis \
---restart=always \
--p 63799:6379 \
---log-opt max-size=100m --log-opt max-file=2 \
--v /root/app/docker-data/redis/redis.conf:/etc/redis/redis.conf \
--v /root/app/docker-data/redis:/data \
--d redis redis-server /etc/redis/redis.conf --appendonly yes
-
-# 7.x
-docker run --name redis7x \
---restart=always \
--p 63799:6379 \
---log-opt max-size=100m --log-opt max-file=2 \
--v /data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
--v /data/docker-data/redis7x:/data \
--d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-
-# win
-docker run --name redis7x --restart=always -p 63799:6379 --log-opt max-size=100m --log-opt max-file=2 -v D:\data\redis7x\redis.conf:/etc/redis/redis.conf -v D:\data\redis7x\:/data -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-
-# mac
-docker run --name redis7x \
---restart=always \
--p 63799:6379 \
---log-opt max-size=100m --log-opt max-file=2 \
--v ~/work/data/redis7x/redis.conf:/etc/redis/redis.conf \
--v ~/work/data/redis7x:/data \
--d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-```
+   # Mac
+   docker run --name redis7x \
+   --restart=always \
+   -p 63799:6379 \
+   --log-opt max-size=100m --log-opt max-file=2 \
+   -v ~/work/data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
+   -v ~/work/data/docker-data/redis7x:/data \
+   -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
+   ```
 
 **说明：**
 
@@ -681,12 +672,6 @@ docker run --name redis7x \
 - -v 挂载文件或目录：前面是宿主机，后面是容器。
 - -d redis redis-server /etc/redis/redis.conf：表示后台启动 redis，以配置文件启动 redis，加载容器内的 conf 文件。
 - appendonly yes：开启 redis 持久化。
-
-7、检查 redis 运行状态
-
-```bash
-docker ps
-```
 
 ### 0x12 Docker 安装 zentao
 
@@ -733,6 +718,7 @@ docker run -d \
 **mysql 8.x**
 
 ```shell
+# Linux
 docker run -d \
 --name mysql8x \
 --privileged=true \
@@ -744,20 +730,29 @@ docker run -d \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
 -e TZ=Asia/Shanghai mysql:8.3
 
-# win
-docker run  -d --name mysql8x --privileged=true --restart=always -p 33077:3306 -v D:\data\mysql8\data:/var/lib/mysql -v D:\data\mysql8\config:/etc/mysql/conf.d -v D:\data\mysql8\logs:/logs -e MYSQL_ROOT_PASSWORD=my-secret-pw -e TZ=Asia/Shanghai mysql:8.1
+# Win
+docker run -d `
+--name mysql8x `
+--privileged=true `
+--restart=always `
+-p 33077:3306 `
+-v D:\data\docker-data\mysql8x\data:/var/lib/mysql `
+-v D:\data\docker-data\mysql8x\config:/etc/mysql/conf.d `
+-v D:\data\docker-data\mysql8x\logs:/logs `
+-e MYSQL_ROOT_PASSWORD=my-secret-pw `
+-e TZ=Asia/Shanghai mysql:8.3
 
-# mac
+# Mac
 docker run  -d  \
 --name mysql8x \
 --privileged=true \
 --restart=always \
 -p 33077:3306 \
--v ~/work/data/mysql8/data:/var/lib/mysql \
--v ~/work/data/mysql8/config:/etc/mysql/conf.d  \
--v ~/work/data/logs:/logs \
+-v ~/work/data/docker-data/mysql8/data:/var/lib/mysql \
+-v ~/work/data/docker-data/mysql8/config:/etc/mysql/conf.d  \
+-v ~/work/data/docker-data/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
--e TZ=Asia/Shanghai mysql:8.1
+-e TZ=Asia/Shanghai mysql:8.3
 
 # 开放远程访问
 # 进入容器
