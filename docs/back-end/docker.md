@@ -328,6 +328,15 @@ docker volume create portainer_data
 docker rm portainer -f
 # 启动容器
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+# Linux
+docker run -d \
+--name portainer \
+--restart=always \
+-p 8000:8000 \
+-p 9000:9000 \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v /data/docker-data/portainer:/data portainer/portainer-ce
 ```
 
 ---
@@ -643,7 +652,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker-data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -654,7 +663,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker-data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Mac
    docker run --name redis7x \
    --restart=always \
