@@ -948,3 +948,12 @@ docker run -d \
   --restart always \
   harness/gitness
 ```
+
+### 0x20 Docker 安装 minio
+
+GitHub: https://github.com/minio/minio
+
+```shell
+docker run -d -p 9000:9000 -p 9001:9001 \
+  quay.io/minio/minio server /data --console-address ":9001"
+```
