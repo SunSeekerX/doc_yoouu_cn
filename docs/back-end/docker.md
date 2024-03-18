@@ -508,8 +508,7 @@ https://hub.docker.com/r/snowdreamtech/frps
 新建配置文件
 
 ```shell
-mkdir -p /etc/frp/
-cd /etc/frp/
+mkdir -p /data/docker-data/frps/ && cd /data/docker-data/frps/
 touch frps.toml
 ```
 
@@ -549,7 +548,13 @@ dashboard_port = 7071
 启动容器
 
 ```shell
-docker run --restart=always --network host -d --name=frps -v /etc/frp/frps.toml:/etc/frp/frps.toml snowdreamtech/frps
+# Linux
+docker run -d \
+--name frps \
+--network host \
+--restart=always \
+-p 33077:3306 \
+-v /data/docker-data/frps/frps.toml:/etc/frp/frps.toml snowdreamtech/frps
 
 # 旧版本
 docker run --restart=always --network host -d -v /etc/frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps
@@ -652,7 +657,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker-data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-   
+
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -663,7 +668,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker-data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-   
+
    # Mac
    docker run --name redis7x \
    --restart=always \
