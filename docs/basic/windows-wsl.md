@@ -61,4 +61,70 @@ cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'
 hostname -I | awk '{print $1}'
 ```
 
-##
+## 转移 wsl 系统数据到其他盘
+
+如果你想将WSL里面的数据存储到D盘上，你可以通过导出当前的WSL分发，然后将其导入到D盘上的新位置来实现。以下是整个流程的步骤：
+
+1. **打开 PowerShell**：打开PowerShell作为管理员。
+
+2. **列出当前的WSL分发**：你需要确定你想要移动的WSL分发的名称。
+
+   ```sh
+   wsl --list --verbose
+   ```
+
+3. **关闭所有的WSL实例**：在进行下一步之前确保所有的WSL实例都已经关闭。
+
+   ```sh
+   wsl --shutdown
+   ```
+
+4. **导出WSL分发**：将你想要移动的WSL分发导出到一个tar文件。例如，如果你的分发名称是Ubuntu，你可以使用以下命令：
+
+   ```sh
+   wsl --export Ubuntu D:\path\to\save\ubuntu.tar
+   ```
+
+   把`D:\path\to\save\ubuntu.tar`替换成你想要保存tar文件的实际路径。
+
+5. **注销WSL分发**：这一步会删除当前的WSL分发，所以确保你已经成功导出了分发。
+
+   ```sh
+   wsl --unregister Ubuntu
+   ```
+
+6. **在新位置创建一个文件夹**：在D盘上选择或创建一个新的文件夹来存放你的WSL分发。
+
+   ```sh
+   mkdir D:\path\where\you\want\wsl
+   ```
+
+7. **导入WSL分发**：将分发导入到你在D盘上创建的新位置。
+
+   ```sh
+   wsl --import Ubuntu D:\path\where\you\want\wsl D:\path\to\save\ubuntu.tar
+   ```
+
+   确保替换路径为你实际想要使用的路径。
+
+8. **启动新的WSL分发**：一旦导入完成，你就可以启动你的新WSL分发了。
+
+   ```sh
+   wsl -d Ubuntu
+   ```
+
+9. **设置默认用户**（如果需要）：如果新导入的分发默认用户是root，你需要修改WSL配置文件来更改默认用户。可以在`D:\path\where\you\want\wsl`路径下创建或编辑`etc\wsl.conf`文件，并添加以下内容：
+
+   ```
+   [user]
+   default=<你的用户名>
+   ```
+
+   替换`<你的用户名>`为你的非root用户的用户名。然后重启WSL。
+
+   ```sh
+   wsl --shutdown
+   wsl -d Ubuntu
+   ```
+
+通过这些步骤，你可以将WSL分发的默认数据存储位置更改到D盘上的指定目录。这样，WSL将使用新的位置来存储和访问所有文件。

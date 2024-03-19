@@ -953,7 +953,17 @@ docker run -d \
 
 GitHub: https://github.com/minio/minio
 
+Doc: https://min.io/docs/minio/container/index.html
+
 ```shell
-docker run -d -p 9000:9000 -p 9001:9001 \
-  quay.io/minio/minio server /data --console-address ":9001"
+# Linux
+docker run -d \
+   --restart=always \
+   -p 9000:9000 \
+   -p 9001:9001 \
+   --name minio \
+   -v ~/data/docker-data/minio/data:/data \
+   -e "MINIO_ROOT_USER=ROOTNAME" \
+   -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
+   quay.io/minio/minio server /data --console-address ":9001"
 ```
