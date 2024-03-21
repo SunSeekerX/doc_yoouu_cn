@@ -140,7 +140,15 @@
 
 [UnblockNeteaseMusic](https://github.com/nondanee/UnblockNeteaseMusic) - 解锁网易云音乐客户端变灰歌曲
 
-### Typora 主题
+### Typora
+
+[Drake](https://github.com/liangjingkanji/DrakeTyporaTheme) - 简单且扁平化的主题, 有 12 种风格
+
+[YuanShan](https://theme.typora.io/theme/YuanShan/) - 远山是一款灵感来源于只此青绿，以中国传统颜色**青色**为主色系的typroa主题
+
+[插件系统](https://github.com/obgnail/typora_plugin)
+
+[LapisCV](https://github.com/BingyanStudio/LapisCV) - 📃 开箱即用的 Obsidian / Typora 简历
 
 [Drake](https://theme.typora.io/theme/Drake/) - 对表格支持较好，表格宽度较宽。
 

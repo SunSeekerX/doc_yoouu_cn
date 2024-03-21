@@ -2,6 +2,31 @@
 
 记录下开发需要用到的网络代理设置。
 
+## Openwrt
+
+MIUIGMS 谷歌服务补全计划: https://blog.minamigo.moe/archives/1022
+
+中国大陆 FCM Hosts Magisk模块: https://blog.minamigo.moe/archives/201
+
+~~openclash 谷歌商店无法下载，openclash 设置添加绕过中国大陆 IPv4 黑名单~~
+
+```
+##解决绕过大陆后谷歌商店无法更新
+services.googleapis.cn
+googleapis.cn
+xn--ngstr-lra8j.com
+```
+
+~~覆写设置 规则设置~~
+
+```
+- DST-PORT,22,DIRECT
+- DOMAIN-SUFFIX,okx.com,proxy
+- DOMAIN-SUFFIX,xn--ngstr-lra8j.com,proxy
+- DOMAIN-SUFFIX,googleapis.cn,proxy
+- DOMAIN-SUFFIX,services.googleapis.cn,proxy
+```
+
 ## Git
 
 ```shell
