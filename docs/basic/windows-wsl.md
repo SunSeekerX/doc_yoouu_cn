@@ -65,6 +65,16 @@ hostname -I | awk '{print $1}'
 
 如果你想将WSL里面的数据存储到D盘上，你可以通过导出当前的WSL分发，然后将其导入到D盘上的新位置来实现。以下是整个流程的步骤：
 
+查看当前 ubuntu 所在路径可以尝试以下命令
+
+> 请将 `*Ubuntu*` 替换为您的 WSL 发行版的实际名称，如果您的发行版不是 Ubuntu。如果你不确定包的确切名称，可以留下 `*` 通配符，这将匹配任何可能的包名称。
+>
+> 这条命令会在当前用户的 `AppData\Local\Packages` 文件夹内递归搜索所有名称中包含 `Ubuntu` 的文件夹，并列出所有找到的 `ext4.vhdx` 文件。运行这个命令之后，你应该能够看到包含 WSL2 文件系统的 `.vhdx` 文件的完整路径。
+
+```powershell
+dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
+```
+
 1. **打开 PowerShell**：打开PowerShell作为管理员。
 
 2. **列出当前的WSL分发**：你需要确定你想要移动的WSL分发的名称。
@@ -83,6 +93,8 @@ hostname -I | awk '{print $1}'
 
    ```sh
    wsl --export Ubuntu D:\path\to\save\ubuntu.tar
+   # 我的命令
+   wsl --export Ubuntu-22.04 D:\ubuntu.tar
    ```
 
    把`D:\path\to\save\ubuntu.tar`替换成你想要保存tar文件的实际路径。
@@ -91,18 +103,24 @@ hostname -I | awk '{print $1}'
 
    ```sh
    wsl --unregister Ubuntu
+   # 我的命令
+   wsl --unregister Ubuntu-22.04
    ```
 
 6. **在新位置创建一个文件夹**：在D盘上选择或创建一个新的文件夹来存放你的WSL分发。
 
    ```sh
    mkdir D:\path\where\you\want\wsl
+   # 我的命令
+   mkdir D:\data\wsl\ubuntu-22.04
    ```
 
 7. **导入WSL分发**：将分发导入到你在D盘上创建的新位置。
 
    ```sh
    wsl --import Ubuntu D:\path\where\you\want\wsl D:\path\to\save\ubuntu.tar
+   # 我的命令
+   wsl --import Ubuntu-22.04 D:\data\wsl\ubuntu-22.04 D:\ubuntu.tar
    ```
 
    确保替换路径为你实际想要使用的路径。
@@ -111,6 +129,8 @@ hostname -I | awk '{print $1}'
 
    ```sh
    wsl -d Ubuntu
+   # 我的命令
+   wsl -d Ubuntu-22.04
    ```
 
 9. **设置默认用户**（如果需要）：如果新导入的分发默认用户是root，你需要修改WSL配置文件来更改默认用户。可以在`D:\path\where\you\want\wsl`路径下创建或编辑`etc\wsl.conf`文件，并添加以下内容：

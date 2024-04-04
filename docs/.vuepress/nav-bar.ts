@@ -230,6 +230,7 @@ export const zhNavbar = navbar([
       { text: '工具', link: '/blockchain/tools' },
       { text: 'Bitcoin', link: '/blockchain/bitcoin' },
       { text: 'Evm 系列', link: '/blockchain/evm' },
+      { text: 'Solana', link: '/blockchain/solana' },
       { text: 'Solidity 开发', link: '/blockchain/solidity' },
       { text: '玩过的项目', link: '/blockchain/apps/' },
     ],
