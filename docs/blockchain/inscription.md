@@ -42,6 +42,109 @@
     - twitter: https://twitter.com/_BellsCoin
 19. Bitlend OG Pass: https://magiceden.io/ordinals/marketplace/bitlendogpass
 
+## runes
+
+### 搭建全节点
+
+感觉是 brc20 的全节点。
+
+下载索引器地址：https://github.com/ordinals/ord/releases
+
+### win
+
+解压随便放在那里，
+
+```powershell
+# 开始索引同步，17179869184 代表使用内存，代表 16gb，https://www.bejson.com/convert/filesize/ 这里去换算
+# 如果 bitcoin 没有安装在默认路径需要指定
+.\ord.exe --index-runes --index-cache-size 17179869184 index update
+.\ord.exe --index-runes --index-cache-size 17179869184 --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
+```
+
+help 输出
+
+```
+➜ .\ord.exe help
+Usage: ord.exe [OPTIONS] <COMMAND>
+
+Commands:
+  balances  List all rune balances
+  decode    Decode a transaction
+  env       Start a regtest ord and bitcoind instance
+  epochs    List the first satoshis of each reward epoch
+  find      Find a satoshi's current location
+  index     Index commands
+  list      List the satoshis in an output
+  parse     Parse a satoshi from ordinal notation
+  runes     List all runes
+  server    Run the explorer server
+  settings  Display settings
+  subsidy   Display information about a block's subsidy
+  supply    Display Bitcoin supply information
+  teleburn  Generate teleburn addresses
+  traits    Display satoshi traits
+  wallet    Wallet commands
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+      --bitcoin-data-dir <BITCOIN_DATA_DIR>
+          Load Bitcoin Core data dir from <BITCOIN_DATA_DIR>.
+      --bitcoin-rpc-password <BITCOIN_RPC_PASSWORD>
+          Authenticate to Bitcoin Core RPC with <BITCOIN_RPC_PASSWORD>.
+      --bitcoin-rpc-url <BITCOIN_RPC_URL>
+          Connect to Bitcoin Core RPC at <BITCOIN_RPC_URL>.
+      --bitcoin-rpc-username <BITCOIN_RPC_USERNAME>
+          Authenticate to Bitcoin Core RPC as <BITCOIN_RPC_USERNAME>.
+      --chain <CHAIN_ARGUMENT>
+          Use <CHAIN>. [default: mainnet] [possible values: mainnet, testnet, signet, regtest]
+      --commit-interval <COMMIT_INTERVAL>
+          Commit to index every <COMMIT_INTERVAL> blocks. [default: 5000]
+      --config <CONFIG>
+          Load configuration from <CONFIG>.
+      --config-dir <CONFIG_DIR>
+          Load configuration from <CONFIG_DIR>.
+      --cookie-file <COOKIE_FILE>
+          Load Bitcoin Core RPC cookie file from <COOKIE_FILE>.
+      --data-dir <DATA_DIR>
+          Store index in <DATA_DIR>.
+      --first-inscription-height <FIRST_INSCRIPTION_HEIGHT>
+          Don't look for inscriptions below <FIRST_INSCRIPTION_HEIGHT>.
+      --height-limit <HEIGHT_LIMIT>
+          Limit index to <HEIGHT_LIMIT> blocks.
+      --index <INDEX>
+          Use index at <INDEX>.
+      --index-cache-size <INDEX_CACHE_SIZE>
+          Set index cache size to <INDEX_CACHE_SIZE> bytes. [default: 1/4 available RAM]
+      --index-runes
+          Track location of runes. RUNES ARE IN AN UNFINISHED PRE-ALPHA STATE AND SUBJECT TO CHANGE AT ANY TIME.
+      --index-sats
+          Track location of all satoshis.
+      --index-spent-sats
+          Keep sat index entries of spent outputs.
+      --index-transactions
+          Store transactions in index.
+      --integration-test
+          Run in integration test mode.
+      --minify
+          Minify JSON output.
+  -n, --no-index-inscriptions
+          Do not index inscriptions.
+      --server-password <SERVER_PASSWORD>
+          Require basic HTTP authentication with <SERVER_PASSWORD>. Credentials are sent in cleartext. Consider using authentication in conjunction with HTTPS.
+      --server-username <SERVER_USERNAME>
+          Require basic HTTP authentication with <SERVER_USERNAME>. Credentials are sent in cleartext. Consider using authentication in conjunction with HTTPS.
+  -r, --regtest
+          Use regtest. Equivalent to `--chain regtest`.
+  -s, --signet
+          Use signet. Equivalent to `--chain signet`.
+  -t, --testnet
+          Use testnet. Equivalent to `--chain testnet`.
+  -h, --help
+          Print help
+  -V, --version
+          Print version
+```
+
 ## Atomicals
 
 文档：https://docs.atomicals.xyz/
