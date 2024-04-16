@@ -216,6 +216,8 @@ addnode=47.108.165.145:8333
 
 <img src="https://static.yoouu.cn/imgs/doc/blockchain/bitcoin/202311292240901.png" alt="img" style="zoom:50%;" />
 
+### 测试网
+
 ## Linux - 搭建全节点
 
 http://mp.weixin.qq.com/s?__biz=Mzg2MTc3Mjk0Nw==&mid=2247485411&idx=1&sn=71f93b1c6e029f23761a63dba21b7bd8&chksm=ce134a1ff964c309e146de70e60c9da003b1ff5c8fc498cb006de30fca27688452d50c7de71c&scene=21#wechat_redirect
