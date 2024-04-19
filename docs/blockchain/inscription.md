@@ -56,14 +56,12 @@
 
 ```powershell
 # 开始索引同步，17179869184 代表使用内存，代表 16gb，https://www.bejson.com/convert/filesize/ 这里去换算
-# 如果 bitcoin 没有安装在默认路径需要指定
-.\ord.exe --index-runes --index-cache-size 17179869184 index update
 # 索引铭文和符文数据
-.\ord.exe --index-runes --index-cache-size 17179869184 --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
+.\ord.exe --index-runes --index-cache-size 17179869184 --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
 # 启动节点
-.\ord.exe --config config --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao server --address 127.0.0.1 --http-port 8011
+.\ord.exe --config D:\data\ord\config --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao server --address 127.0.0.1 --http-port 8011
 # 列出所有的runes代币
-.\ord.exe --bitcoin-data-dir D:\data\Bitcoin runes
+.\ord.exe --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin runes
 ```
 
 配置文件
