@@ -8,8 +8,8 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { zhNavbar } from './nav-bar.js'
 
 export default defineUserConfig({
-  base: '/',
-  dest: './dist',
+  // base: '/',
+  // dest: './dist',
   title: `SunSeekerX's Notebook`,
   description:
     'Javascript、HTML、CSS、Android、iOS、Flutter、NPM、NodeJS、Vue、React、Uni-app、JAVA、Kotlin、NodeJS、Golang、Linux、Docker、Mysql、Solidity、NFT、ETH、BNB、BTC、Windows、Mac、Power shell、zsh、Nginx、Git、Proxy、刷机、黑苹果、Adobe',
