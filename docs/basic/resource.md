@@ -70,6 +70,8 @@
 
 [Slidev](https://github.com/slidevjs/slidev) - 这个工具使用 Markdown 格式编写 PPT 幻灯片，功能较多。
 
+[https://github.com/feschber/lan-mouse](https://github.com/feschber/lan-mouse) - 局域网鼠标键盘
+
 ## 📌 开发
 
 ### CSS
