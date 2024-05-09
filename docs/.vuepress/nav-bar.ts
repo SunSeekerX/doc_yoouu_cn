@@ -2,9 +2,9 @@ import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
   // 简介
-  { text: '简介', link: '/intro', icon: 'creative' },
+  { text: '简介', link: '/intro/' },
   // AI
-  { text: 'AI', link: '/ai/', icon: 'anonymous' },
+  { text: 'AI', link: '/ai/' },
   // 基础
   {
     text: '基础',
@@ -67,6 +67,7 @@ export const zhNavbar = navbar([
           { text: 'NPM 技巧', link: '/front-end/npm' },
           { text: 'Vue', link: '/front-end/vue' },
           { text: 'React', link: '/front-end/react' },
+          { text: 'Next.js', link: '/front-end/nextjs' },
           { text: '小程序', link: '/front-end/mp' },
           {
             text: 'Flutter',
@@ -236,5 +237,5 @@ export const zhNavbar = navbar([
     ],
   },
   // 开源项目 -  Open source
-  { text: '开源项目', link: '/open-source/', icon: 'guide' },
+  { text: '开源项目', link: '/open-source/' },
 ])

@@ -50,20 +50,51 @@
 
 下载索引器地址：https://github.com/ordinals/ord/releases
 
-### win
+### win 命令
 
 解压随便放在那里，
 
 ```powershell
 # 开始索引同步，17179869184 代表使用内存，代表 16gb，https://www.bejson.com/convert/filesize/ 这里去换算
-# 如果 bitcoin 没有安装在默认路径需要指定
-.\ord.exe --index-runes --index-cache-size 17179869184 index update
 # 索引铭文和符文数据
-.\ord.exe --index-runes --index-cache-size 17179869184 --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
+.\ord.exe --index-runes --index-sats --index-cache-size 17179869184 --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
+.\ord.exe --config D:\data\ord\config index update
 # 启动节点
-.\ord.exe --config config --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao server --address 127.0.0.1 --http-port 8011
+.\ord.exe --config D:\data\ord\config --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao server --address 127.0.0.1 --http-port 8011
 # 列出所有的runes代币
-.\ord.exe --bitcoin-data-dir D:\data\Bitcoin runes
+.\ord.exe --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin runes
+
+# 测试网执行需要在执行文件加入 --signet
+# 创建钱包助记词
+.\ord.exe --index-runes --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 create
+# 创建钱地址
+.\ord.exe --index-runes --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 receive
+.\ord.exe --index-runes --config D:\data\ord\config wallet --name test1 --server-url http://127.0.0.1:8011 receive
+# 查询钱包资产余额
+.\ord.exe --index-runes --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 balance
+# 蚀刻（部署）符文
+.\ord.exe --index-runes --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 batch --batch 粘贴刚改名batch.yaml的路径 --fee-rate 改成费率
+# MINT符文 UNCOMMON·GOODS
+.\ord.exe --index-runes --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 mint --fee-rate 66 --rune UNCOMMON•GOODS
+# 从助记词恢复钱包，会启动交互输入，输入助记词就好
+# 测试助记词 morning alpha shift mouse like protect clog choose cross kid banana slim
+.\ord.exe --config D:\data\ord\config wallet --name test1 restore --from mnemonic
+# 从 descriptor 恢复钱包
+.\ord.exe --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 restore --from descriptor
+# 导出钱包
+.\ord.exe --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 dump
+.\ord.exe --config D:\data\ord\config wallet --name test1 --server-url http://127.0.0.1:8011 dump
+# 查看交易
+.\ord.exe --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 transactions
+# 发送符文
+.\ord.exe --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 send --fee-rate 1 SOME_ADDRESS 1000:EXAMPLE
+
+
+# 测试网
+# 索引铭文和符文数据
+.\ord.exe --signet --index-runes --index-cache-size 17179869184 --data-dir D:\data\ord-testnet --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
+# 启动节点
+.\ord.exe --signet --config D:\data\ord\config --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao server --address 127.0.0.1 --http-port 8011
 ```
 
 配置文件
@@ -73,15 +104,17 @@ config
 ```
 no_index_inscriptions: false
 index_runes: true
+index_sats: true
+index_spent_sats: true
+index_transactions: true
 index_cache_size: 17179869184
-bitcoin-data-dir: 'D:\data\Bitcoin'
-bitcoin-rpc-password: nextdao
-bitcoin-rpc-username： nextdao
+data_dir: D:\data\ord
+bitcoin_data_dir: D:\data\Bitcoin
+bitcoin_rpc_password: nextdao
+bitcoin_rpc_username: nextdao
 ```
 
-
-
-help 输出
+### help 输出
 
 ```
 ➜ .\ord.exe help

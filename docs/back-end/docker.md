@@ -313,6 +313,11 @@ $ docker container update --restart=always 容器id
 $ docker exec -it mongodb bash
 # 9.在容器内登录数据库
 $ mongo -u root -p 12345678900
+
+docker run --name mongodb -p 27018:27017 --restart=always -v /data/docker-data/mongodb7x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo
+
+# 3.x
+docker run --name mongodb3x -p 27019:27017 --restart=always -v /data/docker-data/mongodb3x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo:3.6.23
 ```
 
 ### 0x4. Docker 安装 Portainer
@@ -657,7 +662,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker-data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -668,7 +673,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker-data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Mac
    docker run --name redis7x \
    --restart=always \
@@ -725,7 +730,7 @@ docker run -d \
 -v ~/data/mysql57/data:/var/lib/mysql \
 -v ~/data/mysql57/config:/etc/mysql/conf.d  \
 -v ~/data/mysql57/logs:/logs \
--e MYSQL_ROOT_PASSWORD=NeQ46esK8DG0 \
+-e MYSQL_ROOT_PASSWORD=my-secret-pw \
 -e TZ=Asia/Shanghai mysql:5.7
 ```
 
