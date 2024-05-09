@@ -430,9 +430,9 @@ jdk 版本过高无法使用，会报不是有效的 keystore 文件,测试需�
 
 ```shell
 # keytool 在 windows 存在于你 jdk 安装路径下的 bin 目录
-keytool -genkey -alias testalias -keyalg RSA -keysize 2048 -validity 36500 -keystore test.keystore
+keytool -genkey -alias testalias -keyalg RSA -keysize 2048 -validity 36500 -keystore test.keystore -storetype PKCS12
 
-# srckeystore 和 destkeystore 不能同名
+# 如果是 jks 可以升级到 PKCS12 srckeystore 和 destkeystore 不能同名
 keytool -importkeystore -srckeystore test.keystore -destkeystore test2.keystore -deststoretype pkcs12
 
 keytool -list -v -keystore test.keystore
