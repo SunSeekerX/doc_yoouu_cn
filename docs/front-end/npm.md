@@ -1009,6 +1009,19 @@ compareVersions('10.1.1', '10.2.2') // -1
 
 ## 📌 常见问题
 
+### Error: error:0308010C:digital envelope routines::unsupported
+
+解决 nodejs 版本升级 openssl 无法使用问题
+
+```shell
+# bash
+export NODE_OPTIONS=--openssl-legacy-provider
+# cmd
+set NODE_OPTIONS=--openssl-legacy-provider
+# PowerShell
+$env:NODE_OPTIONS="--openssl-legacy-provider"
+```
+
 ### node-gyp 报错
 
 ```
