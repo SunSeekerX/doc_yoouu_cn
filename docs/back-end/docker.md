@@ -722,15 +722,28 @@ nginx 反向代理无法正常工作，禅道工作目录为 www/
 ```shell
 docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:5.7
 
+# Linux
 docker run -d \
 --name mysql57 \
 --privileged=true \
 --restart=always \
 -p 33066:3306 \
--v ~/data/mysql57/data:/var/lib/mysql \
--v ~/data/mysql57/config:/etc/mysql/conf.d  \
--v ~/data/mysql57/logs:/logs \
+-v /data/docker-data/mysql57x/data:/var/lib/mysql \
+-v /data/docker-data/mysql57x/config:/etc/mysql/conf.d  \
+-v /data/docker-data/mysql57x/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e TZ=Asia/Shanghai mysql:5.7
+
+# Win
+docker run -d `
+--name mysql57 `
+--privileged=true `
+--restart=always `
+-p 33066:3306 `
+-v D:\data\docker-data\mysql57x\data:/var/lib/mysql `
+-v D:\data\docker-data\mysql57x\config:/etc/mysql/conf.d `
+-v D:\data\docker-data\mysql57x\logs:/logs `
+-e MYSQL_ROOT_PASSWORD=my-secret-pw `
 -e TZ=Asia/Shanghai mysql:5.7
 ```
 
@@ -972,3 +985,84 @@ docker run -d \
    -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
    quay.io/minio/minio server /data --console-address ":9001"
 ```
+
+### 0x21 Docker 安装 nginx
+
+```shell
+# 新建一个文件夹 D:\data\docker-data\nginx12x\html
+# 新建一个配置文件 D:\data\docker-data\nginx12x\default.conf
+
+docker run -d `
+--restart=always `
+--name nginx `
+--network host `
+-v D:\data\docker-data\nginx12x\html:/usr/share/nginx/html `
+-v D:\data\docker-data\nginx12x\default.conf:/etc/nginx/conf.d/default.conf `
+nginx
+
+# 测试配置文件 win
+nginx -t -c D:\data\docker-data\nginx12x\default.conf
+# 运行 Nginx
+start nginx
+# 重新加载配置
+nginx -s reload
+# 强制停止
+nginx -s stop
+# 优雅停止
+nginx -s quit
+```
+
+default.conf
+
+```nginx
+
+#user  nobody;
+worker_processes 1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+events {
+    worker_connections 1024;
+}
+
+
+http {
+    include mime.types;
+    default_type application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+    sendfile on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout 65;
+
+    #gzip  on;
+
+    server {
+        listen 80;
+        server_name xxx.yyy.com;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        location / {
+            root /app2/site;
+            index index.html;
+        }
+        location /api/ {
+            proxy_pass http://127.0.0.1:8088/dk/;
+        }
+    }
+
+}
+
+```
+
+
+
