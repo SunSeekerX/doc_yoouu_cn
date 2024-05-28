@@ -878,14 +878,14 @@ docker run -d --name=gitea -e USER_UID=1000 -e USER_GID=1000 -e DB_TYPE=mysql -e
 
 ```shell
 # 新建数据目录
-mkdir -p ~/data/app-host
+mkdir -p /data/docker_data/app_host
 
-docker run --name app_host --restart=always -v ~/data/app-host:/app/shared -p 3001:8686 -d tinyc/app-host:lastest
-docker run --name app_host --restart=always -v ~/shared:/app/shared -p 3000:8686 -d tinyc/app-host:0.2.3
-docker run --name app_host --restart=always -v ~/shared:/app/shared -p 3000:8686 -d tinyc/app-host:0.2.2
+docker run --name app_host --restart=always -v /data/docker_data/app_host:/app/shared -p 3001:8686 -d tinyc/app-host:lastest
 ```
 
-测试可以成功访问的 nginx 反向代理配置文件，不按照这个配置可能无法使用
+测试可以成功访问的 nginx 反向代理配置文件，不按照这个配置可能无法使用，
+
+https://x/users/new 这里新建用户
 
 ```
 
@@ -918,6 +918,14 @@ location ^~ /
 }
 #PROXY-END/
 ```
+
+记得修改 nginx 上传配置
+
+```
+client_max_body_size 250m;
+```
+
+
 
 ### 0x17 Docker 安装 twikoo 评论系统
 
