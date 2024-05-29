@@ -223,6 +223,12 @@ setting > search `serializable class without 'serialVersionUID'` > 勾选
 W:\ProgramFiles\Android\Sdk\platform-tools
 ```
 
+## 📌 .9 图片相关
+
+Android平台启动图使用.9.png图片 https://ask.dcloud.net.cn/article/35527
+
+.9 独立工具在 udisk 项目内，也可以在上面文章底部下载使用。
+
 ## 📌 Android studio 初始设置
 
 1. 更改所有编码为 `utf-8`
