@@ -158,6 +158,32 @@ service ssh restart
 
 ## 📌 ubuntu
 
+### 安装 zsh 和配置
+
+教程来源：https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
+
+```shell
+
+# 安装 zsh
+sudo apt install zsh
+# 检查 zsh 是否安装和查看版本
+zsh --version
+# 设置 Zsh 为默认 Shell
+chsh -s $(which zsh)
+# 此命令会将当前用户的默认 shell 更改为 Zsh。你需要退出当前会话并重新登录，或者直接重启系统以使更改生效。
+# 配置 Zsh 安装 Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# 或者，如果你没有 curl，可以使用 wget
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# 验证默认 Shell 输出应该是 /usr/bin/zsh 或 /bin/zsh。
+echo $SHELL
+
+# 国内安装
+sh -c "$(curl -fsSL https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh)"
+```
+
+
+
 ### 挂载硬盘
 
 

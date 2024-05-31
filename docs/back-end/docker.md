@@ -314,10 +314,10 @@ $ docker exec -it mongodb bash
 # 9.在容器内登录数据库
 $ mongo -u root -p 12345678900
 
-docker run --name mongodb -p 27018:27017 --restart=always -v /data/docker-data/mongodb7x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo
+docker run --name mongodb -p 27018:27017 --restart=always -v /data/docker_data/mongodb7x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo
 
 # 3.x
-docker run --name mongodb3x -p 27019:27017 --restart=always -v /data/docker-data/mongodb3x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo:3.6.23
+docker run --name mongodb3x -p 27019:27017 --restart=always -v /data/docker_data/mongodb3x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo:3.6.23
 ```
 
 ### 0x4. Docker 安装 Portainer
@@ -341,7 +341,7 @@ docker run -d \
 -p 8000:8000 \
 -p 9000:9000 \
 -v /var/run/docker.sock:/var/run/docker.sock \
--v /data/docker-data/portainer:/data portainer/portainer-ce
+-v /data/docker_data/portainer:/data portainer/portainer-ce
 ```
 
 ---
@@ -513,7 +513,7 @@ https://hub.docker.com/r/snowdreamtech/frps
 新建配置文件
 
 ```shell
-mkdir -p /data/docker-data/frps/ && cd /data/docker-data/frps/
+mkdir -p /data/docker_data/frps/ && cd /data/docker_data/frps/
 touch frps.toml
 ```
 
@@ -559,7 +559,7 @@ docker run -d \
 --network host \
 --restart=always \
 -p 33077:3306 \
--v /data/docker-data/frps/frps.toml:/etc/frp/frps.toml snowdreamtech/frps
+-v /data/docker_data/frps/frps.toml:/etc/frp/frps.toml snowdreamtech/frps
 
 # 旧版本
 docker run --restart=always --network host -d -v /etc/frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps
@@ -619,7 +619,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
 1. 创建挂载目录
 
    ```shell
-   mkdir -p /data/docker-data/redis7x && cd /data/docker-data/redis7x
+   mkdir -p /data/docker_data/redis7x && cd /data/docker_data/redis7x
    ```
 
 2. 下载 redis.conf 文件
@@ -659,10 +659,10 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    --restart=always \
    -p 63799:6379 \
    --log-opt max-size=100m --log-opt max-file=2 \
-   -v /data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
-   -v /data/docker-data/redis7x:/data \
+   -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
+   -v /data/docker_data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-   
+
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -673,14 +673,14 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker-data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-   
+
    # Mac
    docker run --name redis7x \
    --restart=always \
    -p 63799:6379 \
    --log-opt max-size=100m --log-opt max-file=2 \
-   -v ~/work/data/docker-data/redis7x/redis.conf:/etc/redis/redis.conf \
-   -v ~/work/data/docker-data/redis7x:/data \
+   -v ~/work/data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
+   -v ~/work/data/docker_data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
    ```
 
@@ -728,9 +728,9 @@ docker run -d \
 --privileged=true \
 --restart=always \
 -p 33066:3306 \
--v /data/docker-data/mysql57x/data:/var/lib/mysql \
--v /data/docker-data/mysql57x/config:/etc/mysql/conf.d  \
--v /data/docker-data/mysql57x/logs:/logs \
+-v /data/docker_data/mysql57x/data:/var/lib/mysql \
+-v /data/docker_data/mysql57x/config:/etc/mysql/conf.d  \
+-v /data/docker_data/mysql57x/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
 -e TZ=Asia/Shanghai mysql:5.7
 
@@ -756,9 +756,9 @@ docker run -d \
 --privileged=true \
 --restart=always \
 -p 33077:3306 \
--v /data/docker-data/mysql8x/data:/var/lib/mysql \
--v /data/docker-data/mysql8x/config:/etc/mysql/conf.d  \
--v /data/docker-data/mysql8x/logs:/logs \
+-v /data/docker_data/mysql8x/data:/var/lib/mysql \
+-v /data/docker_data/mysql8x/config:/etc/mysql/conf.d  \
+-v /data/docker_data/mysql8x/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
 -e TZ=Asia/Shanghai mysql:8.3
 
@@ -780,9 +780,9 @@ docker run  -d  \
 --privileged=true \
 --restart=always \
 -p 33077:3306 \
--v ~/work/data/docker-data/mysql8/data:/var/lib/mysql \
--v ~/work/data/docker-data/mysql8/config:/etc/mysql/conf.d  \
--v ~/work/data/docker-data/logs:/logs \
+-v ~/work/data/docker_data/mysql8/data:/var/lib/mysql \
+-v ~/work/data/docker_data/mysql8/config:/etc/mysql/conf.d  \
+-v ~/work/data/docker_data/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
 -e TZ=Asia/Shanghai mysql:8.3
 
@@ -844,12 +844,9 @@ docker run -d \
 > [Gitea](https://gitea.io/zh-cn/)
 
 ```shell
-mkdir -p /var/gitea
-
 # 创建一个网络
 docker network create -d macvlan --subnet=172.172.172.0/24 --gateway=172.172.172.1 -o parent=eth0 dockernet
 
-docker pull gitea/gitea:latest
 # 注意 DB_HOST 和 dockernet 需要新建 docker 网络
 # Linux & mac
 docker run -d \
@@ -865,13 +862,22 @@ docker run -d \
 -p 3000:3000 \
 --network=dockernet \
 --restart=always \
--v /var/gitea:/data \
+-v /data/docker_data/gitea:/data \
 -v /etc/timezone:/etc/timezone:ro \
 -v /etc/localtime:/etc/localtime:ro \
 gitea/gitea:latest
 
 # win
 docker run -d --name=gitea -e USER_UID=1000 -e USER_GID=1000 -e DB_TYPE=mysql -e DB_HOST=172.172.172.1:3306 -e DB_NAME=db_name -e DB_USER=db_user -e DB_PASSWD=db_pwd -p 222:22 -p 3030:3000 --network=dockernet --restart=always -v D:\data\gitea:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro gitea/gitea:latest
+
+# 备份和恢复
+# 查看 1000 用户名
+grep ':1000:' /etc/passwd
+# ubuntu 恢复
+docker exec -u <OS_USERNAME> -it -w <--tempdir> $(docker ps -qf 'name=^<NAME_OF_DOCKER_CONTAINER>$') bash -c '/usr/local/bin/gitea dump -c </path/to/app.ini>'
+
+mkdir -p /data/docker_data/gitea_backup
+docker exec -u root -it -w /data/docker_data/gitea_backup $(docker ps -qf 'name=^gitea$') bash -c '/usr/local/bin/gitea dump -c /data/gitea/conf/app.ini'
 ```
 
 ### 0x16 Docker 安装 AppHost
@@ -924,8 +930,6 @@ location ^~ /
 ```
 client_max_body_size 250m;
 ```
-
-
 
 ### 0x17 Docker 安装 twikoo 评论系统
 
@@ -988,7 +992,7 @@ docker run -d \
    -p 9000:9000 \
    -p 9001:9001 \
    --name minio \
-   -v ~/data/docker-data/minio/data:/data \
+   -v ~/data/docker_data/minio/data:/data \
    -e "MINIO_ROOT_USER=ROOTNAME" \
    -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
    quay.io/minio/minio server /data --console-address ":9001"
@@ -1072,5 +1076,22 @@ http {
 
 ```
 
+### 0x22 Docker 安装 Ghost blog 系统
 
+来源：https://hub.docker.com/_/ghost/
 
+```shell
+# Linux
+docker run -d \
+  --name ghost \
+  --network host \
+  --restart always \
+  -e database__client=mysql \
+  -e database__connection__host=127.0.0.1 \
+  -e database__connection__user=<db_user> \
+  -e database__connection__password=<db_pwd> \
+  -e database__connection__database=<db_name> \
+  -e url=http://localhost:2368/ \
+  -v /data/docker_data/ghost:/var/lib/ghost/content \
+  ghost:5
+```

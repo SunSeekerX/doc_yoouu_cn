@@ -19,8 +19,9 @@ Refused to apply style from 'https://docker.yoouu.cn/main.36f5bcea156ed2e3cca6.c
 然后再修改 Nginx 配置文件，在.well-know 路径规则那里，添加一行 root 文档配置，配置的文件路径为该配置文件开头有定义的 root 文档目录即所在站点根目录，然后保存能保存成功说明配置文件验证通过无误。
 
 ```nginx
+# 宝塔自动续签 ssl 配置
 location ~ \.well-known{
-  root /www/wwwroot/xxx.com;
+  root /www/wwwroot/<x.com>;
   allow all;
 }
 ```

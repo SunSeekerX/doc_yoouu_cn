@@ -472,6 +472,32 @@ pnpm dlx husky-init && pnpm install # pnpm
 
 [nvm](https://github.com/nvm-sh/nvm) 具体安装查看 github 说明。
 
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# 大陆加速安装 nvm
+export NVM_SOURCE=https://gitee.com/mirrors/nvm.git
+curl -o- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash
+
+# 如果没有自动添加环境变量，按照以下方式添加，注意是 zsh 的
+
+# 或者使用 vim
+vim ~/.zshrc
+# 在你的 ~/.zshrc 文件中，添加以下行：
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+# 保存并关闭配置文件
+# 如果你使用的是 nano，按 Ctrl + X 然后按 Y 保存并退出。如果你使用的是 vim，按 Esc，然后输入 :wq 并按回车。
+# 重新加载 Zsh 配置文件
+# 在终端中运行以下命令以重新加载你的 Zsh 配置文件：
+source ~/.zshrc
+# 验证 NVM 是否正确安装
+nvm --version
+```
+
+
+
 ### ubuntu
 
 ```shell
