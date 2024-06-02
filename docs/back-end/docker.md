@@ -340,8 +340,20 @@ docker run -d \
 --restart=always \
 -p 8000:8000 \
 -p 9000:9000 \
+-p 9443:9443 \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v /data/docker_data/portainer:/data portainer/portainer-ce
+
+# Win
+docker run -d `
+--name portainer `
+--restart=always `
+-p 8000:8000 `
+-p 9000:9000 `
+-p 9443:9443 `
+-v /var/run/docker.sock:/var/run/docker.sock `
+-v D:\data\docker_data\portainer:/data portainer/portainer-ce
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 
 ---
@@ -662,18 +674,18 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker_data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Win
    docker run --name redis7x `
    --restart=always `
    -p 63799:6379 `
    --log-opt max-size=100m `
    --log-opt max-file=2 `
-   -v D:\data\docker-data\redis7x\redis.conf:/etc/redis/redis.conf `
-   -v D:\data\docker-data\redis7x\:/data `
+   -v D:\data\docker_data\redis7x\redis.conf:/etc/redis/redis.conf `
+   -v D:\data\docker_data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Mac
    docker run --name redis7x \
    --restart=always \
@@ -740,9 +752,9 @@ docker run -d `
 --privileged=true `
 --restart=always `
 -p 33066:3306 `
--v D:\data\docker-data\mysql57x\data:/var/lib/mysql `
--v D:\data\docker-data\mysql57x\config:/etc/mysql/conf.d `
--v D:\data\docker-data\mysql57x\logs:/logs `
+-v D:\data\docker_data\mysql57x\data:/var/lib/mysql `
+-v D:\data\docker_data\mysql57x\config:/etc/mysql/conf.d `
+-v D:\data\docker_data\mysql57x\logs:/logs `
 -e MYSQL_ROOT_PASSWORD=my-secret-pw `
 -e TZ=Asia/Shanghai mysql:5.7
 ```
@@ -768,9 +780,9 @@ docker run -d `
 --privileged=true `
 --restart=always `
 -p 33077:3306 `
--v D:\data\docker-data\mysql8x\data:/var/lib/mysql `
--v D:\data\docker-data\mysql8x\config:/etc/mysql/conf.d `
--v D:\data\docker-data\mysql8x\logs:/logs `
+-v D:\data\docker_data\mysql8x\data:/var/lib/mysql `
+-v D:\data\docker_data\mysql8x\config:/etc/mysql/conf.d `
+-v D:\data\docker_data\mysql8x\logs:/logs `
 -e MYSQL_ROOT_PASSWORD=my-secret-pw `
 -e TZ=Asia/Shanghai mysql:8.3
 
@@ -1001,19 +1013,19 @@ docker run -d \
 ### 0x21 Docker 安装 nginx
 
 ```shell
-# 新建一个文件夹 D:\data\docker-data\nginx12x\html
-# 新建一个配置文件 D:\data\docker-data\nginx12x\default.conf
+# 新建一个文件夹 D:\data\docker_data\nginx12x\html
+# 新建一个配置文件 D:\data\docker_data\nginx12x\default.conf
 
 docker run -d `
 --restart=always `
 --name nginx `
 --network host `
--v D:\data\docker-data\nginx12x\html:/usr/share/nginx/html `
--v D:\data\docker-data\nginx12x\default.conf:/etc/nginx/conf.d/default.conf `
+-v D:\data\docker_data\nginx12x\html:/usr/share/nginx/html `
+-v D:\data\docker_data\nginx12x\default.conf:/etc/nginx/conf.d/default.conf `
 nginx
 
 # 测试配置文件 win
-nginx -t -c D:\data\docker-data\nginx12x\default.conf
+nginx -t -c D:\data\docker_data\nginx12x\default.conf
 # 运行 Nginx
 start nginx
 # 重新加载配置

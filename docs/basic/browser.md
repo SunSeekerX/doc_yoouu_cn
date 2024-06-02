@@ -1,5 +1,128 @@
 # 浏览器技巧
 
+## 关闭 chrome 自动跳转到 https
+
+在开发和调试过程中，您可能需要关闭 Chrome 自动跳转到 HTTPS 的功能。以下是几种方法来实现这一点：
+
+### 方法一：清除 HSTS 设置
+
+Chrome 会缓存 HSTS（HTTP Strict Transport Security）设置，这可能导致它自动将 HTTP 请求重定向到 HTTPS。您可以通过以下步骤清除 HSTS 设置：
+
+1. 打开 Chrome 浏览器。
+2. 在地址栏中输入 `chrome://net-internals/#hsts` 并按下回车键。
+3. 在页面上找到 `Delete domain security policies` 部分。
+4. 在 `Domain` 字段中输入您要清除 HSTS 设置的域名，例如 `example.com`。
+5. 点击 `Delete` 按钮。
+
+### 方法二：使用隐身模式
+
+隐身模式不会使用现有的浏览数据，因此可以避免缓存的 HSTS 设置。您可以通过以下方式打开隐身模式：
+
+1. 点击 Chrome 右上角的三点菜单。
+2. 选择 `New Incognito Window`（新建隐身窗口）。
+3. 在隐身窗口中访问您需要测试的 HTTP 网址。
+
+### 方法三：禁用 HSTS 域策略
+
+您可以在 Chrome 设置中禁用特定域的 HSTS 策略：
+
+1. 打开 Chrome 浏览器。
+2. 在地址栏中输入 `chrome://net-internals/#hsts` 并按下回车键。
+3. 在页面上找到 `Query domain` 部分。
+4. 在 `Domain` 字段中输入您要查询的域名，例如 `example.com` 并点击 `Query` 按钮。
+5. 如果结果显示域名有 HSTS 设置，您可以在 `Delete domain security policies` 部分输入域名并点击 `Delete` 按钮。
+
+### 方法四：禁用 HTTPS 强制
+
+在 Chrome 中，您可以通过命令行参数来禁用 HTTPS 强制：
+
+1. 关闭所有 Chrome 窗口。
+
+2. 按以下步骤启动 Chrome：
+
+   - **Windows**: 右键点击 Chrome 快捷方式，选择 `属性`。在 `目标` 字段的末尾添加 `--disable-features=BlockInsecurePrivateNetworkRequests`。
+
+   - Mac: 打开终端，输入以下命令并按回车键：
+
+     ```shell
+     open -a "Google Chrome" --args --disable-features=BlockInsecurePrivateNetworkRequests
+     ```
+
+   - Linux: 打开终端，输入以下命令并按回车键：
+
+     ```shell
+     google-chrome --disable-features=BlockInsecurePrivateNetworkRequests
+     ```
+
+### 方法五：使用 localhost（开发环境）
+
+如果您在本地开发环境中测试，可以使用 `localhost` 或 `127.0.0.1`，因为这些通常不会触发 HSTS 重定向。
+
+## 地址栏显示完整的url 包括协议
+
+在 Chrome 浏览器中，默认情况下地址栏可能不会显示完整的 URL（包括协议部分，如 `http://` 或 `https://`），特别是当 URL 使用 HTTPS 协议时。要让地址栏显示完整的 URL，包括协议部分，您可以通过以下方法进行设置。
+
+### 方法一：通过 Chrome 设置启用
+
+1. 打开 Chrome 浏览器。
+2. 在地址栏中输入 `chrome://flags/` 并按下回车键。
+3. 在搜索栏中输入 `Omnibox UI Hide Steady-State URL Scheme and Trivial Subdomains`。
+4. 将该选项设置为 `Disabled`。
+5. 点击页面底部的 `Relaunch` 按钮以重启 Chrome。
+
+### 方法二：使用右键菜单显示完整 URL
+
+如果您不想更改浏览器设置，也可以通过地址栏的右键菜单临时显示完整的 URL：
+
+1. 在地址栏中右键点击 URL。
+2. 选择 `Always show full URLs` 选项。
+
+### 方法三：使用命令行启动 Chrome
+
+您也可以通过命令行参数启动 Chrome 以确保显示完整的 URL：
+
+1. **Windows**：
+
+   - 右键点击 Chrome 快捷方式，选择 `属性`。
+
+   - 在 `目标` 字段的末尾添加 `--enable-features=OmniboxUIExperimentHideSteadyStateURLSchemeAndSubdomains,SimplifyHTTPSIndicator`.
+
+   - 例如：
+
+     ```shell
+     "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --enable-features=OmniboxUIExperimentHideSteadyStateURLSchemeAndSubdomains,SimplifyHTTPSIndicator
+     ```
+
+   - 点击 `确定` 并重新启动 Chrome。
+
+2. **Mac**：
+
+   - 打开终端，输入以下命令并按回车键：
+
+     ```shell
+     open -a "Google Chrome" --args --enable-features=OmniboxUIExperimentHideSteadyStateURLSchemeAndSubdomains,SimplifyHTTPSIndicator
+     ```
+
+3. **Linux**：
+
+   - 打开终端，输入以下命令并按回车键：
+
+     ```shell
+     google-chrome --enable-features=OmniboxUIExperimentHideSteadyStateURLSchemeAndSubdomains,SimplifyHTTPSIndicator
+     ```
+
+### 方法四：通过 Chrome 扩展程序
+
+有些 Chrome 扩展程序可以强制浏览器显示完整的 URL。以下是一些可能有用的扩展程序：
+
+1. Show Full URL
+   - 这个扩展程序可以强制显示完整的 URL，包括协议部分。
+   - 您可以在 Chrome 网上应用店中搜索并安装该扩展程序。
+
+### 总结
+
+通过调整 Chrome 设置、使用右键菜单、命令行参数启动 Chrome 或安装扩展程序，您可以让地址栏显示完整的 URL，包括协议部分。选择最适合您的方法，并根据需要进行设置。
+
 ## 关闭 chrome 左上角标签页搜索功能
 
 There is no Enable Tab Search in chrome://flags anymore! The **`about:flags/#chrome-refresh-2023 `**solution moves this button to the left side, but no way to disable it for good. Hope google will return this flag back
