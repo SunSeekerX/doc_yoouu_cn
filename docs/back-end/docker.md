@@ -1107,3 +1107,65 @@ docker run -d \
   -v /data/docker_data/ghost:/var/lib/ghost/content \
   ghost:5
 ```
+
+### 0x23 Docker 安装 rustdesk
+
+镜像 https://hub.docker.com/r/rustdesk/rustdesk-server/tags
+
+官方文档：https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/
+
+```shell
+# 镜像 https://hub.docker.com/r/rustdesk/rustdesk-server/tags
+# 官方文档：https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/
+sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbs -r <relay-server-ip[:port]>
+sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbb
+
+mkdir -p /data/docker_data/rustdesk
+touch /data/docker_data/rustdesk/docker-compose.yml
+cd /data/docker_data/rustdesk
+docker compose up -d
+
+# 开放 21115-21119
+```
+
+docker-compose.yml 配置内容，替换下 <your_public_ip> 和 <your_key>
+
+```yaml
+version: '3'
+
+networks:
+  rustdesk-net:
+    external: false
+
+services:
+  hbbs:
+    container_name: hbbs
+    ports:
+      - 21115:21115
+      - 21116:21116
+      - 21116:21116/udp
+      - 21118:21118
+    image: rustdesk/rustdesk-server:latest
+    command: hbbs -r <your_public_ip>:21117 --key <your_key>
+    volumes:
+      - ./data:/root
+    networks:
+      - rustdesk-net
+    depends_on:
+      - hbbr
+    restart: unless-stopped
+
+  hbbr:
+    container_name: hbbr
+    ports:
+      - 21117:21117
+      - 21119:21119
+    image: rustdesk/rustdesk-server:latest
+    command: hbbr --key <your_key>
+    volumes:
+      - ./data:/root
+    networks:
+      - rustdesk-net
+    restart: unless-stopped
+```
+
