@@ -1,5 +1,9 @@
 # 工具
 
+网络面板 - 实时监测您的网络情况 https://net.ljxnet.cn
+
+磁力下载 https://imfile.io/
+
 侧边栏垂直书签和标签页管理器 https://vspace.cyhuajuan.site/
 
 ## 生成工具
