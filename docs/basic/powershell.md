@@ -71,7 +71,7 @@ react-native : 无法加载文件 C:\Users\SunSeekerX\AppData\Roaming\npm\react-
    ```powershell
    # 更改执行策略
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
-
+   
    # 查看执行策略
    Get-ExecutionPolicy
    ```
@@ -87,6 +87,9 @@ powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 PS C:\Users\SunSeekerX\Desktop> powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 电源方案 GUID: 124d9932-ad06-41b8-85a6-342c4b5c6db9  (卓越性能)
 PS C:\Users\SunSeekerX\Desktop>
+
+# 省电模式
+powercfg -setactive a1841308-3541-4fab-bc81-f71556f20b4a
 ```
 
 去电源选项选择卓越性能就 ok 了
