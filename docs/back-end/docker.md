@@ -414,7 +414,10 @@ docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v 
 docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk11
 
 # 限制内存为 1.5 GB 腾讯云不限制构建 Vue 项目很容易把内存吃满然后其他服务挂掉
-docker run --name jenkins -m 1536M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts
+docker run --name jenkins -m 1536M -p 50001:8080 -p 50000:50000 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /data/docker_data/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:jdk21
+
+# 端口 8080：用于访问 Jenkins 的 Web 管理界面。
+# 端口 50000：用于 Jenkins 主节点和代理节点之间的通信。
 
 # 拉取长期服务版
 $ docker pull jenkins/jenkins:lts
@@ -898,7 +901,7 @@ docker exec -u root -it -w /data/docker_data/gitea_backup $(docker ps -qf 'name=
 # 新建数据目录
 mkdir -p /data/docker_data/app_host
 
-docker run --name app_host --restart=always -v /data/docker_data/app_host:/app/shared -p 3001:8686 -d tinyc/app-host:lastest
+docker run --name app_host --restart=always -v /data/docker_data/app_host:/app/shared -p 8686:8686 -d tinyc/app-host:lastest
 ```
 
 测试可以成功访问的 nginx 反向代理配置文件，不按照这个配置可能无法使用，
@@ -911,7 +914,7 @@ https://x/users/new 这里新建用户
 
 location ^~ /
 {
-    proxy_pass http://localhost:3000;
+    proxy_pass http://127.0.0.1:8686;
     proxy_set_header Host $http_host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
