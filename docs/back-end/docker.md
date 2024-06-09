@@ -869,7 +869,7 @@ docker run -d \
 -e USER_UID=1000 \
 -e USER_GID=1000 \
 -e DB_TYPE=mysql \
--e DB_HOST=192.168.0.1:3306 \
+-e DB_HOST=172.172.172.1:3306 \
 -e DB_NAME=db_name \
 -e DB_USER=db_user \
 -e DB_PASSWD=db_pwd \
