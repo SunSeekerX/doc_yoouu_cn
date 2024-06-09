@@ -150,7 +150,7 @@ export const zhNavbar = navbar([
         text: 'Lang',
         children: [
           { text: 'C', link: '/back-end/c' },
-          { text: 'NodeJs', link: '/back-end/nodejs/' },
+          { text: 'NodeJs', link: '/back-end/nodejs' },
           { text: 'NestJS', link: '/back-end/nestjs/' },
           { text: 'Kotlin', link: '/back-end/kotlin' },
           { text: 'Golang', link: '/back-end/golang' },

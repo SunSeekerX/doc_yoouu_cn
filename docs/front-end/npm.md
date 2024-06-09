@@ -303,12 +303,16 @@ pnpm config list
 pnpm install
 ```
 
-## 📌 常用全局模块
+## 📌 一键安装常用全局模块
 
 ### 快捷安装
 
 ```shell
+# 淘宝镜像
 npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon -g --registry=https://registry.npmmirror.com
+
+# 原版
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon -g
 ```
 
 ### tbify
@@ -461,6 +465,96 @@ pnpm dlx husky-init && pnpm install # pnpm
 > ```shell
 > chmod ug+x .husky/*
 > ```
+
+### pm2
+
+基本命令
+
+```shell
+# 1. 安装 PM2
+# 安装 pm2
+npm install pm2@latest -g
+
+# 2. 启动应用
+# 启动一个 Node.js 应用
+pm2 start app.js
+
+# 启动时指定应用的名称
+pm2 start app.js --name my-app
+
+# 3. 查看应用状态
+# 查看当前正在运行的所有应用的状态
+pm2 list
+
+# 4. 停止应用
+# 停止一个正在运行的应用
+pm2 stop app.js
+
+# 使用应用名称或ID来停止
+pm2 stop my-app
+# 或者
+pm2 stop 0
+
+# 5. 重启应用
+# 重启应用
+pm2 restart app.js
+
+# 使用应用名称或ID来重启
+pm2 restart my-app
+# 或者
+pm2 restart 0
+
+# 6. 删除应用
+# 从 PM2 进程列表中删除一个应用
+pm2 delete app.js
+
+# 使用应用名称或ID来删除
+pm2 delete my-app
+# 或者
+pm2 delete 0
+
+# 7. 监控应用
+# 实时监控应用的 CPU 和内存使用情况
+pm2 monit
+
+# 8. 日志管理
+# 查看所有应用的日志
+pm2 logs
+
+# 查看特定应用的日志
+pm2 logs my-app
+# 或者
+pm2 logs 0
+
+# 9. 保存和恢复进程列表
+# 保存当前的进程列表，以便在系统重启后恢复
+pm2 save
+
+# 在系统重启后，恢复保存的进程列表
+pm2 resurrect
+
+# 10. 自动启动
+# 设置 PM2 在系统启动时自动启动
+pm2 startup
+
+# 根据提示执行生成的命令
+
+# 11. 环境变量
+# 在启动应用时设置环境变量
+pm2 start app.js --env production
+
+# 12. 进程间通信
+# 发送自定义信号给应用
+pm2 sendSignal SIGUSR2 my-app
+
+# 13. 配置文件
+# 使用配置文件启动多个应用
+# 创建一个 ecosystem.config.js 文件
+# 然后使用配置文件启动应用
+pm2 start ecosystem.config.js
+```
+
+
 
 ## 📌 NodeJs 版本管理 - nvm
 
