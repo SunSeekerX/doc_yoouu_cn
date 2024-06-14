@@ -268,6 +268,84 @@ IMAGE /root/.oldroot/nfs/install/../images/Ubuntu-2204-jammy-amd64-base.tar.gz
 
 如果关闭了 raid 就需要格式化其他的硬盘用作数据盘
 
-```shell
+## 挂载硬盘
 
 ```
+# nvme2n1
+sudo mkdir -p /mnt/nvme02
+sudo mount /dev/nvme2n1 /mnt/nvme02
+```
+
+步骤 1: 检查和创建文件系统
+
+1. **检查是否已经有文件系统**: 使用 `lsblk -f` 命令来查看所有磁盘和分区以及它们的文件系统类型：
+
+   ```
+   lsblk -f
+   ```
+
+   如果 `nvme2n1` 显示有文件系统，比如 `ext4`、`xfs` 等，你可以跳过创建文件系统的步骤。
+
+2. **创建文件系统**: 如果没有文件系统，你可以使用 `mkfs` 命令来创建一个。假设我们使用 `ext4` 文件系统：
+
+   ```
+   sudo mkfs.ext4 /dev/nvme2n1
+   ```
+
+   **注意**: 这将删除 `nvme2n1` 上的所有数据！
+
+步骤 2: 创建挂载点
+
+你需要一个目录来作为挂载点。假设我们要将其挂载到 `/mnt/mydrive`：
+
+```
+sudo mkdir -p /mnt/mydrive
+```
+
+步骤 3: 挂载驱动器
+
+现在你可以挂载这个驱动器了：
+
+```
+sudo mount /dev/nvme2n1 /mnt/mydrive
+```
+
+步骤 4: 自动挂载（可选）
+
+如果你希望每次系统启动时自动挂载这个驱动器，你需要编辑 `/etc/fstab` 文件。
+
+1. **找出 UUID**: 使用 `blkid` 命令来获取 `nvme2n1` 的 UUID：
+
+   ```bash
+   sudo blkid
+   # d14cd72c-4b82-4512-8bad-9191313ab458
+   ```
+
+   记录下 `/dev/nvme2n1` 的 UUID。
+
+2. **编辑 fstab 文件**: 打开 `/etc/fstab` 文件：
+
+   ```
+   sudo nano /etc/fstab
+   ```
+
+   在文件的末尾添加以下行（替换 `<UUID>` 为你的实际 UUID）：
+
+   ```
+   UUID=<UUID> /mnt/mydrive ext4 defaults 0 2
+   
+   # UUID=d14cd72c-4b82-4512-8bad-9191313ab458 /mnt/nvme02 ext4 defaults 0 2
+   ```
+
+   保存并关闭文件。
+
+3. **测试 fstab 文件的正确性**: 在重启之前，你可以测试 fstab 文件的正确性：
+
+   ```
+   sudo mount -a
+   ```
+
+   如果没有错误消息，这意味着你的 fstab 文件是正确的。
+
+现在，每次启动系统时，`nvme2n1` 都会自动挂载到 `/mnt/mydrive` 目录。请确保每一步操作都正确无误，特别是编辑 fstab 文件时，因为错误的配置可能阻碍系统启动。
+
