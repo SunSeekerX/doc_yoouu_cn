@@ -1,30 +1,32 @@
 # 工具
 
+记录裁员后的半年前端求职经历 https://yutengjing.com/posts
+
+ethereum address generation https://lang.eth-address.cn/
+
+IT 人必备工具箱 https://666666.dev/#/
+
+《区块链101》讨论导航（熊市版）（置顶） https://script.brave2049.com/crypto/
+
+一个程序员招聘信息聚合网站，采集自各种社交平台/社区 https://jobincorner.com/
+
+Hacker News https://news.ycombinator.com/news
+
 网络面板 - 实时监测您的网络情况 https://net.ljxnet.cn
 
 磁力下载 https://imfile.io/
 
 侧边栏垂直书签和标签页管理器 https://vspace.cyhuajuan.site/
 
-
-
 ## 生成工具
 
-### 中国山水画生成
+中国山水画生成 https://github.com/LingDong-/shan-shui-in
 
-Github：[https://github.com/LingDong-/shan-shui-inf](https://github.com/LingDong-/shan-shui-inf)
+随机动漫房屋生成 http://oskarstalberg.com/Townscaper/
 
-### 随机动漫房屋生成
+动漫头像生成 https://huggingface.co/spaces/akhaliq/AnimeGANv2
 
-地址：[http://oskarstalberg.com/Townscaper/](http://oskarstalberg.com/Townscaper/)
-
-### 动漫头像生成
-
-地址：[https://huggingface.co/spaces/akhaliq/AnimeGANv2](https://huggingface.co/spaces/akhaliq/AnimeGANv2)
-
-### Unicode 日历生成器
-
-地址：[https://qwerty.dev/calendar-generator/](https://qwerty.dev/calendar-generator/)
+Unicode 日历生成器 https://qwerty.dev/calendar-generator/
 
 ## 192
 

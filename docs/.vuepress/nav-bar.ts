@@ -191,6 +191,7 @@ export const zhNavbar = navbar([
       { text: '刷机', link: '/interest/flash/' },
       { text: '黑苹果', link: '/interest/hackintosh' },
       { text: 'N1 盒子', link: '/interest/n1' },
+      { text: 'R1 音响', link: '/interest/phicomm_r1' },
       { text: '浏览器', link: '/interest/browser' },
       { text: 'JD', link: '/interest/jd' },
       { text: '话题', link: '/interest/topic' },
