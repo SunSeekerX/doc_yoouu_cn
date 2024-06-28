@@ -140,6 +140,12 @@ win10 选择 `PowerShell-7.1.0-preview.7-win-x64.msi` 这种安装即可
 
 我是用的是 `Hack Nerd Font`。
 
+```
+Cascadia Code 也挺不错的
+```
+
+
+
 ### 4️⃣ 安装 PowerShell 模块
 
 win+x 选择 Windows 终端（管理员）
