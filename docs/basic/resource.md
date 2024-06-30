@@ -2,6 +2,12 @@
 
 ## 📌 工具网站
 
+边缘@订阅转换API https://bianyuan.xyz/
+
+AnimeGANv2 - a Hugging Face Space by akhaliq(动漫头像生成) https://huggingface.co/spaces/akhaliq/AnimeGANv2
+
+唧唧-哔哩哔哩唧唧-bilibili视频|弹幕在线下载 https://www.jijidown.com/
+
 [刷新率在线测试-UFO Test: Framerates](https://www.testufo.com/)
 
 [Emoji 符号表情大全](https://www.5vmc.com/emoji/emoji.html)
