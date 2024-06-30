@@ -758,7 +758,7 @@ docker run -d `
 -v D:\data\docker_data\mysql57x\data:/var/lib/mysql `
 -v D:\data\docker_data\mysql57x\config:/etc/mysql/conf.d `
 -v D:\data\docker_data\mysql57x\logs:/logs `
--e MYSQL_ROOT_PASSWORD=my-secret-pw `
+-e MYSQL_ROOT_PASSWORD=root `
 -e TZ=Asia/Shanghai mysql:5.7
 ```
 
@@ -786,7 +786,7 @@ docker run -d `
 -v D:\data\docker_data\mysql8x\data:/var/lib/mysql `
 -v D:\data\docker_data\mysql8x\config:/etc/mysql/conf.d `
 -v D:\data\docker_data\mysql8x\logs:/logs `
--e MYSQL_ROOT_PASSWORD=my-secret-pw `
+-e MYSQL_ROOT_PASSWORD=root `
 -e TZ=Asia/Shanghai mysql:8.3
 
 # Mac
