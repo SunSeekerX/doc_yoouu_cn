@@ -2,6 +2,26 @@
 
 ## 📌 工具网站
 
+10分钟邮箱 - BccTo.CC https://rootsh.com/?lang=cn
+
+网络面板 - 实时监测您的网络情况 https://net.ljxnet.cn
+
+《城市租房生存指南》 https://zufang.ababtools.com/
+
+Acrepi - The Best Free Genshin Impact Hack（原神辅助） https://cheater.fun/genshin-impact_cheats/7175-acrepi-cheat.html
+
+在线PS https://ps.gaoding.com/#/
+
+dns 泄露查询 https://ipleak.net
+
+Auto.js Pro https://pro.autojs.org
+
+Uninstalr - The Best Uninstaller for Windows（最好的 Windows 卸载软件） https://uninstalr.com
+
+SMS-Activate是在线接受短信的虚拟号码服务 https://sms-activate.org/cn
+
+Live Starlink Satellite Map(星链在线查看) https://satellitemap.space
+
 边缘@订阅转换API https://bianyuan.xyz/
 
 AnimeGANv2 - a Hugging Face Space by akhaliq(动漫头像生成) https://huggingface.co/spaces/akhaliq/AnimeGANv2
