@@ -2,6 +2,16 @@
 
 ## 📌 工具网站
 
+发现在角落的工作，工作信息聚合网站 https://jobincorner.com/
+
+接口大全-免费API,收集所有免费的API https://www.free-api.com/
+
+Maven Repository https://mvnrepository.com
+
+Docker Hub https://registry.hub.docker.com/
+
+Midway(Node.js Framework For "Speed") https://www.midwayjs.org
+
 10分钟邮箱 - BccTo.CC https://rootsh.com/?lang=cn
 
 网络面板 - 实时监测您的网络情况 https://net.ljxnet.cn
