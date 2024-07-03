@@ -3,8 +3,8 @@
   font-style: normal;
   font-weight: 400;
   src:
-    url("/fonts/poppins-v19-latin-regular.woff2") format("woff2"),
-    url("/fonts/poppins-v19-latin-regular.woff") format("woff");
+    url('/fonts/poppins-v19-latin-regular.woff2') format('woff2'),
+    url('/fonts/poppins-v19-latin-regular.woff') format('woff');
 }
 
 @font-face {
@@ -12,8 +12,8 @@
   font-style: normal;
   font-weight: 500;
   src:
-    url("/fonts/poppins-v19-latin-500.woff2") format("woff2"),
-    url("/fonts/poppins-v19-latin-500.woff") format("woff");
+    url('/fonts/poppins-v19-latin-500.woff2') format('woff2'),
+    url('/fonts/poppins-v19-latin-500.woff') format('woff');
 }
 
 @font-face {
@@ -21,8 +21,8 @@
   font-style: normal;
   font-weight: 600;
   src:
-    url("/fonts/poppins-v19-latin-600.woff2") format("woff2"),
-    url("/fonts/poppins-v19-latin-600.woff") format("woff");
+    url('/fonts/poppins-v19-latin-600.woff2') format('woff2'),
+    url('/fonts/poppins-v19-latin-600.woff') format('woff');
 }
 
 @font-face {
@@ -30,8 +30,8 @@
   font-style: normal;
   font-weight: 700;
   src:
-    url("/fonts/poppins-v19-latin-700.woff2") format("woff2"),
-    url("/fonts/poppins-v19-latin-700.woff") format("woff");
+    url('/fonts/poppins-v19-latin-700.woff2') format('woff2'),
+    url('/fonts/poppins-v19-latin-700.woff') format('woff');
 }
 
 @font-face {
@@ -39,8 +39,8 @@
   font-style: italic;
   font-weight: 400;
   src:
-    url("/fonts/poppins-v19-latin-italic.woff2") format("woff2"),
-    url("/fonts/poppins-v19-latin-italic.woff") format("woff");
+    url('/fonts/poppins-v19-latin-italic.woff2') format('woff2'),
+    url('/fonts/poppins-v19-latin-italic.woff') format('woff');
 }
 
 @font-face {
@@ -48,12 +48,75 @@
   font-style: italic;
   font-weight: 700;
   src:
-    url("/fonts/poppins-v19-latin-700italic.woff2") format("woff2"),
-    url("/fonts/poppins-v19-latin-700italic.woff") format("woff");
+    url('/fonts/poppins-v19-latin-700italic.woff2') format('woff2'),
+    url('/fonts/poppins-v19-latin-700italic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/dmsans/400.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/dmsans/500.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/dmsans/700.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/Fira_Code/FiraCode-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/Fira_Code/FiraCode-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/Fira_Code/FiraCode-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/Fira_Code/FiraCode-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/Fira_Code/FiraCode-Bold.ttf') format('truetype');
 }
 
 * {
   font-family:
+    DM Sans,
     Poppins,
     -apple-system,
     BlinkMacSystemFont,
@@ -66,9 +129,9 @@
   font-weight: 500;
 }
 
-// body {
-//   font-size: 14px;
-// }
+body {
+  font-size: 16px;
+}
 
 p {
   display: block;
@@ -76,16 +139,26 @@ p {
   margin-block-end: 0.5em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  line-height: normal;
+  // line-height: normal;
 }
 blockquote > p {
-  margin-block-start: 0.5em;
-  margin-block-end: 0.5em;
+  // margin-block-start: 0.5em;
+  // margin-block-end: 0.5em;
 }
 
 code {
   margin: 0 0.1em;
   padding: 0.1rem 0.25rem;
+  font-family:
+    Fira Code,
+    Poppins,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Helvetica,
+    Arial,
+    sans-serif !important;
+  // font-size: 16px;
 }
 
 .theme-hope-content:not(.custom) > p,
