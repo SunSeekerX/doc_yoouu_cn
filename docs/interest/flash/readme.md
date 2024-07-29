@@ -20,6 +20,8 @@ Supporting devices higher than Android 5.0.
 
 ## 机型分区
 
+[红米9 redmi9](./redmi9)
+
 [魅蓝 Note3](./m3-note.md)
 
 [小米 10T / 10T Pro / 红米 K30S 至尊纪念版 (apollo) ](./k30s-apollo.md)
