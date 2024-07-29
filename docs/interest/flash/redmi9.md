@@ -1,6 +1,6 @@
 # Redmi9 lancelot
 
-来源于家人换下的手机，最新 miui 13 稳定版。本人刷机喜欢新版本 Android 版本，因为有些 app 不支持老版本所以新版本为主。我想使用使用的 rom 一般是官改，不过这个手机权重比较低，就想刷类原生最新的 Android 版本试试。
+来源于家人换下的手机，最新 miui 13 稳定版。本人刷机喜欢新版本 Android 版本，因为有些 app 不支持老版本所以新版本为主。我想使用使用的 rom 一般是官改，不过这个手机权重比较低，就想刷类原生最新的 Android 版本试试。需要 google 全家桶，需要多开。
 
 ## 刷机路线
 
@@ -26,7 +26,13 @@
 
 - 刷入 los 的 rec
 
-- 刷入 los
+- 刷入 los（刷入之前记得三清，不然开机不了，不能在刷完之后三清，不然开机不了，在 rec 重启还会关机一次，要手动开机）
+
+  |                                                              |                                                              |
+  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+  | <img src="./assets/redmi9/5ada508e1c27e8c5bbd6d43c89d52af.jpg" alt="5ada508e1c27e8c5bbd6d43c89d52af" style="zoom: 25%;" /> | <img src="./assets/redmi9/2adfd2bd6016fcb6a6884c0b5a936ba.jpg" alt="2adfd2bd6016fcb6a6884c0b5a936ba" style="zoom:50%;" /> |
+
+  
 
   ```shell
   # 使用类似如下的命令，加了 -s 参数是因为有多个设备存在
@@ -38,6 +44,8 @@
 ## 官改
 
 大部分都是 Qe_xr 这个人的
+
+- QEUI14 基于官方MIUI14.0.1修改 https://www.123pan.com/s/t25RVv-rIxph.html qedl
 
 - QEUI11 最终版_FinalVersion https://www.coolapk.com/feed/47016624?shareKey=YzU4YTAzY2I1YmU2NjZhNzEyMjc~&shareUid=775868&shareFrom=com.coolapk.market_14.3.0
 
