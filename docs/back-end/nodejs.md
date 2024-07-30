@@ -334,7 +334,7 @@ User.find(
     } else {
       console.log(data)
     }
-  }
+  },
 )
 ```
 
@@ -352,7 +352,7 @@ User.deleteMany(
     } else {
       console.log(data)
     }
-  }
+  },
 )
 ```
 
@@ -371,7 +371,7 @@ User.findByIdAndUpdate(
     } else {
       console.log(data)
     }
-  }
+  },
 )
 ```
 
@@ -564,7 +564,7 @@ exports.transaction = function (sqlArr) {
                   //查询
                   err ? reject(err) : resolve(result)
                 })
-              })
+              }),
             )
           } catch (e) {
             // sql语句执行出错，跳出循环，不继续执行
@@ -704,14 +704,10 @@ Date.prototype.Format = function (fmt) {
     'q+': Math.floor((this.getMonth() + 3) / 3), //季度
     S: this.getMilliseconds(), //毫秒
   }
-  if (/(y+)/.test(fmt))
-    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
+  if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
   for (var k in o)
     if (new RegExp('(' + k + ')').test(fmt))
-      fmt = fmt.replace(
-        RegExp.$1,
-        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
-      )
+      fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
   return fmt
 }
 
@@ -743,7 +739,7 @@ app.use(
     secret: 'keyboard cat', // 配置加密字符串，增加安全性
     resave: false,
     saveUninitialized: true, // 无论你是否使用session，默认分配一把钥匙
-  })
+  }),
 )
 ```
 

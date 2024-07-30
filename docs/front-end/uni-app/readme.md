@@ -645,13 +645,7 @@ Vue.use(VueClipboard)
 
 ```html
 <!-- #ifdef H5 -->
-<text
-  v-clipboard:copy="message"
-  v-clipboard:success="onH5CopySuccess"
-  v-clipboard:error="onH5CopyError"
->
-  复制
-</text>
+<text v-clipboard:copy="message" v-clipboard:success="onH5CopySuccess" v-clipboard:error="onH5CopyError"> 复制 </text>
 <!-- #endif -->
 ```
 
@@ -671,9 +665,7 @@ onH5CopySuccess(e) {
 // #ifdef APP-PLUS
 let main = plus.android.runtimeMainActivity()
 let pkName = main.getPackageName()
-let NotificationManagerCompat = plus.android.importClass(
-  'android.support.v4.app.NotificationManagerCompat'
-)
+let NotificationManagerCompat = plus.android.importClass('android.support.v4.app.NotificationManagerCompat')
 let packageNames = NotificationManagerCompat.from(main)
 if (!packageNames.areNotificationsEnabled()) {
   //手机没有开启通知的权限
@@ -818,9 +810,6 @@ Vue.prototype.toast = (title) => {
 
 ```javascript
 for (var i = 0; i < data.length; i++) {
-  data[i].question_describe = data[i].question_describe.replace(
-    /\<img/gi,
-    '<img style="max-width:100%;height:auto"'
-  )
+  data[i].question_describe = data[i].question_describe.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
 }
 ```

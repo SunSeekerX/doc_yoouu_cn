@@ -71,7 +71,7 @@ react-native : 无法加载文件 C:\Users\SunSeekerX\AppData\Roaming\npm\react-
    ```powershell
    # 更改执行策略
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
-   
+
    # 查看执行策略
    Get-ExecutionPolicy
    ```
@@ -143,8 +143,6 @@ win10 选择 `PowerShell-7.1.0-preview.7-win-x64.msi` 这种安装即可
 ```
 Cascadia Code 也挺不错的
 ```
-
-
 
 ### 4️⃣ 安装 PowerShell 模块
 

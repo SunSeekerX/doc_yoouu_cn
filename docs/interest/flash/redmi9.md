@@ -20,26 +20,22 @@
 
 - 格式化 data，需要输入 yes 的才是格式化 data，不然分区加密读取不了
 
-- 刷入 [基带备份]IMEI-BACKUP.zip 成功备份基带上传到 otg u 盘以及三个网盘。文件在 QEUI11 最终版_FinalVersion 章节的云盘有
+- 刷入 [基带备份]IMEI-BACKUP.zip 成功备份基带上传到 otg u 盘以及三个网盘。文件在 QEUI11 最终版\_FinalVersion 章节的云盘有
 
-- 刷入 QEUI11 最终版_FinalVersion 官改
+- 刷入 QEUI11 最终版\_FinalVersion 官改
 
 - 刷入 los 的 rec
 
 - 刷入 los（刷入之前记得三清，不然开机不了，不能在刷完之后三清，不然开机不了，在 rec 重启还会关机一次，要手动开机）
 
-  |                                                              |                                                              |
-  | ------------------------------------------------------------ | ------------------------------------------------------------ |
+  |  |  |
+  | --- | --- |
   | <img src="./assets/redmi9/5ada508e1c27e8c5bbd6d43c89d52af.jpg" alt="5ada508e1c27e8c5bbd6d43c89d52af" style="zoom: 25%;" /> | <img src="./assets/redmi9/2adfd2bd6016fcb6a6884c0b5a936ba.jpg" alt="2adfd2bd6016fcb6a6884c0b5a936ba" style="zoom:50%;" /> |
-
-  
 
   ```shell
   # 使用类似如下的命令，加了 -s 参数是因为有多个设备存在
   adb -s 0a6ce7720409 sideload .\lineage-21.0-20240210-UNOFFICIAL-lancelot.zip
   ```
-
-  
 
 ## 官改
 
@@ -47,17 +43,13 @@
 
 - QEUI14 基于官方MIUI14.0.1修改 https://www.123pan.com/s/t25RVv-rIxph.html qedl
 
-- QEUI11 最终版_FinalVersion https://www.coolapk.com/feed/47016624?shareKey=YzU4YTAzY2I1YmU2NjZhNzEyMjc~&shareUid=775868&shareFrom=com.coolapk.market_14.3.0
+- QEUI11 最终版\_FinalVersion https://www.coolapk.com/feed/47016624?shareKey=YzU4YTAzY2I1YmU2NjZhNzEyMjc~&shareUid=775868&shareFrom=com.coolapk.market_14.3.0
 
   https://www.123pan.com/s/t25RVv-vwxph.html eq23
 
   <img src="./assets/redmi9/image-20240729115841859.png" alt="image-20240729115841859" style="zoom:25%;" />
 
   <img src="./assets/redmi9/image-20240729115720857.png" alt="image-20240729115720857" style="zoom:25%;" />
-
-  
-
-  
 
 ## 刷入 rec 用到的命令
 
@@ -76,35 +68,13 @@
 
 ### rec 文件
 
-看来好多人在问一些奇奇怪怪的问题，这里统一解决下
-〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
-红米9Recovery合集，我能找到的能用的REC
-安卓12：[查看链接](https://wws.lanzouj.com/b00r673ji) 密码:70i3
-安卓11：[查看链接](https://wws.lanzouj.com/b00r673kj) 密码:95zd
-安卓10：[查看链接](https://wws.lanzouj.com/b00r673la) 密码:cjma
-〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
-Q&A
-Q:怎么知道自己需要哪一种REC?
-A:
-①刷新包的时候
-注意看文件名后面的“-10.0/11.0”就是安卓版本
-类原生有些会标上“-Q/R/S-”，Q是安卓10，R是11，S是12，字母表以此类推
-看刷机脚本（META-INF里的updater-script用记事本打开，或者你刷入的时候会显示在屏幕上的那些字)，里面的“Android version”会告诉你
-⚠️如果跨安卓底层，那么就在刷完包后顺便刷入所匹配的安卓版本，同安卓底层刷包就不用
+看来好多人在问一些奇奇怪怪的问题，这里统一解决下 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓 红米9Recovery合集，我能找到的能用的REC安卓12：[查看链接](https://wws.lanzouj.com/b00r673ji) 密码:70i3安卓11：[查看链接](https://wws.lanzouj.com/b00r673kj) 密码:95zd安卓10：[查看链接](https://wws.lanzouj.com/b00r673la) 密码:cjma 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓 Q&A Q:怎么知道自己需要哪一种REC? A: ①刷新包的时候注意看文件名后面的“-10.0/11.0”就是安卓版本类原生有些会标上“-Q/R/S-”，Q是安卓10，R是11，S是12，字母表以此类推看刷机脚本（META-INF里的updater-script用记事本打开，或者你刷入的时候会显示在屏幕上的那些字)，里面的“Android version”会告诉你⚠️如果跨安卓底层，那么就在刷完包后顺便刷入所匹配的安卓版本，同安卓底层刷包就不用
 
 ②留意你现在的MIUI/类原生的安卓版本，进入我的设备-全部参数-就可以看到安卓版本，在哪一个安卓版本就刷哪一个安卓版本的REC
 
 ③进这个网站xiaomirom.com来看官方适配了什么安卓版本的MIUI
 
-〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
-Q:怎么刷REC？
-A:
-①Fastboot模式下即可刷入（百度进入方法），推荐懒人工具秋之盒[查看链接](https://www.atmb.top/)，一键刷入
-②在REC里刷入，是的你可以直接在REC里刷REC，直接点击镜像文件就可以了
-〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
-Q:刷完卡一屏/卡开机动画怎么办？
-A:有三个原因
-①包本身就是坏的，除非是自己做的包不然不太可能出现别人能开你不能开的情况
+〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓 Q:怎么刷REC？A: ①Fastboot模式下即可刷入（百度进入方法），推荐懒人工具秋之盒[查看链接](https://www.atmb.top/)，一键刷入②在REC里刷入，是的你可以直接在REC里刷REC，直接点击镜像文件就可以了 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓 Q:刷完卡一屏/卡开机动画怎么办？A:有三个原因①包本身就是坏的，除非是自己做的包不然不太可能出现别人能开你不能开的情况
 
 ②vbmeta是官方的，卡avb验证了，刷入[查看链接](https://wws.lanzouj.com/icEO90zlc4ng)补丁即可解决
 
@@ -112,13 +82,7 @@ A:有三个原因
 
 ④你没格式化data，清除-格式化data-输入yes
 
-⑤玄学：MIUI14的可以先刷入官方包一次，再刷入第三方包一次，直接覆盖着刷，刷完之后清除davlik和cache
-〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
-Q：神马？橙狐的REC是zip，我该怎么刷？
-A：大哥你用压缩软件打开一下，里面就有recovery.img，这个是rec本体，可以提取出来硬刷的，或者你借助twrp刷入橙狐也没问题
-〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
-Q:点击安装，为啥是乱码？？
-A：这是因为你的data被默认加密了，可以通过使用自动解密的twrp或者格式化data后刷入这个：[查看链接](https://wws.lanzouj.com/iVSFc0zl8s0d)来解决
+⑤玄学：MIUI14的可以先刷入官方包一次，再刷入第三方包一次，直接覆盖着刷，刷完之后清除davlik和cache 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓 Q：神马？橙狐的REC是zip，我该怎么刷？A：大哥你用压缩软件打开一下，里面就有recovery.img，这个是rec本体，可以提取出来硬刷的，或者你借助twrp刷入橙狐也没问题 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓 Q:点击安装，为啥是乱码？？A：这是因为你的data被默认加密了，可以通过使用自动解密的twrp或者格式化data后刷入这个：[查看链接](https://wws.lanzouj.com/iVSFc0zl8s0d)来解决
 
 来源：https://www.coolapk.com/feed/47063398?shareKey=MmRmNzVhOTc5Mzg4NjZhNzE0OGU~&shareUid=775868&shareFrom=com.coolapk.market_14.3.0
 

@@ -310,8 +310,6 @@ AnimeGANv2 - a Hugging Face Space by akhaliq(动漫头像生成) https://hugging
 
 ## 🍳 有趣的网站
 
-
-
 航班实时追踪：[http://flightadsb.variflight.com/](http://flightadsb.variflight.com/)
 
 技术热门度曲线：[https://stateofdev.com/](https://stateofdev.com/)

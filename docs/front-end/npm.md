@@ -554,8 +554,6 @@ pm2 sendSignal SIGUSR2 my-app
 pm2 start ecosystem.config.js
 ```
 
-
-
 ## 📌 NodeJs 版本管理 - nvm
 
 ### windows
@@ -589,8 +587,6 @@ source ~/.zshrc
 # 验证 NVM 是否正确安装
 nvm --version
 ```
-
-
 
 ### ubuntu
 

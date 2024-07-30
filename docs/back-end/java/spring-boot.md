@@ -1168,11 +1168,11 @@ logging.pattern.file=%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} =
 
 给类路径下放上每个日志框架自己的配置文件即可；SpringBoot 就不使用他默认配置的了
 
-| Logging System | Customization |
-| --- | --- |
-| Logback | `logback-spring.xml`, `logback-spring.groovy`, `logback.xml` or `logback.groovy` |
-| Log4j2 | `log4j2-spring.xml` or `log4j2.xml` |
-| JDK (Java Util Logging) | `logging.properties` |
+| Logging System          | Customization                                                                    |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| Logback                 | `logback-spring.xml`, `logback-spring.groovy`, `logback.xml` or `logback.groovy` |
+| Log4j2                  | `log4j2-spring.xml` or `log4j2.xml`                                              |
+| JDK (Java Util Logging) | `logging.properties`                                                             |
 
 logback.xml：直接就被日志框架识别了；
 
@@ -1456,7 +1456,7 @@ public class ThymeleafProperties {
 2、使用 thymeleaf 语法；
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
@@ -1831,7 +1831,7 @@ public class MessageSourceAutoConfiguration {
 ![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180211134506.png)
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -1880,9 +1880,7 @@ public class MessageSourceAutoConfiguration {
       <div class="checkbox mb-3">
         <label> <input type="checkbox" value="remember-me" /> [[#{login.remember}]] </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.btn}"
-        >Sign in</button
-      >
+      <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.btn}">Sign in</button>
       <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
       <a class="btn btn-sm">中文</a>
       <a class="btn btn-sm">English</a>
@@ -2072,8 +2070,7 @@ URI： /资源名称/资源标识 HTTP 请求方式区分对资源 CRUD 操作
 2、引入公共片段
 <div th:insert="~{footer :: copy}"></div>
 ~{templatename::selector}：模板名::选择器 ~{templatename::fragmentname}:模板名::片段名 3、默认效果：
-insert的公共片段在div标签中 如果使用th:insert等属性进行引入，可以不用写~{}：
-行内写法可以加上：[[~{}]];[(~{})]；
+insert的公共片段在div标签中 如果使用th:insert等属性进行引入，可以不用写~{}： 行内写法可以加上：[[~{}]];[(~{})]；
 ```
 
 三种引入公共片段的 th 属性：
@@ -2230,23 +2227,11 @@ insert的公共片段在div标签中 如果使用th:insert等属性进行引入�
   <div class="form-group">
     <label>Gender</label><br />
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="gender"
-        value="1"
-        th:checked="${emp!=null}?${emp.gender==1}"
-      />
+      <input class="form-check-input" type="radio" name="gender" value="1" th:checked="${emp!=null}?${emp.gender==1}" />
       <label class="form-check-label">男</label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="gender"
-        value="0"
-        th:checked="${emp!=null}?${emp.gender==0}"
-      />
+      <input class="form-check-input" type="radio" name="gender" value="0" th:checked="${emp!=null}?${emp.gender==0}" />
       <label class="form-check-label">女</label>
     </div>
   </div>
@@ -2289,9 +2274,7 @@ insert的公共片段在div标签中 如果使用th:insert等属性进行引入�
   <td th:text="${#dates.format(emp.birth, 'yyyy-MM-dd HH:mm')}"></td>
   <td>
     <a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.id}">编辑</a>
-    <button th:attr="del_uri=@{/emp/}+${emp.id}" class="btn btn-sm btn-danger deleteBtn"
-      >删除</button
-    >
+    <button th:attr="del_uri=@{/emp/}+${emp.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
   </td>
 </tr>
 
@@ -3209,12 +3192,12 @@ systemctl stop docker
 
 ### 1）、镜像操作
 
-| 操作 | 命令 | 说明 |
-| --- | --- | --- |
+| 操作 | 命令                                         | 说明                                                       |
+| ---- | -------------------------------------------- | ---------------------------------------------------------- |
 | 检索 | docker search 关键字 eg：docker search redis | 我们经常去 docker hub 上检索镜像的详细信息，如镜像的 TAG。 |
-| 拉取 | docker pull 镜像名:tag | :tag 是可选的，tag 表示标签，多为软件的版本，默认是 latest |
-| 列表 | docker images | 查看所有本地镜像 |
-| 删除 | docker rmi image-id | 删除指定的本地镜像 |
+| 拉取 | docker pull 镜像名:tag                       | :tag 是可选的，tag 表示标签，多为软件的版本，默认是 latest |
+| 列表 | docker images                                | 查看所有本地镜像                                           |
+| 删除 | docker rmi image-id                          | 删除指定的本地镜像                                         |
 
 https://hub.docker.com/
 

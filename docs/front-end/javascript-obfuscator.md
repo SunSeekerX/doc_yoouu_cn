@@ -174,7 +174,7 @@ var obfuscationResult = JavaScriptObfuscator.obfuscate(
   {
     compact: false,
     controlFlowFlattening: true,
-  }
+  },
 )
 
 console.log(obfuscationResult.getObfuscatedCode())
@@ -586,23 +586,7 @@ Example:
 })()
 
 // output
-var _0x5024 = [
-  'zaU',
-  'log',
-  'tuv',
-  'wxy',
-  'abc',
-  'cde',
-  'efg',
-  'hij',
-  'QhG',
-  'TeI',
-  'klm',
-  'nop',
-  'qrs',
-  'bZd',
-  'HMx',
-]
+var _0x5024 = ['zaU', 'log', 'tuv', 'wxy', 'abc', 'cde', 'efg', 'hij', 'QhG', 'TeI', 'klm', 'nop', 'qrs', 'bZd', 'HMx']
 var _0x4502 = function (_0x1254b1, _0x583689) {
   _0x1254b1 = _0x1254b1 - 0x0
   var _0x529b49 = _0x5024[_0x1254b1]

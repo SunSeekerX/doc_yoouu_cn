@@ -38,27 +38,27 @@ TypeError - 如果 _pattern_ 是 RegExp 对象，但没有省略 _attributes_ �
 
 ## 修饰符
 
-| 修饰符 | 描述 |
-| :-- | :-- |
-| [i](https://www.w3school.com.cn/jsref/jsref_regexp_i.asp) | 执行对大小写不敏感的匹配。 |
+| 修饰符                                                    | 描述                                                     |
+| :-------------------------------------------------------- | :------------------------------------------------------- |
+| [i](https://www.w3school.com.cn/jsref/jsref_regexp_i.asp) | 执行对大小写不敏感的匹配。                               |
 | [g](https://www.w3school.com.cn/jsref/jsref_regexp_g.asp) | 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。 |
-| m | 执行多行匹配。 |
+| m                                                         | 执行多行匹配。                                           |
 
 ## 方括号
 
 方括号用于查找某个范围内的字符：
 
-| 表达式 | 描述 |
-| :-- | :-- |
-| [[abc\]](https://www.w3school.com.cn/jsref/jsref_regexp_charset.asp) | 查找方括号之间的任何字符。 |
-| [[^abc\]](https://www.w3school.com.cn/jsref/jsref_regexp_charset_not.asp) | 查找任何不在方括号之间的字符。 |
-| [0-9] | 查找任何从 0 至 9 的数字。 |
-| [a-z] | 查找任何从小写 a 到小写 z 的字符。 |
-| [A-Z] | 查找任何从大写 A 到大写 Z 的字符。 |
-| [A-z] | 查找任何从大写 A 到小写 z 的字符。 |
-| [adgk] | 查找给定集合内的任何字符。 |
-| [^adgk] | 查找给定集合外的任何字符。 |
-| (red\|blue\|green) | 查找任何指定的选项。 |
+| 表达式                                                                    | 描述                               |
+| :------------------------------------------------------------------------ | :--------------------------------- |
+| [[abc\]](https://www.w3school.com.cn/jsref/jsref_regexp_charset.asp)      | 查找方括号之间的任何字符。         |
+| [[^abc\]](https://www.w3school.com.cn/jsref/jsref_regexp_charset_not.asp) | 查找任何不在方括号之间的字符。     |
+| [0-9]                                                                     | 查找任何从 0 至 9 的数字。         |
+| [a-z]                                                                     | 查找任何从小写 a 到小写 z 的字符。 |
+| [A-Z]                                                                     | 查找任何从大写 A 到大写 Z 的字符。 |
+| [A-z]                                                                     | 查找任何从大写 A 到小写 z 的字符。 |
+| [adgk]                                                                    | 查找给定集合内的任何字符。         |
+| [^adgk]                                                                   | 查找给定集合外的任何字符。         |
+| (red\|blue\|green)                                                        | 查找任何指定的选项。               |
 
 ## 元字符
 
@@ -87,17 +87,17 @@ TypeError - 如果 _pattern_ 是 RegExp 对象，但没有省略 _attributes_ �
 
 ## 量词
 
-| 量词 | 描述 |
-| :-- | :-- |
-| [n+](https://www.w3school.com.cn/jsref/jsref_regexp_onemore.asp) | 匹配任何包含至少一个 n 的字符串。 |
-| [n\*](https://www.w3school.com.cn/jsref/jsref_regexp_zeromore.asp) | 匹配任何包含零个或多个 n 的字符串。 |
-| [n?](https://www.w3school.com.cn/jsref/jsref_regexp_zeroone.asp) | 匹配任何包含零个或一个 n 的字符串。 |
-| [n{X}](https://www.w3school.com.cn/jsref/jsref_regexp_nx.asp) | 匹配包含 X 个 n 的序列的字符串。 |
-| [n{X,Y}](https://www.w3school.com.cn/jsref/jsref_regexp_nxy.asp) | 匹配包含 X 至 Y 个 n 的序列的字符串。 |
-| [n{X,}](https://www.w3school.com.cn/jsref/jsref_regexp_nxcomma.asp) | 匹配包含至少 X 个 n 的序列的字符串。 |
-| [n\$](https://www.w3school.com.cn/jsref/jsref_regexp_ndollar.asp) | 匹配任何结尾为 n 的字符串。 |
-| [^n](https://www.w3school.com.cn/jsref/jsref_regexp_ncaret.asp) | 匹配任何开头为 n 的字符串。 |
-| [?=n](https://www.w3school.com.cn/jsref/jsref_regexp_nfollow.asp) | 匹配任何其后紧接指定字符串 n 的字符串。 |
+| 量词                                                                  | 描述                                        |
+| :-------------------------------------------------------------------- | :------------------------------------------ |
+| [n+](https://www.w3school.com.cn/jsref/jsref_regexp_onemore.asp)      | 匹配任何包含至少一个 n 的字符串。           |
+| [n\*](https://www.w3school.com.cn/jsref/jsref_regexp_zeromore.asp)    | 匹配任何包含零个或多个 n 的字符串。         |
+| [n?](https://www.w3school.com.cn/jsref/jsref_regexp_zeroone.asp)      | 匹配任何包含零个或一个 n 的字符串。         |
+| [n{X}](https://www.w3school.com.cn/jsref/jsref_regexp_nx.asp)         | 匹配包含 X 个 n 的序列的字符串。            |
+| [n{X,Y}](https://www.w3school.com.cn/jsref/jsref_regexp_nxy.asp)      | 匹配包含 X 至 Y 个 n 的序列的字符串。       |
+| [n{X,}](https://www.w3school.com.cn/jsref/jsref_regexp_nxcomma.asp)   | 匹配包含至少 X 个 n 的序列的字符串。        |
+| [n\$](https://www.w3school.com.cn/jsref/jsref_regexp_ndollar.asp)     | 匹配任何结尾为 n 的字符串。                 |
+| [^n](https://www.w3school.com.cn/jsref/jsref_regexp_ncaret.asp)       | 匹配任何开头为 n 的字符串。                 |
+| [?=n](https://www.w3school.com.cn/jsref/jsref_regexp_nfollow.asp)     | 匹配任何其后紧接指定字符串 n 的字符串。     |
 | [?!n](https://www.w3school.com.cn/jsref/jsref_regexp_nfollow_not.asp) | 匹配任何其后没有紧接指定字符串 n 的字符串。 |
 
 ## RegExp 对象属性
@@ -120,12 +120,12 @@ TypeError - 如果 _pattern_ 是 RegExp 对象，但没有省略 _attributes_ �
 
 ## 支持正则表达式的 String 对象的方法
 
-| 方法 | 描述 | FF | IE |
-| :-- | :-- | :-- | :-- |
-| [search](https://www.w3school.com.cn/jsref/jsref_search.asp) | 检索与正则表达式相匹配的值。 | 1 | 4 |
-| [match](https://www.w3school.com.cn/jsref/jsref_match.asp) | 找到一个或多个正则表达式的匹配。 | 1 | 4 |
-| [replace](https://www.w3school.com.cn/jsref/jsref_replace.asp) | 替换与正则表达式匹配的子串。 | 1 | 4 |
-| [split](https://www.w3school.com.cn/jsref/jsref_split.asp) | 把字符串分割为字符串数组。 | 1 | 4 |
+| 方法                                                           | 描述                             | FF  | IE  |
+| :------------------------------------------------------------- | :------------------------------- | :-- | :-- |
+| [search](https://www.w3school.com.cn/jsref/jsref_search.asp)   | 检索与正则表达式相匹配的值。     | 1   | 4   |
+| [match](https://www.w3school.com.cn/jsref/jsref_match.asp)     | 找到一个或多个正则表达式的匹配。 | 1   | 4   |
+| [replace](https://www.w3school.com.cn/jsref/jsref_replace.asp) | 替换与正则表达式匹配的子串。     | 1   | 4   |
+| [split](https://www.w3school.com.cn/jsref/jsref_split.asp)     | 把字符串分割为字符串数组。       | 1   | 4   |
 
 ## 常用正则表达式
 

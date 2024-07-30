@@ -182,11 +182,7 @@ echo $SHELL
 sh -c "$(curl -fsSL https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh)"
 ```
 
-
-
 ### 挂载硬盘
-
-
 
 ### ubuntu22.4 开启 root 登录
 

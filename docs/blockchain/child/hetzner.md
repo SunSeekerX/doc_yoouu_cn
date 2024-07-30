@@ -333,7 +333,7 @@ sudo mount /dev/nvme2n1 /mnt/mydrive
 
    ```
    UUID=<UUID> /mnt/mydrive ext4 defaults 0 2
-   
+
    # UUID=d14cd72c-4b82-4512-8bad-9191313ab458 /mnt/nvme02 ext4 defaults 0 2
    ```
 
@@ -348,4 +348,3 @@ sudo mount /dev/nvme2n1 /mnt/mydrive
    如果没有错误消息，这意味着你的 fstab 文件是正确的。
 
 现在，每次启动系统时，`nvme2n1` 都会自动挂载到 `/mnt/mydrive` 目录。请确保每一步操作都正确无误，特别是编辑 fstab 文件时，因为错误的配置可能阻碍系统启动。
-
