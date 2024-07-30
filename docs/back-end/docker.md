@@ -677,7 +677,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker_data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -688,7 +688,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker_data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Mac
    docker run --name redis7x \
    --restart=always \
@@ -861,6 +861,12 @@ docker run -d \
 ```shell
 # 创建一个网络
 docker network create -d macvlan --subnet=172.172.172.0/24 --gateway=172.172.172.1 -o parent=eth0 dockernet
+# 上面那个不能用
+docker network create \
+  --driver bridge \
+  --subnet 192.168.0.0/24 \
+  --gateway 192.168.0.1 \
+  dockernet
 
 # 注意 DB_HOST 和 dockernet 需要新建 docker 网络
 # Linux & mac
@@ -869,7 +875,7 @@ docker run -d \
 -e USER_UID=1000 \
 -e USER_GID=1000 \
 -e DB_TYPE=mysql \
--e DB_HOST=172.172.172.1:3306 \
+-e DB_HOST=192.168.0.1:3306 \
 -e DB_NAME=db_name \
 -e DB_USER=db_user \
 -e DB_PASSWD=db_pwd \

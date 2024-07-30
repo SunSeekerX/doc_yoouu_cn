@@ -127,7 +127,7 @@ Chrome 会缓存 HSTS（HTTP Strict Transport Security）设置，这可能导�
 
 There is no Enable Tab Search in chrome://flags anymore! The **`about:flags/#chrome-refresh-2023 `**solution moves this button to the left side, but no way to disable it for good. Hope google will return this flag back
 
-```\
+```
 about:flags/#chrome-refresh-2023
 ```
 
