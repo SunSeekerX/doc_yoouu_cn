@@ -794,7 +794,7 @@ docker run  -d  \
 --name mysql8x \
 --privileged=true \
 --restart=always \
--p 33077:3306 \
+-p 33066:3306 \
 -v ~/work/data/docker_data/mysql8/data:/var/lib/mysql \
 -v ~/work/data/docker_data/mysql8/config:/etc/mysql/conf.d  \
 -v ~/work/data/docker_data/logs:/logs \
@@ -804,6 +804,7 @@ docker run  -d  \
 # 开放远程访问
 # 进入容器
 docker exec -it <container_id_or_name> /bin/bash
+docker exec -it mysql8x /bin/bash
 # 登录 mysql
 mysql -u root -p
 # 开放权限
