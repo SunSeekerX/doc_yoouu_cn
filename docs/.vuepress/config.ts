@@ -65,10 +65,10 @@ export default defineUserConfig({
       },
     },
     plugins: {
-      // comment: {
-      //   provider: 'Twikoo',
-      //   envId: 'https://twikoo-doc.yoouu.cn',
-      // },
+      comment: {
+        provider: 'Twikoo',
+        envId: 'https://twikoo-doc.yoouu.cn',
+      },
       // comment: {
       //   provider: 'Artalk',
       //   server: 'https://artalk.yoouu.cn',

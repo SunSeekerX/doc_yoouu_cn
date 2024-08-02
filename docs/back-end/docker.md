@@ -960,7 +960,9 @@ client_max_body_size 250m;
 mkdir -p ~/data/twikoo
 # 启动容器
 # 3002 我服务器可用的端口号
-docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v ~/data/twikoo:/app/data -d imaegoo/twikoo
+docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo:/app/data -d imaegoo/twikoo
+
+docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo-blog:/app/data -d imaegoo/twikoo
 ```
 
 ### 0x18 Docker 安装 artalk 评论系统
