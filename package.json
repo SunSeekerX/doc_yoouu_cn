@@ -51,5 +51,5 @@
     "vuepress-plugin-search-pro": "2.0.0-rc.37",
     "vuepress-theme-hope": "2.0.0-rc.37"
   },
-  "packageManager": "yarn@4.3.0"
+  "packageManager": "yarn@4.3.1"
 }
