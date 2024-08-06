@@ -677,7 +677,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker_data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -688,7 +688,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker_data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Mac
    docker run --name redis7x \
    --restart=always \
@@ -960,9 +960,9 @@ client_max_body_size 250m;
 mkdir -p ~/data/twikoo
 # 启动容器
 # 3002 我服务器可用的端口号
-docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo:/app/data -d imaegoo/twikoo
+docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo:/app/data --restart=always -d imaegoo/twikoo
 
-docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo-blog:/app/data -d imaegoo/twikoo
+docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo-blog:/app/data --restart=always -d imaegoo/twikoo
 ```
 
 ### 0x18 Docker 安装 artalk 评论系统
