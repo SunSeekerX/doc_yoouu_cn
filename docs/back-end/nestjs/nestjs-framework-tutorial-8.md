@@ -1,10 +1,10 @@
 # Nestjs 框架教程（第八篇：管道）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 ---
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d1dc90b3606425009.png)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d1dc90b3606425009.png)
 
 **管道**（Pipes）是一个用 @Injectable() 装饰过的类，它必须实现 PipeTransform 接口。
 

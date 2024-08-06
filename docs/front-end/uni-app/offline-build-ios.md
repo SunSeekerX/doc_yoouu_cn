@@ -41,7 +41,7 @@
 
 - 将 `HBuilder-Hello` 放在 ios 工程目录下
 
-  <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app/uni-app-ios-project-list.webp" style="zoom:25%;" />
+  <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app/uni-app-ios-project-list.webp" style="zoom:25%;" />
 
 - 添加 `.gitignore`
 
@@ -77,11 +77,11 @@
 
   > 这一步如果你运行 app 的话应该是可以正常跑起来的。只不过会提醒 appkey 未配置或者错误
 
-  <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app/uni-app-ios-project-frist-run.webp" style="zoom:25%;" />
+  <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app/uni-app-ios-project-frist-run.webp" style="zoom:25%;" />
 
 - 配置 `dcloud_appkey` [链接](https://nativesupport.dcloud.net.cn/AppDocs/usesdk/appkey), `${app}/HBuilder-Hello/HBuilder-Hello/HBuilder-Hello-Info.plist`
 
-  <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app/uni-app-ios-project-dcloud_appkey.webp" style="zoom:25%;" />
+  <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app/uni-app-ios-project-dcloud_appkey.webp" style="zoom:25%;" />
 
 - 生成离线打包资源放入 `${app}/HBuilder-Hello/HBuilder-Hello/Pandora/apps/__UNI__XXXXXXX/www`
 
@@ -91,7 +91,7 @@
 
   `__UNI__XXXXXXX` 需要修改为你的 `appid`
 
-  <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app/uni-app-ios-project-control-xml.webp" style="zoom: 25%;" />
+  <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app/uni-app-ios-project-control-xml.webp" style="zoom: 25%;" />
 
   > 内置资源更新如果您更新了内置资源，重新运行 App 加载的还是旧的资源时请检查下面的配置：
   >
@@ -101,7 +101,7 @@
 
   选择左侧应用工程根目录，选中 TARGETS 下的 HBuilder 打开工程属性界面，在 General 下修改 Identity 的值：
 
-  ![](https://static.yoouu.cn/imgs/doc/front-end/uni-app/uni-app-ios-project-boundle-id.webp)
+  ![](https://static.yoouu.cn/static/imgs/doc/front-end/uni-app/uni-app-ios-project-boundle-id.webp)
 
 - 配置应用名称
 
@@ -109,8 +109,8 @@
   >
   > 注意，manifest 文件里的”name“ 对应的是 HBuilderX 打开的工程里的“基础配置”里的应用名称。如下图红色框所示：
   >
-  > <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app/uni-app-ios-project-name.webp" style="zoom:25%;" />
+  > <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app/uni-app-ios-project-name.webp" style="zoom:25%;" />
   >
-  > <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app/uni-app-ios-project-name2.webp" style="zoom:25%;" />
+  > <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app/uni-app-ios-project-name2.webp" style="zoom:25%;" />
 
   这里自己测试还需要修改国际化下面的 `CFBundleDisplayName` 这个 key 值才能生效

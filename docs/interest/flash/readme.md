@@ -44,7 +44,7 @@ LR.Team 定制版 TWRP 下载地址集合：[https://weibo.com/ttarticle/p/show?
 
 包括但不限于下面的手机型号
 
-![recovery](https://static.yoouu.cn/imgs/doc/interest/recovery.png)
+![recovery](https://static.yoouu.cn/static/imgs/doc/interest/recovery.png)
 
 ## Edxposed 安装教程
 
@@ -83,4 +83,4 @@ LR.Team 定制版 TWRP 下载地址集合：[https://weibo.com/ttarticle/p/show?
 
 **魅蓝 note3 win10 2004 救砖成功**
 
-![mlnote3](https://static.yoouu.cn/imgs/doc/interest/mtk.png)
+![mlnote3](https://static.yoouu.cn/static/imgs/doc/interest/mtk.png)

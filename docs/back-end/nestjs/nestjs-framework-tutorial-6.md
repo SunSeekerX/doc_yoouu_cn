@@ -1,12 +1,12 @@
 # Nestjs 框架教程（第六篇：中间件）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 ---
 
 **中间件**就是一个函数，在路由处理器之前调用。这就表示中间件函数可以访问到请求和响应对象以及应用的请求响应周期中的 next() 中间间函数。
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d19e2f1938ef39341.png)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d19e2f1938ef39341.png)
 
 Nest 中间件实际上和 Express 的中间件是一样的，Express 文档中对中间件的描述如下：
 

@@ -166,7 +166,7 @@ Crisp sdk 隐私政策：[https://crisp.chat/en/privacy/](https://crisp.chat/en/
 
 | IOS | Android |
 | :-: | :-: |
-| <img src="https://static.yoouu.cn/imgs/2021/pic-go/crisp-ios-screenshot.png" alt="ios-screenshot" style="zoom: 25%;" /> | <img src="https://static.yoouu.cn/imgs/2021/pic-go/crisp-android-screenshot.jpeg" alt="android-screenshot" style="zoom: 25%;" /> |
+| <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/crisp-ios-screenshot.png" alt="ios-screenshot" style="zoom: 25%;" /> | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/crisp-android-screenshot.jpeg" alt="android-screenshot" style="zoom: 25%;" /> |
 
 ## 测试文件代码
 

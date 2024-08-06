@@ -1,6 +1,6 @@
 # 后端概览
 
-![backend.png](https://static.yoouu.cn/imgs/doc/back-end/backend.png)
+![backend.png](https://static.yoouu.cn/static/imgs/doc/back-end/backend.png)
 
 ## 📌 资源
 

@@ -407,7 +407,7 @@ try {
 
 ## 使用动图
 
-![example.gif](https://static.yoouu.cn/imgs/doc/open-source/web-storage-apis/example.gif)
+![example.gif](https://static.yoouu.cn/static/imgs/doc/open-source/web-storage-apis/example.gif)
 
 ## 更新日志
 

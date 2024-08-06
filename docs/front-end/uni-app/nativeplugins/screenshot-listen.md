@@ -160,7 +160,7 @@ const safeRunning = (name, fun) => {
 
 | IOS | Android |
 | :-: | :-: |
-| <img src="https://static.yoouu.cn/imgs/2021/pic-go/screenshot-listen-ios-screenshot.jpg" alt="screenshot-listen-ios-screenshot" style="zoom: 25%;" /> | <img src="https://static.yoouu.cn/imgs/2021/pic-go/screenshot-listen-android-screenshot.jpeg" alt="screenshot-listen-android-screenshot" style="zoom: 25%;" /> |
+| <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/screenshot-listen-ios-screenshot.jpg" alt="screenshot-listen-ios-screenshot" style="zoom: 25%;" /> | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/screenshot-listen-android-screenshot.jpeg" alt="screenshot-listen-android-screenshot" style="zoom: 25%;" /> |
 
 ## 更新日志
 

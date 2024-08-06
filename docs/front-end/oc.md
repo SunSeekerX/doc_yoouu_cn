@@ -769,7 +769,7 @@ Objective-C 语言支持以下赋值运算符 -
 
 当需要多次执行同一代码块时，可以使用循环来解决。 通常，语句按顺序执行：首先执行函数中的第一个语句，然后执行第二个语句，依此类推。 编程语言提供各种控制结构，允许更复杂的执行路径。循环语句可用于多次执行语句或语句组，以下是大多数编程语言中循环语句的一般形式 -
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/135032_34890.jpg)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/135032_34890.jpg)
 
 Objective-C 编程语言提供以下类型的循环来处理循环需求。单击以下相应链接来查看其详细信息。
 
@@ -814,7 +814,7 @@ int main () {
 
 决策结构要求程序员指定一个或多个要由程序评估或测试的条件，以及在条件被确定为真时要执行的一个或多个语句，以及可选的，如果条件要执行的其他语句 被认定是假的。
 
-以下是大多数编程语言中的典型决策结构的一般形式 - ![img](https://static.yoouu.cn/imgs/doc/front-end/ios/154849_75071.jpg)
+以下是大多数编程语言中的典型决策结构的一般形式 - ![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/154849_75071.jpg)
 
 Objective-C 编程语言将任何非零和非`null`假定为`true`，如果它为零或`null`，则将其假定为`false`。 Objective-C 编程语言提供以下类型的决策制定语句。 单击以下链接查看其详细信息 -
 
@@ -1134,7 +1134,7 @@ Objective-C 编程语言提供了一种叫作数组的数据结构，它可以�
 
 所有数组都包含连续的内存位置。 最低地址对应于第一个元素，最高地址对应于最后一个元素。
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/102413_69680.jpg)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/102413_69680.jpg)
 
 #### 1. 声明数组
 
@@ -1174,7 +1174,7 @@ balance[4] = 50.0;
 
 上面的语句将数组中的第`5`元素赋值为`50.0`。 具有第四个索引的数组它拥有`5`个元素，因为所有数组都将`0`作为第一个元素的索引，也称为基本索引。 以下是上面讨论的相同数组的图形表示 -
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/103351_77103.jpg)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/103351_77103.jpg)
 
 #### 3. 访问数组元素
 

@@ -417,4 +417,4 @@ setting->Editor->General->Code Completion 取消勾选 Match case
 
 效果图：
 
-![](https://static.yoouu.cn/imgs/doc/basic/ide/idea-2020-register.png)
+![](https://static.yoouu.cn/static/imgs/doc/basic/ide/idea-2020-register.png)

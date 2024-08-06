@@ -157,8 +157,8 @@ const safeRunning = (name, fun) => {
 
 | IOS | Android |
 | :-: | :-: |
-| <img src="https://static.yoouu.cn/imgs/2021/pic-go/geetest-ios1.jpg" alt="geetest-ios1" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/imgs/2021/pic-go/geetest-android1.jpeg" alt="geetest-android1" style="zoom:25%;" /> |
-| <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app-nativeplugins/super-module-geetest-01.webp" alt="super-module-geetest-01" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/imgs/2021/pic-go/geetest-android2.jpeg" alt="geetest-android2" style="zoom:25%;" /> |
+| <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/geetest-ios1.jpg" alt="geetest-ios1" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/geetest-android1.jpeg" alt="geetest-android1" style="zoom:25%;" /> |
+| <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app-nativeplugins/super-module-geetest-01.webp" alt="super-module-geetest-01" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/geetest-android2.jpeg" alt="geetest-android2" style="zoom:25%;" /> |
 
 ## 更新日志
 

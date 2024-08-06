@@ -293,21 +293,21 @@ https://github.com/WizzWallet/elex-proxy
 
    https://visualstudio.microsoft.com/zh-hans/vs/
 
-   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030328180.jpeg" alt="img" style="zoom: 33%;" />
+   <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030328180.jpeg" alt="img" style="zoom: 33%;" />
 
    打开客户端工具-获取工具和功能，勾选c++桌面开发，再右下角点完成配置
 
-   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030329252.jpeg" alt="img" style="zoom:33%;" />
+   <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030329252.jpeg" alt="img" style="zoom:33%;" />
 
 2. 下载python
 
    https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe
 
-   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030329467.jpeg" alt="img" style="zoom: 50%;" />
+   <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030329467.jpeg" alt="img" style="zoom: 50%;" />
 
 3. 打开powershell配置atomicals-electrumx
 
-   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330660.jpeg" alt="img" style="zoom:50%;" />
+   <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030330660.jpeg" alt="img" style="zoom:50%;" />
 
    1. 然后次输入以下指令（注意等完成后再输入）
 
@@ -341,13 +341,13 @@ https://github.com/WizzWallet/elex-proxy
       load_dotenv()
       ```
 
-      <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330162.png" alt="img" style="zoom:50%;" />
+      <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030330162.png" alt="img" style="zoom:50%;" />
 
    2. 找到D:\atomicals-electrumx路径下的dev文件， 第一行url改为：DAEMON_URL=http://electrumx:electrumx@localhost:8332/
 
    3. 第五行directory改为指向的data数据路径（具体看你存在什么位置，然后复制路径粘贴到这里就可以，图中是我磁力链接下载好的data数据解压后所在的位置，磁力链接教程在我们OW上一个私有节点教程https://x.com/OrdzWorld/status/1728536317032862024?s=20评论区）
 
-      <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330230.png" alt="img" style="zoom:50%;" />
+      <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030330230.png" alt="img" style="zoom:50%;" />
 
 5. 输入指令
 
@@ -355,7 +355,7 @@ https://github.com/WizzWallet/elex-proxy
    python electrumx_server
    ```
 
-   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030330241.png" alt="img" style="zoom:50%;" />
+   <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030330241.png" alt="img" style="zoom:50%;" />
 
    出现跳动的乱码，等待它完成同步
 
@@ -369,7 +369,7 @@ https://github.com/WizzWallet/elex-proxy
    git clone https://github.com/atomicals/electrumx-proxy
    ```
 
-   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030331600.png" alt="img" style="zoom:50%;" />
+   <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030331600.png" alt="img" style="zoom:50%;" />
 
    依次输入指令：
 
@@ -379,13 +379,13 @@ https://github.com/WizzWallet/elex-proxy
    npm run dev
    ```
 
-   <img src="https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030331440.png" alt="img" style="zoom:50%;" />
+   <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030331440.png" alt="img" style="zoom:50%;" />
 
    查看状态：
 
    http://localhost:8080/proxy/health
 
-   ![img](https://static.yoouu.cn/imgs/doc/blockchain/inscription/202401030331241.png)
+   ![img](https://static.yoouu.cn/static/imgs/doc/blockchain/inscription/202401030331241.png)
 
    等待atomicals-electrumx同步完成即可拥有私人节点，出现2个ture后你就可以去Atomicals js里面的修改env改为自己的节点http://localhost:8080/proxy
 

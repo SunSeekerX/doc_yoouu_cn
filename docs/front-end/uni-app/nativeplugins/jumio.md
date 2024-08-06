@@ -129,7 +129,7 @@ none
 
 | IOS | Android |
 | :-: | :-: |
-|  | <img src="https://static.yoouu.cn/imgs/2021/pic-go/jumio-android-screenshot.jpg" alt="e0cff53506fd1b5769925a276608871" style="zoom: 25%;" /> |
+|  | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/jumio-android-screenshot.jpg" alt="e0cff53506fd1b5769925a276608871" style="zoom: 25%;" /> |
 
 ## 更新日志
 

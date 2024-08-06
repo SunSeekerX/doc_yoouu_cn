@@ -172,13 +172,13 @@ intel 官方出品的软件，常用来查看 CPU 的频率、功耗、稳定等
 
    输入 ca5ns 按照笔记本搜索
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-1.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-1.webp)
 
 3. 桌面新建一个文件夹，解压下载的 bios 文件
 
    你应该能看到如下的文件结构
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-2.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-2.webp)
 
 4. win + x 打开 powershell（管理员）模式进入到桌面下载的文件夹里面，执行以下命令备份当前的 bios
 
@@ -186,29 +186,29 @@ intel 官方出品的软件，常用来查看 CPU 的频率、功耗、稳定等
    .\FPTW64.exe -bios -d backup.fd
    ```
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-3.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-3.webp)
 
 5. 找到备份的 `backup.fd` 文件复制到桌面使用 `InsydeH2OUVE_x86_WINx64_200.00.01.00` 工具打开
 
    点击 setup，然后点击 file > export 导出为 text 文件命名为 `bios.txt`
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-4.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-4.webp)
 
 6. 使用你喜欢的文本编辑器打开 `bios.txt`，这里我使用 vscode 打开，搜索 show 可以打开 bios 菜单显示，不要多一个空格，不要少，不然我也不知道会出什么问题 ❗❗❗，如果你不知道这一步在干嘛可以跳过，不然打开了很多危险的选项可能你就开不了机了。
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-5.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-5.webp)
 
    修改后
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-6.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-6.webp)
 
    我们需要的 cfg 搜索就能关闭了
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-7.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-7.webp)
 
 7. 然后使用导出的工具导入点击 save as 保存为 **mod.fd**
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-8.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-8.webp)
 
 8. 最后使用命令刷回去
 
@@ -216,7 +216,7 @@ intel 官方出品的软件，常用来查看 CPU 的频率、功耗、稳定等
    .\FPTW64.exe -bios -f mod.fd
    ```
 
-   ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-9.webp)
+   ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-9.webp)
 
 9. 全程接通电源不进行其它操作
 
@@ -230,17 +230,17 @@ intel 官方出品的软件，常用来查看 CPU 的频率、功耗、稳定等
 
 解锁前
 
-![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-10.webp)
+![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-10.webp)
 
 解锁后
 
-![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-11.webp)
+![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-11.webp)
 
 11. 不过通过 oc 的工具可以验证确实是解锁了的
 
-    ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-12.webp)
+    ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-12.webp)
 
-    ![](https://static.yoouu.cn/imgs/doc/interest/hackintosh/g8-unlock-cfglock-13.webp)
+    ![](https://static.yoouu.cn/static/imgs/doc/interest/hackintosh/g8-unlock-cfglock-13.webp)
 
 参考
 

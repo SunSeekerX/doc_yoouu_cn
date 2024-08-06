@@ -2,7 +2,7 @@
 
 ## 📌 学习路线
 
-![frontend.png](https://static.yoouu.cn/imgs/doc/front-end/frontend.png)
+![frontend.png](https://static.yoouu.cn/static/imgs/doc/front-end/frontend.png)
 
 ## 📌 文章收集
 

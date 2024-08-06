@@ -8,8 +8,8 @@
 
 | 版本号 | 二维码 |
 | :-: | :-: |
-| 2.1.0 | <img src="https://static.yoouu.cn/imgs/doc/pic-go/uni-plugin-android-starter-app-release_v2.1.0-210.png" alt="app-release_v2.1.0-210" style="zoom: 50%;" /> |
-| 1.0 | <img src="https://static.yoouu.cn/imgs/doc/pic-go/uni-plugin-android-starterv1.0-100.png" style="zoom:50%;" /> |
+| 2.1.0 | <img src="https://static.yoouu.cn/static/imgs/doc/pic-go/uni-plugin-android-starter-app-release_v2.1.0-210.png" alt="app-release_v2.1.0-210" style="zoom: 50%;" /> |
+| 1.0 | <img src="https://static.yoouu.cn/static/imgs/doc/pic-go/uni-plugin-android-starterv1.0-100.png" style="zoom:50%;" /> |
 
 ### IOS
 
@@ -37,7 +37,7 @@
 
 | IOS | Android |
 | --- | --- |
-| <img src="https://static.yoouu.cn/imgs/2021/pic-go/crisp-ios-screenshot.png" width="300" /> | <img src="https://static.yoouu.cn/imgs/2021/pic-go/crisp-android-screenshot.jpeg" width="300"/> |
+| <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/crisp-ios-screenshot.png" width="300" /> | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/crisp-android-screenshot.jpeg" width="300"/> |
 
 ## 📌 Geetest 极验
 
@@ -49,7 +49,7 @@
 
 | IOS | Android |
 | --- | --- |
-| <img src="https://static.yoouu.cn/imgs/2021/pic-go/geetest-ios1.jpg" width="300" /> | <img src="https://static.yoouu.cn/imgs/2021/pic-go/geetest-android1.jpeg" width="300" /> |
+| <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/geetest-ios1.jpg" width="300" /> | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/geetest-android1.jpeg" width="300" /> |
 
 ## 📌 Screenshot 截屏监听
 
@@ -61,7 +61,7 @@
 
 | IOS | Android |
 | --- | --- |
-| <img src="https://static.yoouu.cn/imgs/2021/pic-go/screenshot-listen-ios-screenshot.jpg" width="300" /> | <img src="https://static.yoouu.cn/imgs/2021/pic-go/screenshot-listen-android-screenshot.jpeg" width="300" /> |
+| <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/screenshot-listen-ios-screenshot.jpg" width="300" /> | <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/screenshot-listen-android-screenshot.jpeg" width="300" /> |
 
 ## 📌 SuperWebp
 
@@ -73,7 +73,7 @@
 
 | Android |
 | --- |
-| <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app-nativeplugins/202203221053019.webp" style="zoom:33%;" /> |
+| <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app-nativeplugins/202203221053019.webp" style="zoom:33%;" /> |
 
 ## 📌 Sensetime 商汤人脸识别
 
