@@ -1,3 +1,11 @@
+## 用文件管理器打开当前路径
+
+```
+explorer.exe .
+```
+
+
+
 ## wsl ubuntu 默认打开 root
 
 在 WSL (Windows Subsystem for Linux) 中，默认以非 root 用户身份运行。如果你希望每次打开 WSL Ubuntu 时默认以 root 用户身份运行，可以按照以下步骤操作：
@@ -95,6 +103,7 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    wsl --export Ubuntu D:\path\to\save\ubuntu.tar
    # 我的命令
    wsl --export Ubuntu-22.04 D:\ubuntu.tar
+   wsl --export Ubuntu-24.04 D:\ubuntu2404.tar
    ```
 
    把`D:\path\to\save\ubuntu.tar`替换成你想要保存tar文件的实际路径。
@@ -105,6 +114,7 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    wsl --unregister Ubuntu
    # 我的命令
    wsl --unregister Ubuntu-22.04
+   wsl --unregister Ubuntu-24.04
    ```
 
 6. **在新位置创建一个文件夹**：在D盘上选择或创建一个新的文件夹来存放你的WSL分发。
@@ -113,6 +123,7 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    mkdir D:\path\where\you\want\wsl
    # 我的命令
    mkdir D:\data\wsl\ubuntu-22.04
+   mkdir D:\data\wsl\ubuntu-24.04
    ```
 
 7. **导入WSL分发**：将分发导入到你在D盘上创建的新位置。
@@ -121,6 +132,7 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    wsl --import Ubuntu D:\path\where\you\want\wsl D:\path\to\save\ubuntu.tar
    # 我的命令
    wsl --import Ubuntu-22.04 D:\data\wsl\ubuntu-22.04 D:\ubuntu.tar
+   wsl --import Ubuntu-24.04 D:\data\wsl\ubuntu-24.04 D:\ubuntu2404.tar
    ```
 
    确保替换路径为你实际想要使用的路径。
@@ -131,6 +143,7 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    wsl -d Ubuntu
    # 我的命令
    wsl -d Ubuntu-22.04
+   wsl -d Ubuntu-24.04
    ```
 
 9. **设置默认用户**（如果需要）：如果新导入的分发默认用户是root，你需要修改WSL配置文件来更改默认用户。可以在`D:\path\where\you\want\wsl`路径下创建或编辑`etc\wsl.conf`文件，并添加以下内容：

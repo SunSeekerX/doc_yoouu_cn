@@ -272,13 +272,15 @@ service sshd restart
 
 ### 修改 root 密码
 
-| 步骤 | 方法 |
-| :-- | :-- |
-| 修改 root 密码 | 执行命令 sudo passwd root |
-| 输入密码 | 可以和 ubuntu 密码一致，也可以修改 (密码会让你输入两次) |
-| 修改 ssh 配置 | 执行命令 sudo vi /etc/ssh/sshd_config |
-| 修 改 PermitRootLogin | 进入 ssh 配置界面后找到 PermitRootLogin，将它后面改为 yes，保存 (按 i 进入编辑模式，编辑完 esc 退出，:w 保存当前文件，:q 退出) |
-| 重启 ssh 服务 | 执行命令 sudo service ssh restart |
+```shell
+sudo passwd root
+# 可以和 ubuntu 密码一致，也可以修改 (密码会让你输入两次)
+# 修改 ssh 配置
+sudo vi /etc/ssh/sshd_config
+# 修 改 PermitRootLogin 进入 ssh 配置界面后找到 PermitRootLogin，将它后面改为 yes，保存 (按 i 进入编辑模式，编辑完 esc 退出，:w 保存当前文件，:q 退出)
+# 重启 ssh 服务
+sudo service ssh restart
+```
 
 ### 连接虚拟机中的 ubuntu
 

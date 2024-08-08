@@ -243,26 +243,26 @@ brew --version
    ```shell
    # 检查运行是否正常
    jenv doctor
-
+   
    # 添加到 jEnv
    jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_321.jdk/Contents/Home
-
+   
    # 显示已经添加的版本
    jenv versions
-
+   
    # 查看版本
    jenv --version
-
+   
    # 设置全局 jdk 版本
    jenv global oracle64-1.6.0.39
    # 设置文件夹版本 // Configure local version (per directory)
    jenv local oracle64-1.6.0.39
    # 设置当前会话版本
    jenv shell oracle64-1.6.0.39
-
+   
    # 查看安装的 jdk 版本
    /usr/libexec/java_home -V
-
+   
    # 输出
     ssx@ssxdeMac-mini  ~  /usr/libexec/java_home -V
    Matching Java Virtual Machines (3):
@@ -306,6 +306,25 @@ iTerm2 -> Make ITerm2 Default Term
 [https://iterm2colorschemes.com/](https://iterm2colorschemes.com/)
 
 ## oh-my-zsh
+
+记得先安装 zsh
+
+```shell
+# 检查是否安装
+zsh --version
+# 查看默认 shell
+echo $SHELL
+# 期待输出 /usr/bin/zsh
+# 安装 zsh
+sudo apt install zsh
+# 验证是否安装
+zsh --version
+# 设置为默认
+chsh -s $(which zsh)
+# 注销并重新登录,或重启系统,使更改生效。
+```
+
+安装Z SH 教程：https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
 
 [https://ohmyz.sh/](https://ohmyz.sh/)
 
