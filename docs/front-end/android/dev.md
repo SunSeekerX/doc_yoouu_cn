@@ -1,6 +1,6 @@
 # Android 开发
 
-![roadmap.svg](https://static.yoouu.cn/imgs/doc/front-end/android/roadmap.svg)
+![roadmap.svg](https://static.yoouu.cn/static/imgs/doc/front-end/android/roadmap.svg)
 
 ## 📌 0x1 Android 项目视图
 
@@ -108,13 +108,13 @@
 
 ### Activity
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/android/activity_lifecycle.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/android/activity_lifecycle.png)
 
 **感知生命周期**
 
 实现 `LifecycleObserver` 这个接口即可实现在自己的 `class` 中监听生命周期的回调。而不需要在 `activity` 中操作自己的 `class` 的状态。
 
-![lifecycle_feeling.png](https://static.yoouu.cn/imgs/doc/front-end/android/lifecycle_feeling.png)
+![lifecycle_feeling.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/lifecycle_feeling.png)
 
 ### Service
 
@@ -138,27 +138,27 @@
 
 当 activity 在后台，如果内存不足，activity 会被系统杀掉，甚至 onDestroy 也不会被调用。 ViewModel 的数据也就丢失了。
 
-![viewmodel_savedstate.png](https://static.yoouu.cn/imgs/doc/front-end/android/viewmodel_savedstate.png)
+![viewmodel_savedstate.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/viewmodel_savedstate.png)
 
 ### ViewModel + SavedState 生命周期
 
-![viewmode_savedstate_lifecycle.png](https://static.yoouu.cn/imgs/doc/front-end/android/viewmode_savedstate_lifecycle.png)
+![viewmode_savedstate_lifecycle.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/viewmode_savedstate_lifecycle.png)
 
 ## 📌 LiveData
 
 ### mvc
 
-![livedata_mvc.png](https://static.yoouu.cn/imgs/doc/front-end/android/livedata_mvc.png)
+![livedata_mvc.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/livedata_mvc.png)
 
 ### mvvm
 
-![livedata_mvvm.png](https://static.yoouu.cn/imgs/doc/front-end/android/livedata_mvvm.png)
+![livedata_mvvm.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/livedata_mvvm.png)
 
 ### DataBinding
 
 View 跟 Controller 解耦，只需要控制数据，ViewModel 发生变化 ViewGroup 会自动更新（有点像 Vue）。DataBinding 是绑定试图到 Controller。
 
-![databinding.png](https://static.yoouu.cn/imgs/doc/front-end/android/databinding.png)
+![databinding.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/databinding.png)
 
 ## 📌 DataBinding
 
@@ -184,21 +184,21 @@ android {
 
 ### Navigation
 
-![fragment_navigation.png](https://static.yoouu.cn/imgs/doc/front-end/android/fragment_navigation.png)
+![fragment_navigation.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/fragment_navigation.png)
 
 ### ViewModel
 
-![viewmodel_fragment.png](https://static.yoouu.cn/imgs/doc/front-end/android/viewmodel_fragment.png)
+![viewmodel_fragment.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/viewmodel_fragment.png)
 
 ## 📌 Room
 
-![room_components.png](https://static.yoouu.cn/imgs/doc/front-end/android/room_components.png)
+![room_components.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/room_components.png)
 
 ## 📌 serializable
 
 就相当于 `JavaScript` 里面的 `JSON.stringify()` 序列化，`JSON.parse()` 反序列化。
 
-![serializable.png](https://static.yoouu.cn/imgs/doc/front-end/android/serializable.png)
+![serializable.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/serializable.png)
 
 ### 打开 idea 自动插入序列号功能
 
@@ -208,7 +208,7 @@ setting > search `serializable class without 'serialVersionUID'` > 勾选
 
 ## 📌 kotlin
 
-![android/kotlin.png](https://static.yoouu.cn/imgs/doc/front-end/android/kotlin.png)
+![android/kotlin.png](https://static.yoouu.cn/static/imgs/doc/front-end/android/kotlin.png)
 
 ## 📌 注意事项
 
@@ -263,15 +263,15 @@ Help > Edit custom VM options > 添加就行
 
 #### 0x1 先 clean 项目，再 build
 
-![](https://static.yoouu.cn/imgs/doc/front-end/android/202207021943881.png)
+![](https://static.yoouu.cn/static/imgs/doc/front-end/android/202207021943881.png)
 
 #### 0x2 如果 1 不行，再试 invalidate cache / restart
 
-![](https://static.yoouu.cn/imgs/doc/front-end/android/202207021939504.png)
+![](https://static.yoouu.cn/static/imgs/doc/front-end/android/202207021939504.png)
 
 #### 0x3 如果上述都不行，来个终结方法
 
-![](https://static.yoouu.cn/imgs/doc/front-end/android/202207021944546.png)
+![](https://static.yoouu.cn/static/imgs/doc/front-end/android/202207021944546.png)
 
 先关闭 Android Studio，然后删除项目目录下面的 .idea 文件夹和 .gradle 文件夹，然后重新打开 AS ，发现问题解决
 
@@ -386,43 +386,43 @@ ext {
 
 - 先对项目进行 clean 操作
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-3b7a83388bbf5bef.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-3b7a83388bbf5bef.png)
 
 - 跑到所在的文件夹中新建整个包名目录
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-7c881d12fb7ac855.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-7c881d12fb7ac855.png)
 
 - 选择所需要的包，然后右击选择移动
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-0a4f0913ec8d8218.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-0a4f0913ec8d8218.png)
 
 - 选择第一个，直接移动包
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-dc86e2ca69046cfc.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-dc86e2ca69046cfc.png)
 
 - 在这里输入刚刚新建的包名
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-224801a5f1d9d937.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-224801a5f1d9d937.png)
 
 - 几秒种后就完成了移动
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-7e320385e399b868.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-7e320385e399b868.png)
 
 - 然后在项目右键中选择 **Replace in Path**
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-07c0f1b96070f40b.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-07c0f1b96070f40b.png)
 
 - 然后选择 **Replace All** 来替换
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-1d05c1b53da98945.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-1d05c1b53da98945.png)
 
 - 再同步一下 Gradle 配置
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-8a2835e0ae270303.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-8a2835e0ae270303.png)
 
 - 最后直接编译或者运行项目即可
 
-![img](https://static.yoouu.cn/imgs/doc/pic-go/6038844-8b98155360852185.png)
+![img](https://static.yoouu.cn/static/imgs/doc/pic-go/6038844-8b98155360852185.png)
 
 **在本次测试用的是我自己搭建的架构项目，解决开发中遇到的坑，可以帮你减少开发时间和精力**
 

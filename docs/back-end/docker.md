@@ -166,7 +166,7 @@ rootfs (root file system)，在 bootfs 之上。包含的就是典型 Linux 系�
 
 我们可以去下载一个镜像，注意观察下载的日志输出，可以看到是一层一层的在下载!
 
-![image-20200829154226727](https://static.yoouu.cn/imgs/doc/back-end/docker/image-20200829154226727.png)
+![image-20200829154226727](https://static.yoouu.cn/static/imgs/doc/back-end/docker/image-20200829154226727.png)
 
 思考:为什么 Docker 镜像要采用这种分层的结构呢?
 
@@ -224,7 +224,7 @@ COPY				# 类似ADD，将我们文件拷贝到镜像中
 ENV					# 构建的时候设置环境变量!
 ```
 
-![image-20200829162756885](https://static.yoouu.cn/imgs/doc/back-end/docker/image-20200829162756885.png)
+![image-20200829162756885](https://static.yoouu.cn/static/imgs/doc/back-end/docker/image-20200829162756885.png)
 
 ## 📌 Docker 网络
 
@@ -234,11 +234,11 @@ ENV					# 构建的时候设置环境变量!
 ip addr
 ```
 
-![image-20200830152740185](https://static.yoouu.cn/imgs/doc/back-end/docker/image-20200830152740185.png)
+![image-20200830152740185](https://static.yoouu.cn/static/imgs/doc/back-end/docker/image-20200830152740185.png)
 
 Docker0：`172.18.0.1` 相当于路由器，其他所有启动的镜像都是接入到这个路由器，所以容器之前可以 ping 通，主机也可以 ping 通容器，容器之前互相 ping 请求并不是直接到达各个容器，需要经过 Docker0 进行广播到接入 Docker0 里面的容器。
 
-![image-20200830154055179](https://static.yoouu.cn/imgs/doc/back-end/docker/image-20200830154055179.png)
+![image-20200830154055179](https://static.yoouu.cn/static/imgs/doc/back-end/docker/image-20200830154055179.png)
 
 > 原理
 
@@ -960,9 +960,9 @@ client_max_body_size 250m;
 mkdir -p ~/data/twikoo
 # 启动容器
 # 3002 我服务器可用的端口号
-docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo:/app/data -d imaegoo/twikoo
+docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo:/app/data --restart=always -d imaegoo/twikoo
 
-docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo-blog:/app/data -d imaegoo/twikoo
+docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo-blog:/app/data --restart=always -d imaegoo/twikoo
 ```
 
 ### 0x18 Docker 安装 artalk 评论系统
@@ -1003,11 +1003,17 @@ docker run -d \
   harness/gitness
 ```
 
-### 0x20 Docker 安装 minio
+### 0x20 Docker 安装 minio oss
 
 GitHub: https://github.com/minio/minio
 
 Doc: https://min.io/docs/minio/container/index.html
+
+客户端：https://s3browser.com/
+
+9001 是控制面板
+
+9000 是 api 访问和公开访问链接
 
 ```shell
 # Linux
@@ -1020,6 +1026,46 @@ docker run -d \
    -e "MINIO_ROOT_USER=ROOTNAME" \
    -e "MINIO_ROOT_PASSWORD=CHANGEME123" \
    quay.io/minio/minio server /data --console-address ":9001"
+```
+
+示例 static 桶
+
+```json
+// 原来的
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["*"]
+      },
+      "Action": ["s3:GetBucketLocation"],
+      "Resource": ["arn:aws:s3:::static"]
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["*"]
+      },
+      "Action": ["s3:GetObject"],
+      "Resource": ["arn:aws:s3:::static/**"]
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["*"]
+      },
+      "Action": ["s3:ListBucket"],
+      "Resource": ["arn:aws:s3:::static"],
+      "Condition": {
+        "StringEquals": {
+          "s3:prefix": ["*"]
+        }
+      }
+    }
+  ]
+}
 ```
 
 ### 0x21 Docker 安装 nginx
@@ -1105,19 +1151,64 @@ http {
 来源：https://hub.docker.com/_/ghost/
 
 ```shell
+# 创建一个网络
+docker network create \
+  --driver bridge \
+  --subnet 192.168.0.0/24 \
+  --gateway 192.168.0.1 \
+  dockernet
+
 # Linux
 docker run -d \
   --name ghost \
-  --network host \
   --restart always \
   -e database__client=mysql \
-  -e database__connection__host=127.0.0.1 \
+  -e database__connection__host=192.168.0.1 \
+  -e database__connection__port=3306 \
   -e database__connection__user=<db_user> \
   -e database__connection__password=<db_pwd> \
   -e database__connection__database=<db_name> \
   -e url=http://localhost:2368/ \
+  -p 12368:2368 \
+	--network=dockernet \
   -v /data/docker_data/ghost:/var/lib/ghost/content \
   ghost:5
+```
+
+可用的 nginx 代理配置
+
+```nginx
+
+#PROXY-START/
+
+location ^~ /
+{
+    proxy_pass http://localhost:12368;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header REMOTE-HOST $remote_addr;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_http_version 1.1;
+    # proxy_hide_header Upgrade;
+
+    add_header X-Cache $upstream_cache_status;
+    #Set Nginx Cache
+
+    set $static_fileANBgGfTg 0;
+    if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
+    {
+        set $static_fileANBgGfTg 1;
+        expires 1m;
+    }
+    if ( $static_fileANBgGfTg = 0 )
+    {
+        add_header Cache-Control no-cache;
+    }
+}
+#PROXY-END/
 ```
 
 ### 0x23 Docker 安装 rustdesk

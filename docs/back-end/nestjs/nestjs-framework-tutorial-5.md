@@ -1,12 +1,12 @@
 # Nestjs 框架教程（第五篇：模块）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 ---
 
 **模块**（Module）是一个使用了 @Module() 装饰的类。@Module() 装饰器提供了一些 Nest 需要使用的元数据，用来组织应用程序的结构。
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d19d7a33690e19033.png)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d19d7a33690e19033.png)
 
 每个应用都至少有一个根模块，根模块就是 Nest 应用的入口。Nest 会从这里查找出整个应用的依赖/调用[图](<https://en.wikipedia.org/wiki/Graph_(abstract_data_type)>)。
 
@@ -44,7 +44,7 @@ export class CatsModule {}
 
 在 Nest 中模块默认是单例的，因此你可在不同的模块之间共享任意 Provider 实例。
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d19dd669f9c560755.png)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d19dd669f9c560755.png)
 
 模块都是共享的，我们可以通过导出当前模块的指定 Service 来实现其它模块对 Service 的复用。
 

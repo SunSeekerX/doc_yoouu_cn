@@ -236,61 +236,61 @@ pod update
 
 打开工程 点击工程名称 回车 直接修改
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast.png)
 
 此时会弹出一个对话框，点击 Rename
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130547926.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917130547926.png)
 
 ### 2.修改 scheme 名称
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130615698.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917130615698.png)
 
 弹出对话框 会车直接修改 修改完成之后 点击 Close
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130638915.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917130638915.png)
 
 ### 3.修改目录名称
 
 点击工程内需要修改名字的目录 回车直接修改
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130820602.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917130820602.png)
 
 点击 Find 选择 查找替换
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130839907.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917130839907.png)
 
 点击全部替换
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130859173.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917130859173.png)
 
 部分替换不了的 手动点进去修改
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917130914340.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917130914340.png)
 
 ### 4.修改实体文件夹名称
 
 在文件夹内 将对应的文件夹回车直接修改
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131000048.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917131000048.png)
 
 ### 5.修改.xcodeproj 右键显示包内容
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131057710.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917131057710.png)
 
 双击打开.pbxproj 文件
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131118418.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917131118418.png)
 
 查找替换全部
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131206417.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917131206417.png)
 
 ### 6.如果有 pod (无 pod 忽略)
 
 删除原来的 pod 对应的三项
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/SouthEast-20220917131238030.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/SouthEast-20220917131238030.png)
 
 重新 pod install （注意 不要用 pod install --verbose --no-repo-update ）
 
@@ -393,19 +393,19 @@ clang-format --version
 
 2、添加自动化服务
 
-![1.png](https://static.yoouu.cn/imgs/doc/front-end/ios/2280749423.png)
+![1.png](https://static.yoouu.cn/static/imgs/doc/front-end/ios/2280749423.png)
 
 选择快速操作
 
-![2.png](https://static.yoouu.cn/imgs/doc/front-end/ios/2233056075.png)
+![2.png](https://static.yoouu.cn/static/imgs/doc/front-end/ios/2233056075.png)
 
 将 shell 拖拽到右侧
 
-![3.png](https://static.yoouu.cn/imgs/doc/front-end/ios/1720226373.png)
+![3.png](https://static.yoouu.cn/static/imgs/doc/front-end/ios/1720226373.png)
 
 添加内容并勾选，**保存**并命名为`CodeFormat`
 
-![4.png](https://static.yoouu.cn/imgs/doc/front-end/ios/2701569200.png)
+![4.png](https://static.yoouu.cn/static/imgs/doc/front-end/ios/2701569200.png)
 
 ```ruby
 export PATH=/usr/local/bin:$PATH
@@ -569,11 +569,11 @@ open ~
 
 4、设置快捷键：系统偏好->键盘->快捷键->app 快捷键->选择 Xcode->设置快捷键按钮快捷键按钮建议设置: `control+A` ,系统格式化快捷键为: `control+I` 方便记忆
 
-![5.png](https://static.yoouu.cn/imgs/doc/front-end/ios/1828562928.png)
+![5.png](https://static.yoouu.cn/static/imgs/doc/front-end/ios/1828562928.png)
 
 5、查看效果：
 
-快捷键按钮方式：重新打开 Xcode->选中需要格式化的代码->按下之前设置的快捷键按钮手动选择方式：选中需要格式化的代码->右键->`Services`->`CodeFormat` ![check.png](https://static.yoouu.cn/imgs/doc/front-end/ios/2459538858.png)
+快捷键按钮方式：重新打开 Xcode->选中需要格式化的代码->按下之前设置的快捷键按钮手动选择方式：选中需要格式化的代码->右键->`Services`->`CodeFormat` ![check.png](https://static.yoouu.cn/static/imgs/doc/front-end/ios/2459538858.png)
 
 #### 可能出现的问题
 
@@ -713,15 +713,15 @@ iOS 有两种证书和描述文件：
 
 打开网站 [iOS Dev Center](https://developer.apple.com/devcenter/ios/index.action) 使用苹果开发者账号登录 iOS Dev Center：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/20c1277fd7ad0de258da0a72bb46f1f6.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/20c1277fd7ad0de258da0a72bb46f1f6.png)
 
 登录成功后在页面左侧选择 “Certificates,IDs & Profiles” 进入证书管理页面：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/13b79b72faf48a3217cde91d4bc81f96.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/13b79b72faf48a3217cde91d4bc81f96.png)
 
 在证书管理页面，可以看到所有已经申请的证书及描述文件：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/aacfce590c9253dcbd6cb79723c00544.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/aacfce590c9253dcbd6cb79723c00544.png)
 
 下面我们从头开始学习一下如何申请开发证书、发布证书及相对应的描述文件。
 
@@ -731,23 +731,23 @@ iOS 有两种证书和描述文件：
 
 选择页面的 “Identifiers" 可查看到已申请的所有 App 应用标识，点击页面上的加号来创建一个新的应用标识：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/ae9c05f4b59605cecf83cfd3b3aea5c5.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/ae9c05f4b59605cecf83cfd3b3aea5c5.png)
 
 选择标识类型为 “App IDs”，然后点击 “Continue”
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/e23230bc7d2db789ca656c042c584dd5.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/e23230bc7d2db789ca656c042c584dd5.png)
 
 平台选择 “iOS，tvOS，watchOS”，Bundle ID 选择 “Explicit”，在 Description 中填写描述，然后填写 Bundle ID，Bundle ID 要保持唯一性，建议填写反域名加应用标识的格式 如：“io.dcloud.hellouniapp”， 然后点击 “Continue” **注意：在 HBuilderX 中 App 提交云端打包时界面上的 AppID 栏填写的就是这个 Bundle ID**
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/fd7f98a5285afd17c186bcd1a0dddcb1.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/fd7f98a5285afd17c186bcd1a0dddcb1.png)
 
 接下来需要选择应用需要使用的服务（如需要使用到消息推送功能，则选择“Push Notifications”），然后点击 “Continue” **注意：如果 App 用不到的服务一定不要勾选，以免响应审核**
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/35b2007afc9e32009b6472d8358c6d2a.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/35b2007afc9e32009b6472d8358c6d2a.png)
 
 确认后选择提交，回到 identifiers 页面即可看到刚创建的 App ID：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/f538bec2a6548e9366d3b4246245853d.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/f538bec2a6548e9366d3b4246245853d.png)
 
 至此，App ID 已经创建完毕，接下来开始创建开发证书，在创建开发证书前，需要先生成证书请求文件
 
@@ -757,21 +757,21 @@ iOS 有两种证书和描述文件：
 
 在“Spltlight Search”中搜索“钥匙串”并打开 “钥匙串访问” 工具：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/4fb865746dce3a205287962cc9475934.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/4fb865746dce3a205287962cc9475934.png)
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/1294a8472389b0fec9d9ef341c1f9be9.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/1294a8472389b0fec9d9ef341c1f9be9.png)
 
 打开菜单 “钥匙串访问”->“证书助理”，选择“从证书颁发机构请求证书...”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/890875c122389dcaec03850081acc65e.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/890875c122389dcaec03850081acc65e.png)
 
 打开创建请求证书页面，在页面中输入用户邮件地址、常用名称，选择存储到磁盘，点击 “继续” ：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/0104f0b0456de72df5ae10dbec26ab99.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/0104f0b0456de72df5ae10dbec26ab99.png)
 
 文件名称为“CertificateSigningRequest.certSigningRequest”，选择保存位置，点击 “存储” 将证书请求文件保存到指定路径下，后面申请开发(Development)证书和发布(Production)证书时需要用到
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/0b6a336b56624d306da7625099a3db51.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/0b6a336b56624d306da7625099a3db51.png)
 
 ### 申请开发(Development)证书和描述文件
 
@@ -781,31 +781,31 @@ iOS 有两种证书和描述文件：
 
 在证书管理页面选择 “Certificates" 可查看到已申请的所有证书（TYPE：Development 为开发证书，Distribution 为发布证书），点击页面的加号来创建一个新的证书：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/74051174ffd099862d2d28d5657d9e18.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/74051174ffd099862d2d28d5657d9e18.png)
 
 在 “Software” 栏下选中 “iOS App Development” 然后点击 “Continue”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/e07ae5f61ee512c71574e0c2a910d8b6.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/e07ae5f61ee512c71574e0c2a910d8b6.png)
 
 接下来需要用到刚刚生成的证书请求文件，点击“Choose File...”选择刚刚保存到本地的 “CertificateSigningRequest.certSigningRequest”文件，点击 “Continue” 生成证书文件：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/7b2e445496991680483c66eef460fb7d.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/7b2e445496991680483c66eef460fb7d.png)
 
 生成证书后选择 “Download” 将证书下到本地 (ios_development.cer)：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/36cdfc238a95e7409a0f05cfed68acff.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/36cdfc238a95e7409a0f05cfed68acff.png)
 
 双击保存到本地的 ios_development.cer 文件，会自动打开 “钥匙串访问” 工具说明导入证书成功，可以在证书列表中看到刚刚导入的证书，接下来需要导出 .p12 证书文件，选中导入的证书，右键选择 “导出...”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/bb24badaf2becb672559bc289494833f.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/bb24badaf2becb672559bc289494833f.png)
 
 输入文件名、选择路径后点击 “存储”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/d2fc87ad64b4233ca6ead8c8f02ea911.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/d2fc87ad64b4233ca6ead8c8f02ea911.png)
 
 输入密码及确认密码后点击 “好”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/7a1a08323e9216f2347911e5773e3b23.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/7a1a08323e9216f2347911e5773e3b23.png)
 
 至此，我们已经完成了开发证书的制作（得到了 xxx.p12 证书文件），接下来，继续生成开发阶段所需的描述文件，在生成描述文件之前，需要先添加调试设备（iPhone 、iPad）
 
@@ -815,11 +815,11 @@ iOS 有两种证书和描述文件：
 
 在证书管理页面选择 “Devices”，可查看到已添加的所有设备信息，点击页面上的加号来添加一个新设备：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/78882f6762f85cd392a69e0cea3fb7e1.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/78882f6762f85cd392a69e0cea3fb7e1.png)
 
 填写设备名称 和 UDID（设备标识）：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/b89afcb4f7da511cfb9767b9c79a4c29.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/b89afcb4f7da511cfb9767b9c79a4c29.png)
 
 **获取设备 UDID 方法，将设备连接到电脑，启动 iTunes，点击此区域可切换显示设备的 UDID，右键选择复制**
 
@@ -829,31 +829,31 @@ iOS 有两种证书和描述文件：
 
 在证书管理页面选择 “Profiles”，可查看到已申请的所有描述文件，点击页面上的加号来添加一个新的描述文件：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/0e5ff848e1e83facf20455f4705d0aa4-20220913155101069.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/0e5ff848e1e83facf20455f4705d0aa4-20220913155101069.png)
 
 在 “Development” 栏下选中 “iOS App Development”，点击“Continue”按钮：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/e0dfd711b73264cc18cd551359f40a7e.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/e0dfd711b73264cc18cd551359f40a7e.png)
 
 这里要选择之前创建的 “App ID” (这里是“io.dcloud.hellouniapp”)，点击“Continue”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/10aacf646f0d14cf26751eba620ce4c2.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/10aacf646f0d14cf26751eba620ce4c2.png)
 
 接下来选择需要绑定的证书，这里建议直接勾选 “Select All”，点击“Continue”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/b3b64702a3cf4857c97047c7a3f54c92.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/b3b64702a3cf4857c97047c7a3f54c92.png)
 
 选择授权调试设备，这里建议直接勾选 “Select All”，点击 “Continue”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/80777452245069ebae852fc811b0956d.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/80777452245069ebae852fc811b0956d.png)
 
 输入描述文件的名称（如“HelloUniAppProfile”）, 点击 “Generate” 生成描述文件：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/47aecc44fa2367e99876b05b93dc4feb.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/47aecc44fa2367e99876b05b93dc4feb.png)
 
 点击“Download”下载保存开发描述文件（文件后缀为 .mobileprovision）
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/bbdbd61cb97195384e28098298e9d949.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/bbdbd61cb97195384e28098298e9d949.png)
 
 至此，我们已经得到了开发证书（.p12）及对应的描述文件（.mobileprovision），接下看一下如何制作发布证书及发布描述文件
 
@@ -865,31 +865,31 @@ iOS 有两种证书和描述文件：
 
 在证书管理页面选择 “Certificates" 可查看到已申请的所有证书（TYPE：Development 为开发证书，Distribution 为发布证书），点击页面的加号来创建一个新的证书：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/74051174ffd099862d2d28d5657d9e18-20220913154345626.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/74051174ffd099862d2d28d5657d9e18-20220913154345626.png)
 
 在 “Software” 栏下选中 “App Store and Ad Hoc”，点击 “Continue”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/fe3ac94fd95c00307c878085cec4bd4c.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/fe3ac94fd95c00307c878085cec4bd4c.png)
 
 接下来同样需要用到之前生成的证书请求文件，点击“Choose File...”选择刚刚保存到本地的 “CertificateSigningRequest.certSigningRequest”文件，点击 “Continue” 生成证书文件：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/e7fbce97cbe0b0ef7a75145c4d07eddc.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/e7fbce97cbe0b0ef7a75145c4d07eddc.png)
 
 生成证书成功，选择“Download” 将证书下载到本地 (ios_production.cer)：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/3b907ed505789404b4103f9f6b410f00.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/3b907ed505789404b4103f9f6b410f00.png)
 
 同样双击保存到本地的 ios_production.cer 文件将证书导入到 “钥匙串访问”工具中，可以在证书列表中看到刚刚导入的证书，接下来需要导出 .p12 证书文件，选中导入的证书，右键选择 “导出...”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/6f0c6149cb02b2a833ed6f1542a37042.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/6f0c6149cb02b2a833ed6f1542a37042.png)
 
 输入文件名、选择路径后点击 “存储”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/1294ba12014df0b1babf16aea409c224.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/1294ba12014df0b1babf16aea409c224.png)
 
 输入密码及确认密码后点击 “好”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/37f846d28cdc78ea033dfa59922f80a9.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/37f846d28cdc78ea033dfa59922f80a9.png)
 
 至此，我们已经完成了发布证书的制作（得到了 xxx.p12 证书文件），接下来，继续生成发布描述文件
 
@@ -897,23 +897,23 @@ iOS 有两种证书和描述文件：
 
 在证书管理页面选择 “Profiles”，可查看到已申请的所有描述文件，点击页面上的加号来添加一个新的描述文件：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/0e5ff848e1e83facf20455f4705d0aa4.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/0e5ff848e1e83facf20455f4705d0aa4.png)
 
 在 “Distribution” 栏下选中 “App Store”，点击“Continue”按钮：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/3358562069e032edf2c4b7a7297b2548.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/3358562069e032edf2c4b7a7297b2548.png)
 
 这里要选择之前创建的 “App ID” (这里是“io.dcloud.hellouniapp”)，点击“Continue”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/0c004f6ab41f4cb1d3befddf4fab3c3e.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/0c004f6ab41f4cb1d3befddf4fab3c3e.png)
 
 接下来选择需要绑定的发布证书（iOS Distribution），这里勾选刚刚生成的发布证书”，点击“Continue”：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/bbd790ced5b3b648ba126428a46fa9aa.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/bbd790ced5b3b648ba126428a46fa9aa.png)
 
 接下来输入描述文件的名称（如“HelloUniAppProfileDistribution”）, 点击 “Generate” 生成描述文件：
 
-![img](https://static.yoouu.cn/imgs/doc/front-end/ios/f4d125bf090986026cfa5b060ac4a12b.png)
+![img](https://static.yoouu.cn/static/imgs/doc/front-end/ios/f4d125bf090986026cfa5b060ac4a12b.png)
 
 然后点击 “Download” 将描述文件下载到本地（文件后缀为 .mobileprovision）
 

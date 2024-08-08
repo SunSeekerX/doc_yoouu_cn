@@ -292,7 +292,7 @@ export function safeRunning(name, fun) {
 
 | 开始搜索设备 | 开始搜索设备 | 刷新 | 停止 |
 | --- | --- | --- | --- |
-| <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-01.webp" alt="super-module-hkws-01" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-02.webp" alt="super-module-hkws-02" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-03.png" alt="super-module-hkws-03" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-04.png" alt="super-module-hkws-04" style="zoom:25%;" /> |
+| <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-01.webp" alt="super-module-hkws-01" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-02.webp" alt="super-module-hkws-02" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-03.png" alt="super-module-hkws-03" style="zoom:25%;" /> | <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app-nativeplugins/super-module-hkws-04.png" alt="super-module-hkws-04" style="zoom:25%;" /> |
 
 **Android**
 

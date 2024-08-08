@@ -176,7 +176,7 @@ Tg: [https://t.me/mongooseportal](https://t.me/mongooseportal)
 
 合约地址：[0xa1817b6d8d890f3943b 61648992730373b71f156](https://app.uniswap.org/#/swap?outputCurrency=0xa1817b6d8d890f3943b61648992730373b71f156)
 
-<img src="https://static.yoouu.cn/imgs/doc/blockchain/apps/mongoos-coin.svg" style="zoom:25%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/blockchain/apps/mongoos-coin.svg" style="zoom:25%;" />
 
 ## 📌 BSC（币安智能链）
 
@@ -542,4 +542,4 @@ Medium：[https://icpswap.medium.com/](https://icpswap.medium.com/)
 
 ### a16z
 
-![image-20211230154053106](https://static.yoouu.cn/imgs/doc/blockchain/apps/202112301540750.png)
+![image-20211230154053106](https://static.yoouu.cn/static/imgs/doc/blockchain/apps/202112301540750.png)

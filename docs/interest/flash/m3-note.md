@@ -6,7 +6,7 @@
 
 官网参数：[https://www.meizu.com/products/meilannote3/spec.html](https://www.meizu.com/products/meilannote3/spec.html)
 
-<img src="https://static.yoouu.cn/imgs/doc/interest/wanji/meizu/image-20210716124234044.png" alt="image-20210716124234044" style="zoom: 25%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/interest/wanji/meizu/image-20210716124234044.png" alt="image-20210716124234044" style="zoom: 25%;" />
 
 ## 固件下载
 

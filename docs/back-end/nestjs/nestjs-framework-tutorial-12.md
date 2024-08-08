@@ -1,6 +1,6 @@
 # Nestjs 框架教程（第十二篇：请求模型）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 1. 收到请求
 2. 全局绑定的中间件
@@ -23,4 +23,4 @@
 19. 异常过滤器 （路由，之后是控制器，之后是全局）
 20. 服务器响应
 
-![请求模型](https://static.yoouu.cn/imgs/doc/back-end/nestjs/F68A427CBC78E6C8367392C33779D4D2.jpg)
+![请求模型](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/F68A427CBC78E6C8367392C33779D4D2.jpg)

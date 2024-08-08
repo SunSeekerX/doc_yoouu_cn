@@ -6,7 +6,7 @@
 
 ## devops
 
-![devops.png](https://static.yoouu.cn/imgs/doc/devops/devops.png)
+![devops.png](https://static.yoouu.cn/static/imgs/doc/devops/devops.png)
 
 ## 配置插件下载加速
 
@@ -80,7 +80,7 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
 
 ### 安装远程执行 ssh 插件 `SSH`
 
-![](https://static.yoouu.cn/imgs/doc/basic/jenkins/jenkins-plugin-ssh.png)
+![](https://static.yoouu.cn/static/imgs/doc/basic/jenkins/jenkins-plugin-ssh.png)
 
 ## 实现 - old
 
@@ -94,7 +94,7 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
 2. 选择插件管理
 3. 页面直接`ctrl+f`搜索`ssh`，直接安装`Publish Over SSH`插件(不要用自带的过滤搜索没用)
 
-![plugin-publish-over-ssh](https://static.yoouu.cn/imgs/2020/Jenkins/plugin-publish-over-ssh.png)
+![plugin-publish-over-ssh](https://static.yoouu.cn/static/imgs/2020/Jenkins/plugin-publish-over-ssh.png)
 
 ### 0x2 配置`ssh`插件
 
@@ -112,7 +112,7 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
 10. `Passphrase`填写密码
 11. 填写完了点击`Test Configuration`测试下是否连接成功
 
-![publish-over-ssh-setting](https://static.yoouu.cn/imgs/2020/Jenkins/publish-over-ssh-setting.png)
+![publish-over-ssh-setting](https://static.yoouu.cn/static/imgs/2020/Jenkins/publish-over-ssh-setting.png)
 
 ### 0x3 安装`nodejs`插件
 
@@ -132,7 +132,7 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
       3. 版本选择`12.16.3`，这是目前稳定的长期支持版本
       4. 保存
 
-   ![plugin-nodejs](https://static.yoouu.cn/imgs/2020/Jenkins/plugin-nodejs.png)
+   ![plugin-nodejs](https://static.yoouu.cn/static/imgs/2020/Jenkins/plugin-nodejs.png)
 
 ## 新建项目配置
 
@@ -140,13 +140,13 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
 
 ### 0x2 输入名称
 
-![input-name](https://static.yoouu.cn/imgs/2020/Jenkins/input-name.png)
+![input-name](https://static.yoouu.cn/static/imgs/2020/Jenkins/input-name.png)
 
 ### 0x3 源码管理选择你的项目的`Git`
 
 > 我的文档项目访问是公开的，可以直接访问，如果是私有项目还需要配置一个可访问的账号才可以。就是下面`Credentials`选项。
 
-![repositories](https://static.yoouu.cn/imgs/2020/Jenkins/repositories.png)
+![repositories](https://static.yoouu.cn/static/imgs/2020/Jenkins/repositories.png)
 
 ### 0x4 构建触发器
 
@@ -156,11 +156,11 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
 
 > 勾选`Provide Node & npm bin/ folder to PATH`，这是提供`Node`命令给我们使用。
 
-![build](https://static.yoouu.cn/imgs/2020/Jenkins/build.png)
+![build](https://static.yoouu.cn/static/imgs/2020/Jenkins/build.png)
 
 ### 0x6 增加构建步骤 - `执行shell`
 
-![build-step](https://static.yoouu.cn/imgs/2020/Jenkins/build-step.png)
+![build-step](https://static.yoouu.cn/static/imgs/2020/Jenkins/build-step.png)
 
 执行 shell 内容
 
@@ -194,7 +194,7 @@ tar -zcvf sunseekerx.tar.gz *
 
 执行完成之后会在服务器生成`sunseekerx.tar.gz`，下一步就是把这个文件发送到指定部署的服务器。进行解压。
 
-![build-file](https://static.yoouu.cn/imgs/2020/Jenkins/build-file.png)
+![build-file](https://static.yoouu.cn/static/imgs/2020/Jenkins/build-file.png)
 
 ### 0x7 增加构建后的步骤
 
@@ -213,17 +213,17 @@ cd /www/wwwroot/sunseekerx.yoouu.cn
 \echo ">>>执行成功"
 ```
 
-![send-flie](https://static.yoouu.cn/imgs/2020/Jenkins/send-flie.png)
+![send-flie](https://static.yoouu.cn/static/imgs/2020/Jenkins/send-flie.png)
 
 ### 0x8 测试构建
 
 > 可以看到服务器有了构建之后的文件
 
-![finish-build-files](https://static.yoouu.cn/imgs/2020/Jenkins/finish-build-files.png)
+![finish-build-files](https://static.yoouu.cn/static/imgs/2020/Jenkins/finish-build-files.png)
 
 ### 0x9 访问下网站试试，nice😁
 
-![sunseekerx.yoouu.cn](https://static.yoouu.cn/imgs/2020/Jenkins/sunseekerx.yoouu.cn.png)
+![sunseekerx.yoouu.cn](https://static.yoouu.cn/static/imgs/2020/Jenkins/sunseekerx.yoouu.cn.png)
 
 ### 0x10 Git 设置`Webhooks`
 
@@ -231,17 +231,17 @@ cd /www/wwwroot/sunseekerx.yoouu.cn
 
 > 简单来说就是我提交代码告诉`Git`，`Git`告诉`Jenkins`你该构建了，完了`Jenkins`去构建。`Git`就像仓库管理员，`Jenkins`就是干苦力的。😁
 
-![github-webhook-setting](https://static.yoouu.cn/imgs/2020/Jenkins/github-webhook-setting.png)
+![github-webhook-setting](https://static.yoouu.cn/static/imgs/2020/Jenkins/github-webhook-setting.png)
 
 ### 0x10 测试下提交构建
 
 在本地修改一些文件，提交上去，稍等一会儿查看`Jenkins`，这个处于等待中的任务就是提交的任务
 
-![git-webhook](https://static.yoouu.cn/imgs/2020/Jenkins/git-webhook.png)
+![git-webhook](https://static.yoouu.cn/static/imgs/2020/Jenkins/git-webhook.png)
 
 访问[https://sunseekerx.yoouu.cn/](https://sunseekerx.yoouu.cn/)试试，更新成功 🤣
 
-![new-website](https://static.yoouu.cn/imgs/2020/Jenkins/new-website.png)
+![new-website](https://static.yoouu.cn/static/imgs/2020/Jenkins/new-website.png)
 
 ## uni-app 项目自动打包 docker 触发 rancher 自动更新
 

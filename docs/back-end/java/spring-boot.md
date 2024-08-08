@@ -61,9 +61,9 @@ http://www.gulixueyuan.com/ 谷粒学院
 
 整合 maven 进来；
 
-![idea设置](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180129151045.png)
+![idea设置](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180129151045.png)
 
-![images/](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180129151112.png)
+![images/](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180129151112.png)
 
 ## 4、Spring Boot HelloWorld
 
@@ -250,7 +250,7 @@ Spring 的底层注解@Import，给容器中导入一个组件；导入的组件
 
 将所有需要导入的组件以全类名的方式返回；这些组件就会被添加到容器中；
 
-会给容器中导入非常多的自动配置类（xxxAutoConfiguration）；就是给容器中导入这个场景需要的所有组件，并配置好这些组件； ![自动配置类](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180129224104.png)
+会给容器中导入非常多的自动配置类（xxxAutoConfiguration）；就是给容器中导入这个场景需要的所有组件，并配置好这些组件； ![自动配置类](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180129224104.png)
 
 有了自动配置类，免去了我们手动编写配置注入功能组件等的工作；
 
@@ -448,7 +448,7 @@ public class Person {
 
 调整
 
-![idea配置乱码](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180130161620.png)
+![idea配置乱码](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180130161620.png)
 
 #### 2、@Value 获取值和@ConfigurationProperties 获取值比较
 
@@ -1021,7 +1021,7 @@ public class HelloWorld {
 
 图示；
 
-![images/concrete-bindings.png](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/concrete-bindings.png)
+![images/concrete-bindings.png](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/concrete-bindings.png)
 
 每一个日志的实现框架都有自己的配置文件。使用 slf4j 以后，**配置文件还是做成日志实现框架自己本身的配置文件；**
 
@@ -1031,7 +1031,7 @@ a（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）
 
 统一日志记录，即使是别的框架和我一起统一使用 slf4j 进行输出？
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/legacy.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/legacy.png)
 
 **如何让系统中所有的日志都统一到 slf4j；**
 
@@ -1061,7 +1061,7 @@ SpringBoot 使用它来做日志功能；
 
 底层依赖关系
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180131220946.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180131220946.png)
 
 总结：
 
@@ -1080,7 +1080,7 @@ public abstract class LogFactory {
     static LogFactory logFactory = new SLF4JLogFactory();
 ```
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180131221411.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180131221411.png)
 
 4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？
 
@@ -1369,7 +1369,7 @@ webjars：以 jar 包的方式引入静态资源；
 
 http://www.webjars.org/
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180203181751.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180203181751.png)
 
 localhost:8080/webjars/jquery/3.3.1/jquery.js
 
@@ -1404,7 +1404,7 @@ localhost:8080/ 找 index 页面
 
 JSP、Velocity、Freemarker、Thymeleaf
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/template-engine.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/template-engine.png)
 
 SpringBoot 推荐的 Thymeleaf；
 
@@ -1476,7 +1476,7 @@ public class ThymeleafProperties {
 
 th：任意 html 属性；来替换原生属性的值
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/2018-02-04_123955.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/2018-02-04_123955.png)
 
 2）、表达式？
 
@@ -1791,7 +1791,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 
 1）、编写国际化配置文件，抽取页面需要显示的国际化消息
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180211130721.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180211130721.png)
 
 2）、SpringBoot 自动配置好了管理国际化资源文件的组件；
 
@@ -1828,7 +1828,7 @@ public class MessageSourceAutoConfiguration {
 
 3）、去页面获取国际化的值；
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180211134506.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180211134506.png)
 
 ```html
 <!doctype html>
@@ -2295,17 +2295,17 @@ insert的公共片段在div标签中 如果使用th:insert等属性进行引入�
 
 1）、浏览器，返回一个默认的错误页面
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180226173408.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180226173408.png)
 
 浏览器发送请求的请求头：
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180226180347.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180226180347.png)
 
 2）、如果是其他客户端，默认响应一个 json 数据
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180226173527.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180226173527.png)
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180226180504.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180226180504.png)
 
 原理：
 
@@ -2508,13 +2508,13 @@ public class MyErrorAttributes extends DefaultErrorAttributes {
 
 最终的效果：响应是自适应的，可以通过定制 ErrorAttributes 改变需要返回的内容，
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180228135513.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180228135513.png)
 
 ## 8、配置嵌入式 Servlet 容器
 
 SpringBoot 默认使用 Tomcat 作为嵌入式的 Servlet 容器；
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180301142915.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180301142915.png)
 
 问题？
 
@@ -2619,7 +2619,7 @@ public ServletRegistrationBean dispatcherServletRegistration(
 
 ### 3）、替换为其他嵌入式 Servlet 容器
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180302114401.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180302114401.png)
 
 默认支持：
 
@@ -2747,11 +2747,11 @@ public interface EmbeddedServletContainerFactory {
 }
 ```
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180302144835.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180302144835.png)
 
 2）、EmbeddedServletContainer：（嵌入式的 Servlet 容器）
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180302144910.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180302144910.png)
 
 3）、以**TomcatEmbeddedServletContainerFactory**为例
 
@@ -3010,7 +3010,7 @@ Spring 的 web 模块里面有这个文件：**org.springframework.web.SpringSer
 
 4）、每一个 WebApplicationInitializer 都调用自己的 onStartup；
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180302221835.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180302221835.png)
 
 5）、相当于我们的 SpringBootServletInitializer 的类会被创建对象，并执行 onStartup 方法
 
@@ -3109,9 +3109,9 @@ Docker 支持将软件编译成一个镜像；然后在镜像中各种软件做�
 
 运行中的这个镜像称为容器，容器启动是非常快速的。
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180303145450.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180303145450.png)
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180303145531.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180303145531.png)
 
 ## 2、核心概念
 
@@ -3125,7 +3125,7 @@ docker 镜像(Images)：软件打包好的镜像；放在 docker 仓库中；
 
 docker 容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180303165113.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180303165113.png)
 
 使用 Docker 的步骤：
 
@@ -3442,7 +3442,7 @@ public class DruidConfig {
 		</dependency>
 ```
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180305194443.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180305194443.png)
 
 步骤：
 
@@ -3523,7 +3523,7 @@ http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
 
 ### 1）、SpringData 简介
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180306105412.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180306105412.png)
 
 ### 2）、整合 SpringData JPA
 
@@ -3607,9 +3607,9 @@ private void initialize(Object[] sources) {
 }
 ```
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180306145727.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180306145727.png)
 
-![](https://static.yoouu.cn/imgs/doc/back-end/java/spring-boot/20180306145855.png)
+![](https://static.yoouu.cn/static/imgs/doc/back-end/java/spring-boot/20180306145855.png)
 
 ## 2、运行 run 方法
 

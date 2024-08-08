@@ -1,12 +1,12 @@
 # Nestjs 框架教程（第三篇：控制器）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 ---
 
 **控制器**（Controller）负责处理客户端请求并发送响应内容，在传统的 MVC 架构中控制器就是负责处理指定请求与应用程序的对应关系，路由则决定具体处理哪个请求。
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d18c461b3cb641859.png)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d18c461b3cb641859.png)
 
 ## 路由
 

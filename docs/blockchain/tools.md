@@ -22,7 +22,7 @@
 
 - 市值查询气泡 https://cryptobubbles.net/
 
-  <img src="https://static.yoouu.cn/imgs/doc/blockchain/202111241526766.png" alt="202111241526766.png" style="zoom:25%;" />
+  <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/202111241526766.png" alt="202111241526766.png" style="zoom:25%;" />
 
 - 查投资机构下的项目 https://www.cypherhunter.com/zh-hans/
 

@@ -124,7 +124,7 @@ Windows Registry Editor Version 5.00
 
 2、打开注册表定位到：HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Configuration。查找 NOEDID 开头的项（我的电脑是最后一个），查找的项展开有个 00 项，00 项展开又还有个 00 项；会发现 PrimSurfSize.cx 和 PrimSurfSize.cy 不像其他几个跟屏幕分辨率一致。小一些。
 
-![win10-window-error.png](https://static.yoouu.cn/imgs/doc/issue/win10-window-error.png)
+![win10-window-error.png](https://static.yoouu.cn/static/imgs/doc/issue/win10-window-error.png)
 
 3、两个 00 项都要修改两个键值：PrimSurfSize.cx 和 PrimSurfSize.cy，把这两个键值双击修改，输入你电脑对应的正常分辨率数值，比如 PrimSurfSize.cx 为宽度 1920，PrimSurfSize.cy 为高度 1080。十进制十六进制随意，看其他几个的 00 下的“数据”一栏，都能看到对应的十进制和十六进制，0x780（1920），0x438（1080）
 
@@ -150,7 +150,7 @@ https://www.sordum.org/14479/windows-11-classic-context-menu-v1-0/
 
 1.按“Windows+R”键，打开“运行”，输入“gpedit.msc”，点击“确定”，打开“本地组策略编辑器”。
 
-![](https://static.yoouu.cn/imgs/doc/basic/windows/202202091034151.png)
+![](https://static.yoouu.cn/static/imgs/doc/basic/windows/202202091034151.png)
 
 [完全禁用 Microsoft Compatibility Telemetry](https://blog.csdn.net/m0_49448331/article/details/113824078)
 
@@ -164,7 +164,7 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 （此类软件出现报毒属于正常现象，建议关闭系统自带杀毒软件再使用）
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209110352.png" style="zoom: 50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209110352.png" style="zoom: 50%;" />
 
 ### 关闭系统自动更新
 
@@ -174,7 +174,7 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 对我来讲是必装的，不然无法使用各种绿色版软件。 [微软常用运行库合集 2022.09.15](https://423down.lanzouv.com/b0f1dlg3a)
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209110450.png" style="zoom:50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209110450.png" style="zoom:50%;" />
 
 ### 系统安全软件
 
@@ -192,7 +192,7 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 **QQ**用的是 Dreamcast 大神做的 QQ 绿色版，可以去掉多余的组件，按自己的意愿定制，还有消息防撤回等小功能。感兴趣可以尝试：[去广告绿色版&安装版](https://423down.lanzouv.com/b0f3rmr2h)
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209111148.png" style="zoom:50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209111148.png" style="zoom:50%;" />
 
 **建议先卸载官方版 QQ** ，再使用绿色版，避免官方的组件扫描硬盘检测到修改版导致 QQ 号冻结。 QQ 的聊天记录在“此电脑——文档——Tencent Files”，如果要备份，可直接备份这个文件夹。
 
@@ -206,7 +206,7 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 如果有**下载无损、高音质音乐**的需求，[MusicTools](https://www.123pan.com/s/A6cA-SOAJh) 非常好用，第一次打开需要耐心等待一会，必须先安装[微软运行库](https://yaohuo.me/bbs-1076072.html#运行库)否则可能无法运行。
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209111422.png" style="zoom:50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209111422.png" style="zoom:50%;" />
 
 ### 轻文本编辑器
 
@@ -214,7 +214,7 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 推荐把全局字体换成：[Source Code Pro](https://pan.lanzoui.com/ia7dg9a)，好看不发虚，其它编辑器也可以试试这个字体。
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209112002.png" style="zoom:50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209112002.png" style="zoom:50%;" />
 
 ### 办公套件
 
@@ -250,19 +250,19 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 **系统垃圾清理**推荐 [CCleaner](https://www.123pan.com/s/A6cA-tuAJh)，界面漂亮，清理速度快。其实火绒自带的垃圾清理也不错。
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209112324.png" style="zoom:50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209112324.png" style="zoom:50%;" />
 
 ### 硬盘检测工具
 
 **硬盘检测工具**推荐 [CrystalDiskInfo 单文件版](https://423down.lanzouv.com/b0f1dp0mh)，了解硬盘健康状态和参数。
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209112520.png" style="zoom:50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209112520.png" style="zoom:50%;" />
 
 ### 硬盘文件分析软件
 
 **硬盘文件分析软件** [WizTree](https://www.123pan.com/s/guQ9-6ThWA) 可以让你快速了解哪些文件和文件夹占用的磁盘空间最多，帮助你手动清理掉那些无用的大文件。
 
-<img src="https://static.yoouu.cn/imgs/doc/basic/windows/20221209112550.png" style="zoom:50%;" />
+<img src="https://static.yoouu.cn/static/imgs/doc/basic/windows/20221209112550.png" style="zoom:50%;" />
 
 ### 重复图片查找工具
 
@@ -284,7 +284,7 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 **GIF 录制**用的是 [ScreenToGif](https://pan.lanzoui.com/iJMAH0020fve)，另一款软件 [GifCam](https://423down.lanzouv.com/iBzaY05zb3yj) 功能略少但录制的文件体积更小也可以考虑！有时候录个动图教程发给朋友，或者发到论坛，都很方便，清晰度很好，示例：
 
-![](https://static.yoouu.cn/imgs/doc/basic/windows/005YhI8igy1fwcf4daa6rg30j10gw7vw.gif)
+![](https://static.yoouu.cn/static/imgs/doc/basic/windows/005YhI8igy1fwcf4daa6rg30j10gw7vw.gif)
 
 ### GIF 图片压缩
 
@@ -304,7 +304,7 @@ Win10 系统联网后会自动下载安装驱动，已经没必要用第三方�
 
 ## Windows 文件夹结构
 
-![windows-folder-structure](https://static.yoouu.cn/imgs/doc/basic/others/windows-folder-structure.png)
+![windows-folder-structure](https://static.yoouu.cn/static/imgs/doc/basic/others/windows-folder-structure.png)
 
 ## Typora 快捷键
 

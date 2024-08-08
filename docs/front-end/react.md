@@ -1,6 +1,6 @@
 # React
 
-![react.png](https://static.yoouu.cn/imgs/doc/front-end/react/react.png)
+![react.png](https://static.yoouu.cn/static/imgs/doc/front-end/react/react.png)
 
 数据渲染性能提升
 
@@ -20,11 +20,11 @@
 
 虚拟 dom 比对，只替换更新的内容
 
-![1561796749309](https://static.yoouu.cn/imgs/doc/basic/coding/react/1561796749309.png)
+![1561796749309](https://static.yoouu.cn/static/imgs/doc/basic/coding/react/1561796749309.png)
 
 同层比对
 
-![1561796803532](https://static.yoouu.cn/imgs/doc/basic/coding/react/1561796803532.png)
+![1561796803532](https://static.yoouu.cn/static/imgs/doc/basic/coding/react/1561796803532.png)
 
 ## Getting Started
 
@@ -66,7 +66,7 @@ import * as serviceWorker from './serviceWorker'
 
 **在线地址新版：http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/**
 
-![1561812762437](https://static.yoouu.cn/imgs/doc/basic/coding/react/1561812762437.png)
+![1561812762437](https://static.yoouu.cn/static/imgs/doc/basic/coding/react/1561812762437.png)
 
 ### 无状态组件
 
@@ -76,11 +76,11 @@ import * as serviceWorker from './serviceWorker'
 
 ### Redux 全局 store 管理
 
-![1561818716438](https://static.yoouu.cn/imgs/doc/basic/coding/react/1561818716438.png)
+![1561818716438](https://static.yoouu.cn/static/imgs/doc/basic/coding/react/1561818716438.png)
 
 ### Redux store 运行模式
 
-![1561873237937](https://static.yoouu.cn/imgs/doc/basic/coding/react/1561873237937.png)
+![1561873237937](https://static.yoouu.cn/static/imgs/doc/basic/coding/react/1561873237937.png)
 
 ### Redux 使用
 
@@ -113,7 +113,7 @@ import * as serviceWorker from './serviceWorker'
 npm i redux-thunk
 ```
 
-![1561949895246](https://static.yoouu.cn/imgs/doc/basic/coding/react/1561949895246.png)
+![1561949895246](https://static.yoouu.cn/static/imgs/doc/basic/coding/react/1561949895246.png)
 
 ### Redux-saga 中间件
 
@@ -162,7 +162,7 @@ react-router-dom
 
 在页面通过`this.props.match.params`进行接受参数
 
-![1562568960386](https://static.yoouu.cn/imgs/doc/basic/coding/react/1562568960386.png)
+![1562568960386](https://static.yoouu.cn/static/imgs/doc/basic/coding/react/1562568960386.png)
 
 #### 静态路由
 

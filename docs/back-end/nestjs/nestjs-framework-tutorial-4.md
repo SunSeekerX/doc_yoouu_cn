@@ -1,6 +1,6 @@
 # Nestjs 框架教程（第四篇：Providers）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 ---
 
@@ -79,7 +79,7 @@ constructor(private readonly catsService: CatsService) {}
 
 通常我们在没有依赖注入的时候如果 A 依赖于 B，那么在 A 初始化或者执行中的某个过程需要先创建 B，这时我们就认为 A 对 B 的依赖是**正向**的。但是这样解决依赖的办法会得得 A 与 B 的逻辑耦合在一起，依赖越来越多代码就会变的越来越糟糕。如下图所示，齿轮之间是相互依赖的，一损俱损。
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d19b545530fe73281.jpg)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d19b545530fe73281.jpg)
 
 控制反转（IOC）模式就是要解决这个问题，它会多引入一个容器（Container）的概念，让一个 IOC 容器去管理 A、B 的依赖并初始化。
 

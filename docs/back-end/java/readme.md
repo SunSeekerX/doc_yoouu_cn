@@ -17,7 +17,7 @@
 
 ### 三种创建方式
 
-![java-thread-create.png](https://static.yoouu.cn/imgs/doc/back-end/java/java-thread-create.png)
+![java-thread-create.png](https://static.yoouu.cn/static/imgs/doc/back-end/java/java-thread-create.png)
 
 ## Jdk and tomcat
 

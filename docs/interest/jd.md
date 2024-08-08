@@ -70,7 +70,7 @@ Github：[https://github.com/whyour/qinglong](https://github.com/whyour/qinglong
 
 6. 然后通过 http://ip:5700 访问面板
 
-   ![img](https://static.yoouu.cn/imgs/2021/pic-go/qinglong/20210603215034.png)
+   ![img](https://static.yoouu.cn/static/imgs/2021/pic-go/qinglong/20210603215034.png)
 
    默认账号：admin 密码：admin
 
@@ -501,7 +501,7 @@ PUSH_PLUS_TOKEN 是 https://pushplus.plus/ 注册登录后提供的 Token，必�
 
 ### 京东账户和微信绑定
 
-![a134f26ecb0f37ba5bf2bfdfc4ebb0b8](https://static.yoouu.cn/imgs/2021/pic-go/qinglong/12476_1137571a134f26ecb0f37ba5bf2bfdfc4ebb0b8.png)
+![a134f26ecb0f37ba5bf2bfdfc4ebb0b8](https://static.yoouu.cn/static/imgs/2021/pic-go/qinglong/12476_1137571a134f26ecb0f37ba5bf2bfdfc4ebb0b8.png)
 
 ## 📌 问题集锦
 
@@ -519,7 +519,7 @@ PUSH_PLUS_TOKEN 是 https://pushplus.plus/ 注册登录后提供的 Token，必�
 
 链接：[https://qm.qq.com/cgi-bin/qm/qr?k=p-PIdWRoqo19bSuYW8xFIagSN2c0PUCB&jump_from=webapi](https://qm.qq.com/cgi-bin/qm/qr?k=p-PIdWRoqo19bSuYW8xFIagSN2c0PUCB&jump_from=webapi)
 
-二维码：<img src="https://static.yoouu.cn/imgs/2021/pic-go/qinglong/20210607195608.png" alt="image-20210607195606194" style="zoom: 25%;" />
+二维码：<img src="https://static.yoouu.cn/static/imgs/2021/pic-go/qinglong/20210607195608.png" alt="image-20210607195606194" style="zoom: 25%;" />
 
 ## 📌 来源
 

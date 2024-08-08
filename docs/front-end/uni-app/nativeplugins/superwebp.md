@@ -78,7 +78,7 @@
 
 | Android |
 | :-: |
-| <img src="https://static.yoouu.cn/imgs/doc/front-end/uni-app-nativeplugins/202203221053019.webp" style="zoom: 25%;" /> |
+| <img src="https://static.yoouu.cn/static/imgs/doc/front-end/uni-app-nativeplugins/202203221053019.webp" style="zoom: 25%;" /> |
 
 ## 更新日志
 

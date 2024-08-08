@@ -1,12 +1,12 @@
 # Nestjs 框架教程（第九篇：守卫）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 ---
 
 **守卫**（Guards）是一个使用 @Injectable() 装饰的类，它必须实现 CanActivate 接口。
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d1ec2a0e2ae056395.png)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d1ec2a0e2ae056395.png)
 
 **守卫**只有**一个**职责，就是决定请求是否需要被控制器处理。一般用在权限、角色的场景中。
 

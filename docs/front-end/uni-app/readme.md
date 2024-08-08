@@ -126,7 +126,7 @@ const {
         }
       ```
 
-      <img src="https://static.yoouu.cn/imgs/2021/pic-go/image-20210727233153192.png" alt="image-20210727233153192" style="zoom:50%;" />
+      <img src="https://static.yoouu.cn/static/imgs/2021/pic-go/image-20210727233153192.png" alt="image-20210727233153192" style="zoom:50%;" />
 
       这样玩不得行，虽然你取消混淆是可以的，但我不确定打包出来的插件能不能用 😒。罢了放外面吧。估计没人像我这么玩。
 

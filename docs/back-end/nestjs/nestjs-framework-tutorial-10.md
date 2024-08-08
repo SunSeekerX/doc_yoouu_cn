@@ -1,10 +1,10 @@
 # Nestjs 框架教程（第十篇：拦截器）
 
-![Nestjs](https://static.yoouu.cn/imgs/doc/back-end/nestjs/nestjs-logo.png)
+![Nestjs](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/nestjs-logo.png)
 
 ---
 
-![img](https://static.yoouu.cn/imgs/doc/back-end/nestjs/5d1edebfa26f771380.png)
+![img](https://static.yoouu.cn/static/imgs/doc/back-end/nestjs/5d1edebfa26f771380.png)
 
 **拦截器**（Interceptors）是一个使用 @Injectable() 装饰的类，它必须实现 NestInterceptor 接口。
 
