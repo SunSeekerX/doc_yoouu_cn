@@ -2,6 +2,8 @@
 
 ## 📌 工具网站
 
+开启BBR等加速 https://github.com/jinwyp/one_click_script
+
 像聊天一样发送文件 https://flix.center/
 
 发现在角落的工作，工作信息聚合网站 https://jobincorner.com/
