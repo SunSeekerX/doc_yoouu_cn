@@ -1,9 +1,9 @@
 import { defineUserConfig } from 'vuepress'
-import { hopeTheme } from 'vuepress-theme-hope'
+import { comment, hopeTheme } from 'vuepress-theme-hope'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
 // import { searchProPlugin } from 'vuepress-plugin-search-pro'
 import { viteBundler } from '@vuepress/bundler-vite'
-import { commentPlugin } from '@vuepress/plugin-comment'
+// import { commentPlugin } from '@vuepress/plugin-comment'
 // import { pwaPlugin } from '@vuepress/plugin-pwa'
 
 import { zhNavbar } from './nav-bar.js'
@@ -27,11 +27,11 @@ export default defineUserConfig({
       id: 'G-5XJZQ6WCSH',
       debug: false,
     }),
-    commentPlugin({
-      provider: 'Twikoo',
-      envId: 'https://twikoo-doc.yoouu.cn',
-      // 选项
-    }),
+    // commentPlugin({
+    //   provider: 'Twikoo',
+    //   envId: 'https://twikoo-doc.yoouu.cn',
+    //   // 选项
+    // }),
     // pwaPlugin({
     //   // 选项
     // }),
