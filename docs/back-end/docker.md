@@ -1178,7 +1178,6 @@ docker run -d \
 可用的 nginx 代理配置
 
 ```nginx
-
 #PROXY-START/
 
 location ^~ /
@@ -1188,22 +1187,22 @@ location ^~ /
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Host $host;
     proxy_set_header REMOTE-HOST $remote_addr;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $connection_upgrade;
     proxy_http_version 1.1;
-    # proxy_hide_header Upgrade;
 
     add_header X-Cache $upstream_cache_status;
     #Set Nginx Cache
 
-    set $static_fileANBgGfTg 0;
+    set $static_filerl2wBvit 0;
     if ( $uri ~* "\.(gif|png|jpg|css|js|woff|woff2)$" )
     {
-        set $static_fileANBgGfTg 1;
+        set $static_filerl2wBvit 1;
         expires 1m;
     }
-    if ( $static_fileANBgGfTg = 0 )
+    if ( $static_filerl2wBvit = 0 )
     {
         add_header Cache-Control no-cache;
     }
