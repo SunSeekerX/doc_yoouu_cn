@@ -416,3 +416,73 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler dotenv macos rake rbenv ruby)
 
 ```
+
+#### 如果安装完成出现
+
+```shell
+rbenv_prompt_info:2: command not found: ruby
+# ubuntu 解决
+
+```
+
+1. 首先，安装 rbenv 和 ruby-build：
+
+   ```shell
+   sudo apt update
+   sudo apt install rbenv
+   ```
+
+2. 如果上面的命令无法安装 rbenv，您可以尝试从 GitHub 克隆 rbenv 仓库：
+
+   ```
+   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+   ```
+
+3. 添加 rbenv 到您的 PATH。编辑 ~/.bashrc 文件（如果您使用的是 bash）或 ~/.zshrc 文件（如果您使用的是 zsh），添加以下行：
+
+   ```shell
+   export PATH="$HOME/.rbenv/bin:$PATH"
+   eval "$(rbenv init -)"
+   ```
+
+4. 重新加载 shell 配置：
+
+   ```shell
+   source ~/.bashrc  # 或 source ~/.zshrc
+   ```
+
+5. 验证 rbenv 安装：
+
+   ```shell
+   type rbenv
+   ```
+
+   这应该显示 rbenv 的路径。
+
+6. 安装 ruby-build 插件（如果还没有安装）：
+
+   ```shell
+   mkdir -p "$(rbenv root)"/plugins
+   git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+   ```
+
+7. 现在，安装一个 Ruby 版本：
+
+   ```shell
+   rbenv install 3.0.0  # 或其他您想要的版本
+   
+   # 查看可以安装的版本
+   rbenv install -l
+   ```
+
+8. 设置全局 Ruby 版本：
+
+   ```shell
+   rbenv global 3.0.0
+   ```
+
+9. 验证 Ruby 安装：
+
+   ```shell
+   ruby -v
+   ```
