@@ -8,6 +8,16 @@
 
 [Linux 命令大全](https://wangchujiang.com/linux-command/)
 
+## 📌 一键 DD
+
+github https://github.com/bin456789/reinstall
+
+```shell
+bash reinstall.sh ubuntu 24.04 
+```
+
+
+
 ## oh-my-zsh
 
 - 检查是否安装 zsh
@@ -157,6 +167,64 @@ service ssh restart
 ```
 
 ## 📌 ubuntu
+
+### ubuntu 24.04 LTS 换软件源（针对大陆）
+
+1. 首先，备份原有的源文件：
+
+   ```shell
+   sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
+   ```
+
+2. 使用 vim 编辑源文件：
+
+   ```shell
+   sudo vim /etc/apt/sources.list.d/ubuntu.sources
+   ```
+
+3. 进入 vim 后，按 `i` 键进入插入模式，然后删除所有现有内容（可以用 `gg` 移到文件开头，然后 `dG` 删除到文件末尾）。
+
+4. 粘贴以下内容（以清华大学镜像源为例）：
+
+   ```vim
+   Types: deb deb-src
+   URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+   Suites: noble noble-updates noble-backports noble-security
+   Components: main restricted universe multiverse
+   Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+   
+   Types: deb deb-src
+   URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+   Suites: noble-proposed
+   Components: main restricted universe multiverse
+   Enabled: no
+   Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+   ```
+
+5. 保存并退出编辑器（如果使用nano，按Ctrl+X，然后按Y，最后按Enter）。
+
+6. 更新软件包列表：
+
+   ```shell
+   sudo apt update
+   ```
+
+7. 升级软件包：
+
+   ```shell
+   sudo apt upgrade
+   ```
+
+其他常用的国内镜像源：
+
+- 阿里云：将 URIs 中的地址改为 `https://mirrors.aliyun.com/ubuntu/`
+- 中科大：将 URIs 中的地址改为 `https://mirrors.ustc.edu.cn/ubuntu/`
+- 网易：将 URIs 中的地址改为 `https://mirrors.163.com/ubuntu/`
+
+注意：
+
+1. 确保使用 "noble" 作为版本代号，因为您使用的是 Ubuntu 24.04 LTS。
+2. 如果您希望启用 proposed 仓库，可以将最后一个条目中的 `Enabled: no` 改为 `Enabled: yes`。但请注意，proposed 仓库包含未经充分测试的更新，可能会导致系统不稳定。
 
 ### 安装 zsh 和配置
 
