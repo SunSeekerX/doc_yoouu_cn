@@ -962,7 +962,7 @@ mkdir -p ~/data/twikoo
 # 3002 我服务器可用的端口号
 docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo:/app/data --restart=always -d imaegoo/twikoo
 
-docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo-blog:/app/data --restart=always -d imaegoo/twikoo
+docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo_blog:/app/data --restart=always -d imaegoo/twikoo
 ```
 
 ### 0x18 Docker 安装 artalk 评论系统
