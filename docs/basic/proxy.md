@@ -34,6 +34,9 @@ xn--ngstr-lra8j.com
 git config --global http.proxy http://localhost:7890
 git config --global https.proxy https://localhost:7890
 
+git config --global http.proxy http://localhost:10809
+git config --global https.proxy https://localhost:10809
+
 # 恢复
 git config --global --unset http.proxy
 git config --global --unset https.proxy
