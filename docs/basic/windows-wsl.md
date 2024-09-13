@@ -4,8 +4,6 @@
 explorer.exe .
 ```
 
-
-
 ## wsl ubuntu 默认打开 root
 
 在 WSL (Windows Subsystem for Linux) 中，默认以非 root 用户身份运行。如果你希望每次打开 WSL Ubuntu 时默认以 root 用户身份运行，可以按照以下步骤操作：

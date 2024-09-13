@@ -8,50 +8,26 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "cross-env NODE_OPTIONS=--max_old_space_size=4096 vuepress build docs",
-    "docs:build": "cross-env NODE_OPTIONS=--max_old_space_size=4096 vuepress build docs",
-    "docs:clean-dev": "vuepress dev docs --clean-cache",
-    "docs:dev": "vuepress dev docs",
     "gc": "git add -A && git-cz && git pull && git push",
-    "lint:lint-staged": "lint-staged",
-    "lint:prettier": "prettier --write --loglevel warn \"./**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
-    "pkg:sort": "npx sort-package-json",
-    "serve": "vuepress dev docs",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --write"
-    ],
-    "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
-      "prettier --write--parser json"
-    ],
-    "package.json": [
-      "prettier --write"
-    ],
-    "*.md": [
-      "prettier --write"
-    ]
+    "lint:prettier": "prettier --write --loglevel warn \"./**/*.{js,json,tsx,css,less,scss,vue,html,md}\""
   },
   "devDependencies": {
-    "@vue/repl": "^4.3.1",
-    "@vuepress/bundler-vite": "2.0.0-rc.15",
-    "@vuepress/helper": "2.0.0-rc.26",
+    "@vue/repl": "^4.4.1",
+    "@vuepress/bundler-vite": "2.0.0-rc.12",
+    "@vuepress/helper": "2.0.0-rc.31",
     "@vuepress/plugin-comment": "^2.0.0-rc.40",
     "@vuepress/plugin-google-analytics": "2.0.0-rc.21",
-    "chart.js": "^4.4.3",
+    "chart.js": "^4.4.4",
     "cross-env": "^7.0.3",
     "echarts": "^5.5.1",
-    "husky": "^9.1.4",
-    "katex": "^0.16.11",
-    "lint-staged": "^15.2.9",
-    "mermaid": "^10.9.1",
+    "mermaid": "^11.2.0",
     "prettier": "^3.3.3",
     "reveal.js": "^5.1.0",
     "twikoo": "^1.6.39",
-    "vue": "3.4.38",
-    "vuepress": "2.0.0-rc.15",
+    "vue": "^3.4.27",
+    "vuepress": "2.0.0-rc.12",
     "vuepress-plugin-search-pro": "2.0.0-rc.52",
-    "vuepress-theme-hope": "2.0.0-rc.52"
+    "vuepress-theme-hope": "2.0.0-rc.44"
   },
-  "packageManager": "yarn@4.4.1"
+  "packageManager": "pnpm@8.15.8"
 }

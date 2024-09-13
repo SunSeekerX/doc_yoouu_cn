@@ -1,16 +1,10 @@
 import { defineUserConfig } from 'vuepress'
 import { comment, hopeTheme } from 'vuepress-theme-hope'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
-// import { searchProPlugin } from 'vuepress-plugin-search-pro'
 import { viteBundler } from '@vuepress/bundler-vite'
-// import { commentPlugin } from '@vuepress/plugin-comment'
-// import { pwaPlugin } from '@vuepress/plugin-pwa'
-
 import { zhNavbar } from './nav-bar.js'
 
 export default defineUserConfig({
-  // base: '/',
-  // dest: './dist',
   title: `SunSeekerX's Notebook`,
   description:
     'Javascript、HTML、CSS、Android、iOS、Flutter、NPM、NodeJS、Vue、React、Uni-app、JAVA、Kotlin、NodeJS、Golang、Linux、Docker、Mysql、Solidity、NFT、ETH、BNB、BTC、Windows、Mac、Power shell、zsh、Nginx、Git、Proxy、刷机、黑苹果、Adobe',

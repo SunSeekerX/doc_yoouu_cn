@@ -13,10 +13,8 @@
 github https://github.com/bin456789/reinstall
 
 ```shell
-bash reinstall.sh ubuntu 24.04 
+bash reinstall.sh ubuntu 24.04
 ```
-
-
 
 ## oh-my-zsh
 
@@ -192,7 +190,7 @@ service ssh restart
    Suites: noble noble-updates noble-backports noble-security
    Components: main restricted universe multiverse
    Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-   
+
    Types: deb deb-src
    URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
    Suites: noble-proposed

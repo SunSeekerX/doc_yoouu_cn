@@ -677,7 +677,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker_data/redis7x:/data \
    -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-   
+
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -688,7 +688,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker_data\redis7x\:/data `
    -d redis:7.2 `
    redis-server /etc/redis/redis.conf --appendonly yes
-   
+
    # Mac
    docker run --name redis7x \
    --restart=always \
