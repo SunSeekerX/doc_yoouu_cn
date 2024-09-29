@@ -1271,7 +1271,7 @@ services:
     restart: unless-stopped
 ```
 
-0x24 Docker 安装 webdav 
+### 0x24 Docker 安装 webdav 
 
 ```shell
 docker run -d \
@@ -1281,5 +1281,29 @@ docker run -d \
     -e PASSWORD=yourpassword \
     -p 18080:80 \
     bytemark/webdav
+```
+
+### 0x25 Docker 安装 Tduck-填鸭收集器
+
+https://github.com/TDuckCloud/tduck-front
+
+```shell
+# 创建一个网络
+docker network create \
+  --driver bridge \
+  --subnet 192.168.0.0/24 \
+  --gateway 192.168.0.1 \
+  dockernet
+
+# 启动，需要导入 初始化数据库 https://github.com/TDuckCloud/tduck-platform/blob/master/docker/init-db/tduck-v4.sql
+docker run -d \
+  --name tduck \
+  -e SPRING_DATASOURCE_URL="jdbc:mysql://192.168.0.1:3306/tduck_v4?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&tinyInt1isBit=false&nullCatalogMeansCurrent=true" \
+  -e SPRING_DATASOURCE_USERNAME=tduck_v4 \
+  -e SPRING_DATASOURCE_PASSWORD=3ms7s5Zy4BxxTaFJ \
+  -p 8999:8999 \
+  --network=dockernet \
+  -v /data/docker_data/tduck/upload:/application/BOOT-INF/lib/upload \
+  tduckcloud/tduck-platform
 ```
 
