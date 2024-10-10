@@ -2,11 +2,13 @@
 
 ## 更换字体
 
-先感谢Galaxy_XY提供的字体文件，酷安链接：https://www.coolapk.com/feed/57861121?shareKey=MmMyZGY4NjcyNjZjNjZiMWMzODA~&shareUid=4635765&shareFrom=com.coolapk.market_14.4.0-beta1 1.下载自己喜欢的字体，和字体替换软件 https://www.123pan.com/s/rUG0Vv-do29d.html 2.将下载的字体拖入软件中，点击软件右下角的开始执行3.重启电脑即可
+酷安链接：https://www.coolapk.com/feed/57861121?shareKey=MmMyZGY4NjcyNjZjNjZiMWMzODA~&shareUid=4635765&shareFrom=com.coolapk.market_14.4.0-beta1 
 
-字体作者链接.txt
+1. 下载自己喜欢的字体，和字体替换软件 https://www.123pan.com/s/rUG0Vv-do29d.html 
+2. 将下载的字体拖入软件中，点击软件右下角的开始执行3.重启电脑即可
+3. 字体作者链接：https://galaxy-share.lanzout.com/b01k9lp7e 提取码：62ua
 
-链接：https://galaxy-share.lanzout.com/b01k9lp7e 提取码：62ua
+
 
 ![4635765_374ca909_2782_9045_689@2511x894.png.m](./assets/windows/4635765_374ca909_2782_9045_689@2511x894.png.m-1723692185370-3.jpg)
 
