@@ -234,6 +234,97 @@ Android平台启动图使用.9.png图片 https://ask.dcloud.net.cn/article/35527
 1. 更改所有编码为 `utf-8`
 2. 修改 indent 为 2
 
+### avd 位置更改
+
+不然默认在 c 盘，又大又不常用
+
+#### 方法 1：通过环境变量修改 AVD 位置
+
+Windows 系统
+
+1. 打开 **环境变量** 设置：
+
+   - 在搜索栏中输入 `env`，选择 "编辑系统环境变量"。
+   - 点击 "环境变量" 按钮，进入环境变量设置界面。
+
+2. 在“系统变量”或者“用户变量”中，点击 **新建**。
+
+3. 添加以下变量：
+
+   - **变量名**：`ANDROID_SDK_HOME`
+
+   - **变量值**：你希望存储 AVD 的新路径（例如 `D:\Android\AVD`）
+
+   - ```
+     ANDROID_SDK_HOME
+     D:\app\code\android\sdk
+     ```
+
+4. 点击 **确定** 完成设置。
+
+macOS/Linux 系统
+
+1. 打开终端编辑你的 `.bash_profile`、`.zshrc` 或者 `.bashrc` 文件（根据你使用的 shell 而定）：
+
+   bash
+
+   复制
+
+   ```
+   nano ~/.bash_profile
+   ```
+
+2. 添加以下行，将存储路径替换为你想要的位置：
+
+   bash
+
+   复制
+
+   ```
+   export ANDROID_SDK_HOME=~/新路径/AVD
+   ```
+
+3. 保存文件并执行以下命令以使更改生效：
+
+   bash
+
+   复制
+
+   ```
+   source ~/.bash_profile
+   ```
+
+#### 方法 2：直接修改 Android Studio 配置文件
+
+1. 找到 Android Studio 的配置文件 `config.ini`。这个文件存储了各个 AVD 的配置信息，默认路径通常在：
+
+   - Windows: `C:\Users\YourUsername\.android\avd\YourAVD.avd\config.ini`
+   - macOS/Linux: `/Users/YourUsername/.android/avd/YourAVD.avd/config.ini`
+
+2. 打开 `config.ini` 并找到以下配置项：
+
+   ini
+
+   复制
+
+   ```
+   path=<当前 AVD 位置>
+   ```
+
+3. 将 `path` 修改为你希望存储 AVD 的新路径。
+
+#### 方法 3：通过 Android Studio 重新配置 SDK 位置
+
+1. 在 Android Studio 中，点击 **File** -> **Settings**（macOS 上是 **Android Studio** -> **Preferences**）。
+2. 在左侧导航栏中选择 **Appearance & Behavior** -> **System Settings** -> **Android SDK**。
+3. 在 **Android SDK Location** 中，你可以修改 SDK 的默认存储位置。
+4. 修改完后，点击 **Apply** 并重启 Android Studio。
+
+注意事项
+
+- 修改 AVD 位置后，确保新路径有足够的存储空间。
+- 如果你只是想修改 SDK 的位置，`ANDROID_SDK_HOME` 环境变量只影响 SDK 相关文件的存储路径，不会影响项目文件或其他配置。
+
 ### Logcat 颜色设置
 
 默认所有级别都是 `BBBBBB`，很难区分。
