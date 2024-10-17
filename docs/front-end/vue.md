@@ -312,6 +312,10 @@ import './assets/styles/index.css'
 
 ## 📌 i18n 语言标识
 
+https://i18ns.com/languagecode.html
+
+https://www.techonthenet.com/js/language_tags.php
+
 ```
 简体中文(中国)        zh_CN
 繁体中文(台湾地区)     zh_TW
