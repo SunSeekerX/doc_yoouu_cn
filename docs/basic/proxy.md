@@ -557,6 +557,12 @@ systemProp.https.proxyPort='8080'
 systemProp.https.nonProxyHosts=*.bihe0832.com
 ```
 
+！注意 `C:\Users\{你的用户名}\.gradle\gradle.properties` 路径下的配置文件要删除，不然启动老是问问问！！！
+
+！注意 `C:\Users\{你的用户名}\.gradle\gradle.properties` 路径下的配置文件要删除，不然启动老是问问问！！！
+
+！注意 `C:\Users\{你的用户名}\.gradle\gradle.properties` 路径下的配置文件要删除，不然启动老是问问问！！！
+
 ## pip 代理设置
 
 正如前面提到的，在某些情况下会出现 shell 配置了代理，但是并没有生效的情况。例如 pip，这里介绍一下 pip 设置代理的方法，比如我们安装 Appium-Python-Client。
