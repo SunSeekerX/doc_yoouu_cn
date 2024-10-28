@@ -314,10 +314,10 @@ $ docker exec -it mongodb bash
 # 9.在容器内登录数据库
 $ mongo -u root -p 12345678900
 
-docker run --name mongodb -p 27018:27017 --restart=always -v /data/docker_data/mongodb7x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo
+docker run --name mongodb -p 27018:27017 --restart=always -v /data/docker_data/mongodb7x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my_secret_pw -d mongo
 
 # 3.x
-docker run --name mongodb3x -p 27019:27017 --restart=always -v /data/docker_data/mongodb3x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my-secret-pw -d mongo:3.6.23
+docker run --name mongodb3x -p 27019:27017 --restart=always -v /data/docker_data/mongodb3x:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=my_secret_pw -d mongo:3.6.23
 ```
 
 ### 0x4. Docker 安装 Portainer
@@ -661,7 +661,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    # 默认no 为不守护进程模式，docker部署不需要改为yes，docker run -d本身就是后台启动，不然会冲突
    daemonize no
    # 密码，搜索 requirepass foobared
-   requirepass my-secret-pw
+   requirepass my_secret_pw
    # 持久化
    appendonly yes
    ```
@@ -676,8 +676,8 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    --log-opt max-size=100m --log-opt max-file=2 \
    -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker_data/redis7x:/data \
-   -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
-   
+   -d redis:7.4 redis-server /etc/redis/redis.conf --appendonly yes
+
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -686,9 +686,9 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    --log-opt max-file=2 `
    -v D:\data\docker_data\redis7x\redis.conf:/etc/redis/redis.conf `
    -v D:\data\docker_data\redis7x\:/data `
-   -d redis:7.2 `
+   -d redis:7.4 `
    redis-server /etc/redis/redis.conf --appendonly yes
-   
+
    # Mac
    docker run --name redis7x \
    --restart=always \
@@ -696,7 +696,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    --log-opt max-size=100m --log-opt max-file=2 \
    -v ~/work/data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v ~/work/data/docker_data/redis7x:/data \
-   -d redis:7.2 redis-server /etc/redis/redis.conf --appendonly yes
+   -d redis:7.4 redis-server /etc/redis/redis.conf --appendonly yes
    ```
 
 **说明：**
@@ -735,7 +735,7 @@ nginx 反向代理无法正常工作，禅道工作目录为 www/
 **mysql 57**
 
 ```shell
-docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:5.7
+docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=my_secret_pw -d mysql:5.7
 
 # Linux
 docker run -d \
@@ -746,7 +746,7 @@ docker run -d \
 -v /data/docker_data/mysql57x/data:/var/lib/mysql \
 -v /data/docker_data/mysql57x/config:/etc/mysql/conf.d  \
 -v /data/docker_data/mysql57x/logs:/logs \
--e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_ROOT_PASSWORD=my_secret_pw \
 -e TZ=Asia/Shanghai mysql:5.7
 
 # Win
@@ -774,7 +774,7 @@ docker run -d \
 -v /data/docker_data/mysql8x/data:/var/lib/mysql \
 -v /data/docker_data/mysql8x/config:/etc/mysql/conf.d  \
 -v /data/docker_data/mysql8x/logs:/logs \
--e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_ROOT_PASSWORD=my_secret_pw \
 -e TZ=Asia/Shanghai mysql:8.3
 
 # Win
@@ -798,7 +798,7 @@ docker run  -d  \
 -v ~/work/data/docker_data/mysql8/data:/var/lib/mysql \
 -v ~/work/data/docker_data/mysql8/config:/etc/mysql/conf.d  \
 -v ~/work/data/docker_data/logs:/logs \
--e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_ROOT_PASSWORD=my_secret_pw \
 -e TZ=Asia/Shanghai mysql:8.3
 
 # 开放远程访问
@@ -808,7 +808,7 @@ docker exec -it mysql8x /bin/bash
 # 登录 mysql
 mysql -u root -p
 # 开放权限
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'my-secret-pw';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'my_secret_pw';
 # 刷新权限
 flush privileges;
 ```
@@ -1271,7 +1271,7 @@ services:
     restart: unless-stopped
 ```
 
-### 0x24 Docker 安装 webdav 
+### 0x24 Docker 安装 webdav
 
 ```shell
 docker run -d \
@@ -1306,4 +1306,3 @@ docker run -d \
   -v /data/docker_data/tduck/upload:/application/BOOT-INF/lib/upload \
   tduckcloud/tduck-platform
 ```
-
