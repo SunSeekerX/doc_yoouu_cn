@@ -221,6 +221,11 @@ setting > search `serializable class without 'serialVersionUID'` > 勾选
 
 ```
 W:\ProgramFiles\Android\Sdk\platform-tools
+
+ANDROID_HOME
+D:\app\code\android\sdk
+ANDROID_SDK_HOME
+D:\app\code\android\sdk
 ```
 
 ## 📌 .9 图片相关
