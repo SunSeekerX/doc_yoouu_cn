@@ -13,7 +13,7 @@
 github https://github.com/bin456789/reinstall
 
 ```shell
-bash reinstall.sh ubuntu 24.04
+bash reinstall.sh ubuntu 24.04 --password PASSWORD
 ```
 
 ## oh-my-zsh
