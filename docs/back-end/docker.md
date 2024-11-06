@@ -677,7 +677,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker_data/redis7x:/data \
    -d redis:7.4 redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Win
    docker run --name redis7x `
    --restart=always `
@@ -688,7 +688,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    -v D:\data\docker_data\redis7x\:/data `
    -d redis:7.4 `
    redis-server /etc/redis/redis.conf --appendonly yes
-
+   
    # Mac
    docker run --name redis7x \
    --restart=always \
@@ -1306,3 +1306,12 @@ docker run -d \
   -v /data/docker_data/tduck/upload:/application/BOOT-INF/lib/upload \
   tduckcloud/tduck-platform
 ```
+
+### 0x26 Docker 安装 OneNav 书签管理
+
+```shell
+docker run -itd --name="onenav" -p 11180:80 \
+    -v /data/docker_data/onenav:/data/wwwroot/default/data \
+    helloz/onenav
+```
+
