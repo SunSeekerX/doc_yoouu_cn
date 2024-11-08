@@ -20,6 +20,8 @@ Supporting devices higher than Android 5.0.
 
 ## 机型分区
 
+[摩托罗拉](./motorola)
+
 [红米9 redmi9](./redmi9)
 
 [魅蓝 Note3](./m3-note.md)
