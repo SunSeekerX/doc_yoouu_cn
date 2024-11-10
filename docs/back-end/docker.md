@@ -1315,3 +1315,23 @@ docker run -itd --name="onenav" -p 11180:80 \
     helloz/onenav
 ```
 
+### 0x27 Docker 安装 stirling pdf 工具
+
+https://github.com/Stirling-Tools/Stirling-PDF
+
+配置 ocr https://github.com/Stirling-Tools/Stirling-PDF/blob/main/HowToUseOCR.md
+
+```shell
+docker run -d \
+  -p 8081:8080 \
+  -v /data/docker_data/stirling/trainingData:/usr/share/tessdata \
+  -v /data/docker_data/stirling/extraConfigs:/configs \
+  -v /data/docker_data/stirling/logs:/logs \
+ 	-v /data/docker_data/stirling/customFiles:/customFiles \
+  -e DOCKER_ENABLE_SECURITY=false \
+  -e INSTALL_BOOK_AND_ADVANCED_HTML_OPS=true \
+  -e LANGS=zh_CN \
+  --name stirling_pdf \
+  frooodle/s-pdf:latest
+```
+
