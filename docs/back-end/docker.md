@@ -408,10 +408,20 @@ $ docker run -d -p 65535:8080 --restart=always --name music pan93412/unblock-net
 
 ```bash
 # lts-jdk17 8192M
-docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk17
+docker run --name jenkins \
+-m 8192M \
+-p 50001:8080 \
+-p 50000:50000 \
+--restart=always \
+ -u root  \
+ -d  \
+ -v /var/run/docker.sock:/var/run/docker.sock  \
+ -v /data/docker_data/jenkins_home:/var/jenkins_home  \
+ -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8"  \
+ jenkins/jenkins:lts-jdk17
 
 # jdk 11 8192M
-docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk11
+docker run --name jenkins -m 8192M -p 50001:8080 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /data/docker_data/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:lts-jdk11
 
 # 限制内存为 1.5 GB 腾讯云不限制构建 Vue 项目很容易把内存吃满然后其他服务挂掉
 docker run --name jenkins -m 1536M -p 50001:8080 -p 50000:50000 --restart=always -u root -d -v /var/run/docker.sock:/var/run/docker.sock -v /data/docker_data/jenkins_home:/var/jenkins_home -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8" jenkins/jenkins:jdk21
@@ -1333,5 +1343,14 @@ docker run -d \
   -e LANGS=zh_CN \
   --name stirling_pdf \
   frooodle/s-pdf:latest
+```
+
+### 0x28 Docker 安装 dpanel
+
+```shell
+docker run -it -d --name dpanel --restart=always \
+ -p 8807:8080 -e APP_NAME=dpanel \
+ -v /var/run/docker.sock:/var/run/docker.sock \
+ -v /data/docker_data/dpanel:/dpanel dpanel/dpanel:lite
 ```
 
