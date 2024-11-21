@@ -13,6 +13,12 @@
 github https://github.com/bin456789/reinstall
 
 ```shell
+# 当前系统是 Linux
+# 国外下载
+curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
+# 国内服务器
+curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
+
 bash reinstall.sh ubuntu 24.04 --password PASSWORD
 ```
 

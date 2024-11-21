@@ -2,6 +2,14 @@
 
 ## Android
 
+### noactive
+
+三方墓碑模块，简称 noa https://app.myflv.cn/
+
+### freezer
+
+官网文档 https://freezer.sakion.top/
+
 ### Root
 
 **SuperSU**
