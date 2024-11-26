@@ -37,6 +37,16 @@
   adb -s 0a6ce7720409 sideload .\lineage-21.0-20240210-UNOFFICIAL-lancelot.zip
   ```
 
+## Rom
+
+### crDroidAndroid 11-BETA - OFFICIAL | Android 15
+
+https://t.me/HelioG85_Updates/1001
+
+https://crdroid.net/lancelot/11
+
+
+
 ## 官改
 
 大部分都是 Qe_xr 这个人的

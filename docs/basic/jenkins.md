@@ -52,6 +52,152 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
 
 每次更新了插件列表都要执行替换命令，否则下载地址会替换回去。
 
+## 重要的打包命令记录
+
+普通 vue 项目构建
+
+```she
+cd $WORKSPACE
+# 安装依赖
+yarn
+# 执行打包构建
+yarn build:prod
+# 进入生成打包文件的目录
+cd dist/
+# 压缩所有文件
+tar -zcvf dist.tar.gz *
+```
+
+发送构建到远程服务器
+
+```
+cd /www/wwwroot/xxx.com
+find * | grep -v '\(.htaccess\|.user.ini\|favicon.ico\|dist.tar.gz\)' | xargs rm -rf
+tar -zxvf dist.tar.gz -C ./
+```
+
+
+
+nestjs 项目到远程服务器打包
+
+```shell
+cd $WORKSPACE
+tar --warning=no-file-changed -zcvf dist.tar.gz --exclude=./.git . || true
+```
+
+发送构建到远程服务器
+
+```shell
+#!/bin/sh
+. ~/.nvm/nvm.sh
+. ~/.profile
+. ~/.bashrc
+
+cd /data/app/origin_nestjs_server
+
+pm2 delete origin_nestjs_server
+
+rm -rf ./src
+
+tar -zxvf dist.tar.gz -C ./
+
+# 安装依赖
+yarn
+# 打包
+yarn build
+# 定义环境变量
+cat <<EOL > .env.production
+SERVER_PORT=13002
+IS_DEMO_ENV=false
+UPLOAD_PATH=''
+IS_OPEN_DOC=true
+API_GLOBAL_PREFIX='/api'
+
+DB_TYPE='mysql'
+DB_HOST='localhost'
+DB_PORT=3306
+DB_DATABASE='xxxxxx'
+DB_USER='xxxxxx'
+DB_PASSWORD='xxxxxx'
+DB_SYNCHRONIZE=true
+DB_LOGGING=false
+
+IS_USING_REDIS=true
+REDIS_HOST='localhost'
+REDIS_PORT=6379
+REDIS_DB='2'
+REDIS_PASSWORD=''
+
+EOL
+
+# 提示生成成功
+echo ".env.production 文件已生成并写入到当前目录。"
+
+# 启动项目
+pm2 start prod_ecosystem.config.js --env production
+```
+
+
+
+nuxtjs 项目
+
+```shell
+cd $WORKSPACE
+# 安装依赖
+yarn
+# 定义环境变量
+cat <<EOL > .env.prod
+# API URLs
+NESTJS_API_URL=http://localhost:13002/api
+
+# Site Configuration
+NUXT_PUBLIC_SITE_URL=https://navify.yoouu.cn
+NUXT_PUBLIC_SITE_NAME=Navify
+NUXT_PUBLIC_SITE_DESCRIPTION=🎨 一个充满美感的现代化导航网站应用
+EOL
+# 执行打包构建
+yarn build:prod
+# 进入生成打包文件的目录
+cd .output/
+# 压缩所有文件
+tar -zcvf output.tar.gz *
+```
+
+发送构建到远程服务器
+
+```shell
+#!/bin/sh
+set -e  # 遇到错误立即退出
+
+# 加载环境
+. ~/.nvm/nvm.sh
+. ~/.profile
+. ~/.bashrc
+
+# 检查目录是否存在
+cd /data/app/navify.yoouu.cn || exit 1
+
+# 检查压缩包是否存在
+if [ ! -f output.tar.gz ]; then
+    echo "Error: output.tar.gz not found"
+    exit 1
+fi
+
+# 清理旧文件，保留特定文件
+find * | grep -v '\(.htaccess\|.user.ini\|favicon.ico\|output.tar.gz\)' | xargs rm -rf
+
+# 解压新文件
+tar -zxvf output.tar.gz -C ./
+
+# 重启服务
+pm2 delete navify || true
+NITRO_PORT=3004 pm2 start server/index.mjs --name navify
+
+echo "Deployment completed successfully"
+```
+
+
+
 ## Vue 项目自动化构建
 
 `Jenkins`安装查看`Docker`章节。
@@ -197,6 +343,43 @@ tar -zcvf sunseekerx.tar.gz *
 ![build-file](https://static.yoouu.cn/static/imgs/2020/Jenkins/build-file.png)
 
 ### 0x7 增加构建后的步骤
+
+2024-11-25 17:26:07
+
+增强版本命令，防止无法加载 pm2 
+
+```bash
+#!/bin/sh
+set -e  # 遇到错误立即退出
+
+# 加载环境
+. ~/.nvm/nvm.sh
+. ~/.profile
+. ~/.bashrc
+
+# 检查目录是否存在
+cd /data/app/navify.yoouu.cn || exit 1
+
+# 检查压缩包是否存在
+if [ ! -f output.tar.gz ]; then
+    echo "Error: output.tar.gz not found"
+    exit 1
+fi
+
+# 清理旧文件，保留特定文件
+find * | grep -v '\(.htaccess\|.user.ini\|favicon.ico\|output.tar.gz\)' | xargs rm -rf
+
+# 解压新文件
+tar -zxvf output.tar.gz -C ./
+
+# 重启服务
+pm2 delete navify || true
+pm2 start server/index.mjs --name navify
+
+echo "Deployment completed successfully"
+```
+
+
 
 > 这一步将上一步打包好的文件发送到服务器，并且解压。
 

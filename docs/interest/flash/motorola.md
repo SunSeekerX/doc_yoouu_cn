@@ -26,7 +26,7 @@ Users:
         UserInfo{902:应用分身:1010} running
         UserInfo{903:应用分身:1010} running
         UserInfo{904:应用分身:1010} running
-# 显示完整包名
+# 显示完整包名(测试只需要这个，健身就可以启动)
 pm path com.google.android.gms
 
 # 安装到指定空间
@@ -57,5 +57,13 @@ com.fitbit.FitbitMobile
 
 Support components
 com.google.mainline.telemetry
+```
+
+批量操作
+
+```shell
+pm path com.google.android.gms
+pm path com.android.vending
+pm path com.google.android.gsf
 ```
 
