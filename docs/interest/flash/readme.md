@@ -12,6 +12,48 @@
 
 ### Root
 
+#### redmi9 刷入 root 步骤
+
+1. 提取 boot.img 用 magisk 修补
+
+2. fastboot 刷入
+
+   ```shell
+   fastboot flash boot .\magisk_patched-28000_idff0.img
+   ```
+
+3. 提取 vbmeta.img 刷入
+
+   ```shell
+   fastboot --disable-verity --disable-verification flash vbmeta vbmeta.img
+   fastboot reboot
+   ```
+
+4. 输出参考
+
+   ```
+   PowerShell 7.4.6
+   Loading personal and system profiles took 815ms.
+    ~\Desktop                                                                                                  | 00:04:07
+   ➜ fastboot flash boot .\magisk_patched-28000_idff0.img
+   Sending 'boot' (65536 KB)                          OKAY [  1.549s]
+   Writing 'boot'                                     OKAY [  0.880s]
+   Finished. Total time: 2.433s
+    ~\Desktop                                                                                                  | 00:04:22
+   ➜ fastboot --disable-verity --disable-verification flash vbmeta vbmeta.img
+   Rewriting vbmeta struct at offset: 0
+   Sending 'vbmeta' (4 KB)                            OKAY [  0.011s]
+   Writing 'vbmeta'                                   OKAY [  0.004s]
+   Finished. Total time: 0.023s
+    ~\Desktop                                                                                                  | 00:05:06
+   ➜ fastboot reboot
+   Rebooting                                          OKAY [  0.000s]
+   Finished. Total time: 0.001s
+    ~\Desktop
+   ```
+
+   
+
 **SuperSU**
 
 Android 版本 7.1 及以下使用 SuperSU 来 ROOT 手机，Android 版本 8.0 及以上使用 Magisk 来 ROOT 手机。
@@ -36,7 +78,7 @@ Supporting devices higher than Android 5.0.
 
 [小米 10T / 10T Pro / 红米 K30S 至尊纪念版 (apollo) ](./k30s-apollo.md)
 
-## Recovery 下载
+## Recovery 下载(wzsx150)
 
 LR.Team 定制版 TWRP 下载地址集合：[https://weibo.com/ttarticle/p/show?id=2309404160776561631202](https://weibo.com/ttarticle/p/show?id=2309404160776561631202)
 
