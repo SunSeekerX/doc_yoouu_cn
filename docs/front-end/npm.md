@@ -307,11 +307,15 @@ pnpm install
 
 ### 快捷安装
 
-```shell
-# 淘宝镜像
-npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon -g --registry=https://registry.npmmirror.com
+淘宝镜像
 
-# 原版
+```shell
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon -g --registry=https://registry.npmmirror.com
+```
+
+原版
+
+```shell
 npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon -g
 ```
 

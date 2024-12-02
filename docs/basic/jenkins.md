@@ -134,7 +134,7 @@ EOL
 echo ".env.production 文件已生成并写入到当前目录。"
 
 # 启动项目
-pm2 start prod_ecosystem.config.js --env production
+pm2 start ecosystem.config.js --env production
 ```
 
 
