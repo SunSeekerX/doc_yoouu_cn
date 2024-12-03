@@ -2,6 +2,8 @@
 
 ## 更换字体
 
+吾爱链接 https://www.52pojie.cn/thread-1829462-1-1.html
+
 酷安链接：https://www.coolapk.com/feed/57861121?shareKey=MmMyZGY4NjcyNjZjNjZiMWMzODA~&shareUid=4635765&shareFrom=com.coolapk.market_14.4.0-beta1 
 
 1. 下载自己喜欢的字体，和字体替换软件 https://www.123pan.com/s/rUG0Vv-do29d.html 
