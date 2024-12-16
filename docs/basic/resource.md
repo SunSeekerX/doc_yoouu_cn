@@ -2,6 +2,11 @@
 
 ## 📌 工具网站
 
+网站抓取工具
+
+- HTTrack Website Copier https://www.httrack.com/
+- WebCopy https://www.cyotek.com/cyotek-webcopy
+
 开启BBR等加速 https://github.com/jinwyp/one_click_script
 
 像聊天一样发送文件 https://flix.center/

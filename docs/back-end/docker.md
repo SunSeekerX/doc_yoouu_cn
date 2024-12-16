@@ -1237,7 +1237,7 @@ touch /data/docker_data/rustdesk/docker-compose.yml
 cd /data/docker_data/rustdesk
 docker compose up -d
 
-# 开放 21115-21119
+# 开放 tcp 21115-21119
 ```
 
 docker-compose.yml 配置内容，替换下 <your_public_ip> 和 <your_key>

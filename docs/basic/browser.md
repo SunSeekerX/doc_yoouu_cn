@@ -1,4 +1,24 @@
+
+
 # 浏览器技巧
+
+## 提示不安全的网站也要保存密码
+
+Edge 使用的是 Chromium 内核，因此我们可以尝试通过 `flags` 页面调整设置，强制启用密码管理功能：
+
+1. 在地址栏输入以下内容并按回车：
+
+   复制
+
+   ```
+   edge://flags
+   
+   chrome://flags
+   ```
+
+2. 搜索 **"Insecure origins treated as secure"** 或类似的实验性功能。如果找到相关选项，可以将其设置为 **Enabled**。
+
+3. 重启浏览器，然后再次尝试保存密码。
 
 ## 关闭 chrome 自动跳转到 https
 
