@@ -160,7 +160,7 @@ brew install --cask git-credential-manager-core
 
    ```
    # 创建一个`ssh key`，直接回车，文件存在，不用的直接删除目录，有用的就直接复制`ssh key`
-   ssh-keygen -t rsa -b 4096 -C "sunseekerxi@gmail.com"
+   ssh-keygen -t rsa -b 4096 -C "sunseekerxi@outlook.com"
    # 把密钥放在剪贴板
    clip < ~/.ssh/id_rsa.pub
    # mac

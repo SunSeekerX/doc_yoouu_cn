@@ -514,7 +514,7 @@ Crisp sdk 隐私政策：[https://crisp.chat/en/privacy/](https://crisp.chat/en/
           },
 
           // setUserEmail
-          email: 'sunseekerxi@gmail.com',
+          email: 'xxx@outlook.com',
 
           // setUserNickname
           nickname: '不知道起啥昵称',
