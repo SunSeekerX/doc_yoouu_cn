@@ -1,5 +1,60 @@
 # Windows 技巧
 
+## 禁用 usb 设备唤醒睡眠电脑
+
+睡眠的时候撞一下鼠标就醒了还是挺烦的，下面代码后缀为 ps1 然后用 powershell 管理员权限执行下就行了，如果新的 usb 设备插入也需要执行下。
+
+```powershell
+# 需要管理员权限运行
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))  
+{  
+    Write-Warning "请使用管理员权限运行此脚本!"
+    Break
+}
+
+# 获取所有可以唤醒系统的设备
+$wakeDevices = powercfg -devicequery wake_armed
+
+if ($null -eq $wakeDevices) {
+    Write-Host "没有找到可以唤醒系统的设备。"
+    exit
+}
+
+Write-Host "发现以下可唤醒设备："
+$wakeDevices | ForEach-Object { Write-Host "- $_" }
+
+Write-Host "`n开始禁用设备唤醒功能..."
+
+# 对每个设备禁用唤醒功能
+foreach ($device in $wakeDevices) {
+    if ($device -match "\S+") {  # 确保不是空行
+        Write-Host "正在处理: $device"
+        $result = powercfg -devicedisablewake "$device" 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "成功禁用: $device" -ForegroundColor Green
+        } else {
+            Write-Host "禁用失败: $device" -ForegroundColor Red
+            Write-Host "错误信息: $result" -ForegroundColor Red
+        }
+    }
+}
+
+Write-Host "`n正在验证结果..."
+$remainingDevices = powercfg -devicequery wake_armed
+
+if ($null -eq $remainingDevices) {
+    Write-Host "所有设备的唤醒功能已成功禁用！" -ForegroundColor Green
+} else {
+    Write-Host "以下设备仍然可以唤醒系统：" -ForegroundColor Yellow
+    $remainingDevices | ForEach-Object { Write-Host "- $_" }
+}
+
+Write-Host "`n脚本执行完成。"
+
+```
+
+
+
 ## 更换字体
 
 吾爱链接 https://www.52pojie.cn/thread-1829462-1-1.html
