@@ -54,7 +54,144 @@ sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsing
 
 ## 重要的打包命令记录
 
-普通 vue 项目构建
+### nextjs 项目
+
+使用默认模式，在 Jenkins 所在服务器进行打包构建，发送构建产物在目标服务器安装运行时依赖然后启动服务使用 pm2 进行守护
+
+构建过程执行的 shell 命令参考
+
+```shell
+cd $WORKSPACE
+
+# 设置内存
+export NODE_OPTIONS=--max_old_space_size=8192
+
+# 安装依赖
+yarn
+
+# 执行打包构建
+yarn build:prod
+
+# 创建部署目录并复制文件
+rm -rf dist
+mkdir -p dist
+cp -r .next dist/
+cp package.json dist/
+cp -r .yarn dist/        # 复制 .yarn 目录
+cp .yarnrc.yml dist/     # 复制 .yarnrc.yml
+cp yarn.lock dist/       # 复制 yarn.lock
+cp -r public dist/ 2>/dev/null || true
+cp ecosystem.config.js dist/ 2>/dev/null || true
+
+# 修改打包命令，添加 --force 选项
+cd dist && tar -czf dist.tar.gz --force-local . || true
+```
+
+发送到目标服务器命令
+
+Source files: `dist/dist.tar.gz`
+
+Remove prefix: `dist`
+
+Remote directory: `/path/to/your/app`
+
+Exec command:
+
+```shell
+#!/bin/sh
+. ~/.nvm/nvm.sh
+. ~/.profile
+. ~/.bashrc
+
+cd /path/to/your/app && \
+
+# 1. 先停止运行中的服务
+yarn prod:delete || true && \
+
+# 2. 清理日志和构建输出目录
+rm -rf .next && \
+rm -rf logs/* && \    # 只清理 logs 目录下的文件，保留目录本身
+
+# 3. 解压新文件
+tar -zxvf dist.tar.gz && \
+rm -f dist.tar.gz && \
+
+# 4. 启动服务
+yarn deploy:prod
+```
+
+package.json 参考
+
+```json
+{
+  "name": "auth-stake",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 14000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:prod": "next build",
+    "start:prod": "next start -p 14001",
+    "deploy:prod": "pm2 start ecosystem.config.js --only auth_stake_prod",
+    "prod:stop": "pm2 stop auth_stake_prod",
+    "prod:restart": "pm2 restart auth_stake_prod",
+    "prod:delete": "pm2 delete auth_stake_prod",
+    "prod:logs": "pm2 logs auth_stake_prod",
+    "pm2:list": "pm2 list",
+    "pm2:monit": "pm2 monit",
+    "pm2:save": "pm2 save"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "@tanstack/query-core": "^5.66.0",
+    "@tanstack/react-query": "^5.66.0",
+    "@web3modal/ethereum": "^2.7.1",
+    "@web3modal/react": "^2.7.1",
+    "autoprefixer": "^10.4.20",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "1.0.4",
+    "date-fns": "latest",
+    "embla-carousel-react": "8.5.2",
+    "ethers": "^6.13.5",
+    "input-otp": "1.4.2",
+    "lucide-react": "^0.474.0",
+    "next": "14.2.23",
+    "next-themes": "^0.4.4",
+    "radix-ui": "^1.1.2",
+    "react": "^18",
+    "react-day-picker": "8.10.1",
+    "react-dom": "^18",
+    "react-hook-form": "^7.54.2",
+    "react-hot-toast": "latest",
+    "react-resizable-panels": "^2.1.7",
+    "recharts": "2.15.1",
+    "sonner": "^1.7.4",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.9.9",
+    "viem": "^2.22.17",
+    "wagmi": "^2.14.9",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "pino-pretty": "^13.0.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  },
+  "packageManager": "yarn@4.6.0"
+}
+
+```
+
+### 普通 vue 项目构建
 
 ```she
 cd $WORKSPACE
@@ -76,9 +213,7 @@ find * | grep -v '\(.htaccess\|.user.ini\|favicon.ico\|dist.tar.gz\)' | xargs rm
 tar -zxvf dist.tar.gz -C ./
 ```
 
-
-
-nestjs 项目到远程服务器打包
+### nestjs 项目
 
 ```shell
 cd $WORKSPACE
@@ -137,9 +272,7 @@ echo ".env.production 文件已生成并写入到当前目录。"
 pm2 start ecosystem.config.js --env production
 ```
 
-
-
-nuxtjs 项目
+### nuxtjs 项目
 
 ```shell
 cd $WORKSPACE
@@ -195,8 +328,6 @@ NITRO_PORT=3004 pm2 start server/index.mjs --name navify
 
 echo "Deployment completed successfully"
 ```
-
-
 
 ## Vue 项目自动化构建
 
