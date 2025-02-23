@@ -20,6 +20,22 @@ curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh 
 curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
 
 bash reinstall.sh ubuntu 24.04 --password PASSWORD
+
+# dd 到 Windows
+curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
+
+# 下载镜像
+wget -O windows2022.iso "https://delivery.massgrave.dev/706db63b-5716-4158-ab66-4f12e594d955/zh-cn_windows_server_2022_updated_nov_2024_x64_dvd_4e34897c.iso?t=4e3d2975-599f-4410-a1c1-768738e09d26&P1=1740266314&P2=601&P3=2&P4=bZJrv9CHTLoUIvg3dmYMTSaDrBedIZaCeRIc5fUcf5U%3D"
+# 开始安装
+     bash reinstall.sh windows \
+     --image-name "Windows Server 2022 SERVERDATACENTER" \
+     --iso "https://oemsoc.download.prss.microsoft.com/dbazure/X23-81954_26100.1742.240906-0331.ge_release_svc_refresh_SERVER_OEMRET_x64FRE_zh-cn.iso_c0a03233-3c87-4c90-9fac-9cbf668255c1?t=fdfcc05d-ef3b-45a4-8f87-cd492f6d10de&P1=102817441905&P2=601&P3=2&P4=phtRoTOxQBx%2bH5nhSijWBQw9deo3wwkODOj9HbwaH1%2fC%2bYTg5C7FrUUduOXIC9TzweFPlCY0YlpXM1ZD%2fj3dYrYwBbRnCeeDOvzHTjIMoZvtjfKHH%2bfI3IdPFJBa6gv5sL69QQFUUmaWqRHCTT81p6IYcNwuwOUrNW9u3BVttXiQNIAX9XrrYbWAHHmfkLW3wR2YdstEsFxF8sIQ4w1V6Znm3B7NO7Rv%2fjk3nyhQ9zzMjZFjdIlkZg4NbAhYE12EZr9pHHR0AHQeW2%2fN%2fVhGjoaYWYjHMTtfNV48EJbeQoQKrrfdLTQ%2fHk6%2bGUxO5D8xCPfkr0vpr7oBo2uICepJ3w%3d%3d"
+
+     # win10 iot
+     bash reinstall.sh windows \
+     --image-name "Windows 10 IoT Enterprise" \
+     --iso "https://delivery.massgrave.dev/706db63b-5716-4158-ab66-4f12e594d955/en-us_windows_10_iot_enterprise_version_22h2_x64_dvd_51cc370f.iso?t=f0b7dd38-9fe7-4df4-9ef3-6dbe00ddea03&P1=1740328028&P2=601&P3=2&P4=RQrNKsonZaSwpiKoDjaE066E1iRHU3MPsiBsBj1pyOE%3D"
+
 ```
 
 ## oh-my-zsh

@@ -206,6 +206,12 @@ brew install --cask git-credential-manager-core
 
 ## 常用操作
 
+### Ubuntu 让 git 记住 https 用户名和密码
+
+```shell
+git config --global credential.helper store
+```
+
 ### 将文件添加到仓库
 
 ```bash
