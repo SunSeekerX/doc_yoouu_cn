@@ -2,13 +2,15 @@
 
 ## Android
 
-### noactive
+ksu https://kernelsu.org/zh_CN/
 
-三方墓碑模块，简称 noa https://app.myflv.cn/
+noactive 三方墓碑模块，简称 noa https://app.myflv.cn/
 
-### freezer
+freezer 官网文档 https://freezer.sakion.top/
 
-官网文档 https://freezer.sakion.top/
+LSPosed 已经停止更新 https://github.com/LSPosed/LSPosed
+
+JingMatrix 修改版本 LSPosed https://github.com/JingMatrix/LSPosed
 
 ### Root
 
