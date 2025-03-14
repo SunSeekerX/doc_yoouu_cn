@@ -57,6 +57,13 @@ Write-Host "`n脚本执行完成。"
 
 ## 更换字体
 
+远景论坛字体下载 https://bbs.pcbeta.com/viewthread-1960120-1-4.html
+
+- 鸿蒙替换中文字体-20250208U1 https://wwvu.lanzouq.com/ioNiJ2qebg0f
+- 鸿蒙替换英文字体-20250208V2 https://wwvu.lanzouq.com/iskZt2n651yh
+- 工具链接 https://wwwb.lanzouw.com/iS5I90qr9pwf 密码:3hdu
+- 把字体下载好全部拖到工具就可以了
+
 吾爱链接 https://www.52pojie.cn/thread-1829462-1-1.html
 
 酷安链接：https://www.coolapk.com/feed/57861121?shareKey=MmMyZGY4NjcyNjZjNjZiMWMzODA~&shareUid=4635765&shareFrom=com.coolapk.market_14.4.0-beta1 

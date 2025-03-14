@@ -554,40 +554,15 @@ auth.token = "xxxxxx"
 
 webServer.addr = "0.0.0.0"
 webServer.port = 7071
-```
-
-~~新建配置文件~~
-
-```shell
-mkdir -p /etc/frp/
-cd /etc/frp/
-touch frps.ini
-```
-
-~~写入配置文件，`frps.ini`，根据你自己的配置~~
-
-```ini
-[common]
-bind_port = 7000
-vhost_http_port = 7070
-token = xxxxxx
-
-dashboard_port = 7071
+webServer.user = "admin"         # 设置用户名
+webServer.password = "yourpassword"  # 设置密码
 ```
 
 启动容器
 
 ```shell
 # Linux
-docker run -d \
---name frps \
---network host \
---restart=always \
--p 33077:3306 \
--v /data/docker_data/frps/frps.toml:/etc/frp/frps.toml snowdreamtech/frps
-
-# 旧版本
-docker run --restart=always --network host -d -v /etc/frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps
+docker run --restart=always --network host -d -v /data/docker_data/frps/frps.toml:/etc/frp/frps.toml --name frps snowdreamtech/frps
 ```
 
 ### 0x10 Docker 安装 frpc
@@ -601,42 +576,12 @@ auth.method = "token"
 auth.token = "xxxxxx"
 ```
 
-~~新建配置文件~~
-
-```shell
-mkdir -p /etc/frp/
-cd /etc/frp/
-touch frpc.ini
-```
-
-~~写入配置文件，`frpc.ini`，根据你自己的配置~~
-
-```ini
-[common]
-server_addr = x.x.x.x
-server_port = 7000
-token = xxxxxxxx
-
-admin_addr = 127.0.0.1
-admin_port = 7400
-
-[ssh]
-type = tcp
-local_ip = 127.0.0.1
-local_port = 22
-remote_port = 2233
-
-
-[a.example.com]
-type = http
-local_port = 2233
-custom_domains = a.example.com
-```
-
 启动容器
 
 ```shell
 docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc.ini --name frpc snowdreamtech/frpc
+# 或者本地下载启动
+./frpc -c ./frpc.toml
 ```
 
 ### 0x11 Docker 安装 redis
