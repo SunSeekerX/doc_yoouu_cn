@@ -213,6 +213,32 @@ service ssh restart
 
 ## 📌 ubuntu
 
+### 优化 shell
+
+```shell
+# 安装 ZSH
+sudo apt install zsh -y
+
+# 安装 Oh My Zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# 设为默认 shell
+chsh -s $(which zsh)
+
+# ZSH 自动建议
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# ZSH 语法高亮
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# 然后在 ~/.zshrc 中添加这些插件：
+nano ~/.zshrc
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler dotenv macos rake rbenv ruby)
+```
+
+
+
 ### ubuntu 24.04 LTS 换软件源（针对大陆）
 
 1. 首先，备份原有的源文件：

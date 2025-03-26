@@ -1,5 +1,57 @@
 # Windows 技巧
 
+## 好用的系统镜像
+
+[系统工具] VMware Workstation PRO_v17.6.3_正式版 https://bbs.pcbeta.com/viewthread-2034848-1-2.html
+
+- win10
+
+  - [资源] 工作游戏专用Win10企业版：精挑细选，追求极致稳定 https://bbs.pcbeta.com/viewthread-1914191-1-1.html
+
+    > Win10.19042.844.Enterprise.Modified_For_Workstation.20220923.iso
+    > Size: 4457627648 bytes
+    > MD5: C17BC77CFF2658DCA029750DE2D23FF2
+    > SHA1: 0FD3CB7820F0A943FFD5F56BD8E2CC65FFC16F69
+    >
+    > 百度盘：https://pan.baidu.com/s/105kZ5132mcjvPl-vL2EUmA
+    > 提取码：beta
+    >
+    > 阿里盘：https://www.aliyundrive.com/s/q39CZoHe3jN
+    > （文件去掉pdf扩展名）
+    > （阿里盘由于上传太慢，可能无法及时更新）
+    >
+    > - 不支持 wsl2 开发或者挂机慎用
+
+  - 【真Client】20348.3089/3091更新 https://bbs.pcbeta.com/viewthread-2031071-1-1.html
+  
+    > https://www.123865.com/s/LoyDVv-22wn?提取码:3089
+    > https://pan.huang1111.cn/s/9Q9Z7Fd
+    > https://pan.baidu.com/s/1TykDO-1zP6B72WcIEFW_Pw 提取码: 3089
+    >
+    > 
+    >
+    > - 魔改系统是真流畅 不过目前测试 win+v 有问题 高度依赖这个功能不知道后续能不能优化
+    > - 添加系统功能方式有点特别
+    > - 有人反馈声音会有点问题
+    > - 
+    
+  - 来自Windows 10（11）的最后一舞——采用22000.2538内核的Windows 10（UI） https://bbs.pcbeta.com/viewthread-2036683-1-1.html
+    
+    > 链接似乎都被吞了，这里补一个最新5.2版本的
+    > 简体中文：https://www.kzwr.com/file/86cb8bd2
+    > 繁体中文：https://www.kzwr.com/file/fc845649
+    > @Mintraspberry Cool 大佬的B站主页：https://space.bilibili.com/1786951968
+    > @HadZyperRaid  大佬的B站主页：https://space.bilibili.com/1671986595
+    >
+    > 项目地址：https://www.bilibili.com/video/B ... dfecada8ad781ea80a9
+    > 互联网档案馆存档：https://archive.org/details/ccsa-x-64-fre-en-us-dv-5
+    >
+    > 魔改系统
+    
+    
+    
+    
+
 ## 禁用 usb 设备唤醒睡眠电脑
 
 睡眠的时候撞一下鼠标就醒了还是挺烦的，下面代码后缀为 ps1 然后用 powershell 管理员权限执行下就行了，如果新的 usb 设备插入也需要执行下。
