@@ -1,5 +1,44 @@
 # Nginx
 
+## 宝塔 nginx 守护
+
+在宝塔中添加定时任务
+
+1. 登录宝塔面板，进入 计划任务 模块。
+
+2. 点击 添加任务，配置如下：
+
+   - 任务类型：选择 Shell脚本。
+
+   - 任务名称：自定义，例如 Nginx守护进程。nginx_guard
+
+   - 执行周期：建议设置为每 5 分钟（_/5 _ \* \* \*），根据需求调整。
+
+   - 脚本内容：输入脚本路径，例如：
+
+     ```shell
+     #!/bin/bash
+  
+     # 检查 Nginx 是否在运行
+     if ! ps aux | grep [n]ginx > /dev/null; then
+         echo "Nginx 已停止，正在尝试重启..."
+         # 重启 Nginx 服务
+         systemctl restart nginx
+         # 等待几秒检查是否重启成功
+         sleep 5
+         if ps aux | grep [n]ginx > /dev/null; then
+             echo "Nginx 重启成功！"
+         else
+             echo "Nginx 重启失败，请检查日志！"
+             # 可选：发送通知（需要额外配置邮件或第三方工具）
+         fi
+     else
+         echo "Nginx 正在运行，无需操作。"
+     fi
+     ```
+
+3. 保存并执行，检查是否正常运行。
+
 ## 反向代理出现 `MIME type` 不正确
 
 ```

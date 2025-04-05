@@ -54,16 +54,6 @@ JingMatrix 修改版本 LSPosed https://github.com/JingMatrix/LSPosed
     ~\Desktop
    ```
 
-   
-
-**SuperSU**
-
-Android 版本 7.1 及以下使用 SuperSU 来 ROOT 手机，Android 版本 8.0 及以上使用 Magisk 来 ROOT 手机。
-
-一 SuperSU 支持至安卓 7.1，且不再更新
-
-[https://supersuroot.org/](https://supersuroot.org/)
-
 **Magisk**
 
 Supporting devices higher than Android 5.0.
@@ -78,9 +68,40 @@ Supporting devices higher than Android 5.0.
 
 [魅蓝 Note3](./m3-note.md)
 
-[小米 10T / 10T Pro / 红米 K30S 至尊纪念版 (apollo) ](./k30s-apollo.md)
+### 小米 10T / 10T Pro / 红米 K30S 至尊纪念版 (apollo) 
 
-## Recovery 下载(wzsx150)
+官方线刷工具 https://xiaomirom.com/rom/mi-10t-10t-pro-apollo-china-fastboot-recovery-rom/
+
+rom
+
+- 白羊‖miui_apollo_V13.0.6.0.SJDCNXM_f559664_12_221216.zip‖https://www.123pan.com/s/f12RVv-Z4kVv‖Oskr
+- 柚稚的孩纸‖https://www.123pan.com/s/jKv8Vv-vfSWd.html‖bwHc
+- mingofficial 个人主页‖https://mingofficial.cn/‖rom 下载 https://www.123684.com/s/YmWSVv-RFGVh
+
+## recovery
+
+android 下刷入命令
+
+```shell
+ 刷：fastboot flash recovery|recovery_ab|recovery_a|recovery_b rec.img
+ 启动：fastboot reboot recovery
+```
+
+官改
+
+## 归档 archive
+
+以下内容随着时间的推移，已经不再适合时代，你可以怀旧
+
+### 软件
+
+#### **SuperSU**
+
+https://supersuroot.org/
+
+Android 版本 7.1 及以下使用 SuperSU 来 ROOT 手机，Android 版本 8.0 及以上使用 Magisk 来 ROOT 手机。SuperSU 支持至安卓 7.1，且不再更新
+
+### Recovery 下载(wzsx150)
 
 LR.Team 定制版 TWRP 下载地址集合：[https://weibo.com/ttarticle/p/show?id=2309404160776561631202](https://weibo.com/ttarticle/p/show?id=2309404160776561631202)
 
@@ -100,7 +121,7 @@ LR.Team 定制版 TWRP 下载地址集合：[https://weibo.com/ttarticle/p/show?
 
 ![recovery](https://static.yoouu.cn/static/imgs/doc/interest/recovery.png)
 
-## Edxposed 安装教程
+### Edxposed 安装教程
 
 1. 确保已经安装 Magisk Manager， 版本不低于 V17.0。
 2. [https://github.com/topjohnwu/Magisk/releases ](https://github.com/topjohnwu/Magisk/releases)
@@ -114,13 +135,13 @@ LR.Team 定制版 TWRP 下载地址集合：[https://weibo.com/ttarticle/p/show?
 10. EdXposedManager
 11. [https://github.com/ElderDrivers/EdXposedManager/releases](https://github.com/ElderDrivers/EdXposedManager/releases)
 
-### 常见问题
+**常见问题**
 
 - 第一次刷机安装了 Edxpoed，完了 EdXposedManager 显示警告未激活？
 
   > 可以尝试删除 EdXposedManager，在安装一次
 
-## MTK 刷机
+### MTK 刷机
 
 **条件**
 
