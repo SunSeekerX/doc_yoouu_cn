@@ -1,3 +1,14 @@
+## 用命令下载发行版本
+
+```shell
+wsl --list --online
+
+wsl --install -d <DistroName>
+wsl --install -d Ubuntu-24.04
+```
+
+
+
 ## 用文件管理器打开当前路径
 
 ```
@@ -100,7 +111,6 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    ```sh
    wsl --export Ubuntu D:\path\to\save\ubuntu.tar
    # 我的命令
-   wsl --export Ubuntu-22.04 D:\ubuntu.tar
    wsl --export Ubuntu-24.04 D:\ubuntu2404.tar
    ```
 
@@ -111,40 +121,36 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    ```sh
    wsl --unregister Ubuntu
    # 我的命令
-   wsl --unregister Ubuntu-22.04
    wsl --unregister Ubuntu-24.04
    ```
-
+   
 6. **在新位置创建一个文件夹**：在D盘上选择或创建一个新的文件夹来存放你的WSL分发。
 
    ```sh
    mkdir D:\path\where\you\want\wsl
    # 我的命令
-   mkdir D:\data\wsl\ubuntu-22.04
    mkdir D:\data\wsl\ubuntu-24.04
    ```
-
+   
 7. **导入WSL分发**：将分发导入到你在D盘上创建的新位置。
 
    ```sh
    wsl --import Ubuntu D:\path\where\you\want\wsl D:\path\to\save\ubuntu.tar
    # 我的命令
-   wsl --import Ubuntu-22.04 D:\data\wsl\ubuntu-22.04 D:\ubuntu.tar
    wsl --import Ubuntu-24.04 D:\data\wsl\ubuntu-24.04 D:\ubuntu2404.tar
    ```
-
+   
    确保替换路径为你实际想要使用的路径。
-
+   
 8. **启动新的WSL分发**：一旦导入完成，你就可以启动你的新WSL分发了。
 
    ```sh
    wsl -d Ubuntu
    # 我的命令
-   wsl -d Ubuntu-22.04
    wsl -d Ubuntu-24.04
    ```
-
-9. **设置默认用户**（如果需要）：如果新导入的分发默认用户是root，你需要修改WSL配置文件来更改默认用户。可以在`D:\path\where\you\want\wsl`路径下创建或编辑`etc\wsl.conf`文件，并添加以下内容：
+   
+9. **设置默认用户**（如果需要）：如果新导入的分发默认用户是root，你需要修改WSL配置文件来更改默认用户。可以在 linux 内编辑`etc\wsl.conf`文件，并添加以下内容：
 
    ```
    [user]

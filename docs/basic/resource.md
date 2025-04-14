@@ -75,6 +75,8 @@ AnimeGANv2 - a Hugging Face Space by akhaliq(动漫头像生成) https://hugging
 
 ## 📌 软件
 
+- Mozilla 推出类似 Gmail 的邮件服务 ThunderMail https://www.thunderbird.net/zh-CN/
+
 ### Windows 软件
 
 [mactype](https://github.com/snowie2000/mactype) - 改进 Windows 字体渲染的软件

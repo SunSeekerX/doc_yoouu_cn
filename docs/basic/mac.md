@@ -414,7 +414,6 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 ```shell
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler dotenv macos rake rbenv ruby)
-
 ```
 
 #### 如果安装完成出现
