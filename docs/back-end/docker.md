@@ -540,6 +540,7 @@ https://hub.docker.com/r/snowdreamtech/frps
 ```shell
 mkdir -p /data/docker_data/frps/ && cd /data/docker_data/frps/
 touch frps.toml
+nano frps.toml
 ```
 
 写入配置文件，`frps.toml`，根据你自己的配置
@@ -563,6 +564,7 @@ webServer.password = "yourpassword"  # 设置密码
 ```shell
 # Linux
 docker run --restart=always --network host -d -v /data/docker_data/frps/frps.toml:/etc/frp/frps.toml --name frps snowdreamtech/frps
+# 放开 7000 7070 7071 7443
 ```
 
 ### 0x10 Docker 安装 frpc
@@ -1172,9 +1174,6 @@ location ^~ /
 官方文档：https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/
 
 ```shell
-sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td rustdesk/rustdesk-server hbbs -r <relay-server-ip[:port]>
-sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td rustdesk/rustdesk-server hbb
-
 sudo docker image pull rustdesk/rustdesk-server
 sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbs 
 sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbr
