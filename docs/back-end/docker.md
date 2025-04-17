@@ -1172,10 +1172,15 @@ location ^~ /
 官方文档：https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/
 
 ```shell
-# 镜像 https://hub.docker.com/r/rustdesk/rustdesk-server/tags
-# 官方文档：https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/
-sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbs -r <relay-server-ip[:port]>
-sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbb
+sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td rustdesk/rustdesk-server hbbs -r <relay-server-ip[:port]>
+sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td rustdesk/rustdesk-server hbb
+
+sudo docker image pull rustdesk/rustdesk-server
+sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbs 
+sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbr
+
+sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td rustdesk/rustdesk-server hbbs 
+sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td rustdesk/rustdesk-server hbbr
 
 mkdir -p /data/docker_data/rustdesk
 touch /data/docker_data/rustdesk/docker-compose.yml
@@ -1183,6 +1188,11 @@ cd /data/docker_data/rustdesk
 docker compose up -d
 
 # 开放 tcp 21115-21119
+
+# 停止
+docker-compose down
+# -v 参数会同时删除 volumes，这样就会删除数据库中的所有数据。
+docker-compose down -v
 ```
 
 docker-compose.yml 配置内容，替换下 <your_public_ip> 和 <your_key>
