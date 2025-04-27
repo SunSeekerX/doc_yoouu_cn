@@ -188,13 +188,28 @@ export const zhNavbar = navbar([
     text: '爱好',
     children: [
       { text: '旅行', link: '/travel/' },
-      { text: '刷机', link: '/interest/flash/' },
+      // { text: '刷机', link: '/interest/flash/' },
       {
         text: '刷机',
         children: [
           {
             text: '刷机',
             link: '/interest/flash/',
+          },
+          {
+            text: '摩托罗拉 edge s30',
+            link: '/interest/flash/edge_s30',
+          }, {
+            text: '红米 k30su',
+            link: '/interest/flash/k30s-apollo',
+          }
+          , {
+            text: '红米 9',
+            link: '/interest/flash/redmi9',
+          },
+          {
+            text: '魅蓝 node3',
+            link: '/interest/flash/m3-note',
           },
           {
             text: '文石 Tab10c Pro',
