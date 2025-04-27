@@ -2,7 +2,11 @@
 
 - 官网 https://zh.boox.com/tab10cpro
 
+- 解密 upx GitHub https://github.com/Hagb/decryptBooxUpdateUpx
+
 - 设备 model 表格 https://github.com/Hagb/decryptBooxUpdateUpx/blob/master/BooxKeys.csv
+
+- 获取固件: https://github.com/Hagb/decryptBooxUpdateUpx/issues/2
 
 - 高通工具箱 https://syxz.lanzoue.com/b01g1c7ve 密码 bulf
 
@@ -23,6 +27,8 @@
   <img src="https://static.yoouu.cn/static/imgs/doc/interest/tab10cpro/Screenshot_20250424-195248.avif" style="zoom:33%;" />
 
 ## Root
+
+一句话概括就是进入 edl 模式回读分区修改然后刷入。
 
 玩这个你需要自己排查出现的问题 比如 Windows 缩放会导致一些软件按钮提示看不到这种细节
 
@@ -71,6 +77,20 @@
 
    <img src="https://static.yoouu.cn/static/imgs/doc/interest/tab10cpro/read_back.avif"  />
 
+8. 找到回读出来的镜像文件
+
+   <img src="https://static.yoouu.cn/static/imgs/doc/interest/tab10cpro/read_images.avif"  />
+
+9. 接下来就简单了，用之前确定的当前分区用 magisk 修补然后直接刷入例如当前分区是 b
+
+   ```shell
+   # 选择刷入单个分区输入
+   boot_b
+   # 选择你修复好的镜像文件，刷入然后重启到系统就 ok 了
+   ```
+
+下面是之前写的，先放着。
+
 1. 拿到固件包
 
 2. 拿到 boot.img
@@ -105,7 +125,7 @@
    vbmeta_system (4.1 kB)  [=================================================================================================================================] 100 %
    vendor (611 MB)         [=================================================================================================================================] 100 %
    xbl (3.2 MB)            [=================================================================================================================================] 100 %
-    D:\rom_builder\tab10cpro 
+    D:\rom_builder\tab10cpro
    ```
 
 6. 拿到了 boot.img
@@ -124,30 +144,20 @@
 
     ```shell
     fastboot getvar unlocked
-    
+
     # 例如我的
      D:\rom_builder\tab10cpro                                                                                                                             | 17:34:51
     ➜ fastboot getvar unlocked
     unlocked: yes
     Finished. Total time: 0.003s
-     D:\rom_builder\tab10cpro  
+     D:\rom_builder\tab10cpro
     ```
 
 11. 刷入 patch 的 boot
 
     ```shell
     fastboot flash boot boot.img
-    # 例如我的
-    
     ```
-
-    
-
-https://github.com/Hagb/decryptBooxUpdateUpx?tab=readme-ov-file
-
-设备大全: https://github.com/Hagb/decryptBooxUpdateUpx/blob/master/BooxKeys.csv
-
-获取固件: https://github.com/Hagb/decryptBooxUpdateUpx/issues/2
 
 ```
 http://data.onyx-international.cn/api/firmware/update?where={"buildNumber":0,"buildType":"user","deviceMAC":"","lang":"zh_CN","model":"NovaPro","submodel":"","fingerprint":""}
@@ -171,8 +181,3 @@ http://data.onyx-international.cn/api/firmware/update?where={"buildNumber":0,"bu
    ```
 
 3. 使用这个工具 https://github.com/ssut/payload-dumper-go 解包 payload.bin
-
-   ```shell
-   ```
-
-   

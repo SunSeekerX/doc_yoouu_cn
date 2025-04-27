@@ -193,7 +193,7 @@ package.json 参考
 
 ### 普通 vue 项目构建
 
-```she
+```shell
 cd $WORKSPACE
 # 安装依赖
 yarn

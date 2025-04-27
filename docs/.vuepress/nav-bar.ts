@@ -4,7 +4,7 @@ export const zhNavbar = navbar([
   // 简介
   { text: '简介', link: '/intro/' },
   // AI
-  { text: 'AI', link: '/ai/' },
+  // { text: 'AI', link: '/ai/' },
   // 基础
   {
     text: '基础',
@@ -189,6 +189,19 @@ export const zhNavbar = navbar([
     children: [
       { text: '旅行', link: '/travel/' },
       { text: '刷机', link: '/interest/flash/' },
+      {
+        text: '刷机',
+        children: [
+          {
+            text: '刷机',
+            link: '/interest/flash/',
+          },
+          {
+            text: '文石 Tab10c Pro',
+            link: '/interest/flash/tab10cpro',
+          },
+        ],
+      },
       { text: '黑苹果', link: '/interest/hackintosh' },
       { text: 'N1 盒子', link: '/interest/n1' },
       { text: 'R1 音响', link: '/interest/phicomm_r1' },

@@ -13,21 +13,23 @@
   },
   "devDependencies": {
     "@vue/repl": "^4.4.1",
-    "@vuepress/bundler-vite": "2.0.0-rc.12",
+    "@vuepress/bundler-vite": "2.0.0-rc.19",
     "@vuepress/helper": "2.0.0-rc.31",
     "@vuepress/plugin-comment": "^2.0.0-rc.40",
     "@vuepress/plugin-google-analytics": "2.0.0-rc.21",
+    "@vuepress/plugin-revealjs": "2.0.0-rc.47",
+    "@vuepress/plugin-slimsearch": "2.0.0-rc.61",
     "chart.js": "^4.4.4",
     "cross-env": "^7.0.3",
     "echarts": "^5.5.1",
     "mermaid": "^11.2.0",
     "prettier": "^3.3.3",
     "reveal.js": "^5.1.0",
+    "sass": "^1.83.4",
     "twikoo": "^1.6.39",
-    "vue": "^3.4.27",
-    "vuepress": "2.0.0-rc.12",
-    "vuepress-plugin-search-pro": "2.0.0-rc.52",
-    "vuepress-theme-hope": "2.0.0-rc.44"
+    "vue": "^3.5.13",
+    "vuepress": "2.0.0-rc.19",
+    "vuepress-theme-hope": "2.0.0-rc.68"
   },
-  "packageManager": "pnpm@8.15.8"
+  "packageManager": "pnpm@10.9.0"
 }
