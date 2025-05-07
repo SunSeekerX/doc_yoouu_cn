@@ -48,6 +48,7 @@ sync_binlog = 1
 # 开启GTID（注意：需要按顺序启用以下配置）
 gtid_mode = ON
 enforce_gtid_consistency = ON
+early-plugin-load = ""
 ```
 
 1. 二进制日志配置

@@ -1,5 +1,25 @@
 # Windows 技巧
 
+## edge 和 chrome 禁用 ssl 检查
+
+如果是开发者每次都要提醒 ssl 证书有问题是非常麻烦的，如果放在任务栏需要复制快捷方式取消原来的链接，拖动改好的快捷方式到任务栏链接才能生效
+
+```
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --ignore-certificate-errors --ignore-urlfetcher-cert-requests
+
+"C:\Program Files (x86)\Microsoft\Edge Dev\Application\msedge.exe" --ignore-certificate-errors --ignore-urlfetcher-cert-requests
+
+"C:\Program Files (x86)\Microsoft\Edge Beta\Application\msedge.exe" --ignore-certificate-errors --ignore-urlfetcher-cert-requests
+
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --ignore-certificate-errors --ignore-urlfetcher-cert-requests
+
+"C:\Program Files\Google\Chrome Dev\Application\chrome.exe" --ignore-certificate-errors --ignore-urlfetcher-cert-requests
+
+"C:\Program Files\Google\Chrome Beta\Application\chrome.exe" --ignore-certificate-errors --ignore-urlfetcher-cert-requests
+```
+
+
+
 ## 好用的系统镜像
 
 [系统工具] VMware Workstation PRO_v17.6.3_正式版 https://bbs.pcbeta.com/viewthread-2034848-1-2.html
