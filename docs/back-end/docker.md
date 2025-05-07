@@ -407,6 +407,19 @@ $ docker run -d -p 65535:8080 --restart=always --name music pan93412/unblock-net
 > Docker 镜像：[https://hub.docker.com/r/jenkins/jenkins](https://hub.docker.com/r/jenkins/jenkins)
 
 ```bash
+# lts-jdk17
+docker run --name jenkins \
+-m 6144M \
+-p 50001:8080 \
+-p 50000:50000 \
+--restart=always \
+ -u root  \
+ -d  \
+ -v /var/run/docker.sock:/var/run/docker.sock  \
+ -v /data/docker_data/jenkins_home:/var/jenkins_home  \
+ -e JAVA_OPTS="-Dfile.encoding=UTF-8 -Xms1g -Xmx3g -XX:+UseG1GC -XX:+UseCompressedOops -Xlog:gc*:file=/var/jenkins_home/gc.log:time,uptime:filecount=5,filesize=10M" \
+  jenkins/jenkins:lts-jdk21
+ 
 # lts-jdk17 8192M
 docker run --name jenkins \
 -m 8192M \
