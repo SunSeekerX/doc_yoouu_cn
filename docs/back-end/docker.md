@@ -417,7 +417,7 @@ docker run --name jenkins \
  -d  \
  -v /var/run/docker.sock:/var/run/docker.sock  \
  -v /data/docker_data/jenkins_home:/var/jenkins_home  \
- -e JAVA_OPTS="-Dfile.encoding=UTF-8 -Xms1g -Xmx3g -XX:+UseG1GC -XX:+UseCompressedOops -Xlog:gc*:file=/var/jenkins_home/gc.log:time,uptime:filecount=5,filesize=10M" \
+ -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 -Xms1g -Xmx3g -XX:+UseG1GC -XX:+UseCompressedOops -Xlog:gc*:file=/var/jenkins_home/gc.log:time,uptime:filecount=5,filesize=10M" \
   jenkins/jenkins:lts-jdk21
  
 # lts-jdk17 8192M
