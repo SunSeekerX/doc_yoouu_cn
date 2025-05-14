@@ -1,5 +1,7 @@
 # 资源
 
+- 关于远程工作你想知道的都在这 https://wcngrtwsafnt.feishu.cn/wiki/Un61wNY0YizkBEkP7hDck3eondf
+
 ## 📌 工具网站
 
 网站抓取工具
