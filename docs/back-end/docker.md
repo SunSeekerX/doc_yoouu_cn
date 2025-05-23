@@ -552,8 +552,7 @@ https://hub.docker.com/r/snowdreamtech/frps
 
 ```shell
 mkdir -p /data/docker_data/frps/ && cd /data/docker_data/frps/
-touch frps.toml
-nano frps.toml
+touch frps.toml && nano frps.toml
 ```
 
 写入配置文件，`frps.toml`，根据你自己的配置
