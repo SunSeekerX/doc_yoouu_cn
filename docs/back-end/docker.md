@@ -1183,23 +1183,26 @@ location ^~ /
 
 镜像 https://hub.docker.com/r/rustdesk/rustdesk-server/tags
 
-官方文档：https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/
+官方文档：https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/install/
 
 ```shell
-sudo docker image pull rustdesk/rustdesk-server
-sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbs 
-sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td --net=host rustdesk/rustdesk-server hbbr
+# 这个能用
+docker run --name hbbs -v /data/docker_data/rustdesk/hbbs:/root -td --net=host --restart unless-stopped rustdesk/rustdesk-server hbbs -k your_public_key_here
+docker run --name hbbr -v /data/docker_data/rustdesk/hbbr:/root -td --net=host --restart unless-stopped rustdesk/rustdesk-server hbbr -k your_public_key_here
 
-sudo docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`:/root -td rustdesk/rustdesk-server hbbs 
-sudo docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`:/root -td rustdesk/rustdesk-server hbbr
+# 这个可以设置 ip
+docker run --name hbbs -v /data/docker_data/rustdesk/hbbs:/root -td --net=host --restart unless-stopped rustdesk/rustdesk-server hbbs -r 192.168.1.100:21117 -k your_public_key_here
+docker run --name hbbr -v /data/docker_data/rustdesk/hbbr:/root -td --net=host --restart unless-stopped rustdesk/rustdesk-server hbbr -k your_public_key_here
 
+# 开放 tcp 21114-21119
+# 开放 udp 21116
+
+# 下面是 docker-compose 方式配置文件在下面
 mkdir -p /data/docker_data/rustdesk
 touch /data/docker_data/rustdesk/docker-compose.yml
 cd /data/docker_data/rustdesk
+# 启动
 docker compose up -d
-
-# 开放 tcp 21115-21119
-
 # 停止
 docker-compose down
 # -v 参数会同时删除 volumes，这样就会删除数据库中的所有数据。
@@ -1336,7 +1339,7 @@ docker run -d \
 -v /data/docker_data/cloudreve/uploads:/cloudreve/uploads \
 -v /data/docker_data/cloudreve/avatar:/cloudreve/avatar \
 cloudreve/cloudreve:latest
-# 查看初始管理员账户和密码
+# 查看初始管理员账户和密码（新版本注册第一个用户就是管理员）
 docker logs cloudreve
 ```
 
