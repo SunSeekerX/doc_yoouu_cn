@@ -12,15 +12,11 @@
 
 github https://github.com/bin456789/reinstall
 
+注意不支持本地 iso
+
 ```shell
 # 安装下载镜像的工具
 apt update || true && apt install cpufrequtils -y || true && apt install nano -y || true && apt install mdadm -y || true && apt install vim -y || true && apt install isc-dhcp-server -y || true && apt install numactl -y || true && apt install lm-sensors -y || true && apt install htop -y || true && apt install dmidecode -y || true && apt install zfsutils-linux -y || true && apt install zfs-auto-snapshot -y || true && apt install iputils-ping -y || true && apt install aria2 -y || true && apt install sysbench -y || true
-
-bash reinstall.sh windows --image-name "Windows Server 2022 SERVERDATACENTER" --img /root/zh-cn_windows_server_2022_updated_nov_2024_x64_dvd_4e34897c.iso
-
-bash reinstall.sh windows \
-     --image-name "Windows Server 2022 SERVERDATACENTER" \
-     --iso "./zh-cn_windows_server_2022_updated_nov_2024_x64_dvd_4e34897c.iso"
 
 # 当前系统是 Linux
 # 国外下载
@@ -28,10 +24,10 @@ curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh 
 # 国内服务器
 curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
 
-bash reinstall.sh ubuntu 24.04 --password PASSWORD
-
-# dd 到 Windows
-curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
+# 从 linux dd 到 Windows
+bash reinstall.sh windows \
+     --image-name "Windows Server 2022 SERVERDATACENTER" \
+     --iso "your_windows_remote_download_url"
 
 # 终止安装
 killall trans.start
@@ -245,8 +241,6 @@ nano ~/.zshrc
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler dotenv macos rake rbenv ruby)
 ```
-
-
 
 ### ubuntu 24.04 LTS 换软件源（针对大陆）
 
