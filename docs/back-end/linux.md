@@ -13,6 +13,15 @@
 github https://github.com/bin456789/reinstall
 
 ```shell
+# 安装下载镜像的工具
+apt update || true && apt install cpufrequtils -y || true && apt install nano -y || true && apt install mdadm -y || true && apt install vim -y || true && apt install isc-dhcp-server -y || true && apt install numactl -y || true && apt install lm-sensors -y || true && apt install htop -y || true && apt install dmidecode -y || true && apt install zfsutils-linux -y || true && apt install zfs-auto-snapshot -y || true && apt install iputils-ping -y || true && apt install aria2 -y || true && apt install sysbench -y || true
+
+bash reinstall.sh windows --image-name "Windows Server 2022 SERVERDATACENTER" --img /root/zh-cn_windows_server_2022_updated_nov_2024_x64_dvd_4e34897c.iso
+
+bash reinstall.sh windows \
+     --image-name "Windows Server 2022 SERVERDATACENTER" \
+     --iso "./zh-cn_windows_server_2022_updated_nov_2024_x64_dvd_4e34897c.iso"
+
 # 当前系统是 Linux
 # 国外下载
 curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_

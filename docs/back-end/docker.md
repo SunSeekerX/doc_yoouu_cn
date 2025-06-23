@@ -1326,24 +1326,8 @@ docker run -it -d --name dpanel --restart=always \
 ### 0x29 Docker 安装 Cloudreve
 
 ```shell
-# 首先，创建所需的目录和文件
-mkdir -vp /data/docker_data/cloudreve/{uploads,avatar} \
-&& touch /data/docker_data/cloudreve/conf.ini \
-&& touch /data/docker_data/cloudreve/cloudreve.db
-# 然后，运行 Docker 容器
-docker run -d \
--p 5212:5212 \
---name cloudreve \
---mount type=bind,source=/data/docker_data/cloudreve/conf.ini,target=/cloudreve/conf.ini \
---mount type=bind,source=/data/docker_data/cloudreve/cloudreve.db,target=/cloudreve/cloudreve.db \
--v /data/docker_data/cloudreve/uploads:/cloudreve/uploads \
--v /data/docker_data/cloudreve/avatar:/cloudreve/avatar \
-cloudreve/cloudreve:latest
+docker run -d --name cloudreve -p 5212:5212 \
+    -v /data/docker_data/cloudreve/data:/cloudreve/data \
+    cloudreve/cloudreve:latest
 # 查看初始管理员账户和密码（新版本注册第一个用户就是管理员）
-docker logs cloudreve
 ```
-
-
-
-
-
