@@ -71,7 +71,7 @@ react-native : 无法加载文件 C:\Users\SunSeekerX\AppData\Roaming\npm\react-
    ```powershell
    # 更改执行策略
    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
-
+   
    # 查看执行策略
    Get-ExecutionPolicy
    ```
@@ -158,13 +158,12 @@ win+x 选择 Windows 终端（管理员）
   不受信任的存储库你正在从不受信任的存储库安装模块。如果你信任该存储库，请通过运行 Set-PSRepositorycmdlet 更改其 InstallationPolicy 值。是否确实要从“PSGallery”安装模块?[Y] 是(Y)  [A] 全是(A)  [N] 否(N)  [L] 全否(L)  [S] 暂停(S)  [?] 帮助
   ```
 
-  你可以按 Y 或 A 键，但是如果你觉得每次都这样麻烦的话，可以先执行下面的命令：
+  你可以按 Y 或 A 键，但是如果你觉得每次都这样麻烦的话，可以先执行下面的命令，之后再安装模块就不会出现这个提示了。
 
   ```powershell
   Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
   ```
 
-  之后再安装模块就不会出现这个提示了。
 
 #### posh-git
 
@@ -178,22 +177,21 @@ PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 
 #### oh-my-posh
 
-需要使用 [Scoop](https://scoop.sh/) 进行安装
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+```
+
+~~需要使用 [Scoop](https://scoop.sh/) 进行安装~~
 
 ```powershell
-# 设置权限
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
-# 普通用户
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 # 安装 Scoop
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 # 安装 curl
 scoop install curl
 
 # 安装 oh-my-posh
-scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
-# 更新
-scoop update oh-my-posh
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
 ```
 
 或者使用 winget

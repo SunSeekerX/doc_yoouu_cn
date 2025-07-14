@@ -1,5 +1,16 @@
 # Windows 技巧
 
+关闭打开 exe 警告
+
+```powershell
+# 创建必要的注册表路径和键，并禁用 .exe 文件打开时的警告提示
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies" -Name "Associations" -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" -Name "LowRiskFileTypes" -Value ".exe;.bat;.cmd;.js;.vbs;.reg;.msi;.msp;.hta;.cpl;.dll;.scr;.com;.lnk" -Type String
+
+# 恢复
+Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" -Force
+```
+
 ## edge 和 chrome 禁用 ssl 检查
 
 如果是开发者每次都要提醒 ssl 证书有问题是非常麻烦的，如果放在任务栏需要复制快捷方式取消原来的链接，拖动改好的快捷方式到任务栏链接才能生效
@@ -17,8 +28,6 @@
 
 "C:\Program Files\Google\Chrome Beta\Application\chrome.exe" --ignore-certificate-errors --ignore-urlfetcher-cert-requests
 ```
-
-
 
 ## 好用的系统镜像
 
