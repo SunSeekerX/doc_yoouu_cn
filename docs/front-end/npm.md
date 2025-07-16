@@ -303,6 +303,46 @@ pnpm config list
 pnpm install
 ```
 
+## 📌 bun 常用命令
+
+```powershell
+# PowerShell 脚本：检查并创建 bunfig.toml
+
+# 定义 bunfig.toml 的路径（位于用户主目录下的 .bun 文件夹）
+$bunConfigDir = Join-Path $env:USERPROFILE ".bun"
+$bunConfigFile = Join-Path $bunConfigDir "bunfig.toml"
+
+# 检查 .bun 目录是否存在，不存在则创建
+if (-not (Test-Path $bunConfigDir)) {
+    New-Item -Path $bunConfigDir -ItemType Directory -Force
+    Write-Host "Created directory: $bunConfigDir"
+}
+
+# 检查 bunfig.toml 文件是否存在
+if (-not (Test-Path $bunConfigFile)) {
+    # 定义 bunfig.toml 的内容
+    $bunConfigContent = @"
+[install.cache]
+# 指定缓存目录
+dir = "d:\\data\\node_package\\bun"
+
+# 当为 true 时，禁用全局缓存，但仍可能写入 node_modules/.cache
+disable = false
+
+# 当为 true 时，总是从 registry 获取最新版本
+disableManifest = true
+"@
+
+    # 创建 bunfig.toml 文件并写入内容
+    Set-Content -Path $bunConfigFile -Value $bunConfigContent -Encoding UTF8
+    Write-Host "Created bunfig.toml at: $bunConfigFile"
+} else {
+    Write-Host "bunfig.toml already exists at: $bunConfigFile"
+}
+```
+
+
+
 ## 📌 一键安装常用全局模块
 
 ### 快捷安装
@@ -316,7 +356,7 @@ npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env 
 原版
 
 ```shell
-npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon -g
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun -g
 ```
 
 ### tbify
