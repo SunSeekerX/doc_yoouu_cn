@@ -327,6 +327,10 @@ git reflog
 
 git reset --hard 版本号
 
+# 回滚之后使用垃圾回收
+git reflog expire --expire=now --all
+git gc --prune=now
+
 --soft：只是改变HEAD指针指向，缓存区和工作区不变；
 --mixed：修改HEAD指针指向，暂存区内容丢失，工作区不变；
 --hard：修改HEAD指针指向，暂存区内容丢失，工作区恢复以前状态；

@@ -164,10 +164,13 @@ Write-Host "`n脚本执行完成。"
 win+x powershell 管理员模式输入，输入完成，重启
 
 ```powershell
+# 关闭
 bcdedit /set hypervisorlaunchtype off
+# 开启
+bcdedit /set hypervisorlaunchtype auto
 ```
 
-win+r 输入 msinfo32 查看是否关闭
+win+r 输入 `msinfo32`查看是否关闭
 
 ## 关闭兼容性遥测
 
