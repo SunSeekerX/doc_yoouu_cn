@@ -187,7 +187,7 @@ export const zhNavbar = navbar([
   {
     text: '爱好',
     children: [
-      { text: '旅行', link: '/travel/' },
+      { text: '虚拟机折腾', link: '/interest/vm' },
       // { text: '刷机', link: '/interest/flash/' },
       {
         text: '刷机',
@@ -199,11 +199,12 @@ export const zhNavbar = navbar([
           {
             text: '摩托罗拉 edge s30',
             link: '/interest/flash/edge_s30',
-          }, {
+          },
+          {
             text: '红米 k30su',
             link: '/interest/flash/k30s-apollo',
-          }
-          , {
+          },
+          {
             text: '红米 9',
             link: '/interest/flash/redmi9',
           },
@@ -221,6 +222,7 @@ export const zhNavbar = navbar([
       { text: 'N1 盒子', link: '/interest/n1' },
       { text: 'R1 音响', link: '/interest/phicomm_r1' },
       { text: '浏览器', link: '/interest/browser' },
+      { text: '旅行', link: '/travel/' },
       { text: 'JD', link: '/interest/jd' },
       { text: '话题', link: '/interest/topic' },
       {
