@@ -350,13 +350,13 @@ disableManifest = true
 淘宝镜像
 
 ```shell
-npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon -g --registry=https://registry.npmmirror.com
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g --registry=https://registry.npmmirror.com
 ```
 
 原版
 
 ```shell
-npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun -g
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g
 ```
 
 ### tbify
