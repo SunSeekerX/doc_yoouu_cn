@@ -1325,9 +1325,11 @@ docker run -it -d --name dpanel --restart=always \
 
 ### 0x29 Docker 安装 Cloudreve
 
+https://docs.cloudreve.org/zh/overview/deploy/
+
 ```shell
 docker run -d --name cloudreve -p 5212:5212 \
-    -v /data/docker_data/cloudreve/data:/cloudreve/data \
+    -v /data/docker_data/cloudreve:/cloudreve/data \
     cloudreve/cloudreve:latest
 # 查看初始管理员账户和密码（新版本注册第一个用户就是管理员）
 ```
