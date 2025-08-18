@@ -1,5 +1,39 @@
 # Windows 技巧
 
+## Git bash 强化
+
+Install Git Bash with ZSH, OH MY ZSH & POWERLEVEL10K | Windows Guide https://gist.github.com/glenkusuma/7d7df65a89e485ec2f4690fdc88fffd6
+
+.minttyrc配置
+
+```
+Font=更纱终端书呆黑体-简
+FontHeight=10
+FontWeight=600
+BoldAsFont=no
+Columns=160
+Rows=46
+ScrollbackLines=2000
+BackgroundColour=13,13,13
+MiddleClickAction=void
+RightClickAction=paste
+Language=
+BellType=0
+BellFlash=yes
+Printer=Microsoft Print to PDF
+Transparency=off
+CursorBlinks=yes
+ThemeFile=nord
+ForegroundColour=178,178,178
+CursorColour=225,225,225
+FontSmoothing=full
+Locale=en_US
+Charset=UTF-8
+Term=xterm-256color
+BoldAsColour=no
+CursorType=block
+```
+
 关闭打开 exe 警告
 
 ```powershell
