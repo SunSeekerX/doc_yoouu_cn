@@ -376,6 +376,23 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 ### 6️⃣ 配置 Windows Terminal
 
+2025-08-22 02:40:26
+
+```powershell
+# 写入
+New-Item -ItemType Directory -Path "$env:USERPROFILE\AppData\Local\terminal" -Force | Out-Null; Invoke-WebRequest "https://raw.githubusercontent.com/yanglr/WindowsDevTools/master/awosomeTerminal/icons/wt_32.ico" -OutFile "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"
+# 打开文件夹
+Start-Process "$env:USERPROFILE\AppData\Local\terminal"
+# 添加到右键 默认当前路径
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""
+# 空白处右键
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""; `
+# 文件夹右键
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""
+# 删除
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue
+```
+
 #### 添加 Windows Terminal 到右键
 
 如果是 win11 官方镜像的系统，默认应该就已经安装到了右键。没有安装的可以手动安装下。
