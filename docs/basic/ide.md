@@ -406,6 +406,8 @@ setting->Editor->General->Code Completion 取消勾选 Match case
 
 ### 激活
 
+http://ckey.run/
+
 > 文档内的方法如果失效了，自己 Google 一下。就解决了，如果我自己使用文档方法无法激活才会更新。
 
 激活码网站
