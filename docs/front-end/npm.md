@@ -345,18 +345,11 @@ disableManifest = true
 
 ## 📌 一键安装常用全局模块
 
-### 快捷安装
-
-淘宝镜像
-
-```shell
-npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g --registry=https://registry.npmmirror.com
-```
-
-原版
-
 ```shell
 npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g
+
+# 淘宝镜像
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g --registry=https://registry.npmmirror.coma
 ```
 
 ### tbify

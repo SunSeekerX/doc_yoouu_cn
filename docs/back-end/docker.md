@@ -407,7 +407,28 @@ $ docker run -d -p 65535:8080 --restart=always --name music pan93412/unblock-net
 > Docker 镜像：[https://hub.docker.com/r/jenkins/jenkins](https://hub.docker.com/r/jenkins/jenkins)
 
 ```bash
-# lts-jdk17
+# lts-jdk21
+docker run --name jenkins \
+-m 12288M \
+--cpus=6.0 \
+-p 50001:8080 \
+-p 50000:50000 \
+--restart=always \
+-u root \
+-d \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v /data/docker_data/jenkins_home:/var/jenkins_home \
+-e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 -Xms4g -Xmx8g -XX:+UseG1GC -XX:+UseCompressedOops -Xlog:gc*:file=/var/jenkins_home/gc.log:time,uptime:filecount=5,filesize=20M" \
+jenkins/jenkins:lts-jdk21
+
+# 方向代理记得加上
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Host $host;
+proxy_set_header X-Forwarded-Port $server_port;
+proxy_set_header X-Forwarded-Proto $scheme;
+
 docker run --name jenkins \
 -m 6144M \
 -p 50001:8080 \
@@ -858,17 +879,49 @@ docker run -d \
 -v /etc/localtime:/etc/localtime:ro \
 gitea/gitea:latest
 
+docker run -d \
+--name=gitea \
+-e USER_UID=1000 \
+-e USER_GID=1000 \
+-e DB_TYPE=mysql \
+-e DB_HOST=192.168.0.1:3306 \
+-e DB_NAME=itssx_gitea \
+-e DB_USER=itssx_gitea \
+-e DB_PASSWD=itssx_gitea \
+-p 222:22 \
+-p 3000:3000 \
+--network=dockernet \
+--restart=always \
+-v /data/docker_data/gitea:/data \
+-v /etc/timezone:/etc/timezone:ro \
+-v /etc/localtime:/etc/localtime:ro \
+gitea/gitea:latest
+
 # win
 docker run -d --name=gitea -e USER_UID=1000 -e USER_GID=1000 -e DB_TYPE=mysql -e DB_HOST=172.172.172.1:3306 -e DB_NAME=db_name -e DB_USER=db_user -e DB_PASSWD=db_pwd -p 222:22 -p 3030:3000 --network=dockernet --restart=always -v D:\data\gitea:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro gitea/gitea:latest
 
-# 备份和恢复
+# 备份和恢复 官方文档 https://docs.gitea.com/zh-cn/administration/backup-and-restore
+# 我是直接导出数据库 然后备份文件 在新的机器还原 如果域名更改需要修改数据库导出的内容 数据库 sql 压缩之后可以变得更小
 # 查看 1000 用户名
 grep ':1000:' /etc/passwd
-# ubuntu 恢复
-docker exec -u <OS_USERNAME> -it -w <--tempdir> $(docker ps -qf 'name=^<NAME_OF_DOCKER_CONTAINER>$') bash -c '/usr/local/bin/gitea dump -c </path/to/app.ini>'
 
-mkdir -p /data/docker_data/gitea_backup
-docker exec -u root -it -w /data/docker_data/gitea_backup $(docker ps -qf 'name=^gitea$') bash -c '/usr/local/bin/gitea dump -c /data/gitea/conf/app.ini'
+# 我得 dump 命令
+docker exec -u git -w /data/gitea -it gitea bash -c '/usr/local/bin/gitea dump -c /data/gitea/conf/app.ini'
+
+# 在容器中打开 bash 会话
+docker exec --user git -it 2a83b293548e bash
+docker exec --user git -it gitea bash
+# 在容器内解压您的备份文件
+unzip gitea-dump-1610949662.zip
+cd gitea-dump-1610949662
+# 恢复 Gitea 数据
+mv data/* /data/gitea
+# 恢复仓库本身
+mv repos/* /data/git/gitea-repositories/
+# 调整文件权限
+chown -R git:git /data
+# 重新生成 Git 钩子
+/usr/local/bin/gitea -c '/data/gitea/conf/app.ini' admin regenerate hooks
 ```
 
 ### 0x16 Docker 安装 AppHost

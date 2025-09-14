@@ -218,6 +218,20 @@ service ssh restart
 
 ## 📌 ubuntu
 
+### 常用工具包
+
+```shell
+# 安装工具包
+apt update || true && apt install cpufrequtils -y || true && apt install nano -y || true && apt install mdadm -y || true && apt install vim -y || true && apt install isc-dhcp-server -y || true && apt install numactl -y || true && apt install lm-sensors -y || true && apt install htop -y || true && apt install dmidecode -y || true && apt install iputils-ping -y || true && apt install aria2 -y || true && apt install sysbench -y || true && apt install parted -y || true && apt install parallel -y || true
+```
+
+### aria2 快速多线程下载
+
+```shell
+# 多线程下载（16个连接）
+aria2c -x 16 -s 16 "文件直链"
+```
+
 ### 优化 shell
 
 ```shell
@@ -326,29 +340,6 @@ sh -c "$(curl -fsSL https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install
 
 ### 挂载硬盘
 
-### ubuntu22.4 开启 root 登录
-
-1. 使用管理权限打开`/etc/ssh/sshd_config`文件，并更改以下行
-
-```yaml
-FROM:
-#PermitRootLogin prohibit-password
-TO:
-PermitRootLogin yes
-```
-
-或者使用以下命令快速替换
-
-```bash
-sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-```
-
-重启 ssh 服务
-
-```
-sudo systemctl restart ssh
-```
-
 ### ubuntu 查看端口被占用并处理
 
 ```shell
@@ -373,43 +364,50 @@ lsof -i:**
 kill pid
 ```
 
+### ubuntu22.4 开启 root 登录
+
+```shell
+# 修改 ssh 配置
+sudo nano /etc/ssh/sshd_config
+# 至少保证
+Port 22
+PermitRootLogin yes
+PasswordAuthentication yes
+UsePAM yes
+# 修改完成按 ctrl+o 然后 enter 保存 然后 ctrl+x 退出
+# 重启 ssh 服务
+sudo systemctl restart ssh
+# 或者
+sudo systemctl restart ssh.socket
+
+# Ubuntu 24 默认用 systemd socket 激活 sshd
+sudo systemctl stop ssh.socket
+sudo systemctl disable ssh.socket
+sudo systemctl enable ssh.service
+sudo systemctl restart ssh.service
+```
+
 ### 更改 ssh 端口
 
-**一、更改 ssh 的端口**
-
-1.修改 sshd_config
-
-```bash
-vim /etc/ssh/sshd_config
-```
-
-2.在 port 后面添加端口即可，这些端口都是并列的，添加后如下
-
-```bash
+```shell
+# 修改 ssh 配置
+sudo nano /etc/ssh/sshd_config
+# 至少保证
 Port 22
-Port 443
-```
 
-3、重启 ssh 服务
+# 修改完成按 ctrl+o 然后 enter 保存 然后 ctrl+x 退出
+# 重启 ssh 服务
+sudo systemctl restart ssh
+# 或者
+sudo systemctl restart ssh.socket
 
-```bash
-sudo service ssh restart
-```
-
-**二、禁止远程登录 root 用户**
-
-1.修改/etc/ssh/sshd_config
-
-```bash
-vim /etc/ssh/sshd_config
-
+# Ubuntu 24 默认用 systemd socket 激活 sshd
+sudo systemctl stop ssh.socket
+sudo systemctl disable ssh.socket
+sudo systemctl enable ssh.service
+sudo systemctl restart ssh.service
+# 禁止远程登录 root 用户
 # 将 PermitRootLogin 改为 PermitRootLogin no
-```
-
-2.重启
-
-```bash
-service sshd restart
 ```
 
 ### 修改 root 密码
