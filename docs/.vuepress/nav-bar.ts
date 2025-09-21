@@ -156,6 +156,7 @@ export const zhNavbar = navbar([
           { text: 'Golang', link: '/back-end/golang' },
           { text: 'Rust', link: '/back-end/rust' },
           { text: 'Python', link: '/back-end/python' },
+          { text: 'PHP', link: '/back-end/php' },
         ],
       },
       // {

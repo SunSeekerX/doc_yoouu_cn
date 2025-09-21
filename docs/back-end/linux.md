@@ -24,6 +24,9 @@ curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh 
 # 国内服务器
 curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
 
+# 从 linux dd 到 linux
+bash reinstall.sh ubuntu 24.04 --password "xxxxxx" --ssh-port 22
+
 # 从 linux dd 到 Windows
 bash reinstall.sh windows \
      --image-name "Windows Server 2022 SERVERDATACENTER" \

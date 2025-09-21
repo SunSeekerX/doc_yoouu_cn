@@ -924,6 +924,22 @@ chown -R git:git /data
 /usr/local/bin/gitea -c '/data/gitea/conf/app.ini' admin regenerate hooks
 ```
 
+一些基础安全设置
+
+```ini
+# 禁止注册
+DISABLE_REGISTRATION = true
+# 只允许管理员创建用户
+ALLOW_ONLY_EXTERNAL_REGISTRATION = false
+REGISTER_EMAIL_CONFIRM = false
+# 关闭自助邮件功能（防止外部滥用）
+ENABLE_NOTIFY_MAIL = false
+# 禁止匿名访问
+REQUIRE_SIGNIN_VIEW = true
+# 禁止未登录用户克隆仓库
+DISABLE_GRAVATAR = true
+```
+
 ### 0x16 Docker 安装 AppHost
 
 ```shell

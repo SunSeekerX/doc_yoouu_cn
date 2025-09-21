@@ -8,6 +8,10 @@
 
 ![devops.png](https://static.yoouu.cn/static/imgs/doc/devops/devops.png)
 
+## Publish over SSH 配置显示执行日志
+
+你需要把这个Verbose output in console勾上  得在每个项目的里面 没有全局开关 牛逼
+
 ## 配置插件下载加速
 
 **第一次安装**
