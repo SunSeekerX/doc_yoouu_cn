@@ -387,10 +387,22 @@ Start-Process "$env:USERPROFILE\AppData\Local\terminal"
 Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""
 # 空白处右键
 New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""; `
+# 删除文件夹空白处右键 "Open in Windows Terminal"
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue
+
 # 文件夹右键
 New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""
-# 删除
-Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue
+# 删除文件夹右键 "Open in Windows Terminal"
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue
+
+
+# 在 wsl 打开当前目录
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl" -Name '(default)' -Value 'Open Ubuntu (root+zsh)'
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"
+
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl\command" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl\command" -Name '(default)' -Value "`"$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe`" wsl -d Ubuntu-24.04 --user root bash -c 'cd \$(wslpath \"%V\"); exec zsh -l'"
 ```
 
 #### 添加 Windows Terminal 到右键

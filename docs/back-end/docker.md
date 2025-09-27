@@ -643,7 +643,9 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
 
    ```bash
    vi redis.conf
-
+   # or
+   nano redis.conf
+   
    # 这行要注释掉，解除本地连接限制 配置绑定 ip，搜索 bind 127.0.0.1 -::1
    bind 0.0.0.0
    # 默认yes，如果设置为yes，则只允许在本机的回环连接，其他机器无法连接。
@@ -662,7 +664,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    # Linux
    docker run --name redis7x \
    --restart=always \
-   -p 63799:6379 \
+   -p 16379:6379 \
    --log-opt max-size=100m --log-opt max-file=2 \
    -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v /data/docker_data/redis7x:/data \
@@ -671,7 +673,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    # Win
    docker run --name redis7x `
    --restart=always `
-   -p 63799:6379 `
+   -p 16379:6379 `
    --log-opt max-size=100m `
    --log-opt max-file=2 `
    -v D:\data\docker_data\redis7x\redis.conf:/etc/redis/redis.conf `
@@ -682,7 +684,7 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
    # Mac
    docker run --name redis7x \
    --restart=always \
-   -p 63799:6379 \
+   -p 16379:6379 \
    --log-opt max-size=100m --log-opt max-file=2 \
    -v ~/work/data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
    -v ~/work/data/docker_data/redis7x:/data \
@@ -722,36 +724,6 @@ nginx 反向代理无法正常工作，禅道工作目录为 www/
 
 镜像地址：[https://hub.docker.com/\_/mysql?tab=reviews](https://hub.docker.com/_/mysql?tab=reviews)
 
-**mysql 57**
-
-```shell
-docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=my_secret_pw -d mysql:5.7
-
-# Linux
-docker run -d \
---name mysql57 \
---privileged=true \
---restart=always \
--p 33066:3306 \
--v /data/docker_data/mysql57x/data:/var/lib/mysql \
--v /data/docker_data/mysql57x/config:/etc/mysql/conf.d  \
--v /data/docker_data/mysql57x/logs:/logs \
--e MYSQL_ROOT_PASSWORD=my_secret_pw \
--e TZ=Asia/Shanghai mysql:5.7
-
-# Win
-docker run -d `
---name mysql57 `
---privileged=true `
---restart=always `
--p 33066:3306 `
--v D:\data\docker_data\mysql57x\data:/var/lib/mysql `
--v D:\data\docker_data\mysql57x\config:/etc/mysql/conf.d `
--v D:\data\docker_data\mysql57x\logs:/logs `
--e MYSQL_ROOT_PASSWORD=root `
--e TZ=Asia/Shanghai mysql:5.7
-```
-
 **mysql 8.x**
 
 ```shell
@@ -760,19 +732,19 @@ docker run -d \
 --name mysql8x \
 --privileged=true \
 --restart=always \
--p 33077:3306 \
+-p 13306:3306 \
 -v /data/docker_data/mysql8x/data:/var/lib/mysql \
 -v /data/docker_data/mysql8x/config:/etc/mysql/conf.d  \
 -v /data/docker_data/mysql8x/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my_secret_pw \
--e TZ=Asia/Shanghai mysql:8.3
+-e TZ=Asia/Shanghai mysql:8
 
 # Win
 docker run -d `
 --name mysql8x `
 --privileged=true `
 --restart=always `
--p 33077:3306 `
+-p 13306:3306 `
 -v D:\data\docker_data\mysql8x\data:/var/lib/mysql `
 -v D:\data\docker_data\mysql8x\config:/etc/mysql/conf.d `
 -v D:\data\docker_data\mysql8x\logs:/logs `
@@ -784,14 +756,26 @@ docker run  -d  \
 --name mysql8x \
 --privileged=true \
 --restart=always \
--p 33066:3306 \
+-p 13306:3306 \
 -v ~/work/data/docker_data/mysql8/data:/var/lib/mysql \
 -v ~/work/data/docker_data/mysql8/config:/etc/mysql/conf.d  \
 -v ~/work/data/docker_data/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=my_secret_pw \
 -e TZ=Asia/Shanghai mysql:8.3
 
-# 开放远程访问
+# 开放远程访问 MySQL 8.4+ 中默认已经 移除了 mysql_native_password 插件
+# 进入容器
+docker exec -it <container_id_or_name> /bin/bash
+docker exec -it mysql8x /bin/bash
+# 登录 mysql
+mysql -u root -p
+# 开放权限
+DROP USER 'root'@'%';
+CREATE USER 'root'@'%' IDENTIFIED BY 'my_secret_pw';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+# 开放远程访问 MySQL 8.4 中默认已经 移除了 mysql_native_password 插件
 # 进入容器
 docker exec -it <container_id_or_name> /bin/bash
 docker exec -it mysql8x /bin/bash
@@ -801,6 +785,46 @@ mysql -u root -p
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'my_secret_pw';
 # 刷新权限
 flush privileges;
+```
+
+**mysql 57**
+
+```shell
+docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=my_secret_pw -d mysql:5.7
+
+# Linux
+docker run -d \
+--name mysql57 \
+--privileged=true \
+--restart=always \
+-p 23066:3306 \
+-v /data/docker_data/mysql57x/data:/var/lib/mysql \
+-v /data/docker_data/mysql57x/config:/etc/mysql/conf.d  \
+-v /data/docker_data/mysql57x/logs:/logs \
+-e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+-e TZ=Asia/Shanghai mysql:5.7
+
+# Win
+docker run -d `
+--name mysql57 `
+--privileged=true `
+--restart=always `
+-p 23306:3306 `
+-v D:\data\docker_data\mysql57x\data:/var/lib/mysql `
+-v D:\data\docker_data\mysql57x\config:/etc/mysql/conf.d `
+-v D:\data\docker_data\mysql57x\logs:/logs `
+-e MYSQL_ALLOW_EMPTY_PASSWORD=yes `
+-e TZ=Asia/Shanghai mysql:5.7
+
+
+# 启动 phpmyadmin 测试
+docker run -d `
+--name myadmin `
+--restart=always `
+-e PMA_HOST=host.docker.internal `
+-e PMA_PORT=23306 `
+-p 28080:80 `
+phpmyadmin:latest
 ```
 
 ### 0x14 Docker 安装 Bookstack
@@ -879,24 +903,6 @@ docker run -d \
 -v /etc/localtime:/etc/localtime:ro \
 gitea/gitea:latest
 
-docker run -d \
---name=gitea \
--e USER_UID=1000 \
--e USER_GID=1000 \
--e DB_TYPE=mysql \
--e DB_HOST=192.168.0.1:3306 \
--e DB_NAME=itssx_gitea \
--e DB_USER=itssx_gitea \
--e DB_PASSWD=itssx_gitea \
--p 222:22 \
--p 3000:3000 \
---network=dockernet \
---restart=always \
--v /data/docker_data/gitea:/data \
--v /etc/timezone:/etc/timezone:ro \
--v /etc/localtime:/etc/localtime:ro \
-gitea/gitea:latest
-
 # win
 docker run -d --name=gitea -e USER_UID=1000 -e USER_GID=1000 -e DB_TYPE=mysql -e DB_HOST=172.172.172.1:3306 -e DB_NAME=db_name -e DB_USER=db_user -e DB_PASSWD=db_pwd -p 222:22 -p 3030:3000 --network=dockernet --restart=always -v D:\data\gitea:/data -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro gitea/gitea:latest
 
@@ -905,7 +911,7 @@ docker run -d --name=gitea -e USER_UID=1000 -e USER_GID=1000 -e DB_TYPE=mysql -e
 # 查看 1000 用户名
 grep ':1000:' /etc/passwd
 
-# 我得 dump 命令
+# 我的 dump 命令
 docker exec -u git -w /data/gitea -it gitea bash -c '/usr/local/bin/gitea dump -c /data/gitea/conf/app.ini'
 
 # 在容器中打开 bash 会话
@@ -938,6 +944,17 @@ ENABLE_NOTIFY_MAIL = false
 REQUIRE_SIGNIN_VIEW = true
 # 禁止未登录用户克隆仓库
 DISABLE_GRAVATAR = true
+
+# 下面是开启 ssh
+DISABLE_SSH = false
+DOMAIN = gitea.yoouu.cn
+SSH_DOMAIN = gitea.yoouu.cn
+HTTP_PORT = 3000
+ROOT_URL = https://gitea.yoouu.cn/
+START_SSH_SERVER = true
+SSH_PORT = 222
+SSH_LISTEN_PORT = 22
+LFS_START_SERVER = true
 ```
 
 ### 0x16 Docker 安装 AppHost

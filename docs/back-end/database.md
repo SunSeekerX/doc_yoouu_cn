@@ -1,4 +1,11 @@
-# Data base
+# 数据库操作
+
+## 导出和导入
+
+```shell
+# 导出
+docker exec mysql57 sh -c "mysqldump -uroot mydb | gzip" > mydb.sql.gz
+```
 
 ## 📌 Common
 

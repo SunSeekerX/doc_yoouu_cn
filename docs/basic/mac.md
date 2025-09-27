@@ -421,7 +421,6 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler dotenv macos ra
 ```shell
 rbenv_prompt_info:2: command not found: ruby
 # ubuntu 解决
-
 ```
 
 1. 首先，安装 rbenv 和 ruby-build：
