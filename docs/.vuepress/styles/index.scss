@@ -197,14 +197,23 @@
 
 /* 应用字体到全局 */
 :root {
-  --font-family: 'HarmonyOS Sans SC', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-family: 'HarmonyOS Sans SC', "Noto Sans SC", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --heading-font-family: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif SC", serif;
 }
 
 body {
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // font-size: 18px;
+}
+
+/* 京都宿泊风格的温暖背景渐变 - 仅白天模式 */
+html:not([data-theme="dark"]) body {
+  background: linear-gradient(rgb(252, 248, 242) 0%, rgb(243, 237, 228) 45%, rgb(249, 246, 240) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: rgb(31, 21, 15);
+  line-height: 1.7;
 }
 
 * {
@@ -221,11 +230,288 @@ p {
   margin-block-end: 0.5em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  // line-height: normal;
 }
-blockquote > p {
-  // margin-block-start: 0.5em;
-  // margin-block-end: 0.5em;
+
+/* 京都风格样式 - 仅白天模式 */
+html:not([data-theme="dark"]) {
+  /* 段落样式 */
+  p {
+    color: rgb(107, 92, 82);
+    line-height: 1.7;
+  }
+
+  /* 标题使用深色和衬线字体 */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font-family);
+    color: rgb(31, 21, 15);
+    font-weight: 500;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* 链接样式 - 使用温暖的茶色调 */
+  a {
+    color: rgb(139, 102, 66);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  a:hover {
+    color: rgb(107, 69, 39);
+  }
+
+  /* 内容区域内的链接增强效果 */
+  .theme-hope-content a {
+    color: rgb(139, 102, 66) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .theme-hope-content a:hover {
+    color: rgb(107, 69, 39) !important;
+    background: rgba(139, 102, 66, 0.15);
+    padding: 1px 3px;
+    border-radius: 3px;
+  }
+
+  /* 导航栏样式优化 */
+  .vp-navbar {
+    background: rgba(252, 248, 242, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(31, 21, 15, 0.1);
+  }
+
+  .vp-navbar .vp-navbar-title {
+    color: rgb(31, 21, 15) !important;
+  }
+
+  .vp-navbar .vp-navbar-nav a {
+    color: rgb(107, 92, 82) !important;
+  }
+
+  .vp-navbar .vp-navbar-nav a:hover {
+    color: rgb(31, 21, 15) !important;
+  }
+
+  /* 导航栏下拉菜单样式优化 */
+  .vp-navbar-dropdown-wrapper .vp-navbar-dropdown {
+    background: rgba(252, 248, 242, 0.98) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(31, 21, 15, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(31, 21, 15, 0.15);
+  }
+
+  .vp-navbar-dropdown-wrapper .vp-navbar-dropdown .vp-navbar-dropdown-item {
+    color: rgb(107, 92, 82) !important;
+    border-bottom: 1px solid rgba(31, 21, 15, 0.05);
+  }
+
+  .vp-navbar-dropdown-wrapper .vp-navbar-dropdown .vp-navbar-dropdown-item:hover {
+    background: rgba(243, 237, 228, 0.5) !important;
+    color: rgb(31, 21, 15) !important;
+  }
+
+  .vp-navbar-dropdown-wrapper .vp-navbar-dropdown .vp-navbar-dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  /* 移动端菜单样式优化 */
+  .vp-sidebar {
+    background: rgba(252, 248, 242, 0.98) !important;
+    backdrop-filter: blur(15px);
+    border-right: 1px solid rgba(31, 21, 15, 0.1);
+  }
+
+  .vp-sidebar .vp-sidebar-item a {
+    color: rgb(107, 92, 82) !important;
+  }
+
+  .vp-sidebar .vp-sidebar-item a:hover {
+    background: rgba(243, 237, 228, 0.5) !important;
+    color: rgb(31, 21, 15) !important;
+  }
+
+  .vp-sidebar .vp-sidebar-item.active > a {
+    background: rgba(243, 237, 228, 0.8) !important;
+    color: rgb(31, 21, 15) !important;
+    border-right: 3px solid rgb(107, 92, 82);
+  }
+
+  /* PC端右侧TOC目录样式优化 */
+  @media (min-width: 1440px) {
+    .page-toc {
+      background: rgba(255, 255, 255, 0.7) !important;
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      border: 1px solid rgba(31, 21, 15, 0.08);
+      box-shadow: 0 4px 20px rgba(31, 21, 15, 0.1);
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .page-toc .toc-header {
+      color: rgb(31, 21, 15) !important;
+      font-family: var(--heading-font-family);
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(31, 21, 15, 0.1);
+    }
+
+    .page-toc .toc-list {
+      margin: 0;
+      padding: 0;
+    }
+
+    .page-toc .toc-list .toc-item {
+      margin: 0.3rem 0;
+    }
+
+    .page-toc .toc-list .toc-item a {
+      color: rgb(107, 92, 82) !important;
+      text-decoration: none;
+      display: block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .page-toc .toc-list .toc-item a:hover {
+      color: rgb(31, 21, 15) !important;
+      background: rgba(243, 237, 228, 0.6) !important;
+      transform: translateX(2px);
+    }
+
+    .page-toc .toc-list .toc-item.active > a {
+      color: rgb(31, 21, 15) !important;
+      background: rgba(243, 237, 228, 0.8) !important;
+      border-left: 3px solid rgb(107, 92, 82);
+      font-weight: 500;
+      padding-left: 0.7rem;
+    }
+
+    /* 多级目录缩进 */
+    .page-toc .toc-list .toc-item.toc-h3 a {
+      padding-left: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .page-toc .toc-list .toc-item.toc-h4 a {
+      padding-left: 2.2rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* 内容区域背景 */
+  .theme-hope-content {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 12px rgba(31, 21, 15, 0.1);
+  }
+
+  blockquote > p {
+    color: rgb(107, 92, 82);
+  }
+
+  /* 代码样式优化 */
+  code {
+    background: rgba(252, 248, 242, 0.8) !important;
+    border: 1px solid rgba(31, 21, 15, 0.1);
+    border-radius: 4px;
+    color: rgb(31, 21, 15) !important;
+    padding: 0.1rem 0.3rem;
+  }
+
+  /* 代码块背景优化 */
+  div[class*="language-"] {
+    background: rgba(252, 248, 242, 0.9) !important;
+    border: 1px solid rgba(31, 21, 15, 0.1);
+    border-radius: 8px;
+  }
+
+  div[class*="language-"] pre {
+    background: transparent !important;
+  }
+
+  div[class*="language-"] code {
+    background: transparent !important;
+    border: none !important;
+    color: rgb(31, 21, 15) !important;
+  }
+
+  /* 表格样式优化 - 简洁京都风格 */
+  table {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(31, 21, 15, 0.1);
+    border: none !important;
+  }
+
+  table thead {
+    background: rgba(252, 248, 242, 0.8) !important;
+  }
+
+  table thead th {
+    background: transparent !important;
+    color: rgb(31, 21, 15) !important;
+    font-family: var(--font-family) !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(31, 21, 15, 0.1) !important;
+    padding: 1rem 0.8rem;
+    text-align: left !important;
+  }
+
+  table tbody tr {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  table tbody tr:nth-child(even) {
+    background: rgba(252, 248, 242, 0.3) !important;
+  }
+
+  table tbody tr:hover {
+    background: rgba(243, 237, 228, 0.5) !important;
+  }
+
+  table tbody td {
+    border: none !important;
+    color: rgb(107, 92, 82) !important;
+    padding: 0.8rem;
+    vertical-align: top;
+  }
+
+  table tbody td a {
+    color: rgb(139, 102, 66) !important;
+  }
 }
 
 code {

@@ -57,3 +57,4 @@ coverage/
 
 # macOS
 .DS_Store
+.claude

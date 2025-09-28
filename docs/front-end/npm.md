@@ -46,6 +46,18 @@ yarn config set cache-folder "d:\data\node_package\yarn_cache"
 pnpm config set store-dir "d:\data\node_package\.pnpm-store"
 ```
 
+**添加环境变量：**
+
+修改全局安装包路径后，需要将 `d:\data\node_package\npm` 添加到系统环境变量 `Path` 中：
+
+```
+Win + S 搜索 环境变量，选择 编辑系统环境变量
+→ 弹出"系统属性" → 点击右下角 环境变量(N)...
+→ 在"系统变量(S)"下面找到 Path → 点击 编辑(I)...
+→ 点击 新建(N) → 输入 d:\data\node_package\npm
+→ 确认 → 确认 → 重启终端（或重启电脑）
+```
+
 ### wsl
 
 wsl 还是别改了。等下一堆问题
@@ -364,7 +376,8 @@ disableManifest = true
 npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g
 
 # 淘宝镜像
-npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g --registry=https://registry.npmmirror.coma
+npm i yarn pnpm -g --registry=https://registry.npmmirror.com
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g --registry=https://registry.npmmirror.com
 ```
 
 ### tbify
