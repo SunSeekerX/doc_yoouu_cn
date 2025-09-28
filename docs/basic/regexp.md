@@ -93,8 +93,8 @@ TypeError - 如果 _pattern_ 是 RegExp 对象，但没有省略 _attributes_ �
 | [n\*](https://www.w3school.com.cn/jsref/jsref_regexp_zeromore.asp)    | 匹配任何包含零个或多个 n 的字符串。         |
 | [n?](https://www.w3school.com.cn/jsref/jsref_regexp_zeroone.asp)      | 匹配任何包含零个或一个 n 的字符串。         |
 | [n{X}](https://www.w3school.com.cn/jsref/jsref_regexp_nx.asp)         | 匹配包含 X 个 n 的序列的字符串。            |
-| [n{X,Y}](https://www.w3school.com.cn/jsref/jsref_regexp_nxy.asp)      | 匹配包含 X 至 Y 个 n 的序列的字符串。       |
-| [n{X,}](https://www.w3school.com.cn/jsref/jsref_regexp_nxcomma.asp)   | 匹配包含至少 X 个 n 的序列的字符串。        |
+| [`n{X,Y}`](https://www.w3school.com.cn/jsref/jsref_regexp_nxy.asp)      | 匹配包含 X 至 Y 个 n 的序列的字符串。       |
+| [`n{X,}`](https://www.w3school.com.cn/jsref/jsref_regexp_nxcomma.asp)   | 匹配包含至少 X 个 n 的序列的字符串。        |
 | [n\$](https://www.w3school.com.cn/jsref/jsref_regexp_ndollar.asp)     | 匹配任何结尾为 n 的字符串。                 |
 | [^n](https://www.w3school.com.cn/jsref/jsref_regexp_ncaret.asp)       | 匹配任何开头为 n 的字符串。                 |
 | [?=n](https://www.w3school.com.cn/jsref/jsref_regexp_nfollow.asp)     | 匹配任何其后紧接指定字符串 n 的字符串。     |
