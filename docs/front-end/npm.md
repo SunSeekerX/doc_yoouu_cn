@@ -612,6 +612,23 @@ pm2 start ecosystem.config.js
 
 使用 [nvm](https://github.com/coreybutler/nvm-windows) 进行管理，具体安装查看 github 说明。
 
+**常用命令：**
+
+```shell
+# 查看已安装的 Node.js 版本
+nvm list
+# 查看可下载的 Node.js 版本
+nvm list available
+# 安装指定版本
+nvm install 18.16.0
+# 切换到指定版本
+nvm use 18.16.0
+# 显示当前使用的版本
+nvm current
+# 卸载指定版本
+nvm uninstall 18.16.0
+```
+
 ### mac
 
 [nvm](https://github.com/nvm-sh/nvm) 具体安装查看 github 说明。

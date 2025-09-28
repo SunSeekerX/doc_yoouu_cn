@@ -167,7 +167,6 @@
   text-align: start !important;
 }
 
-
 /* 引入 HarmonyOS Sans 字体 - 只引入常规和中等粗细 */
 // @font-face {
 //   font-family: 'HarmonyOS Sans SC';
@@ -177,13 +176,13 @@
 //   src: url('/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
 // }
 
-@font-face {
-  font-family: 'HarmonyOS Sans SC';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Medium.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: 'HarmonyOS Sans SC';
+//   font-style: normal;
+//   font-weight: 500;
+//   font-display: swap;
+//   src: url('/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Medium.ttf') format('truetype');
+// }
 
 /* 也可以根据需要添加粗体 */
 /* 
@@ -211,7 +210,6 @@ body {
 * {
   font-family: inherit;
 }
-
 
 body {
   // font-size: 16px;
