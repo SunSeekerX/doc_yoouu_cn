@@ -8,9 +8,22 @@ import { zhNavbar } from './nav-bar.js'
 export default defineUserConfig({
   base: "/",
   title: `SunSeekerX's Notebook`,
-  description:
-    'Javascript、HTML、CSS、Android、iOS、Flutter、NPM、NodeJS、Vue、React、Uni-app、JAVA、Kotlin、NodeJS、Golang、Linux、Docker、Mysql、Solidity、NFT、ETH、BNB、BTC、Windows、Mac、Power shell、zsh、Nginx、Git、Proxy、刷机、黑苹果、Adobe',
+  description: '涵盖前端、后端、移动开发、区块链、Linux运维等技术领域的实用教程和经验分享。专注于JavaScript、Vue、React、Node.js、Docker、区块链开发等现代技术栈。',
   bundler: viteBundler(),
+
+  // SEO优化配置
+  head: [
+    ['meta', { name: 'keywords', content: 'JavaScript,Vue,React,Node.js,前端开发,后端开发,Java,Spring Boot,MyBatis,NestJS,Golang,Docker,Linux,区块链,Solidity,NFT,以太坊,比特币,Android开发,iOS开发,Uni-app,人工智能,Stable Diffusion,数据库,MySQL,Git,Nginx,编程教程,技术笔记,开发文档,程序员,软件开发,Web开发,移动开发,全栈开发,DevOps,运维,代码示例,技术分享,开源项目' }],
+    ['meta', { name: 'author', content: 'SunSeekerX' }],
+    ['meta', { property: 'og:title', content: `SunSeekerX's Notebook - 技术笔记与教程分享` }],
+    ['meta', { property: 'og:description', content: '涵盖前端、后端、移动开发、区块链、Linux运维等技术领域的实用教程和经验分享' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:url', content: 'https://doc.yoouu.cn' }],
+    ['meta', { property: 'og:site_name', content: `SunSeekerX's Notebook` }],
+    ['link', { rel: 'canonical', href: 'https://doc.yoouu.cn' }],
+    ['meta', { name: 'robots', content: 'index,follow' }],
+    ['meta', { name: 'googlebot', content: 'index,follow' }]
+  ],
   plugins: [
     // searchProPlugin({
     //   // 配置选项
