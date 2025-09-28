@@ -620,9 +620,9 @@ nvm list
 # 查看可下载的 Node.js 版本
 nvm list available
 # 安装指定版本
-nvm install 18.16.0
+nvm install 22.20.0
 # 切换到指定版本
-nvm use 18.16.0
+nvm use 22.20.0
 # 显示当前使用的版本
 nvm current
 # 卸载指定版本
