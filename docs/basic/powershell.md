@@ -385,10 +385,15 @@ New-Item -ItemType Directory -Path "$env:USERPROFILE\AppData\Local\terminal" -Fo
 Start-Process "$env:USERPROFILE\AppData\Local\terminal"
 # 添加到右键 默认当前路径
 Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""
-# 空白处右键
+# 文件夹空白处右键
 New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""; `
 # 删除文件夹空白处右键 "Open in Windows Terminal"
 Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue
+
+# 文件夹空白处右键 -> Open Git Bash (Windows Terminal)
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Name '(default)' -Value 'Open Git Bash (Windows Terminal)'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Name 'Icon' -Value "C:\Program Files\Git\mingw64\share\git\git-for-windows.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash\command" -Name '(default)' -Value "`"$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe`" -p `{2c4de342-38b7-51cf-b940-2309a097f518`} -d `"%V`""
+# 删除命令（撤销上面添加的菜单）
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Recurse -Force -ErrorAction SilentlyContinue
 
 # 文件夹右键
 New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""

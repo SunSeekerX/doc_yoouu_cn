@@ -1419,3 +1419,38 @@ docker run -d --name cloudreve -p 5212:5212 \
     cloudreve/cloudreve:latest
 # 查看初始管理员账户和密码（新版本注册第一个用户就是管理员）
 ```
+
+### 0x30 Claude Relay Service
+
+https://github.com/Wei-Shaw/claude-relay-service
+
+https://pincc.ai/
+
+```shell
+# 创建目录
+mkdir -p /data/docker_data/crs && cd /data/docker_data/crs
+# 
+curl -fsSL https://pincc.ai/crs-compose.sh -o crs-compose.sh && chmod +x crs-compose.sh && ./crs-compose.sh
+# 启动服务
+docker-compose up -d
+
+# 更新
+docker-compose pull
+# 停止并删除旧容器
+docker-compose down
+# 重新启动服务
+docker-compose up -d
+```
+
+### 0x31 闲鱼自动回复系统
+
+https://github.com/zhinianboke/xianyu-auto-reply
+
+```shell
+docker run -d \
+  -p 18888:8080 \
+  -v /data/docker_data/xianyu_auto_reply/:/app/data/ \
+  --name xianyu_auto_reply \
+  registry.cn-shanghai.aliyuncs.com/zhinian-software/xianyu-auto-reply:1.0.2
+```
+

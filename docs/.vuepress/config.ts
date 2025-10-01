@@ -83,6 +83,10 @@ export default defineUserConfig({
       },
     },
     markdown: {
+      highlighter: {
+        type: 'shiki',
+        lineNumbers: true, // 启用行号
+      },
       linkify:true,
       align: true,
       attrs: true,

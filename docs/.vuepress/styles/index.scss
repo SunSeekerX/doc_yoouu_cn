@@ -518,3 +518,10 @@ code {
   padding: 0.1rem 0.25rem;
   font-family: var(--font-family);
 }
+
+/* 代码块自动换行 */
+div[class*="language-"] pre code {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
