@@ -20,9 +20,9 @@ apt update || true && apt install cpufrequtils -y || true && apt install nano -y
 
 # 当前系统是 Linux
 # 国外下载
-curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
+curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O ${_##*/} $_
 # 国内服务器
-curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
+curl -O https://cnb.cool/bin456789/reinstall/-/git/raw/main/reinstall.sh || wget -O ${_##*/} $_
 
 # 从 linux dd 到 linux
 bash reinstall.sh ubuntu 24.04 --password "xxxxxx" --ssh-port 22

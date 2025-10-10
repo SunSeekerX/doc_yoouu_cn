@@ -259,6 +259,22 @@ Docker0：`172.18.0.1` 相当于路由器，其他所有启动的镜像都是接
 ### 0x2. Docker 安装 MariaDB
 
 ```shell
+# 2025-10-10 11:28:47 MariaDB没有Alpine镜像,最小的是基于Ubuntu Noble的镜像,但比MySQL 8.0官方镜像仍然要小一些
+docker run -d \
+  --name mariadb11 \
+  --privileged=true \
+  --restart=always \
+  -p 13306:3306 \
+  --memory="800m" \
+  --memory-swap="800m" \
+  --memory-swappiness=0 \
+  --cpus="0.5" \
+  -v /data/docker_data/mariadb11/data:/var/lib/mysql \
+  -v /data/docker_data/mariadb11/config:/etc/mysql/conf.d \
+  -e MYSQL_ROOT_PASSWORD=yAPbBb1Ua4r3CGXPa4L9 \
+  -e TZ=Asia/Shanghai \
+  mariadb:11-noble
+  
 # 1.搜索mariadb镜像（非必须）
 $ docker search mariadb
 # 2.下载docker镜像
@@ -621,75 +637,84 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
 
 ### 0x11 Docker 安装 redis
 
-1. 创建挂载目录
+https://hub.docker.com/_/redis
 
-   ```shell
-   mkdir -p /data/docker_data/redis7x && cd /data/docker_data/redis7x
-   ```
+```shell
+# 先搞配置文件
+mkdir -p /data/docker_data/redis7x && cd /data/docker_data/redis7x
+# 下载 redis.conf 文件
+wget https://download.redis.io/redis-stable/redis.conf
+chmod 777 redis.conf
+```
 
-2. 下载 redis.conf 文件
+修改默认配置信息
 
-   ```shell
-   wget https://download.redis.io/redis-stable/redis.conf
-   ```
+```nginx
+vi redis.conf
+# or
+nano redis.conf
 
-3. 权限
+# 这行要注释掉，解除本地连接限制 配置绑定 ip，搜索 bind 127.0.0.1 -::1
+bind 0.0.0.0
+# 默认yes，如果设置为yes，则只允许在本机的回环连接，其他机器无法连接。
+protected-mode no
+# 默认no 为不守护进程模式，docker部署不需要改为yes，docker run -d本身就是后台启动，不然会冲突
+daemonize no
+# 密码，搜索 requirepass foobared
+requirepass my_secret_pw
+# 持久化
+appendonly yes
+```
 
-   ```shell
-   chmod 777 redis.conf
-   ```
 
-4. 修改默认配置信息
 
-   ```bash
-   vi redis.conf
-   # or
-   nano redis.conf
-   
-   # 这行要注释掉，解除本地连接限制 配置绑定 ip，搜索 bind 127.0.0.1 -::1
-   bind 0.0.0.0
-   # 默认yes，如果设置为yes，则只允许在本机的回环连接，其他机器无法连接。
-   protected-mode no
-   # 默认no 为不守护进程模式，docker部署不需要改为yes，docker run -d本身就是后台启动，不然会冲突
-   daemonize no
-   # 密码，搜索 requirepass foobared
-   requirepass my_secret_pw
-   # 持久化
-   appendonly yes
-   ```
+```shell
+# 限制资源版本
+# Redis 7.4是稳定的LTS分支
+docker run --name redis7x \
+  --restart=always \
+  -p 16379:6379 \
+  --memory="256m" \
+  --memory-swap="256m" \
+  --memory-swappiness=0 \
+  --cpus="0.3" \
+  --log-opt max-size=100m \
+  --log-opt max-file=2 \
+  -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
+  -v /data/docker_data/redis7x:/data \
+  -d redis:7.4-alpine redis-server /etc/redis/redis.conf --appendonly yes
+  
+# Linux
+docker run --name redis7x \
+--restart=always \
+-p 16379:6379 \
+--log-opt max-size=100m --log-opt max-file=2 \
+-v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
+-v /data/docker_data/redis7x:/data \
+-d redis:7.4 redis-server /etc/redis/redis.conf --appendonly yes
 
-5. docker 启动 redis
+# Win
+docker run --name redis7x `
+--restart=always `
+-p 16379:6379 `
+--log-opt max-size=100m `
+--log-opt max-file=2 `
+-v D:\data\docker_data\redis7x\redis.conf:/etc/redis/redis.conf `
+-v D:\data\docker_data\redis7x\:/data `
+-d redis:7.4 `
+redis-server /etc/redis/redis.conf --appendonly yes
 
-   ```shell
-   # Linux
-   docker run --name redis7x \
-   --restart=always \
-   -p 16379:6379 \
-   --log-opt max-size=100m --log-opt max-file=2 \
-   -v /data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
-   -v /data/docker_data/redis7x:/data \
-   -d redis:7.4 redis-server /etc/redis/redis.conf --appendonly yes
-   
-   # Win
-   docker run --name redis7x `
-   --restart=always `
-   -p 16379:6379 `
-   --log-opt max-size=100m `
-   --log-opt max-file=2 `
-   -v D:\data\docker_data\redis7x\redis.conf:/etc/redis/redis.conf `
-   -v D:\data\docker_data\redis7x\:/data `
-   -d redis:7.4 `
-   redis-server /etc/redis/redis.conf --appendonly yes
-   
-   # Mac
-   docker run --name redis7x \
-   --restart=always \
-   -p 16379:6379 \
-   --log-opt max-size=100m --log-opt max-file=2 \
-   -v ~/work/data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
-   -v ~/work/data/docker_data/redis7x:/data \
-   -d redis:7.4 redis-server /etc/redis/redis.conf --appendonly yes
-   ```
+# Mac
+docker run --name redis7x \
+--restart=always \
+-p 16379:6379 \
+--log-opt max-size=100m --log-opt max-file=2 \
+-v ~/work/data/docker_data/redis7x/redis.conf:/etc/redis/redis.conf \
+-v ~/work/data/docker_data/redis7x:/data \
+-d redis:7.4 redis-server /etc/redis/redis.conf --appendonly yes
+```
+
+
 
 **说明：**
 
@@ -727,6 +752,24 @@ nginx 反向代理无法正常工作，禅道工作目录为 www/
 **mysql 8.x**
 
 ```shell
+# 限制资源版本
+# MySQL 8.x (开发环境)  
+docker run -d \
+  --name mysql8x \
+  --privileged=true \
+  --restart=always \
+  -p 13306:3306 \
+  --memory="1g" \
+  --memory-swap="1g" \
+  --memory-swappiness=0 \
+  --cpus="0.5" \
+  -v /data/docker_data/mysql8x/data:/var/lib/mysql \
+  -v /data/docker_data/mysql8x/config:/etc/mysql/conf.d \
+  -v /data/docker_data/mysql8x/logs:/logs \
+  -e MYSQL_ROOT_PASSWORD=my_secret_pw \
+  -e TZ=Asia/Shanghai \
+  mysql:8.0
+  
 # Linux
 docker run -d \
 --name mysql8x \
@@ -790,8 +833,6 @@ flush privileges;
 **mysql 57**
 
 ```shell
-docker run --name --restart=always mysql57 -p 33066:3306 -e MYSQL_ROOT_PASSWORD=my_secret_pw -d mysql:5.7
-
 # Linux
 docker run -d \
 --name mysql57 \
@@ -1011,13 +1052,12 @@ client_max_body_size 250m;
 ### 0x17 Docker 安装 twikoo 评论系统
 
 ```shell
-# 新建数据目录
-mkdir -p ~/data/twikoo
-# 启动容器
 # 3002 我服务器可用的端口号
 docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo:/app/data --restart=always -d imaegoo/twikoo
 
-docker run --name twikoo -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo_blog:/app/data --restart=always -d imaegoo/twikoo
+# 我的实例
+docker run --name twikoo_blog -e TWIKOO_THROTTLE=1000 -p 3002:8080 -v /data/docker_data/twikoo_blog:/app/data --restart=always -d imaegoo/twikoo
+docker run --name twikoo_doc -e TWIKOO_THROTTLE=1000 -p 3003:8080 -v /data/docker_data/twikoo_doc:/app/data --restart=always -d imaegoo/twikoo
 ```
 
 ### 0x18 Docker 安装 artalk 评论系统
@@ -1220,10 +1260,25 @@ docker run -d \
   -e database__client=mysql \
   -e database__connection__host=192.168.0.1 \
   -e database__connection__port=3306 \
-  -e database__connection__user=<db_user> \
-  -e database__connection__password=<db_pwd> \
-  -e database__connection__database=<db_name> \
-  -e url=http://localhost:2368/ \
+  -e database__connection__user=db_user \
+  -e database__connection__password=db_pwd \
+  -e database__connection__database=db_name \
+  -e url=https://yoouu.cn/ \
+  -p 12368:2368 \
+	--network=dockernet \
+  -v /data/docker_data/ghost:/var/lib/ghost/content \
+  ghost:6
+  
+docker run -d \
+  --name ghost \
+  --restart always \
+  -e database__client=mysql \
+  -e database__connection__host=192.168.0.1 \
+  -e database__connection__port=3306 \
+  -e database__connection__user=db_user \
+  -e database__connection__password=db_pwd \
+  -e database__connection__database=db_name \
+  -e url=your_site_url \
   -p 12368:2368 \
 	--network=dockernet \
   -v /data/docker_data/ghost:/var/lib/ghost/content \

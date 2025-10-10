@@ -111,6 +111,15 @@ export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_pr
 
 ## Linux
 
+### shell
+
+```shell
+export https_proxy=http://127.0.0.1:8080
+export http_proxy=http://127.0.0.1:8080
+```
+
+
+
 ### Clash
 
 https://blog.gakki.icu/linux/55

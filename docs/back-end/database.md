@@ -31,11 +31,35 @@ slow-query-log-file=/www/server/data/mysql-slow.log
 long_query_time=3
 #log_queries_not_using_indexes=on
 early-plugin-load = ""
+
+
+log-bin=mysql-bin
+#skip-log-bin
+binlog_format=mixed
+server-id = 1
+binlog_expire_logs_seconds = 600000
+slow_query_log=1
+slow-query-log-file=/www/server/data/mysql-slow.log
+long_query_time=3
+#log_queries_not_using_indexes=on
+early-plugin-load = ""
 ```
 
 修改后
 
 ```ini
+log-bin=mysql-bin
+#skip-log-bin
+binlog_format=ROW
+server-id = 1
+# 设置binlog过期时间（秒），这里设置30天
+binlog_expire_logs_seconds = 2592000
+slow_query_log=1
+slow-query-log-file=/www/server/data/mysql-slow.log
+long_query_time=3
+#log_queries_not_using_indexes=on
+early-plugin-load = ""
+
 # 启用二进制日志
 log-bin=mysql-bin
 # 设置为ROW格式更安全

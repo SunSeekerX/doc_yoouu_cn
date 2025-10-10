@@ -324,21 +324,15 @@ chsh -s $(which zsh)
 # 注销并重新登录,或重启系统,使更改生效。
 ```
 
-安装Z SH 教程：https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
+安装ZSH 教程：https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
 
-[https://ohmyz.sh/](https://ohmyz.sh/)
-
-选择下面其中一种脚本安装：
-
-curl：
+https://ohmyz.sh/
 
 ```shell
+# 选择下面其中一种脚本安装：
+# curl
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-wget：
-
-```shell
+# wget：
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 ```
 

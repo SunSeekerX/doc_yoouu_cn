@@ -124,15 +124,11 @@ echo %PATH%
 
 在 **Microsoft Store** 中下载 `Windows Terminal` 注意系统要求
 
-<img src="https://image.yoouu.cn/static/2020/win10-terminal/win10-terminal.png" alt="win10-terminal" style="zoom:50%;" />
-
 ### 2️⃣ 安装 PowerShell core
 
 下载地址：[https://github.com/PowerShell/PowerShell/releases](https://github.com/PowerShell/PowerShell/releases)
 
 win10 选择 `PowerShell-7.1.0-preview.7-win-x64.msi` 这种安装即可
-
-<img src="https://image.yoouu.cn/static/2020/win10-terminal/poweishell-core.png" alt="poweishell-core" style="zoom:50%;" />
 
 ### 3️⃣ 安装字体
 
@@ -413,8 +409,6 @@ Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\w
 #### 添加 Windows Terminal 到右键
 
 如果是 win11 官方镜像的系统，默认应该就已经安装到了右键。没有安装的可以手动安装下。
-
-<img src="https://image.yoouu.cn/static/2020/win10-terminal/right-menu.png" alt="right-menu" style="zoom:50%;" />
 
 **0x1 下载图标**
 

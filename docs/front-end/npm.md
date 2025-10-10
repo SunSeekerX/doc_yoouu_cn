@@ -377,6 +377,10 @@ npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env 
 
 # 淘宝镜像
 npm i yarn pnpm -g --registry=https://registry.npmmirror.com
+
+# 服务器
+npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g --registry=https://registry.npmmirror.com
+# 开发
 npm i yarn pnpm tbify sort-package-json http-server npm-check-updates cross-env pm2 commitizen cz-conventional-changelog nodemon bun serve live-server -g --registry=https://registry.npmmirror.com
 ```
 
@@ -647,8 +651,7 @@ nvm uninstall 18.16.0
 [nvm](https://github.com/nvm-sh/nvm) 具体安装查看 github 说明。
 
 ```shell
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 # 大陆加速安装 nvm
 export NVM_SOURCE=https://gitee.com/mirrors/nvm.git
 curl -o- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash
