@@ -271,7 +271,7 @@ docker run -d \
   --cpus="0.5" \
   -v /data/docker_data/mariadb11/data:/var/lib/mysql \
   -v /data/docker_data/mariadb11/config:/etc/mysql/conf.d \
-  -e MYSQL_ROOT_PASSWORD=yAPbBb1Ua4r3CGXPa4L9 \
+  -e MYSQL_ROOT_PASSWORD=my_secret_pw \
   -e TZ=Asia/Shanghai \
   mariadb:11-noble
   
