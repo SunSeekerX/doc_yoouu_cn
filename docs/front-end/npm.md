@@ -328,6 +328,9 @@ pnpm config set store-dir "d:\data\node_package\pnpm"
 pnpm config list
 # 安装依赖
 pnpm install
+
+# 执行下面的命令，所有项目都允许执行安装脚本：
+pnpm config set dangerouslyAllowAllBuilds true
 ```
 
 ## 📌 bun 常用命令
