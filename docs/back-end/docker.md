@@ -275,6 +275,17 @@ docker run -d \
   -e TZ=Asia/Shanghai \
   mariadb:11-noble
   
+# win
+docker run -d `
+  --name mariadb11 `
+  --restart=always `
+  -p 13307:3306 `
+  -v "C:\data\docker_data\mariadb11\data:/var/lib/mysql" `
+  -v "C:\data\docker_data\mariadb11\config:/etc/mysql/conf.d" `
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes `
+  -e TZ=Asia/Shanghai `
+  mariadb:11-noble
+  
 # 1.搜索mariadb镜像（非必须）
 $ docker search mariadb
 # 2.下载docker镜像
