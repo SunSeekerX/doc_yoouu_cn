@@ -760,7 +760,7 @@ nginx 反向代理无法正常工作，禅道工作目录为 www/
 
 镜像地址：[https://hub.docker.com/\_/mysql?tab=reviews](https://hub.docker.com/_/mysql?tab=reviews)
 
-**mysql 8.x**
+#### **mysql 8.x**
 
 ```shell
 # 限制资源版本
@@ -841,7 +841,7 @@ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'my_secret_pw';
 flush privileges;
 ```
 
-**mysql 57**
+#### **mysql 57**
 
 ```shell
 # Linux
@@ -1279,6 +1279,8 @@ docker run -d \
 	--network=dockernet \
   -v /data/docker_data/ghost:/var/lib/ghost/content \
   ghost:6
+  
+# 安装目录在 /var/lib/ghost
   
 docker run -d \
   --name ghost \
