@@ -856,6 +856,22 @@ docker run -d \
 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
 -e TZ=Asia/Shanghai mysql:5.7
 
+docker run -d \
+  --name mysql57 \
+  --privileged=true \
+  --restart=always \
+  -p 13306:3306 \
+  -v /data/docker_data/mysql57x/data:/var/lib/mysql \
+  -v /data/docker_data/mysql57x/config:/etc/mysql/conf.d \
+  -v /data/docker_data/mysql57x/logs:/logs \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+  -e MYSQL_ROOT_PASSWORD=my_secret_pw \
+  -e TZ=Asia/Shanghai \
+  --memory=600m \
+  --memory-swap=1g \
+  --cpus="0.8" \
+  mysql:5.7
+
 # Win
 docker run -d `
 --name mysql57 `
