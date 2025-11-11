@@ -372,7 +372,11 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 ### 6️⃣ 配置 Windows Terminal
 
-2025-08-22 02:40:26
+2025-11-11 14:38:10
+
+如果搞坏了删不掉的 优先试试 360 的右键菜单管理有奇效
+
+试试 https://github.com/BluePointLilac/ContextMenuManager
 
 ```powershell
 # 写入
@@ -386,27 +390,66 @@ New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Forc
 # 删除文件夹空白处右键 "Open in Windows Terminal"
 Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue
 
-# 文件夹空白处右键 -> Open Git Bash (Windows Terminal)
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Name '(default)' -Value 'Open Git Bash (Windows Terminal)'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Name 'Icon' -Value "C:\Program Files\Git\mingw64\share\git\git-for-windows.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash\command" -Name '(default)' -Value "`"$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe`" -p `{2c4de342-38b7-51cf-b940-2309a097f518`} -d `"%V`""
-# 删除命令（撤销上面添加的菜单）
-Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wt_gitbash" -Recurse -Force -ErrorAction SilentlyContinue
+# 需要安装wt 和 powershell core
+# Open PowerShell in WT
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt" -Name '(default)' -Value 'Open PowerShell in WT'
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"
+Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt" -Name 'Extended' -ErrorAction SilentlyContinue
+Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt\command" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe new-tab -p `"PowerShell`" --startingDirectory `"%V`""
+# 删除 PowerShell in WT 菜单项
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt" -Recurse -Force -ErrorAction SilentlyContinue
 
-# 文件夹右键
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name '(default)' -Value 'Open in Windows Terminal'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe -d `"%V`""
-# 删除文件夹右键 "Open in Windows Terminal"
-Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell\wt" -Recurse -Force -ErrorAction SilentlyContinue
+# # 需要安装wt 和 gitbash
+# Open Git Bash in WT
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt" -Name '(default)' -Value 'Open Git Bash in WT'
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt" -Name 'Icon' -Value "C:\Program Files\Git\mingw64\share\git\git-for-windows.ico"
+Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt" -Name 'Extended' -ErrorAction SilentlyContinue
+Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt\command" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe new-tab -p `"Git Bash`" --startingDirectory `"%V`""
+# 删除 Git Bash in WT 菜单项
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt" -Recurse -Force -ErrorAction SilentlyContinue
 
 
-# 在 wsl 打开当前目录
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl" -Force | Out-Null
-Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl" -Name '(default)' -Value 'Open Ubuntu (root+zsh)'
-Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"
-
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl\command" -Force | Out-Null
-Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl\command" -Name '(default)' -Value "`"$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe`" wsl -d Ubuntu-24.04 --user root bash -c 'cd \$(wslpath \"%V\"); exec zsh -l'"
+# 需要 wt 和 ubuntu 24 wsl
+# Open Ubuntu 24 in WT
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name '(default)' -Value 'Open Ubuntu 24 in WT'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Extended' -ErrorAction SilentlyContinue; Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe new-tab -p '{d8e96812-b789-5068-a5ae-10b2fb53e95f}' --startingDirectory `"%V`""
+# 删除
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Recurse -Force
 ```
 
-#### 添加 Windows Terminal 到右键
+wt 配置文件
+
+需要添加 "commandline": "wsl.exe -d Ubuntu-24.04", 才能让 wsl 跳转到启动命令的位置
+
+```json
+// 修改前
+{
+    "guid": "{d8e96812-b789-5068-a5ae-10b2fb53e95f}",
+    "hidden": false,
+    "name": "Ubuntu 24.04.1 LTS",
+    "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
+}
+
+// 修改后
+{
+    "guid": "{d8e96812-b789-5068-a5ae-10b2fb53e95f}",
+    "hidden": false,
+    "name": "Ubuntu 24.04.1 LTS",
+    "commandline": "wsl.exe -d Ubuntu-24.04",
+    "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
+}
+```
+
+
+
+
+
+#### 添加 Windows Terminal 到右键(这是老的 也可以用)
 
 如果是 win11 官方镜像的系统，默认应该就已经安装到了右键。没有安装的可以手动安装下。
 
