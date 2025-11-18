@@ -1538,3 +1538,42 @@ docker run -d \
   registry.cn-shanghai.aliyuncs.com/zhinian-software/xianyu-auto-reply:1.0.2
 ```
 
+### 0x32 new-api
+
+https://github.com/QuantumNous/new-api?tab=readme-ov-file
+
+```shell
+docker network create \
+  --driver bridge \
+  --subnet 192.168.0.0/24 \
+  --gateway 192.168.0.1 \
+  dockernet
+
+# 使用 SQLite（默认）
+docker run --name new-api -d --restart always \
+  -p 3000:3000 \
+  -e TZ=Asia/Shanghai \
+  -v ./data:/data \
+  calciumion/new-api:latest
+
+# 使用 MySQL
+docker run --name new-api -d --restart always \
+  -p 3000:3000 \
+  -e SQL_DSN="root:123456@tcp(localhost:3306)/oneapi" \
+  -e TZ=Asia/Shanghai \
+  -v ./data:/data \
+  calciumion/new-api:latest
+
+# 宝塔配置数据库权限 记得防火墙也要放开的 不然链接不上
+127.0.0.1
+192.168.%.%
+# 
+docker run --name new_api -d --restart always \
+  -p 3040:3000 \
+  -e SQL_DSN="root:123456@tcp(192.168.0.1:3306)/oneapi" \
+  -e TZ=Asia/Shanghai \
+  -v /data/docker_data/new_api:/data \
+  --network=dockernet \
+  calciumion/new-api:latest
+```
+
