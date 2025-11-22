@@ -420,6 +420,17 @@ Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbas
 New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name '(default)' -Value 'Open Ubuntu 24 in WT'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Extended' -ErrorAction SilentlyContinue; Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe new-tab -p '{d8e96812-b789-5068-a5ae-10b2fb53e95f}' --startingDirectory `"%V`""
 # 删除
 Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Recurse -Force
+
+# 需要 wt 和 ubuntu 24 wsl
+# === 推荐方案：右键直接打开 微软商店版 Ubuntu 24.04（启动快、不卡）===
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name '(default)' -Value 'Open Ubuntu 24.04 in WT'
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"
+Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Extended' -ErrorAction SilentlyContinue
+Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue
+
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Force | Out-Null
+Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe new-tab -p `{d8e96812-b789-5068-a5ae-10b2fb53e95f`} --startingDirectory `"%V`""
 ```
 
 wt 配置文件
@@ -444,10 +455,6 @@ wt 配置文件
     "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
 }
 ```
-
-
-
-
 
 #### 添加 Windows Terminal 到右键(这是老的 也可以用)
 
