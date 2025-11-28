@@ -4,7 +4,7 @@ export const zhNavbar = navbar([
   // 简介
   { text: '简介', link: '/intro/' },
   // AI
-  // { text: 'AI', link: '/ai/' },
+  { text: 'AI', link: '/ai/' },
   // 基础
   {
     text: '基础',

@@ -2,6 +2,355 @@
 
 可能是你能找到最全的 AI 相关资源。
 
+## claude code
+
+### 安装卸载
+
+版本大全 https://www.npmjs.com/package/@anthropic-ai/claude-code?activeTab=versions
+
+```shell
+# 安装
+npm install -g @anthropic-ai/claude-code
+# 卸载
+npm uninstall -g @anthropic-ai/claude-code
+
+# 查看目前用得命令安装在哪里
+Get-Command claude
+
+# 查看版本
+claude -version
+# 禁止自动更新
+claude config set -g autoUpdates false
+# 开启
+claude config set autoUpdates true
+```
+
+### 配置环境变量
+
+```shell
+# 系统级别
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'your_api_key', 'Machine')
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_BASE_URL', 'https://crs.itssx.com/api', 'Machine')
+[System.Environment]::SetEnvironmentVariable('CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC', '1', 'Machine')
+
+# 删除
+# 删除系统级（Machine 级）环境变量
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', $null, 'Machine')
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_BASE_URL', $null, 'Machine')
+[System.Environment]::SetEnvironmentVariable('CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC', $null, 'Machine')
+# ✅ 删除用户级（User）环境变量
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', $null, 'User')
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_BASE_URL', $null, 'User')
+[System.Environment]::SetEnvironmentVariable('CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC', $null, 'User')
+# 🧭 验证是否真的删掉
+Get-ChildItem Env:ANTHROPIC_*
+
+# linux & mac 查看当前环境变量
+echo "BASE: $ANTHROPIC_BASE_URL" && echo "TOKEN: $ANTHROPIC_AUTH_TOKEN"
+```
+
+### settings.json 配置模板
+
+注意不能有注释的 下面有注释要删除的
+
+```json
+{
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(unzip:*)",
+      "Bash(javap:*)",
+      "Bash(tree:*)",
+      "Read(**)",
+      "Read(//c/Users/ssx/.claude/**)",
+      "Read(//c/Users/ssx/**)",
+      "Grep(**)",
+      "Glob(**)",
+      "LS(**)",
+      "WebFetch",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "TodoWrite",
+      "TodoRead",
+      "NotebookRead(**)",
+      "Task(*)",
+      "Agent(*)",
+      "Bash(git clone:*)",
+      "Bash(find:*)",
+      "Bash(echo:*)",
+      "Bash(dir:*)",
+      "mcp__*",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_evaluate"
+    ],
+    "deny": [
+      "Bash(set:*)",
+      "Bash(echo %:*)",
+      "Bash(powershell:*)",
+      "Read(**\\.ssh\\**)",
+      "Read(**\\id_rsa*)",
+      "Read(**\\id_ed25519*)",
+      "Read(**\\.pem)",
+      "Read(**\\.key)",
+      "Read(**\\AppData\\Roaming\\Microsoft\\Credentials\\**)",
+      "Read(**\\AppData\\Local\\Microsoft\\Credentials\\**)",
+      "Read(**\\AppData\\Roaming\\Microsoft\\Protect\\**)",
+      "Read(**\\AppData\\Local\\Microsoft\\Vault\\**)",
+      "Read(**\\AppData\\Local\\Google\\Chrome\\User Data\\**)",
+      "Read(**\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\**)",
+      "Read(**\\AppData\\Local\\Microsoft\\Edge\\User Data\\**)",
+      "Read(**\\AppData\\Local\\BraveSoftware\\**)",
+      "Read(**\\.aws\\**)",
+      "Read(**\\.azure\\**)",
+      "Read(**\\.docker\\config.json)",
+      "Read(**\\.npmrc)",
+      "Read(**\\.gitconfig)",
+      "Read(**\\.git-credentials)",
+      "Read(**\\AppData\\Roaming\\Code\\User\\globalStorage\\**)",
+      "Read(**\\.vscode\\settings.json)",
+      "Read(**\\.reg)",
+      "Read(**\\.pfx)",
+      "Read(**\\.p12)",
+      "Read(**\\.cer)",
+      "Read(**\\.crt)",
+      "Read(**\\secrets.*)",
+      "Read(**\\credentials.*)",
+      "Read(**\\password.*)",
+      "Read(**\\token.*)",
+      "Read(**\\api_key.*)",
+      "Read(**\\private.*)"
+    ],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\",
+      "D:\\",
+      "~"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  }
+}
+```
+
+#### wsl 版本
+
+```json
+{
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(unzip:*)",
+      "Bash(javap:*)",
+      "Bash(tree:*)",
+      "Read(**)",
+      "Read(/home/*/.claude/**)",
+      "Read(/home/**)",
+      "Read(/mnt/c/Users/ssx/.claude/**)",
+      "Read(/mnt/c/Users/ssx/**)",
+      "Grep(**)",
+      "Glob(**)",
+      "LS(**)",
+      "WebFetch",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "TodoWrite",
+      "TodoRead",
+      "NotebookRead(**)",
+      "Task(*)",
+      "Agent(*)",
+      "Bash(git clone:*)",
+      "Bash(find:*)",
+      "Bash(echo:*)",
+      "Bash(dir:*)",
+      "mcp__*",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_evaluate"
+    ],
+    "deny": [
+      "Bash(set:*)",
+      "Bash(echo %:*)",
+      "Bash(powershell:*)",
+      "Read(**/.ssh/**)",
+      "Read(**/id_rsa*)",
+      "Read(**/id_ed25519*)",
+      "Read(**/.pem)",
+      "Read(**/.key)",
+      "Read(/home/**/.aws/**)",
+      "Read(/home/**/.azure/**)",
+      "Read(/home/**/.docker/config.json)",
+      "Read(/home/**/.npmrc)",
+      "Read(/home/**/.gitconfig)",
+      "Read(/home/**/.git-credentials)",
+      "Read(/home/**/.vscode/settings.json)",
+      "Read(/home/**/.config/**/credentials/**)",
+      "Read(/home/**/.local/share/**/credentials/**)",
+      "Read(/mnt/c/Users/**/AppData/Roaming/Microsoft/Credentials/**)",
+      "Read(/mnt/c/Users/**/AppData/Local/Microsoft/Credentials/**)",
+      "Read(/mnt/c/Users/**/AppData/Roaming/Microsoft/Protect/**)",
+      "Read(/mnt/c/Users/**/AppData/Local/Microsoft/Vault/**)",
+      "Read(/mnt/c/Users/**/AppData/Local/Google/Chrome/User Data/**)",
+      "Read(/mnt/c/Users/**/AppData/Roaming/Mozilla/Firefox/Profiles/**)",
+      "Read(/mnt/c/Users/**/AppData/Local/Microsoft/Edge/User Data/**)",
+      "Read(/mnt/c/Users/**/AppData/Local/BraveSoftware/**)",
+      "Read(/mnt/c/Users/**/AppData/Roaming/Code/User/globalStorage/**)",
+      "Read(**/.reg)",
+      "Read(**/.pfx)",
+      "Read(**/.p12)",
+      "Read(**/.cer)",
+      "Read(**/.crt)",
+      "Read(**/secrets.*)",
+      "Read(**/credentials.*)",
+      "Read(**/password.*)",
+      "Read(**/token.*)",
+      "Read(**/api_key.*)",
+      "Read(**/private.*)"
+    ],
+    "ask": [],
+    "additionalDirectories": ["/", "/home", "/mnt/c", "/mnt/d", "~"]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  }
+}
+
+```
+
+### .claude.json 配置模板
+
+```json
+{
+  "numStartups": 13,
+  "installMethod": "unknown",
+  "tipsHistory": {
+    "new-user-warmup": 3,
+    "memory-command": 3,
+    "theme-command": 3,
+    "status-line": 3,
+    "prompt-queue": 3,
+    "enter-to-steer-in-relatime": 3,
+    "todo-list": 3,
+    "ide-upsell-external-terminal": 3,
+    "# for memory": 4,
+    "install-github-app": 4,
+    "drag-and-drop-images": 4,
+    "double-esc": 7,
+    "continue": 7,
+    "shift-tab": 7,
+    "image-paste": 10
+  },
+  "cachedStatsigGates": {
+    "tengu_disable_bypass_permissions_mode": false
+  },
+  "userID": "ae7e0749e81d4d244c09b45c5b3cda45bd00c456d083c7c3841960406ff40db5",
+  "firstStartTime": "2025-09-07T17:20:54.222Z",
+  "projects": {},
+  "hasCompletedOnboarding": true,
+  "lastOnboardingVersion": "1.0.106",
+  "hasOpusPlanDefault": false,
+  "subscriptionNoticeCount": 0,
+  "hasAvailableSubscription": false,
+  "isQualifiedForDataSharing": false,
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  },
+  "cachedChangelog": "",
+  "changelogLastFetched": 1757267387938,
+  "lastReleaseNotesSeen": "1.0.106"
+}
+
+```
+
+## codex
+
+```shell
+# 安装
+npm install -g @openai/codex
+npm install -g @openai/codex@alpha
+
+codex -m gpt-5.1-codex-max --sandbox danger-full-access
+codex --yolo -m gpt-5.1-codex -c model_reasoning_effort="high"
+```
+
+### 插件
+
+#### ccstatusline
+
+很好用啊 可以显示当前会话用了多少
+
+https://github.com/sirmalloc/ccstatusline
+
+```shell
+# Run the configuration TUI with npm
+npx ccstatusline@latest
+```
+
+![](https://static.yoouu.cn/static/sunseekerx/ai/ccstatusline.webp)
+
+## mcp
+
+
+
+## glm
+
+https://bigmodel.cn/
+
+https://z.ai/
+
+对话
+
+https://chat.z.ai/
+
+```powershell
+# 系统级别
+# 系统级（Machine 级）设置方式
+# ⚠️ 需要以管理员身份运行 PowerShell
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'your_zhipu_api_key', 'Machine')
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_BASE_URL', 'https://open.bigmodel.cn/api/anthropic', 'Machine')
+[System.Environment]::SetEnvironmentVariable('CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC', '1', 'Machine')
+```
+
+### factory
+
+注册 需要手机号码验证
+
+https://app.factory.ai/welcome
+
+查询key用量
+
+http://dkey.web5.best/
+
+```shell
+# Windows 安装
+irm https://app.factory.ai/cli/windows | iex
+# macos/linux
+curl -fsSL https://app.factory.ai/cli | sh
+
+# 添加环境变量 Windows powershell 执行
+[Environment]::SetEnvironmentVariable(
+    'Path',
+    [Environment]::GetEnvironmentVariable('Path','User') + ';C:\Users\ssx\bin',
+    'User'
+)
+```
+
 ## Stable Diffusion WebUI 使用手冊(简体中文)
 
 [https://ivonblog.com/posts/stable-diffusion-webui-manuals/zh-cn/](https://ivonblog.com/posts/stable-diffusion-webui-manuals/zh-cn/)

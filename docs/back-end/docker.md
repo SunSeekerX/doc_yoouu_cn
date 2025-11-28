@@ -1127,7 +1127,7 @@ docker run -d \
 
 ### 0x20 Docker 安装 minio oss
 
-GitHub: https://github.com/minio/minio
+https://github.com/minio/minio
 
 Doc: https://min.io/docs/minio/container/index.html
 
