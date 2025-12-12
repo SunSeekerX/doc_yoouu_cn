@@ -1,5 +1,3 @@
-# AI
-
 可能是你能找到最全的 AI 相关资源。
 
 ## claude code
@@ -11,6 +9,8 @@
 ```shell
 # 安装
 npm install -g @anthropic-ai/claude-code
+
+npm install -g @anthropic-ai/claude-code --registry=https://registry.npmmirror.com
 # 卸载
 npm uninstall -g @anthropic-ai/claude-code
 
@@ -29,7 +29,7 @@ claude config set autoUpdates true
 
 ```shell
 # 系统级别
-[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'your_api_key', 'Machine')
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'cr_218348a080e43ac4702eb40548b35c38aaec293938cfab160516b9ba12503ffa', 'Machine')
 [System.Environment]::SetEnvironmentVariable('ANTHROPIC_BASE_URL', 'https://crs.itssx.com/api', 'Machine')
 [System.Environment]::SetEnvironmentVariable('CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC', '1', 'Machine')
 
@@ -46,12 +46,42 @@ claude config set autoUpdates true
 Get-ChildItem Env:ANTHROPIC_*
 
 # linux & mac 查看当前环境变量
+echo $SHELL
+
 echo "BASE: $ANTHROPIC_BASE_URL" && echo "TOKEN: $ANTHROPIC_AUTH_TOKEN"
+
+# 对于 bash (默认)
+echo 'export ANTHROPIC_BASE_URL="https://crs.itssx.com/api"' >> ~/.bashrc
+echo 'export ANTHROPIC_AUTH_TOKEN="你的API密钥"' >> ~/.bashrc
+source ~/.bashrc
+
+# 对于 zsh
+echo 'export ANTHROPIC_BASE_URL="https://crs.itssx.com/api"' >> ~/.zshrc
+echo 'export ANTHROPIC_AUTH_TOKEN="你的API密钥"' >> ~/.zshrc
+source ~/.zshrc
 ```
+
+### 问题记录
+
+#### API Error: 413 Something went wrong
+
+可能是读取了大文件？pdf ？cc 不太支持目前最佳为文字和图片
+
+#### API Error: 424 {"error":"Claude system prompt similarity too low. Modifying the system
+
+​     prompt is prohibited"}
+
+转发服务问题 联系我
+
+#### Error: File has been unexpectedly modified. Read it again before attempting to write it.
+
+工具本来的问题 新开窗口 或者关闭编辑器 完全重新打开项目
 
 ### settings.json 配置模板
 
 注意不能有注释的 下面有注释要删除的
+
+这是初期在我的 windows配置的 因为 cc 干活老是一直问问问
 
 ```json
 {
@@ -278,16 +308,9 @@ echo "BASE: $ANTHROPIC_BASE_URL" && echo "TOKEN: $ANTHROPIC_AUTH_TOKEN"
 
 ```
 
-## codex
+### agent
 
-```shell
-# 安装
-npm install -g @openai/codex
-npm install -g @openai/codex@alpha
-
-codex -m gpt-5.1-codex-max --sandbox danger-full-access
-codex --yolo -m gpt-5.1-codex -c model_reasoning_effort="high"
-```
+https://github.com/wshobson/agents
 
 ### 插件
 
@@ -304,9 +327,42 @@ npx ccstatusline@latest
 
 ![](https://static.yoouu.cn/static/sunseekerx/ai/ccstatusline.webp)
 
-## mcp
+### mcp
 
 
+
+## codex
+
+```shell
+# 安装
+npm install -g @openai/codex
+npm install -g @openai/codex@alpha
+
+npm install -g @openai/codex --registry=https://registry.npmmirror.com
+
+codex -m gpt-5.1-codex-max --sandbox danger-full-access
+codex --yolo -m gpt-5.1-codex -c model_reasoning_effort="high"
+
+# 系统级别
+[System.Environment]::SetEnvironmentVariable('CRS_OAI_KEY', 'cr_9f87c0a1f2250937f8b74064605c3ffd28f1501e2b3a71a3d0fa911304a51a34', 'Machine')
+
+# 删除
+# 删除系统级（Machine 级）环境变量
+[System.Environment]::SetEnvironmentVariable('CRS_OAI_KEY', $null, 'Machine')
+# ✅ 删除用户级（User）环境变量
+[System.Environment]::SetEnvironmentVariable('CRS_OAI_KEY', $null, 'User')
+
+# 🧭 验证是否真的删掉
+Get-ChildItem Env:CRS_OAI_KEY
+
+
+# linux & mac 查看当前环境变量
+echo "CRS_OAI_KEY: $CRS_OAI_KEY"
+
+# 对于 zsh
+echo "export CRS_OAI_KEY=cr_xxxxxxxxxx" >> ~/.zshrc
+source ~/.zshrc
+```
 
 ## glm
 
