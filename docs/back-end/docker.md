@@ -1575,5 +1575,25 @@ docker run --name new_api -d --restart always \
   -v /data/docker_data/new_api:/data \
   --network=dockernet \
   calciumion/new-api:latest
+  
+docker pull calciumion/new-api:latest && \
+docker rm -f new_api && \
+docker run --name new_api -d --restart always \
+  -p 3040:3000 \
+  -e SQL_DSN="root:123456@tcp(192.168.0.1:3306)/oneapi" \
+  -e TZ=Asia/Shanghai \
+  -v /data/docker_data/new_api:/data \
+  --network=dockernet \
+  calciumion/new-api:latest
+```
+
+### 0x33
+
+```shell
+docker run -d \
+  --name aiclient2api \
+  -p 3041:3000 \
+  -v /data/docker_data/aiclient2api:/app/data \
+  justlikemaki/aiclient-2-api:latest
 ```
 
