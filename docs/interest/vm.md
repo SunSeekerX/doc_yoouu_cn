@@ -92,6 +92,8 @@ lspci
 
 ### istore
 
+不能直接选择镜像驱动需要使用命令导入才能开机
+
 ```shell
 #pve虚拟机id和img文件路径替换为自己的
 qm importdisk pve虚拟机id img文件路径 local
