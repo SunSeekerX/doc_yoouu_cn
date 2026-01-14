@@ -650,6 +650,8 @@ docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc
 
 https://hub.docker.com/_/redis
 
+mac&linux&wsl
+
 ```shell
 # 先搞配置文件
 mkdir -p /data/docker_data/redis7x && cd /data/docker_data/redis7x
@@ -675,6 +677,29 @@ daemonize no
 requirepass my_secret_pw
 # 持久化
 appendonly yes
+```
+
+windows
+
+```powershell
+# 创建目录
+New-Item -ItemType Directory -Force -Path D:\data\docker_data\redis7x
+cd D:\data\docker_data\redis7x
+# 下载 redis.conf（方法一：Invoke-WebRequest）
+Invoke-WebRequest -Uri "https://download.redis.io/redis-stable/redis.conf" -OutFile "redis.conf"
+# 修改配置（PowerShell 方式）
+# 用记事本打开
+notepad redis.conf
+# 或者用 VS Code
+code redis.conf
+# 快速替换配置（一键脚本）
+# 读取并替换关键配置
+$conf = Get-Content redis.conf -Raw
+$conf = $conf -replace 'bind 127.0.0.1 -::1', 'bind 0.0.0.0'
+$conf = $conf -replace 'protected-mode yes', 'protected-mode no'
+$conf = $conf -replace '# requirepass foobared', 'requirepass my_secret_pw'
+$conf = $conf -replace 'appendonly no', 'appendonly yes'
+$conf | Set-Content redis.conf -Encoding UTF8
 ```
 
 
@@ -714,6 +739,14 @@ docker run --name redis7x `
 -v D:\data\docker_data\redis7x\:/data `
 -d redis:7.4 `
 redis-server /etc/redis/redis.conf --appendonly yes
+
+# win 本地开发
+docker run --name redis7x `
+  -p 16379:6379 `
+  -v D:\data\docker_data\redis7x\redis.conf:/etc/redis/redis.conf `
+  -v D:\data\docker_data\redis7x\:/data `
+  -d redis:7.4 `
+  redis-server /etc/redis/redis.conf
 
 # Mac
 docker run --name redis7x \

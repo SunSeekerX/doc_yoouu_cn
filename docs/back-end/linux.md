@@ -104,6 +104,75 @@ wget -O windows2022.iso "https://delivery.massgrave.dev/706db63b-5716-4158-ab66-
 
 - 剩下的可以查看 mac 下的配置：[https://doc.yoouu.cn/basic/mac.html#oh-my-zsh](https://doc.yoouu.cn/basic/mac.html#oh-my-zsh)
 
+## 📌 文件占用分析工具
+
+```shell
+# 交互式查看：ncdu 工具
+sudo apt install ncdu  # Debian/Ubuntu
+sudo yum install ncdu  # CentOS/RHEL
+ncdu /
+```
+
+###  journal 日志永久上限改成 1GB 的最简单一键命令
+
+会自动清理之前的
+
+> 支持的系统（基本 100% 兼容，你的脚本能直接跑）
+>
+> - Ubuntu（从 15.04 开始，默认 systemd + journald）
+> - Debian（从 Debian 8/Jessie 开始，默认 systemd）
+> - Fedora（从 Fedora 15 开始就用 systemd，现在所有版本）
+> - CentOS / Rocky Linux / AlmaLinux（从 CentOS 7 / RHEL 7 开始，默认 systemd + journald）
+> - Arch Linux（默认 systemd）
+> - openSUSE（Leap 和 Tumbleweed，默认 systemd）
+> - Pop!_OS、Linux Mint（基于 Ubuntu，所以兼容）
+> - Manjaro、EndeavourOS 等 Arch 衍生版
+> - 大多数云服务器镜像（AWS、Azure、GCP 的 Ubuntu/Debian/Fedora/CentOS 镜像）
+>
+> 这些系统几乎都默认启用 journald 的持久日志（或至少支持创建 /var/log/journal），--vacuum-size=1G、--disk-usage 和 SystemMaxUse=1G 这些选项从 systemd 很早版本（大约 2014-2015 年后）就稳定支持了，现在的 systemd 版本都远超这个。不支持或部分不支持的系统（脚本会失败或无效）
+>
+> - Devuan（Debian 的无 systemd 分支，默认 sysvinit 或 openrc，没有 journald）
+> - Gentoo（可以选择 systemd，但默认 OpenRC，没有 journald）
+> - Alpine Linux（默认 OpenRC + busybox/syslog，没有 systemd）
+> - Void Linux（默认 runit 或 OpenRC）
+> - Slackware（传统 SysVinit）
+> - PCLinuxOS、Artix Linux（明确避免 systemd）
+> - 非常老的发行版（比如 CentOS 6、Ubuntu 14.04 之前），这些已经基本没人用了
+>
+> 怎么快速判断你的系统是否支持？跑这条命令就知道：
+>
+> ```bash
+> systemctl status systemd-journald
+> ```
+>
+> - 如果输出是 active (running)，并且有 journald 的信息 → 支持，脚本完美可用。
+> - 如果说 "Unit systemd-journald.service could not be found." → 不支持 systemd-journald，这个脚本没用。
+>
+> 或者直接看：
+>
+> ```bash
+> ls /etc/systemd/journald.conf
+> ```
+>
+> 存在文件 → 支持。总结：如果你用的是主流的桌面/服务器 Linux（Ubuntu、Debian、Fedora、RHEL 系、Arch 等），是的，所有这些系统都可以直接用这个脚本，它已经是标准做法了。非 systemd 系统（少数 niche 发行版）才不行。如果你告诉我你的具体发行版和版本（比如 cat /etc/os-release 的输出），我可以 100% 确认兼容性～
+
+```shell
+sudo bash -c '
+  echo "当前 journal 占用："
+  journalctl --disk-usage
+  echo -e "\n立即清理到 1GB 以内（如果已经超过）："
+  journalctl --vacuum-size=1G
+  echo -e "\n设置永久上限为 1GB（重启 journald 后生效）"
+  mkdir -p /etc/systemd && \
+  { grep -q "^SystemMaxUse" /etc/systemd/journald.conf 2>/dev/null || echo "" >> /etc/systemd/journald.conf; } && \
+  sed -i "/^SystemMaxUse=/d" /etc/systemd/journald.conf && \
+  echo "SystemMaxUse=1G" >> /etc/systemd/journald.conf && \
+  systemctl restart systemd-journald && \
+  echo -e "\n设置完成，新占用："
+  journalctl --disk-usage
+'
+```
+
 ## 📌 ssh 登录服务器
 
 ```shell
