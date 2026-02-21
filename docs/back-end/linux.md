@@ -256,7 +256,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # 然后在 ~/.zshrc 中添加这些插件：
 nano ~/.zshrc
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler dotenv macos rake rbenv ruby)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler macos rake rbenv ruby)
 ```
 
 ### ubuntu 24.04 LTS 换软件源（针对大陆）
