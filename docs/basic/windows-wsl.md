@@ -7,8 +7,6 @@ wsl --install -d <DistroName>
 wsl --install -d Ubuntu-24.04
 ```
 
-
-
 ## 用文件管理器打开当前路径
 
 ```
