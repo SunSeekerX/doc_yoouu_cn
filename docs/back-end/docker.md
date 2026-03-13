@@ -1620,7 +1620,7 @@ docker run --name new_api -d --restart always \
   calciumion/new-api:latest
 ```
 
-### 0x33
+### 0x33 aiclient2api
 
 ```shell
 docker run -d \
@@ -1628,5 +1628,17 @@ docker run -d \
   -p 3041:3000 \
   -v /data/docker_data/aiclient2api:/app/data \
   justlikemaki/aiclient-2-api:latest
+```
+
+### 0x34
+
+https://github.com/go-gost/gost
+
+```shell
+docker run -d --restart=always --net=host \
+  --name gost \
+  gogost/gost:latest \
+  -L=socks5://user:pass@:1080?udp=true \
+  -L=http://user:pass@:3128
 ```
 
