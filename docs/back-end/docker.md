@@ -1630,7 +1630,7 @@ docker run -d \
   justlikemaki/aiclient-2-api:latest
 ```
 
-### 0x34
+### 0x34 gost
 
 https://github.com/go-gost/gost
 
@@ -1641,4 +1641,96 @@ docker run -d --restart=always --net=host \
   -L=socks5://user:pass@:1080?udp=true \
   -L=http://user:pass@:3128
 ```
+
+### 0x35 Antigravity-Manager
+
+https://github.com/lbjlaq/Antigravity-Manager
+
+```
+docker run -d --name antigravity_manager \
+  -p 8045:8045 \
+  -e API_KEY=sk-你自己改成强密钥 \
+  -e WEB_PASSWORD=你的后台登录密码 \
+  -e ABV_MAX_BODY_SIZE=104857600 \
+  -v /data/docker_data/.antigravity_tools:/root/.antigravity_tools \
+  --restart unless-stopped \
+  lbjlaq/antigravity-manager:latest
+```
+
+### 0x36 CLIProxyAPI
+
+> 将 Gemini CLI、Claude Code、Codex、Qwen Code 等 AI CLI 工具包装成 OpenAI 兼容的 HTTP API 服务
+>
+> 文档：https://help.router-for.me/introduction/quick-start.html
+>
+> GitHub：https://github.com/router-for-me/CLIProxyAPI
+>
+> 镜像：`eceasy/cli-proxy-api:latest`
+
+```shell
+# 创建目录
+mkdir -p /data/docker_data/cli_proxy_api
+
+# 写入最小启动配置
+cat > /data/docker_data/cli_proxy_api/config.yaml << 'EOF'
+port: 8317
+auth-dir: /root/.cli-proxy-api
+remote-management:
+  allow-remote: true
+EOF
+
+# 推荐追加安全配置（按需修改后追加到 config.yaml）：
+# api-keys: 客户端调用 API 时需要携带的 key，不设则不鉴权
+# secret-key: 管理面板密码，留空则禁用管理 API
+#
+# api-keys:
+#   - "sk-your-api-key"
+# remote-management:
+#   secret-key: "your_password"
+
+# 启动
+# 端口说明：8317=API服务, 8085=Gemini OAuth, 54545=Claude OAuth,
+#          1455=Codex OAuth, 11451=iFlow OAuth, 51121=Antigravity OAuth
+docker run -d \
+  --name cli-proxy-api \
+  --restart=always \
+  -p 8317:8317 \
+  -p 8085:8085 \
+  -p 1455:1455 \
+  -p 54545:54545 \
+  -p 51121:51121 \
+  -p 11451:11451 \
+  -v /data/docker_data/cli_proxy_api/config.yaml:/CLIProxyAPI/config.yaml \
+  -v /data/docker_data/cli_proxy_api/auth_data:/root/.cli-proxy-api \
+  -v /data/docker_data/cli_proxy_api/logs:/CLIProxyAPI/logs \
+  eceasy/cli-proxy-api:latest
+```
+
+登录 AI 服务（按需选，OAuth 类会打印 URL 复制到浏览器完成认证，Qwen 为交互式 device flow 需在终端输入）：
+
+```shell
+# Gemini CLI（免费，OAuth 端口 8085）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --login
+
+# Claude Code（OAuth 端口 54545）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --claude-login
+
+# Codex（OAuth 端口 1455）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --codex-login
+
+# Qwen Code（交互式 device flow，按终端提示操作）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --qwen-login
+
+# iFlow（OAuth 端口 11451）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --iflow-login
+
+# Antigravity（OAuth 端口 51121）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --antigravity-login
+```
+
+登录成功后：
+
+- API 地址：`http://localhost:8317/v1`，兼容 OpenAI 格式，请求时 Header 带 `Authorization: Bearer sk-your-api-key`
+- 管理面板：`http://localhost:8317/management.html`，密码为配置中的 `secret-key`
+- 完整配置参考：https://github.com/router-for-me/CLIProxyAPI/blob/main/config.example.yaml
 
