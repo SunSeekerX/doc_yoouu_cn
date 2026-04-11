@@ -66,6 +66,18 @@ d----         2023/5/10     22:15                CanonicalGroupLimited.Ubuntu22.
 .\ubuntu2204.exe config --default-user root
 ```
 
+## 重置 WSL 用户密码
+
+忘记密码时，在 Windows PowerShell 中以 root 身份直接重置，无需重启 WSL：
+
+```powershell
+# 重置 Ubuntu 24 的 ssx 用户密码
+wsl -d Ubuntu-24.04 -u root passwd ssx
+
+# 重置 Ubuntu 22 的 ssx 用户密码
+wsl -d Ubuntu-22.04 -u root passwd ssx
+```
+
 ## WSL 中获取宿主机 IP
 
 WSL 每次启动的时候都会有不同的 IP 地址，所以并不能直接用静态的方式来设置代理。WSL2 会把 IP 写在 `/etc/resolv.conf` 中，因此可以用这条指令获得宿主机 IP 。

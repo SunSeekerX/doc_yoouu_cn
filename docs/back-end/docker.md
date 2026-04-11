@@ -1622,13 +1622,31 @@ docker run --name new_api -d --restart always \
 
 ### 0x33 aiclient2api
 
+https://github.com/justlovemaki/AIClient-2-API
+
+> 公网部署务必先改密码再启动，或用防火墙/反代限制管理面板访问
+
 ```shell
+# Linux
 docker run -d \
   --name aiclient2api \
+  --restart=always \
   -p 3041:3000 \
-  -v /data/docker_data/aiclient2api:/app/data \
+  -p 8085-8086:8085-8086 \
+  -p 1455:1455 \
+  -p 19876-19880:19876-19880 \
+  -v /data/docker_data/aiclient2api:/app/configs \
   justlikemaki/aiclient-2-api:latest
 ```
+
+端口说明：
+
+- 3041 → 3000：Web 管理界面
+- 8085-8086：Gemini / Antigravity OAuth 回调
+- 1455：Codex OAuth 回调
+- 19876-19880：Kiro OAuth 回调
+
+启动后访问 `http://localhost:3041`，默认密码 `admin123`，首次登录后请立即修改（也可通过 configs 目录下的 `pwd` 文件修改）
 
 ### 0x34 gost
 
@@ -1733,4 +1751,352 @@ docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --antigravit
 - API 地址：`http://localhost:8317/v1`，兼容 OpenAI 格式，请求时 Header 带 `Authorization: Bearer sk-your-api-key`
 - 管理面板：`http://localhost:8317/management.html`，密码为配置中的 `secret-key`
 - 完整配置参考：https://github.com/router-for-me/CLIProxyAPI/blob/main/config.example.yaml
+
+### 0x37 Docker 安装 ClickHouse
+
+https://hub.docker.com/r/clickhouse/clickhouse-server/
+
+mac&linux&wsl
+
+```shell
+# 创建数据目录
+mkdir -p /data/docker_data/clickhouse/{data,logs}
+```
+
+windows
+
+```powershell
+New-Item -ItemType Directory -Force -Path D:\data\docker_data\clickhouse\data
+New-Item -ItemType Directory -Force -Path D:\data\docker_data\clickhouse\logs
+```
+
+端口说明：8123=HTTP接口（REST API、Web UI、JDBC/ODBC HTTP），9000=Native TCP协议（clickhouse-client）
+
+```shell
+# 限制资源版本
+# ClickHouse 25.8 LTS (lts tag 指向此版本)
+docker run -d \
+  --name clickhouse \
+  --restart=always \
+  --memory="1g" \
+  --memory-swap="1g" \
+  --memory-swappiness=0 \
+  --cpus="1" \
+  --ulimit nofile=262144:262144 \
+  --log-opt max-size=100m \
+  --log-opt max-file=2 \
+  -p 18123:8123 \
+  -p 19000:9000 \
+  -v /data/docker_data/clickhouse/data:/var/lib/clickhouse \
+  -v /data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD=my_secret_pw \
+  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
+  clickhouse/clickhouse-server:lts-alpine
+
+# Linux
+docker run -d \
+  --name clickhouse \
+  --restart=always \
+  --ulimit nofile=262144:262144 \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  -p 18123:8123 \
+  -p 19000:9000 \
+  -v /data/docker_data/clickhouse/data:/var/lib/clickhouse \
+  -v /data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD=my_secret_pw \
+  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
+  clickhouse/clickhouse-server:lts-alpine
+
+# Win
+docker run -d `
+  --name clickhouse `
+  --restart=always `
+  --ulimit nofile=262144:262144 `
+  --log-opt max-size=100m `
+  --log-opt max-file=2 `
+  -p 18123:8123 `
+  -p 19000:9000 `
+  -v D:\data\docker_data\clickhouse\data:/var/lib/clickhouse `
+  -v D:\data\docker_data\clickhouse\logs:/var/log/clickhouse-server `
+  -e CLICKHOUSE_USER=default `
+  -e CLICKHOUSE_PASSWORD=my_secret_pw `
+  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 `
+  clickhouse/clickhouse-server:lts-alpine
+
+# Mac
+docker run -d \
+  --name clickhouse \
+  --restart=always \
+  --ulimit nofile=262144:262144 \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  -p 18123:8123 \
+  -p 19000:9000 \
+  -v ~/work/data/docker_data/clickhouse/data:/var/lib/clickhouse \
+  -v ~/work/data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD=my_secret_pw \
+  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
+  clickhouse/clickhouse-server:lts-alpine
+
+# 验证 - 直接执行 clickhouse-client（alpine 镜像无 bash）
+docker exec -it clickhouse clickhouse-client --user default --password my_secret_pw
+# SQL 测试
+# SELECT version();
+
+# HTTP 接口测试（带密码）
+curl "http://localhost:18123/?user=default&password=my_secret_pw&query=SELECT%20version()"
+
+# 内置 Web UI（零依赖，浏览器访问）
+# http://localhost:18123/play
+```
+
+### 0x38 Docker 安装 ch-ui（ClickHouse Web 管理）
+
+https://github.com/caioricciuti/ch-ui
+
+> 仅限本地开发使用。生产环境必须加反向代理 + HTTPS + 认证，不要直接暴露到公网
+
+```shell
+# Linux（绑定 127.0.0.1，仅本机访问）
+docker run -d \
+  --name ch-ui \
+  --restart=always \
+  -p 127.0.0.1:5521:5521 \
+  ghcr.io/caioricciuti/ch-ui:v1.6.4
+
+# Win（绑定 127.0.0.1，仅本机访问）
+docker run -d `
+  --name ch-ui `
+  --restart=always `
+  -p 127.0.0.1:5521:5521 `
+  ghcr.io/caioricciuti/ch-ui:v1.6.4
+
+# 访问 http://localhost:5521 填入 ClickHouse 地址连接
+```
+
+### 0x39 DragonflyDB
+
+https://www.dragonflydb.io/docs
+
+https://github.com/dragonflydb/dragonfly
+
+> 现代多线程内存数据库，完全兼容 Redis 和 Memcached API，单实例可达百万级 QPS。直接用 redis-cli 或 ioredis 等 Redis 客户端连接，零迁移成本。
+>
+> 前提：Linux Kernel ≥ 4.19，建议至少 4GB RAM
+>
+> **二进制仅提供 Linux 版本**（x86_64 / aarch64），macOS 和 Windows 官方只提供 Docker 方式，Win 也可通过 WSL2 运行 Linux 二进制
+
+#### Docker
+
+```shell
+# Linux 生产（host 网络，性能最好，和二进制几乎无差异）
+# cache_mode: 纯缓存场景开启，内存满时自动淘汰旧 key；如果需要数据持久不丢，去掉此参数
+docker run -d \
+  --name dragonfly \
+  --restart=always \
+  --network=host \
+  --ulimit memlock=-1 \
+  -v /data/docker_data/dragonfly:/data \
+  docker.dragonflydb.io/dragonflydb/dragonfly \
+  --logtostderr \
+  --requirepass my_secret_pw \
+  --maxmemory 4gb \
+  --port 6379 \
+  --primary_port_http_enabled false \
+  --snapshot_cron "*/30 * * * *" \
+  --dbfilename dump.rdb \
+  --dir /data
+
+# Linux 资源限制版（端口映射，适合和其他服务共存）
+docker run -d \
+  --name dragonfly \
+  --restart=always \
+  -p 16379:6379 \
+  --ulimit memlock=-1 \
+  --memory="4g" \
+  --memory-swap="4g" \
+  --memory-swappiness=0 \
+  --cpus="2.0" \
+  --log-opt max-size=100m \
+  --log-opt max-file=2 \
+  -v /data/docker_data/dragonfly:/data \
+  docker.dragonflydb.io/dragonflydb/dragonfly \
+  --logtostderr \
+  --requirepass my_secret_pw \
+  --maxmemory 3gb \
+  --primary_port_http_enabled false \
+  --snapshot_cron "*/30 * * * *" \
+  --dbfilename dump.rdb \
+  --dir /data
+
+# Win 本地开发
+docker run -d `
+  --name dragonfly `
+  -p 16379:6379 `
+  --ulimit memlock=-1 `
+  -v D:\data\docker_data\dragonfly:/data `
+  docker.dragonflydb.io/dragonflydb/dragonfly `
+  --logtostderr `
+  --requirepass my_secret_pw `
+  --maxmemory 2gb `
+  --dir /data
+
+# Mac 本地开发
+docker run -d \
+  --name dragonfly \
+  -p 16379:6379 \
+  --ulimit memlock=-1 \
+  -v ~/work/data/docker_data/dragonfly:/data \
+  docker.dragonflydb.io/dragonflydb/dragonfly \
+  --logtostderr \
+  --requirepass my_secret_pw \
+  --maxmemory 2gb \
+  --dir /data
+```
+
+#### Docker Compose
+
+```yaml
+# docker-compose.yml
+version: "3"
+
+services:
+  dragonfly:
+    image: docker.dragonflydb.io/dragonflydb/dragonfly
+    container_name: dragonfly
+    restart: always
+    network_mode: host            # Linux 生产推荐，Mac/Win 改为 ports 映射
+    ulimits:
+      memlock: -1
+    volumes:
+      - /data/docker_data/dragonfly:/data
+    command:
+      - --logtostderr
+      - --requirepass=my_secret_pw
+      - --maxmemory=4gb
+      - --port=6379
+      - --primary_port_http_enabled=false
+      - --snapshot_cron=*/30 * * * *
+      - --dbfilename=dump.rdb
+      - --dir=/data
+```
+
+#### 二进制安装（仅 Linux）
+
+> macOS / Windows 官方未提供二进制，请使用 Docker 方式。Windows 也可在 WSL2 中运行 Linux 二进制。
+
+```shell
+# 1. 下载（去 GitHub Releases 页面选对应架构）
+# https://github.com/dragonflydb/dragonfly/releases
+# X86-64:  dragonfly-x86_64.tar.gz
+# ARM64:   dragonfly-aarch64.tar.gz
+wget https://github.com/dragonflydb/dragonfly/releases/latest/download/dragonfly-x86_64.tar.gz
+
+# 2. 解压
+tar zxf dragonfly-x86_64.tar.gz
+mv dragonfly-x86_64 /usr/local/bin/dragonfly
+chmod +x /usr/local/bin/dragonfly
+
+# 3. 创建数据目录
+mkdir -p /data/dragonfly
+
+# 4. 运行
+/usr/local/bin/dragonfly \
+  --logtostderr \
+  --requirepass my_secret_pw \
+  --maxmemory 4gb \
+  --bind localhost \
+  --port 6379 \
+  --primary_port_http_enabled false \
+  --snapshot_cron "*/30 * * * *" \
+  --dbfilename dump.rdb \
+  --dir /data/dragonfly
+# 如果需要外部访问，把 --bind localhost 改为 --bind 0.0.0.0
+# 对外暴露时 --primary_port_http_enabled false 是必须的，关闭主端口上的 HTTP console
+```
+
+#### systemd 服务（Linux 生产推荐）
+
+```ini
+# /etc/systemd/system/dragonfly.service
+[Unit]
+Description=DragonflyDB
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/dragonfly \
+  --logtostderr \
+  --requirepass my_secret_pw \
+  --maxmemory 4gb \
+  --bind localhost \
+  --port 6379 \
+  --primary_port_http_enabled false \
+  --snapshot_cron "*/30 * * * *" \
+  --dbfilename dump.rdb \
+  --dir /data/dragonfly
+Restart=always
+RestartSec=5
+LimitMEMLOCK=infinity
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```shell
+# 启用并启动
+systemctl daemon-reload
+systemctl enable dragonfly
+systemctl start dragonfly
+systemctl status dragonfly
+```
+
+#### 参数说明
+
+| 参数 | 说明 | 推荐值 |
+|------|------|--------|
+| `--requirepass` | 连接密码 | 生产必须设置 |
+| `--maxmemory` | 最大内存限制 | 物理内存的 70-80% |
+| `--cache_mode` | 缓存模式，内存满时自动淘汰旧 key | **仅纯缓存场景开启**，需要数据不丢的不要加 |
+| `--primary_port_http_enabled` | 主端口 HTTP console | 对外暴露时必须设为 `false` |
+| `--snapshot_cron` | 快照持久化 cron 表达式 | `*/30 * * * *`（每30分钟） |
+| `--dbfilename` | 快照文件名 | `dump.rdb` |
+| `--dir` | 数据目录 | 挂载的持久化目录 |
+| `--bind` | 绑定地址 | 仅本机：`localhost`，对外：`0.0.0.0` |
+| `--port` | 端口 | `6379`（默认） |
+| `-dbnum` | 数据库数量 | `1`（不需要多 DB 就用 1） |
+| `--cluster_mode` | 集群模式 | 支持 `emulated` 模式（单节点模拟集群协议） |
+| `--keys_output_limit` | KEYS 命令输出上限 | `12288` |
+| `--logtostderr` | 日志输出到 stderr | 始终开启 |
+
+#### 连接验证
+
+```shell
+# 用 redis-cli 连接（DragonflyDB 完全兼容 Redis 协议）
+redis-cli -p 6379 -a my_secret_pw
+
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> set hello world
+OK
+127.0.0.1:6379> get hello
+"world"
+127.0.0.1:6379> info server
+# 会看到 dragonfly_version 字段
+```
+
+#### 注意事项
+
+- **Mac/Win 的 Docker 走 VM**，有性能损失，仅用于本地开发
+- **Linux Docker `--network=host`** 和二进制性能几乎一致，生产可用
+- **安全**：对外暴露端口时务必加 `--primary_port_http_enabled false`，否则 HTTP console 和指标会一起暴露
+- **cache_mode**：只在纯缓存场景开启。如果你的数据不能丢（如 session、队列），不要加此参数
+- 没有 AOF，只有快照持久化，纯缓存场景可不开 snapshot
+- 支持 emulated cluster mode（`--cluster_mode emulated`），兼容需要 cluster 协议的客户端
+- 部分冷门 Redis 命令可能未实现，常用命令全部兼容
+- ioredis、Bull 队列、node-redis 等 Redis 客户端可直接连接，不改代码
+- **macOS/Windows 无官方二进制**，只能用 Docker 或 WSL2
 

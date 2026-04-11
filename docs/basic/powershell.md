@@ -416,26 +416,20 @@ Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbas
 
 
 # 需要 wt 和 ubuntu 24 wsl
-# Open Ubuntu 24 in WT
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name '(default)' -Value 'Open Ubuntu 24 in WT'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Extended' -ErrorAction SilentlyContinue; Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe new-tab -p '{d8e96812-b789-5068-a5ae-10b2fb53e95f}' --startingDirectory `"%V`""
+# Open Ubuntu 24 in WT 右键菜单直接显示，不需要 Shift（注意 GUID 必须用双引号）
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name '(default)' -Value 'Open Ubuntu 24 in WT'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Extended' -ErrorAction SilentlyContinue; Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Name '(default)' -Value "`"$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe`" new-tab -p `"{d8e96812-b789-5068-a5ae-10b2fb53e95f}`" --startingDirectory `"%V`""
 # 删除
 Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Recurse -Force
 
-# 需要 wt 和 ubuntu 24 wsl
-# === 推荐方案：右键直接打开 微软商店版 Ubuntu 24.04（启动快、不卡）===
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Force | Out-Null
-Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name '(default)' -Value 'Open Ubuntu 24.04 in WT'
-Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"
-Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'Extended' -ErrorAction SilentlyContinue
-Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue
-
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Force | Out-Null
-Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command" -Name '(default)' -Value "$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe new-tab -p `{d8e96812-b789-5068-a5ae-10b2fb53e95f`} --startingDirectory `"%V`""
+# Open Ubuntu 22 in WT 右键菜单直接显示，不需要 Shift（注意 GUID 必须用双引号，单引号会被注册表原样传给 wt 导致匹配失败回落到默认 profile）
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22" -Name '(default)' -Value 'Open Ubuntu 22 in WT'; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22" -Name 'Icon' -Value "$env:USERPROFILE\AppData\Local\terminal\wt_32.ico"; Remove-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22" -Name 'Extended' -ErrorAction SilentlyContinue; Rename-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22" -Name 'HideBasedOnVelocityId' -NewName 'ShowBasedOnVelocityId' -ErrorAction SilentlyContinue; New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22\command" -Force | Out-Null; Set-ItemProperty -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22\command" -Name '(default)' -Value "`"$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\wt.exe`" new-tab -p `"{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}`" --startingDirectory `"%V`""
+# 删除
+Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22" -Recurse -Force
 ```
 
 wt 配置文件
 
-需要添加 "commandline": "wsl.exe -d Ubuntu-24.04", 才能让 wsl 跳转到启动命令的位置
+可选：显式指定 commandline，确保 --startingDirectory 能正确跳转到对应目录
 
 ```json
 // 修改前
