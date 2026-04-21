@@ -171,6 +171,22 @@ sudo bash -c '
   echo -e "\n设置完成，新占用："
   journalctl --disk-usage
 '
+
+# 100mb
+sudo bash -c '
+  echo "当前 journal 占用："
+  journalctl --disk-usage
+  echo -e "\n立即清理到 100MB 以内（如果已经超过）："
+  journalctl --vacuum-size=100M
+  echo -e "\n设置永久上限为 100MB（重启 journald 后生效）"
+  mkdir -p /etc/systemd && \
+  { grep -q "^SystemMaxUse" /etc/systemd/journald.conf 2>/dev/null || echo "" >> /etc/systemd/journald.conf; } && \
+  sed -i "/^SystemMaxUse=/d" /etc/systemd/journald.conf && \
+  echo "SystemMaxUse=100M" >> /etc/systemd/journald.conf && \
+  systemctl restart systemd-journald && \
+  echo -e "\n设置完成，新占用："
+  journalctl --disk-usage
+'
 ```
 
 ## 📌 ssh 登录服务器
