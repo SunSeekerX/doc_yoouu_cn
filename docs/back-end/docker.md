@@ -448,7 +448,16 @@ docker run --name jenkins \
 -e JAVA_OPTS="-Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 -Xms4g -Xmx8g -XX:+UseG1GC -XX:+UseCompressedOops -Xlog:gc*:file=/var/jenkins_home/gc.log:time,uptime:filecount=5,filesize=20M" \
 jenkins/jenkins:lts-jdk21
 
-# 方向代理记得加上
+# 安装 Docker CLI（Pipeline 构建镜像需要）
+# docker.sock 已挂载，但容器内没有 docker 命令，需要装 CLI
+docker exec jenkins bash -c "\
+  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor --yes -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+  echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bookworm stable' > /etc/apt/sources.list.d/docker.list && \
+  apt-get update && apt-get install -y docker-ce-cli"
+# 验证
+docker exec jenkins docker version
+
+# 反向代理记得加上
 proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

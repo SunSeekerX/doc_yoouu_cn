@@ -10,7 +10,7 @@
 
 ## 📌 一键 DD
 
-github https://github.com/bin456789/reinstall
+https://github.com/bin456789/reinstall
 
 注意不支持本地 iso
 
