@@ -819,3 +819,52 @@ Windows 下的命令行还有很多的玩法，比如支持 Linux 命令的 `MSY
 - [添加 Windows Terminal 到鼠标右键菜单](https://zhuanlan.zhihu.com/p/91259377)，by Jerry
 - [PowerShell 美化指南](https://coolcode.org/2018/03/16/how-to-make-your-powershell-beautiful/) by 小马哥
 - [Windows Terminal 完美配置 PowerShell 7.1](https://zhuanlan.zhihu.com/p/137595941) by littleNewton
+
+## Windows Terminal Preview
+
+如果是通过 `winget install Microsoft.WindowsTerminal.Preview` 安装的 Preview，可执行文件通常在：
+
+`$env:USERPROFILE\AppData\Local\Microsoft\WindowsApps\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\wt.exe`
+
+一键改写现有 4 个右键菜单到 Preview（单行命令，避免终端复制换行）：
+
+```powershell
+$previewWt=Join-Path $env:USERPROFILE 'AppData\Local\Microsoft\WindowsApps\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\wt.exe'; Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt\command' -Name '(default)' -Value ('"' + $previewWt + '" new-tab -p "Git Bash" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt\command' -Name '(default)' -Value ('"' + $previewWt + '" new-tab -p "PowerShell" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22\command' -Name '(default)' -Value ('"' + $previewWt + '" new-tab -p "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command' -Name '(default)' -Value ('"' + $previewWt + '" new-tab -p "{d8e96812-b789-5068-a5ae-10b2fb53e95f}" --startingDirectory "%V"')
+```
+
+验证命令值里没有换行：
+
+```powershell
+'gitbash-wt','powershell-wt','wsl22','wsl24'|%{$v=(Get-ItemProperty "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\$_\command").'(default)';[PSCustomObject]@{Key=$_;HasNewline=($v.Contains("`r") -or $v.Contains("`n"));Value=$v}}|fl
+```
+
+注意：不要用 `-f` 拼接这两条 WSL 命令，因为 GUID 里的 `{}` 会被 PowerShell 当成格式化占位符。
+### 清理与回退
+
+删除这 4 个右键菜单：
+
+```powershell
+Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24' -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+切回正式版 Windows Terminal：
+
+```powershell
+$stableWt=Join-Path $env:USERPROFILE 'AppData\Local\Microsoft\WindowsApps\wt.exe'; Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "Git Bash" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "PowerShell" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "{d8e96812-b789-5068-a5ae-10b2fb53e95f}" --startingDirectory "%V"')
+```
+
+恢复 Preview 的旧 settings.json 备份：
+
+```powershell
+$previewDir=Join-Path $env:LOCALAPPDATA 'Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState'; Copy-Item -LiteralPath (Join-Path $previewDir 'settings.json.bak-20260507-215717') -Destination (Join-Path $previewDir 'settings.json') -Force
+```
+
+如果 Preview 下 `Ubuntu 24` 不能在当前目录打开，补上对应 profile 的 `commandline`：
+
+```json
+{
+  "commandline": "wsl.exe -d Ubuntu-24.04",
+  "guid": "{d8e96812-b789-5068-a5ae-10b2fb53e95f}",
+  "name": "Ubuntu 24.04.1 LTS"
+}
+```

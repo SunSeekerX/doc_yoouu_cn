@@ -1657,7 +1657,7 @@ docker run -d \
 
 启动后访问 `http://localhost:3041`，默认密码 `admin123`，首次登录后请立即修改（也可通过 configs 目录下的 `pwd` 文件修改）
 
-### 0x34 gost
+### 0x34 gost GO语言实现的安全隧道
 
 https://github.com/go-gost/gost
 
@@ -1801,7 +1801,7 @@ docker run -d \
   -e CLICKHOUSE_USER=default \
   -e CLICKHOUSE_PASSWORD=my_secret_pw \
   -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
-  clickhouse/clickhouse-server:lts-alpine
+  clickhouse/clickhouse-server:latest-alpine
 
 # Linux
 docker run -d \
@@ -1816,7 +1816,7 @@ docker run -d \
   -e CLICKHOUSE_USER=default \
   -e CLICKHOUSE_PASSWORD=my_secret_pw \
   -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
-  clickhouse/clickhouse-server:lts-alpine
+  clickhouse/clickhouse-server:latest-alpine
 
 # Win
 docker run -d `
@@ -1832,7 +1832,7 @@ docker run -d `
   -e CLICKHOUSE_USER=default `
   -e CLICKHOUSE_PASSWORD=my_secret_pw `
   -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 `
-  clickhouse/clickhouse-server:lts-alpine
+  clickhouse/clickhouse-server:latest-alpine
 
 # Mac
 docker run -d \
@@ -1847,7 +1847,7 @@ docker run -d \
   -e CLICKHOUSE_USER=default \
   -e CLICKHOUSE_PASSWORD=my_secret_pw \
   -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
-  clickhouse/clickhouse-server:lts-alpine
+  clickhouse/clickhouse-server:latest-alpine
 
 # 验证 - 直接执行 clickhouse-client（alpine 镜像无 bash）
 docker exec -it clickhouse clickhouse-client --user default --password my_secret_pw
@@ -2109,3 +2109,87 @@ OK
 - ioredis、Bull 队列、node-redis 等 Redis 客户端可直接连接，不改代码
 - **macOS/Windows 无官方二进制**，只能用 Docker 或 WSL2
 
+### 0x40 Docker 安装 SiYuan 思源笔记
+
+https://github.com/siyuan-note/siyuan
+
+https://hub.docker.com/r/b3log/siyuan
+
+> 思源笔记是一款隐私优先的个人知识管理系统，支持完全离线使用，所有数据存储在本地。Docker 部署仅支持浏览器访问，不支持桌面端和移动端连接，不支持导出 PDF/HTML/Word，不支持导入 Markdown。
+
+```shell
+# 设置目录权限（PUID/PGID 要和下面启动参数一致）
+mkdir -p /data/docker_data/siyuan/workspace
+chown -R 1000:1000 /data/docker_data/siyuan/workspace
+
+# Linux
+docker run -d \
+  --name siyuan \
+  --restart=always \
+  -p 6806:6806 \
+  -p 6807:6807 \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Shanghai \
+  -v /data/docker_data/siyuan/workspace:/siyuan/workspace \
+  b3log/siyuan \
+  --workspace=/siyuan/workspace/ \
+  --accessAuthCode=your_access_code
+
+# Win
+docker run -d `
+  --name siyuan `
+  --restart=always `
+  -p 6806:6806 `
+  -p 6807:6807 `
+  -e TZ=Asia/Shanghai `
+  -v D:\data\docker_data\siyuan\workspace:/siyuan/workspace `
+  b3log/siyuan `
+  --workspace=/siyuan/workspace/ `
+  --accessAuthCode=your_access_code
+  
+# 移除
+docker rm -f siyuan
+```
+
+Docker Compose
+
+```yaml
+version: "3.9"
+services:
+  siyuan:
+    image: b3log/siyuan
+    container_name: siyuan
+    command: ['--workspace=/siyuan/workspace/', '--accessAuthCode=${AuthCode}']
+    ports:
+      - 6806:6806
+      - 6807:6807
+    volumes:
+      - /data/docker_data/siyuan/workspace:/siyuan/workspace
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+```
+
+环境变量说明：
+
+- `PUID` / `PGID`：用户/组 ID，默认 1000
+- `SIYUAN_WORKSPACE_PATH`：工作空间路径（也可用 `--workspace` 参数）
+- `SIYUAN_ACCESS_AUTH_CODE`：访问授权码（也可用 `--accessAuthCode` 参数）
+- `SIYUAN_ACCESS_AUTH_CODE_BYPASS=true`：禁用授权码验证
+
+发布服务（只读模式）：
+
+- 端口 `6806`：编辑模式，需要 accessAuthCode 登录，可读可写
+- 端口 `6807`：发布模式，只读，别人只能浏览不能编辑
+- 启动容器后在思源 **设置 -> 关于 -> 发布服务** 中开启，端口设置为 `6807`
+- 确保工作空间中不包含敏感信息，发布服务会暴露整个工作空间内容
+
+注意事项：
+
+- 务必修改 `--accessAuthCode`，不要使用默认值
+- 确保挂载卷配置正确，否则容器删除后数据丢失
+- 勿使用 URL 重写进行重定向，应配置反向代理
+- 使用 NGINX 反向代理时需配置 WebSocket 支持（`/ws`）
