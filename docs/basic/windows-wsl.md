@@ -175,3 +175,102 @@ dir $env:LOCALAPPDATA\Packages\*Ubuntu* -Recurse -Filter ext4.vhdx
    ```
 
 通过这些步骤，你可以将WSL分发的默认数据存储位置更改到D盘上的指定目录。这样，WSL将使用新的位置来存储和访问所有文件。
+
+## 查看内存被什么占用
+
+```shell
+# 总览：重点看 available(真实可用) 和 swap
+free -h
+
+# 占用内存最高的进程
+ps aux --sort=-%mem | head -16
+
+# 按进程名汇总 RSS(MB)，看清同名进程总和（如多个语言服务器）
+ps aux | awk 'NR>1 {n=$11; sub(".*/","",n); rss[n]+=$6; cnt[n]++} END {for(i in rss) printf "%9.1f MB  %3d个  %s\n", rss[i]/1024, cnt[i], i}' | sort -rn | head
+
+# 查谁在用 swap
+for f in /proc/*/status; do awk -v p=$(basename $(dirname $f)) '/^Name:/{n=$2} /^VmSwap:/{if($2+0>0) print $2/1024" MB", n, p}' "$f" 2>/dev/null; done | sort -rn | head
+```
+
+> `buff/cache` 占用大是正常的（可回收），看 `available` 才是真实可用。如果 `swap` 被打满、`load average` 飙高，多半是进程太多（开了多个 IDE 语言服务器 / AI 会话），优先关掉不用的会话。
+
+## 配置 WSL 内存与 swap 分配
+
+WSL2 默认最多用宿主机一半内存。在 Windows 用户目录新建/编辑 `C:\Users\<用户名>\.wslconfig`：
+
+```ini
+[wsl2]
+# 内存上限，宿主 64G 时给 WSL 48G、留 16G 给 Windows
+memory=48GB
+# 磁盘 swap，当后备
+swap=8GB
+localhostForwarding=true
+
+[experimental]
+# 把空闲内存逐步还给 Windows
+autoMemoryReclaim=gradual
+```
+
+改完在 Windows PowerShell 重启 WSL 生效（会关闭所有 WSL 会话，先存好工作）：
+
+```powershell
+wsl --shutdown
+```
+
+## 配置 zram 压缩 swap
+
+磁盘 swap 被打满时进程跑在磁盘上会很卡。zram 把 swap 数据压缩后放在内存里，快几十倍，比单纯加磁盘 swap 更对症。
+
+先确认内核支持 zram（微软默认内核已带）：
+
+```shell
+modprobe zram && ls /sys/class/zram-control && zramctl
+# 查可用压缩算法
+cat /sys/block/zram0/comp_algorithm
+```
+
+> 微软默认 WSL 内核只编译了 `lzo / lzo-rle`，没有 `zstd`（`CONFIG_CRYPTO_ZSTD` 未开、也没有对应模块，`modprobe zstd` 会直接失败）。要 zstd 必须自己编译 WSL 内核（开 `CONFIG_CRYPTO_ZSTD`，再用 `.wslconfig` 的 `kernel=` 指定自编译内核）。lzo-rle 速度更快、压缩率约 2.5:1，当 swap 够用，一般不必折腾 zstd。
+
+启用了 systemd 的发行版（`/etc/wsl.conf` 里 `systemd=true`），用 systemd service 持久化。
+
+新建启动脚本 `/usr/local/sbin/zram_swap.sh`：
+
+```sh
+#!/bin/sh
+# 开机启用 zram 压缩 swap，优先级高于磁盘 swap
+modprobe zram
+echo lzo-rle > /sys/block/zram0/comp_algorithm
+echo 16G > /sys/block/zram0/disksize
+mkswap /dev/zram0 >/dev/null
+swapon -p 100 /dev/zram0
+```
+
+新建 `/etc/systemd/system/zram-swap.service`：
+
+```ini
+[Unit]
+Description=zram compressed swap
+After=local-fs.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/zram_swap.sh
+ExecStop=/sbin/swapoff /dev/zram0
+
+[Install]
+WantedBy=multi-user.target
+```
+
+赋权并启用：
+
+```shell
+chmod +x /usr/local/sbin/zram_swap.sh
+systemctl daemon-reload
+systemctl enable --now zram-swap.service
+
+# 验证：zram0 优先级 100，磁盘 swap 当后备
+swapon --show
+```
+
+> zram `disksize` 建议设内存上限的 1/3 左右（如 48G 上限设 16G）。它压缩后约占 6G 物理内存，别设太大以免挤占进程内存。

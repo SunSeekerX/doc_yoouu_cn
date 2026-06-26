@@ -52,7 +52,7 @@ claude config set autoUpdates true
 
 ```shell
 # 系统级别
-[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'cr_218348a080e43ac4702eb40548b35c38aaec293938cfab160516b9ba12503ffa', 'Machine')
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'your_anthropic_auth_token', 'Machine')
 [System.Environment]::SetEnvironmentVariable('ANTHROPIC_BASE_URL', 'https://crs.itssx.com/api', 'Machine')
 [System.Environment]::SetEnvironmentVariable('CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC', '1', 'Machine')
 
@@ -527,7 +527,7 @@ codex -m gpt-5.1-codex-max --sandbox danger-full-access
 codex --yolo -m gpt-5.1-codex -c model_reasoning_effort="high"
 
 # 系统级别
-[System.Environment]::SetEnvironmentVariable('CRS_OAI_KEY', 'cr_9f87c0a1f2250937f8b74064605c3ffd28f1501e2b3a71a3d0fa911304a51a34', 'Machine')
+[System.Environment]::SetEnvironmentVariable('CRS_OAI_KEY', 'your_crs_oai_key', 'Machine')
 
 # 删除
 # 删除系统级（Machine 级）环境变量

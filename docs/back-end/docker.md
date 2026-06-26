@@ -1491,7 +1491,7 @@ docker run -d \
   --name tduck \
   -e SPRING_DATASOURCE_URL="jdbc:mysql://192.168.0.1:3306/tduck_v4?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&tinyInt1isBit=false&nullCatalogMeansCurrent=true" \
   -e SPRING_DATASOURCE_USERNAME=tduck_v4 \
-  -e SPRING_DATASOURCE_PASSWORD=3ms7s5Zy4BxxTaFJ \
+  -e SPRING_DATASOURCE_PASSWORD=your_db_password \
   -p 8999:8999 \
   --network=dockernet \
   -v /data/docker_data/tduck/upload:/application/BOOT-INF/lib/upload \
@@ -1686,7 +1686,7 @@ docker run -d --name antigravity_manager \
 
 ### 0x36 CLIProxyAPI
 
-> 将 Gemini CLI、Claude Code、Codex、Qwen Code 等 AI CLI 工具包装成 OpenAI 兼容的 HTTP API 服务
+> 将 Claude Code、Codex、Antigravity、xAI、Kimi 等 AI CLI 工具账号包装成 OpenAI 兼容的 HTTP API 服务（Gemini 现仅支持 API Key 方式，OAuth 登录已移除）
 >
 > 文档：https://help.router-for.me/introduction/quick-start.html
 >
@@ -1716,43 +1716,42 @@ EOF
 #   secret-key: "your_password"
 
 # 启动
-# 端口说明：8317=API服务, 8085=Gemini OAuth, 54545=Claude OAuth,
-#          1455=Codex OAuth, 11451=iFlow OAuth, 51121=Antigravity OAuth
+# 端口说明：8317=API服务, 54545=Claude OAuth, 1455=Codex OAuth,
+#          51121=Antigravity OAuth, 56121=xAI OAuth（Kimi 为 device flow，无需端口）
 docker run -d \
   --name cli-proxy-api \
   --restart=always \
   -p 8317:8317 \
-  -p 8085:8085 \
   -p 1455:1455 \
   -p 54545:54545 \
   -p 51121:51121 \
-  -p 11451:11451 \
+  -p 56121:56121 \
   -v /data/docker_data/cli_proxy_api/config.yaml:/CLIProxyAPI/config.yaml \
   -v /data/docker_data/cli_proxy_api/auth_data:/root/.cli-proxy-api \
   -v /data/docker_data/cli_proxy_api/logs:/CLIProxyAPI/logs \
   eceasy/cli-proxy-api:latest
 ```
 
-登录 AI 服务（按需选，OAuth 类会打印 URL 复制到浏览器完成认证，Qwen 为交互式 device flow 需在终端输入）：
+登录 AI 服务（按需选，OAuth 回调类打印 URL 到浏览器完成认证；Codex device 与 Kimi 走 device code 流程，打印验证 URL 后在浏览器授权、程序自动等待，无需本地回调端口）：
 
 ```shell
-# Gemini CLI（免费，OAuth 端口 8085）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --login
-
 # Claude Code（OAuth 端口 54545）
 docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --claude-login
 
-# Codex（OAuth 端口 1455）
+# Codex（OAuth 回调，端口 1455）
 docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --codex-login
 
-# Qwen Code（交互式 device flow，按终端提示操作）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --qwen-login
-
-# iFlow（OAuth 端口 11451）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --iflow-login
+# Codex（device code 流程，无需回调端口；适合无法暴露 1455 的环境）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --codex-device-login
 
 # Antigravity（OAuth 端口 51121）
 docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --antigravity-login
+
+# xAI / Grok（OAuth 端口 56121）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --xai-login
+
+# Kimi（device code 流程，打印验证 URL，浏览器授权后自动保存）
+docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --kimi-login
 ```
 
 登录成功后：
@@ -1781,16 +1780,28 @@ New-Item -ItemType Directory -Force -Path D:\data\docker_data\clickhouse\logs
 
 端口说明：8123=HTTP接口（REST API、Web UI、JDBC/ODBC HTTP），9000=Native TCP协议（clickhouse-client）
 
+内存配置（通用：下面所有生产 docker run 都挂 zz_memory，防 CH 按宿主机内存把 cache 配成 50%、自认上限 90% 导致大查询挤爆机器。系统日志治理另见下方专门小节，按需选方案一/二写 zz_system_logs.xml）：
+
 ```shell
-# 限制资源版本
-# ClickHouse 25.8 LTS (lts tag 指向此版本)
+mkdir -p /data/docker_data/clickhouse/config.d
+
+# 内存：关 uncompressed_cache、mark_cache 压到 512M
+cat > /data/docker_data/clickhouse/config.d/zz_memory.xml <<'EOF'
+<clickhouse>
+  <uncompressed_cache_size>0</uncompressed_cache_size>
+  <mark_cache_size>536870912</mark_cache_size>
+</clickhouse>
+EOF
+```
+
+```shell
+# 限制资源版本（生产基础：带 --memory + 挂 zz_memory；要治理系统日志再按下方「系统日志治理」选方案一/二多挂 zz_system_logs。latest-alpine 是滚动版，可钉具体版本号防漂移）
 docker run -d \
   --name clickhouse \
   --restart=always \
-  --memory="1g" \
-  --memory-swap="1g" \
+  --memory="2g" \
+  --memory-swap="2g" \
   --memory-swappiness=0 \
-  --cpus="1" \
   --ulimit nofile=262144:262144 \
   --log-opt max-size=100m \
   --log-opt max-file=2 \
@@ -1798,52 +1809,27 @@ docker run -d \
   -p 19000:9000 \
   -v /data/docker_data/clickhouse/data:/var/lib/clickhouse \
   -v /data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
+  -v /data/docker_data/clickhouse/config.d/zz_memory.xml:/etc/clickhouse-server/config.d/zz_memory.xml \
   -e CLICKHOUSE_USER=default \
   -e CLICKHOUSE_PASSWORD=my_secret_pw \
   -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
   clickhouse/clickhouse-server:latest-alpine
 
-# Linux
+# 本地开发/测试最简版：带 --memory 防 CH 按宿主机内存把 cache 配大；不挂日志/内存配置(本地不在乎日志精简)。
+# 生产部署别用本段：仅资源基础用上面的「限制资源版本」(--memory + zz_memory)；要系统日志治理 + TTL，用下方「系统日志治理」方案一/二(在其上多挂 zz_system_logs + 重建后补 ALTER TTL)。
+# Win: 行尾续行符换反引号 `、数据目录换 D:\data\docker_data\clickhouse\{data,logs}；Mac: 数据目录换 ~/work/data/docker_data/clickhouse/{data,logs}
 docker run -d \
   --name clickhouse \
   --restart=always \
+  --memory="1g" \
+  --memory-swap="1g" \
+  --memory-swappiness=0 \
   --ulimit nofile=262144:262144 \
   --log-opt max-size=100m --log-opt max-file=2 \
   -p 18123:8123 \
   -p 19000:9000 \
   -v /data/docker_data/clickhouse/data:/var/lib/clickhouse \
   -v /data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
-  -e CLICKHOUSE_USER=default \
-  -e CLICKHOUSE_PASSWORD=my_secret_pw \
-  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
-  clickhouse/clickhouse-server:latest-alpine
-
-# Win
-docker run -d `
-  --name clickhouse `
-  --restart=always `
-  --ulimit nofile=262144:262144 `
-  --log-opt max-size=100m `
-  --log-opt max-file=2 `
-  -p 18123:8123 `
-  -p 19000:9000 `
-  -v D:\data\docker_data\clickhouse\data:/var/lib/clickhouse `
-  -v D:\data\docker_data\clickhouse\logs:/var/log/clickhouse-server `
-  -e CLICKHOUSE_USER=default `
-  -e CLICKHOUSE_PASSWORD=my_secret_pw `
-  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 `
-  clickhouse/clickhouse-server:latest-alpine
-
-# Mac
-docker run -d \
-  --name clickhouse \
-  --restart=always \
-  --ulimit nofile=262144:262144 \
-  --log-opt max-size=100m --log-opt max-file=2 \
-  -p 18123:8123 \
-  -p 19000:9000 \
-  -v ~/work/data/docker_data/clickhouse/data:/var/lib/clickhouse \
-  -v ~/work/data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
   -e CLICKHOUSE_USER=default \
   -e CLICKHOUSE_PASSWORD=my_secret_pw \
   -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
@@ -1859,6 +1845,284 @@ curl "http://localhost:18123/?user=default&password=my_secret_pw&query=SELECT%20
 
 # 内置 Web UI（零依赖，浏览器访问）
 # http://localhost:18123/play
+```
+
+#### 系统日志治理：zz_system_logs.xml
+
+ClickHouse 默认把一堆系统级可观测性日志（text_log/trace_log/metric_log/part_log/processors_profile_log…）无限写入且无 TTL，单机几周能涨到几十 G 撑爆磁盘（线上踩过：64G 全是这些）。大厂做法：业务只存自己需要的表，系统日志只留「错误」+ 短 TTL 兜底，其余高频日志全关。
+
+挂单个文件不会盖掉镜像自带的 `docker_related_config.xml`。下面两套配置按需选一套写入 `/data/docker_data/clickhouse/config.d/zz_system_logs.xml`。
+
+##### 方案一：高频系统日志全部关闭（只留 error）
+
+```shell
+mkdir -p /data/docker_data/clickhouse/config.d
+
+cat > /data/docker_data/clickhouse/config.d/zz_system_logs.xml <<'EOF'
+<clickhouse>
+  <!-- ===== 高频系统日志全部关闭（只停写入，不影响业务表） ===== -->
+  <trace_log remove="1"/>
+  <metric_log remove="1"/>
+  <asynchronous_metric_log remove="1"/>
+  <processors_profile_log remove="1"/>
+  <query_thread_log remove="1"/>
+  <query_views_log remove="1"/>
+  <query_metric_log remove="1"/>
+  <part_log remove="1"/>
+  <latency_log remove="1"/>
+  <asynchronous_insert_log remove="1"/>
+  <backup_log remove="1"/>
+  <blob_storage_log remove="1"/>
+  <opentelemetry_span_log remove="1"/>
+  <session_log remove="1"/>
+  <zookeeper_log remove="1"/>
+  <transactions_info_log remove="1"/>
+  <filesystem_cache_log remove="1"/>
+  <filesystem_read_prefetches_log remove="1"/>
+  <s3queue_log remove="1"/>
+  <background_schedule_pool_log remove="1"/>
+
+  <!-- ===== 只保留错误相关 + 14 天 TTL ===== -->
+  <!-- text_log: 只记 error 级（CH 自身报错排查），是之前 34G 的元凶，收到 error 后体积可忽略 -->
+  <text_log replace="1">
+    <database>system</database>
+    <table>text_log</table>
+    <level>error</level>
+    <partition_by>event_date</partition_by>
+    <ttl>event_date + INTERVAL 14 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </text_log>
+  <!-- error_log: 结构化错误统计 -->
+  <error_log replace="1">
+    <database>system</database>
+    <table>error_log</table>
+    <partition_by>event_date</partition_by>
+    <ttl>event_date + INTERVAL 14 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </error_log>
+
+  <!-- query_log: 只关心错误 → 默认关闭。需排查慢查询时把上面这条删掉、解开下面注释再重启 -->
+  <query_log remove="1"/>
+  <!--
+  <query_log replace="1">
+    <database>system</database>
+    <table>query_log</table>
+    <partition_by>event_date</partition_by>
+    <ttl>event_date + INTERVAL 7 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </query_log>
+  -->
+
+  <!-- 服务器自身文件日志(挂载到 logs 目录)收到 warning，减少噪音 -->
+  <logger><level>warning</level></logger>
+</clickhouse>
+EOF
+```
+
+docker run（在限制资源版基础上多挂 zz_system_logs；--memory + zz_memory 同样必带，否则 CH 仍按宿主机内存配大 cache）：
+
+```shell
+docker run -d \
+  --name clickhouse \
+  --restart=always \
+  --memory="2g" \
+  --memory-swap="2g" \
+  --memory-swappiness=0 \
+  --ulimit nofile=262144:262144 \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  -p 18123:8123 \
+  -p 19000:9000 \
+  -v /data/docker_data/clickhouse/data:/var/lib/clickhouse \
+  -v /data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
+  -v /data/docker_data/clickhouse/config.d/zz_system_logs.xml:/etc/clickhouse-server/config.d/zz_system_logs.xml \
+  -v /data/docker_data/clickhouse/config.d/zz_memory.xml:/etc/clickhouse-server/config.d/zz_memory.xml \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD=my_secret_pw \
+  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
+  clickhouse/clickhouse-server:latest-alpine
+```
+
+全新安装（空 `/var/lib/clickhouse`）直接上面 docker run 即可。**复用已有数据目录**时，方案一同样改了 system log 表配置，和方案二一样会留下旧表、触发改名重建或残留历史数据，必须补做清理——差异：方案一额外关闭了 query_log/metric_log/asynchronous_metric_log，所以在方案二「回收磁盘」①的 DROP 列表里再加上这三张表；保留表只有 text_log/error_log，ALTER 补 TTL 也只补这两张（均 14 天）。「等就绪 → ALTER 补 TTL → 回收磁盘 → 清 `*_log_N` 孤儿」的具体命令见方案二，按上述差异照搬即可。
+
+验证生效（不能只查 `%_log`——会漏掉 CH 改名产生的 `*_log_N` 孤儿表，必须用 `%log%`；方案一只保留 text_log/error_log，结果应只剩这两张，冒出其它 `*log*` 表说明旧表/孤儿没清干净）：
+
+```shell
+docker exec clickhouse clickhouse-client --user default --password my_secret_pw \
+  -q "SELECT name FROM system.tables WHERE database='system' AND name LIKE '%log%' ORDER BY name"
+```
+
+##### 方案二：保留 + TTL 折中版（更贴近生产最佳实践）
+
+保留的系统日志统一加 TTL 限制体积，不是全删——保留 text_log(error 级)/error_log(14 天)、query_log(7 天，慢查询/审计排查)、metric_log/asynchronous_metric_log(3 天，CH 自身监控指标)，其余高频又少用的日志关闭。核心是「有界保留 + 保住可观测性」，既避免无 TTL 系统日志撑爆磁盘，CH 出问题时又有据可查。
+
+```shell
+mkdir -p /data/docker_data/clickhouse/config.d
+
+cat > /data/docker_data/clickhouse/config.d/zz_system_logs.xml <<'EOF'
+<clickhouse>
+  <!-- ===== 高频/少用系统日志关闭（只停写入，不影响业务表） ===== -->
+  <trace_log remove="1"/>
+  <processors_profile_log remove="1"/>
+  <query_thread_log remove="1"/>
+  <query_views_log remove="1"/>
+  <query_metric_log remove="1"/>
+  <part_log remove="1"/>
+  <latency_log remove="1"/>
+  <asynchronous_insert_log remove="1"/>
+  <backup_log remove="1"/>
+  <blob_storage_log remove="1"/>
+  <opentelemetry_span_log remove="1"/>
+  <session_log remove="1"/>
+  <zookeeper_log remove="1"/>
+  <transactions_info_log remove="1"/>
+  <filesystem_cache_log remove="1"/>
+  <filesystem_read_prefetches_log remove="1"/>
+  <s3queue_log remove="1"/>
+  <background_schedule_pool_log remove="1"/>
+
+  <!-- partition_by 用 toYYYYMM(event_date) 与 CH 默认/现存表保持一致, 避免启动时结构不符触发改名重建;
+       注意: 下面的 <ttl> 只在「建表时」套用, 对已存在的旧表无效, 必须用后面的 ALTER 显式补 TTL -->
+
+  <!-- ===== 保留：错误诊断（14 天 TTL） ===== -->
+  <text_log replace="1">
+    <database>system</database>
+    <table>text_log</table>
+    <level>error</level>
+    <partition_by>toYYYYMM(event_date)</partition_by>
+    <ttl>event_date + INTERVAL 14 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </text_log>
+  <error_log replace="1">
+    <database>system</database>
+    <table>error_log</table>
+    <partition_by>toYYYYMM(event_date)</partition_by>
+    <ttl>event_date + INTERVAL 14 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </error_log>
+
+  <!-- ===== 保留：查询审计/慢查询排查（7 天 TTL） ===== -->
+  <query_log replace="1">
+    <database>system</database>
+    <table>query_log</table>
+    <partition_by>toYYYYMM(event_date)</partition_by>
+    <ttl>event_date + INTERVAL 7 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </query_log>
+
+  <!-- ===== 保留：CH 自身监控指标（3 天 TTL，喂监控/排障） ===== -->
+  <metric_log replace="1">
+    <database>system</database>
+    <table>metric_log</table>
+    <partition_by>toYYYYMM(event_date)</partition_by>
+    <ttl>event_date + INTERVAL 3 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </metric_log>
+  <asynchronous_metric_log replace="1">
+    <database>system</database>
+    <table>asynchronous_metric_log</table>
+    <partition_by>toYYYYMM(event_date)</partition_by>
+    <ttl>event_date + INTERVAL 3 DAY DELETE</ttl>
+    <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+  </asynchronous_metric_log>
+
+  <!-- 服务器自身文件日志收到 warning，减少噪音 -->
+  <logger><level>warning</level></logger>
+</clickhouse>
+EOF
+```
+
+重建容器（旧容器已存在、18123/19000 端口已占用，必须先停删旧容器，否则 docker run 报名字/端口冲突；数据在 bind mount，删容器不丢数据）：
+
+```shell
+# 1. 停止并删除旧容器
+docker stop clickhouse && docker rm clickhouse
+
+# 2. 用新配置重建（在限制资源版基础上多挂 zz_system_logs；--memory + zz_memory 同样必带，否则 CH 仍按宿主机内存配大 cache）
+docker run -d \
+  --name clickhouse \
+  --restart=always \
+  --memory="2g" \
+  --memory-swap="2g" \
+  --memory-swappiness=0 \
+  --ulimit nofile=262144:262144 \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  -p 18123:8123 \
+  -p 19000:9000 \
+  -v /data/docker_data/clickhouse/data:/var/lib/clickhouse \
+  -v /data/docker_data/clickhouse/logs:/var/log/clickhouse-server \
+  -v /data/docker_data/clickhouse/config.d/zz_system_logs.xml:/etc/clickhouse-server/config.d/zz_system_logs.xml \
+  -v /data/docker_data/clickhouse/config.d/zz_memory.xml:/etc/clickhouse-server/config.d/zz_memory.xml \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD=my_secret_pw \
+  -e CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1 \
+  clickhouse/clickhouse-server:26.3.12-alpine
+```
+
+等 ClickHouse 就绪（`docker run -d` 只拉起容器，服务端监听端口/恢复表有延迟，不等就执行后面命令会连不上而假失败；下面所有 `$CH` 命令假设在同一终端会话里顺序执行）：
+
+```shell
+CH="docker exec clickhouse clickhouse-client --user default --password my_secret_pw"
+ready=0
+for i in $(seq 1 30); do
+  $CH -q "SELECT 1" >/dev/null 2>&1 && { ready=1; echo "ClickHouse ready"; break; }
+  echo "waiting for ClickHouse... ($i/30)"; sleep 2
+done
+# 60s 内未就绪视为启动失败：打印日志并 exit 1 硬停，绝不继续往下执行 ALTER/DROP
+# 注意：交互式逐段粘贴时 exit 1 会退出当前 SSH 会话——这是预期的硬停，重连排查后再继续
+[ "$ready" = 1 ] || { echo "ClickHouse 60s 内未就绪，可能 XML 配错/端口占用/恢复表失败，排查后再继续；最近日志："; docker logs --tail 50 clickhouse; exit 1; }
+```
+
+给已存在的表显式补 TTL（关键：config 的 `<ttl>` 只在建表时套用，已存在的旧表必须用 ALTER 才会真正带上 TTL；下面命令幂等，可重复执行）：
+
+```shell
+$CH -q "ALTER TABLE system.text_log MODIFY TTL event_date + INTERVAL 14 DAY"
+$CH -q "ALTER TABLE system.error_log MODIFY TTL event_date + INTERVAL 14 DAY"
+$CH -q "ALTER TABLE system.query_log MODIFY TTL event_date + INTERVAL 7 DAY"
+$CH -q "ALTER TABLE system.metric_log MODIFY TTL event_date + INTERVAL 3 DAY"
+$CH -q "ALTER TABLE system.asynchronous_metric_log MODIFY TTL event_date + INTERVAL 3 DAY"
+```
+
+回收磁盘，分两类（`IF EXISTS` 保证没建过的表不报错）：
+- ① XML 里 remove 的表：remove 只停写入，表和旧数据仍留在 system.tables，必须 DROP
+- ② `*_log_N` 改名孤儿：CH 启动时会把「结构/TTL 与新配置不符」的旧日志表改名成 `<name>_N` 另建新表，**实测 query_log/metric_log/asynchronous_metric_log 都会被改名**，旧数据留在 `_N` 里，必须单独清
+
+```shell
+# ① 删除被关闭的日志表
+for t in trace_log processors_profile_log query_thread_log query_views_log query_metric_log \
+         part_log latency_log asynchronous_insert_log backup_log blob_storage_log \
+         opentelemetry_span_log session_log zookeeper_log transactions_info_log \
+         filesystem_cache_log filesystem_read_prefetches_log s3queue_log background_schedule_pool_log; do
+  $CH -q "DROP TABLE IF EXISTS system.$t SYNC"
+done
+
+# ② 删除 CH 改名产生的 *_log_N 孤儿表（含被关闭表的历史改名残留）
+for t in $($CH -q "SELECT name FROM system.tables WHERE database='system' AND match(name,'_log_[0-9]+\$')"); do
+  $CH -q "DROP TABLE IF EXISTS system.\`$t\` SYNC" && echo "drop orphan $t"
+done
+
+# 可选：清掉 text_log 旧的混级别历史数据（只保留今后 error 级新写入）
+# $CH -q "TRUNCATE TABLE system.text_log SYNC"
+```
+
+验证（不能只看表名——必须确认 TTL 真生效、text_log 真的只记 error，否则配置没完全生效会被误判成成功）：
+
+```shell
+# a. 现存 system 库含 log 的表：应只剩保留的 5 张（text_log/error_log/query_log/metric_log/asynchronous_metric_log）
+#    用 %log% 而非 %_log——否则匹配不到 *_log_N 改名孤儿；若这里冒出 _N 后缀的表，说明上一步②没清干净
+$CH -q "SELECT name FROM system.tables WHERE database='system' AND name LIKE '%log%' ORDER BY name"
+
+# b. 保留表的分区 + TTL 天数：ttl_check 必须全为 OK
+#    按表核对 toIntervalDay 的天数(14/14/7/3/3)，而非只看有没有 TTL 字样——position 那种写法会撞上列名/注释里的 "TTL"(metric_log 有一堆 ProfileEvent_*TTL* 列)，旧表残留或 ALTER 漏改都会被误判成功
+$CH -q "SELECT name, partition_key, multiIf(name IN ('text_log','error_log'),'toIntervalDay(14)', name='query_log','toIntervalDay(7)','toIntervalDay(3)') AS expect, if(create_table_query LIKE concat('%TTL event_date + ', expect, '%'),'OK','FAIL') AS ttl_check FROM system.tables WHERE database='system' AND name IN ('text_log','error_log','query_log','metric_log','asynchronous_metric_log') ORDER BY name FORMAT PrettyCompact"
+
+# c. 验证 text_log 只记 error：直接查 CH 合并后的生效配置（确定性）。
+#    不要用"跑查询→看 text_log 有没有非-error 行"那种运行时探测：实测普通查询不一定写 text_log，空结果既可能是过滤生效、也可能是这组活动本就不写日志，证明不了
+docker exec clickhouse grep -A4 "<text_log" /var/lib/clickhouse/preprocessed_configs/config.xml | grep -i "<level>"
+# 期望输出: <level>error</level>（这是 config.d 全部 merge/remove/replace 后 CH 实际加载的最终配置，过滤已激活）
+
+# d. text_log 当前全表 level 分布（看实际占用，与是否执行了上面的可选 TRUNCATE 有关）：
+#    执行了 TRUNCATE → 接近 0，只剩重启后新写入的 error；没执行 → 仍有变更前大量 Debug/Trace 历史(几百 MiB)，靠 14 天 TTL 按月分区逐步清
+$CH -q "SELECT level, count() FROM system.text_log GROUP BY level ORDER BY level FORMAT PrettyCompact"
 ```
 
 ### 0x38 Docker 安装 ch-ui（ClickHouse Web 管理）

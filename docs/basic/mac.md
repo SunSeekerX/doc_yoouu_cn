@@ -307,174 +307,52 @@ iTerm2 -> Make ITerm2 Default Term
 
 ## oh-my-zsh
 
-记得先安装 zsh
+> macOS 自 Catalina 起默认 shell 即为 zsh，一般无需另装。Linux 下的快速安装见 [linux 文档](https://doc.yoouu.cn/back-end/linux.html#oh-my-zsh-快速安装)。
+
+### 安装 zsh
 
 ```shell
-# 检查是否安装
+# 查看版本与默认 shell（期待 /bin/zsh，已自带可跳过）
 zsh --version
-# 查看默认 shell
 echo $SHELL
-# 期待输出 /usr/bin/zsh
-# 安装 zsh
-sudo apt install zsh
-# 验证是否安装
-zsh --version
-# 设置为默认
-chsh -s $(which zsh)
-# 注销并重新登录,或重启系统,使更改生效。
+# 没有、或想用更新版才装 brew 的 zsh（需先装好 Homebrew，见本文「homebrew」一节）
+brew install zsh
+# 显式取 brew 的 zsh（which zsh 可能仍解析到系统自带的 /bin/zsh）
+BREW_ZSH="$(brew --prefix)/bin/zsh"
+# brew 的 zsh 不在 /etc/shells，先登记再设默认（已存在则跳过，避免重复追加），否则 chsh 报 non-standard shell
+grep -qxF "$BREW_ZSH" /etc/shells || sudo sh -c "echo $BREW_ZSH >> /etc/shells"
+chsh -s "$BREW_ZSH"
 ```
 
-安装ZSH 教程：https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
+### 安装 oh-my-zsh
 
-https://ohmyz.sh/
+教程：https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH ｜ https://ohmyz.sh/
 
 ```shell
-# 选择下面其中一种脚本安装：
-# curl
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# wget：
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 ```
 
 ### 配置主题
 
-官方收集了一些主题（不再收录新主题），你可以访问 [主题&&截图](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes) 页面查看并选取。
-
-这里以`agnoster`为例说明。
-
-1.编辑`~/.zshrc`文件，修改`ZSH_THEME`配置：
-
 ```shell
+# 编辑 ~/.zshrc 修改 ZSH_THEME，主题见 https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
 ```
 
-- agnoster
-- amuse
-
-### 功能增强
-
-#### 1. zsh-autosuggestions
-
-命令自动补全功能。
-
-1.克隆代码到`$ZSH_CUSTOM/plugins`（默认位于`~/.oh-my-zsh/custom/plugins`）
+### 常用插件
 
 ```shell
-git clone https://gitee.com/imirror/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-```
+# 命令自动补全
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# 语法高亮
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-2.在`Oh My Zsh`配置启用插件
-
-打开`~/.zshrc`，找到`plugins`，追加`zsh-autosuggestions`。
-
-`git`为默认配置。
-
-```shell
-plugins=(git zsh-autosuggestions)
-```
-
-如果有看不到自动补全的内容，确保以下两个颜色不是相近的：
-
-```shell
-iTerm > Preferences > Profiles > Colors > ANSI Colors > Bright > Black
-iTerm > Preferences > Profiles > Colors > Basic Colors > Background
-```
-
-最后执行`source ~/.zshrc`生效。
-
-#### 2. zsh-syntax-highlighting
-
-语法高亮。
-
-1.克隆代码到`$ZSH_CUSTOM/plugins`（默认位于`~/.oh-my-zsh/custom/plugins`）
-
-```shell
-git clone https://gitee.com/imirror/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-
-2.在`Oh My Zsh`配置启用插件
-
-打开`~/.zshrc`，找到`plugins`，追加`zsh-syntax-highlighting`。
-
-`git`为默认配置。
-
-```shell
+# 编辑 ~/.zshrc 启用，再执行 source ~/.zshrc 生效
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-```
-
-最后执行`source ~/.zshrc`生效。
-
-#### 我启用的插件列表
-
-```shell
+# 我启用的全部插件
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting bundler macos rake rbenv ruby)
 ```
 
-#### 如果安装完成出现
+> `bundler rake rbenv ruby` 需要本机装好 Ruby/rbenv 环境，否则启动会报 `rbenv_prompt_info: command not found: ruby`，用不到就从 plugins 里删掉这几个。
 
-```shell
-rbenv_prompt_info:2: command not found: ruby
-# ubuntu 解决
-```
-
-1. 首先，安装 rbenv 和 ruby-build：
-
-   ```shell
-   sudo apt update
-   sudo apt install rbenv
-   ```
-
-2. 如果上面的命令无法安装 rbenv，您可以尝试从 GitHub 克隆 rbenv 仓库：
-
-   ```
-   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-   ```
-
-3. 添加 rbenv 到您的 PATH。编辑 ~/.bashrc 文件（如果您使用的是 bash）或 ~/.zshrc 文件（如果您使用的是 zsh），添加以下行：
-
-   ```shell
-   export PATH="$HOME/.rbenv/bin:$PATH"
-   eval "$(rbenv init -)"
-   ```
-
-4. 重新加载 shell 配置：
-
-   ```shell
-   source ~/.bashrc  # 或 source ~/.zshrc
-   ```
-
-5. 验证 rbenv 安装：
-
-   ```shell
-   type rbenv
-   ```
-
-   这应该显示 rbenv 的路径。
-
-6. 安装 ruby-build 插件（如果还没有安装）：
-
-   ```shell
-   mkdir -p "$(rbenv root)"/plugins
-   git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-   ```
-
-7. 现在，安装一个 Ruby 版本：
-
-   ```shell
-   rbenv install 3.0.0  # 或其他您想要的版本
-
-   # 查看可以安装的版本
-   rbenv install -l
-   ```
-
-8. 设置全局 Ruby 版本：
-
-   ```shell
-   rbenv global 3.0.0
-   ```
-
-9. 验证 Ruby 安装：
-
-   ```shell
-   ruby -v
-   ```
+> 看不到自动补全时，确保 iTerm2 两个颜色不相近：`Profiles > Colors > ANSI Colors > Bright > Black` 与 `Basic Colors > Background`。
