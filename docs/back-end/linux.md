@@ -662,6 +662,98 @@ service ssh restart
 /etc/init.d/ssh restart
 ```
 
+## 云服务器开启 root SSH 登录（AWS EC2 / Debian 13）
+
+云镜像（AWS / GCP 等）默认禁止 root 直接登录：root 的 authorized_keys 里塞了一行「请用普通用户登录」的拦截命令；密码认证也被 `/etc/ssh/sshd_config.d/50-cloud-init.conf` 关掉了。下面用 drop-in 文件覆盖，sshd 对同名选项是「第一个出现的值生效」，所以文件名用 `00-` 前缀排到最前。
+
+默认登录用户：Debian 是 `admin`，Ubuntu 是 `ubuntu`，Amazon Linux 是 `ec2-user`。
+
+### 1. 先用默认用户登录
+
+```bash
+# 本地 WSL：/mnt/c 挂载盘不能正确 chmod，先把密钥拷到家目录
+mkdir -p ~/.ssh
+cp /mnt/c/Users/<用户名>/Downloads/your-key.pem ~/.ssh/your-key.pem
+chmod 400 ~/.ssh/your-key.pem
+
+# Debian 默认用户是 admin
+ssh -i ~/.ssh/your-key.pem admin@<公网IP>
+```
+
+### 2. 开启 root 密钥登录
+
+```bash
+# 先看 root 现有的 authorized_keys：全新云机器里应只有一行「请用 admin 登录」的拦截命令
+# 若出现你不认识的其他管理密钥，先查清来源，别直接覆盖，否则会锁掉其他管理员
+sudo cat /root/.ssh/authorized_keys 2>/dev/null
+
+# 只给 root 授予「你这把登录密钥」的公钥，不要整份复制 admin 的 authorized_keys
+# （admin 里若有协作者 key、临时 key，整份复制会把它们一并提权成 root，属于权限扩张）
+# 在本地（有 .pem 的机器）从私钥导出这把公钥，复制下面命令的输出备用：
+ssh-keygen -y -f ~/.ssh/your-key.pem
+
+# 回到服务器：备份原文件，再把上一步导出的那一行公钥写给 root（覆盖掉拦截行）
+sudo install -d -m 700 /root/.ssh
+sudo cp /root/.ssh/authorized_keys /root/.ssh/authorized_keys.bak 2>/dev/null
+echo '把上一步导出的公钥整行粘贴到这里' | sudo tee /root/.ssh/authorized_keys
+sudo chmod 600 /root/.ssh/authorized_keys
+sudo chown -R root:root /root/.ssh
+# 非全新机器想保留 root 原有密钥：先删掉拦截行，再只追加这一把公钥
+# 不能只 tee -a 追加而不删拦截行：拦截行绑定的多是同一把公钥且排在前面，SSH 逐行匹配会先
+# 命中它的 forced command 把登录拦掉，追加在后面的干净公钥根本轮不到，root 照样登不上
+# sudo sed -i '/Please login as/d' /root/.ssh/authorized_keys
+# echo '把导出的公钥整行粘贴到这里' | sudo tee -a /root/.ssh/authorized_keys
+
+# 允许 root 用密钥登录，prohibit-password = 只允许密钥、禁止密码
+echo 'PermitRootLogin prohibit-password' | sudo tee /etc/ssh/sshd_config.d/00-permit-root.conf
+
+# 测试语法没问题再重启（Debian 服务名是 ssh 不是 sshd）
+sudo sshd -t
+sudo systemctl restart ssh
+```
+
+### 3. 开启 root 密码登录（可选，不推荐公网开放）
+
+```bash
+# 给 root 设密码（按提示输两遍）
+sudo passwd root
+
+# 同时允许 root 登录 + 密码认证，覆盖 50-cloud-init.conf 的 PasswordAuthentication no
+sudo tee /etc/ssh/sshd_config.d/00-permit-root.conf <<'EOF'
+PermitRootLogin yes
+PasswordAuthentication yes
+EOF
+
+sudo sshd -t
+sudo systemctl restart ssh
+```
+
+### 4. 验证
+
+```bash
+# sshd -T 看最终生效值（比 grep 文件可靠），期望值取决于你做到哪一步：
+# 只做到第 2 步：permitrootlogin prohibit-password、passwordauthentication no
+# 做到第 3 步  ：permitrootlogin yes、passwordauthentication yes
+sudo sshd -T | grep -iE 'permitrootlogin|passwordauthentication'
+
+# 保持当前会话别关，另开终端测试
+
+# 验证第 2 步：密钥登录 root
+# 加 IdentitiesOnly=yes 让客户端只认 -i 这把 key，否则它还会把 ssh-agent 里已加载的其它 key
+# 一起递上去；万一 root 接受了别的 key 也会登录成功，就证明不了刚写进去的 your-key.pem 真可用
+ssh -o IdentitiesOnly=yes -i ~/.ssh/your-key.pem root@<公网IP>
+
+# 验证第 3 步：密码登录 root
+# 必须强制禁用公钥，否则本机密钥/agent 会优先命中走公钥，看似成功实则测不出密码是否真生效
+ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password root@<公网IP>
+```
+
+注意：
+
+- 公网开放 root + 密码是爆破首要目标，密码要足够长随机，并装 fail2ban（见「软件推荐」）。
+- 临时用完建议把 `PasswordAuthentication` 改回 `no` 再 `systemctl restart ssh`。
+- 连不上先查安全组/防火墙是否放行 22 端口。
+
 ## 📌 ubuntu
 
 ### 常用工具包
