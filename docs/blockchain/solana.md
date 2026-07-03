@@ -21,7 +21,7 @@ avm use latest
 anchor --version
 
 # 创建项目
-chor init <new-workspace-name>
+anchor init <new-workspace-name>
 ```
 
 

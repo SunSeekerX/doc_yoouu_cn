@@ -198,7 +198,6 @@ Firefox 支持通过 CSS 定制界面。对应的 CSS 规则需要保存到名�
 
 有一个不那么优雅的方案。如果你没有调整过 Firefox 的默认布局，地址栏跟左右两边的图标之间会有一段空白，它的长度会动态调整。屏幕越宽，空白越长。可以用鼠标点击这两块空白区域实现移动窗口。但我之前总觉得这种设计很丑，所以会第一时间删除这两段空白。但跟显示标题栏相比，显示空白也不是什么大问题了。所以再回到上面的[Customize toolbar…]页面，把 Flexible Space 重新拖拽到地址栏两边就可以了。
 
-<iframe id="aswift_1" name="aswift_1" style="left: 0px; top: 0px; border: 0px none; width: 800px; height: 0px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-1675550068685852&amp;output=html&amp;h=280&amp;adk=2957514618&amp;adf=314069034&amp;pi=t.aa~a.2515182043~i.53~rp.4&amp;w=800&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1687831069&amp;num_ads=1&amp;rafmt=1&amp;armr=3&amp;sem=mc&amp;pwprc=3665232219&amp;ad_type=text_image&amp;format=800x280&amp;url=https%3A%2F%2Ftaoshu.in%2Ffirefox%2Fvertical-tabs.html&amp;fwr=0&amp;pra=3&amp;rh=200&amp;rw=800&amp;rpe=1&amp;resp_fmts=3&amp;wgl=1&amp;fa=27&amp;dt=1688526673361&amp;bpp=1&amp;bdt=794&amp;idt=1&amp;shv=r20230627&amp;mjsv=m202306260101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3Dabfbbd14272e3477-227f527f8ee200d5%3AT%3D1688526020%3ART%3D1688526359%3AS%3DALNI_MY6WkFb37OfiN-THavqSoEs68HQeA&amp;gpic=UID%3D00000c96827bc1c8%3AT%3D1688526020%3ART%3D1688526359%3AS%3DALNI_MaDl0LxoCbXgQHm63wdl91HKC-_Qg&amp;prev_fmts=0x0&amp;nras=2&amp;correlator=6152084093157&amp;frm=20&amp;pv=1&amp;ga_vid=2118617151.1688526023&amp;ga_sid=1688526673&amp;ga_hid=1469554680&amp;ga_fc=1&amp;u_tz=480&amp;u_his=2&amp;u_h=1440&amp;u_w=3440&amp;u_ah=1392&amp;u_aw=3440&amp;u_cd=24&amp;u_sd=1&amp;adx=217&amp;ady=2690&amp;biw=1234&amp;bih=888&amp;scr_x=0&amp;scr_y=0&amp;eid=42532280%2C44759926%2C44759875%2C44759842%2C42532278%2C31075643%2C31075665%2C42531705%2C44785292%2C44788442&amp;oid=2&amp;pvsid=606485017619302&amp;tmod=695562629&amp;nvt=1&amp;fc=1408&amp;brdim=539%2C317%2C539%2C317%2C3440%2C0%2C1601%2C993%2C1234%2C888&amp;vis=1&amp;rsz=%7C%7Cs%7C&amp;abl=NS&amp;fu=128&amp;bc=31&amp;ifi=2&amp;uci=a!2&amp;btvi=1&amp;fsb=1&amp;xpc=MZgIsEAjO3&amp;p=https%3A//taoshu.in&amp;dtd=101" data-google-container-id="a!2" data-load-complete="true" data-google-query-id="CISjxILM9v8CFRjWFgUd9AwG7g" width="800" height="0" frameborder="0"></iframe>
 
 最后需要优化的就是侧边栏的标题。Firefox 默认为显示当前的扩展名，也就是 Sidebery。我感觉没有必要，可以往 userChrome.css 添加如下样式规则：
 
@@ -217,3 +216,25 @@ Firefox 支持通过 CSS 定制界面。对应的 CSS 规则需要保存到名�
 读者 donie.leigh 留言说为什么不用 Vivaldi。主要因为它用的也是 Chromium 内核。我很久之前就用过，当时感觉界面有点卡。收到留言后我又体验了一下，Vivaldi 的垂直标签栏比 Edge 做的要好，但比 Firefox 的实现效果还差一点 😄
 
 [https://taoshu.in/firefox/vertical-tabs.html](https://taoshu.in/firefox/vertical-tabs.html)
+
+## 屏蔽垃圾搜索结果域名
+
+使用 `Google Hit Hider by Domain (Search Filter / Block Sites)` 油猴脚本清理搜索结果，屏蔽内容农场域名，省的浪费时间。
+
+推荐屏蔽列表：
+
+```
+fly63.com
+geek-share.com
+hotbak.net
+it1352.com
+it610.com
+itranslater.com
+w3xue.com
+voidcn.com
+yiidian.com
+mlog.club
+nuomiphp.com
+codeleading.com
+pianshen.com
+```

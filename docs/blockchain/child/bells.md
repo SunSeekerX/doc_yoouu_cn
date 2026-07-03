@@ -1,3 +1,9 @@
+# Bellscoin (bells)
+
+::: warning
+以下挖矿程序来自第三方网盘，来源无法验证，下载运行前务必自行确认安全，建议在隔离环境运行。
+:::
+
 下载挖矿软件
 
 https://drive.google.com/file/d/0B9Jd8wswMvMTZU9QekxncWwtQkU/edit?resourcekey=0-PCIM2DJCGSO6n1l5PNfhow

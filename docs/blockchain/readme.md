@@ -144,7 +144,7 @@ NFT 的投资价值
 
 学习资源
 
-- **Solidity 文档**：[Solidity GitHub](https://chat.openai.com/c/solidity)
+- **Solidity 文档**：[Solidity Documentation](https://docs.soliditylang.org/)
 - **OlympusDAO**：包括合约和前端，GitHub：[OlympusDAO GitHub](https://github.com/OlympusDAO), 应用：[OlympusDAO Dashboard](https://app.olympusdao.finance/#/dashboard)
 - **buildspace**：提供区块链合约和NFT开发教程，官网：[buildspace](https://buildspace.so/)
 

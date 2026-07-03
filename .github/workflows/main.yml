@@ -19,14 +19,13 @@ jobs:
   build: # 任务的job_id，具体名称自定义，这里build代表打包
     runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8
           run_install: false
       #缓存依赖
       - name: Get pnpm store directory
@@ -45,7 +44,7 @@ jobs:
         run: pnpm install
       # 打包
       - name: Build
-        run: pnpm run docs:build
+        run: pnpm run build
       # 上传打包资源
       - name: Deploy
         uses: easingthemes/ssh-deploy@v4.1.8

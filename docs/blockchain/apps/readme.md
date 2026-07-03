@@ -126,7 +126,7 @@ ens 合约地址（eth）：0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72
 
 [https://www.ethswarm.org/](https://www.ethswarm.org/)
 
-相关资料：[Swarm](./apps/swarm)
+相关资料：[Swarm](./swarm)
 
 ### DeFi
 
@@ -174,7 +174,7 @@ Twitter: [https://twitter.com/mongoosecoineth](https://twitter.com/mongoosecoine
 
 Tg: [https://t.me/mongooseportal](https://t.me/mongooseportal)
 
-合约地址：[0xa1817b6d8d890f3943b 61648992730373b71f156](https://app.uniswap.org/#/swap?outputCurrency=0xa1817b6d8d890f3943b61648992730373b71f156)
+合约地址：[0xa1817b6d8d890f3943b61648992730373b71f156](https://app.uniswap.org/#/swap?outputCurrency=0xa1817b6d8d890f3943b61648992730373b71f156)
 
 <img src="https://static.yoouu.cn/static/imgs/doc/blockchain/apps/mongoos-coin.svg" style="zoom:25%;" />
 
@@ -440,7 +440,7 @@ Tg Channel：[https://t.me/metacelo_ann](https://t.me/metacelo_ann)
 
 Tg Discussion：[https://t.me/metacelo_official](https://t.me/metacelo_official)
 
-Discord：[https://discord.gg/SnXAAewAyC](
+Discord：[https://discord.gg/SnXAAewAyC](https://discord.gg/SnXAAewAyC)
 
 ## 📌 Polygon （马蹄链）
 
@@ -525,6 +525,8 @@ Twitter：[https://twitter.com/InkProtocol\_\_](https://twitter.com/InkProtocol_
 Tg：[https://t.me/InkProtocol_official](https://t.me/InkProtocol_official)
 
 ## 📌 Dfinity
+
+相关资料：[Dfinity](./dfinity)
 
 ### DeFi
 

@@ -40,6 +40,7 @@
     - Cgminer link: https://cgminer.info/
     - CCminer link: https://github.com/tpruvot/ccminer/releases (需要 CUDA)
     - twitter: https://twitter.com/_BellsCoin
+    - 本站挖矿记录: [bells](./child/bells)
 19. Bitlend OG Pass: https://magiceden.io/ordinals/marketplace/bitlendogpass
 
 ## runes
@@ -57,10 +58,10 @@
 ```powershell
 # 开始索引同步，17179869184 代表使用内存，代表 16gb，https://www.bejson.com/convert/filesize/ 这里去换算
 # 索引铭文和符文数据
-.\ord.exe --index-runes --index-sats --index-cache-size 17179869184 --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
+.\ord.exe --index-runes --index-sats --index-cache-size 17179869184 --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password <RPC密码> --bitcoin-rpc-username <RPC用户名> index update
 .\ord.exe --config D:\data\ord\config index update
 # 启动节点
-.\ord.exe --config D:\data\ord\config --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao server --address 127.0.0.1 --http-port 8011
+.\ord.exe --config D:\data\ord\config --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password <RPC密码> --bitcoin-rpc-username <RPC用户名> server --address 127.0.0.1 --http-port 8011
 # 列出所有的runes代币
 .\ord.exe --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin runes
 
@@ -77,7 +78,7 @@
 # MINT符文 UNCOMMON·GOODS
 .\ord.exe --index-runes --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 mint --fee-rate 66 --rune UNCOMMON•GOODS
 # 从助记词恢复钱包，会启动交互输入，输入助记词就好
-# 测试助记词 morning alpha shift mouse like protect clog choose cross kid banana slim
+# 助记词请自行离线生成，切勿使用任何公开在网页或文档里的助记词（资产会被立即盗走）
 .\ord.exe --config D:\data\ord\config wallet --name test1 restore --from mnemonic
 # 从 descriptor 恢复钱包
 .\ord.exe --config D:\data\ord\config wallet --server-url http://127.0.0.1:8011 restore --from descriptor
@@ -92,9 +93,9 @@
 
 # 测试网
 # 索引铭文和符文数据
-.\ord.exe --signet --index-runes --index-cache-size 17179869184 --data-dir D:\data\ord-testnet --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao index update
+.\ord.exe --signet --index-runes --index-cache-size 17179869184 --data-dir D:\data\ord-testnet --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password <RPC密码> --bitcoin-rpc-username <RPC用户名> index update
 # 启动节点
-.\ord.exe --signet --config D:\data\ord\config --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password nextdao --bitcoin-rpc-username nextdao server --address 127.0.0.1 --http-port 8011
+.\ord.exe --signet --config D:\data\ord\config --data-dir D:\data\ord --bitcoin-data-dir D:\data\Bitcoin --bitcoin-rpc-password <RPC密码> --bitcoin-rpc-username <RPC用户名> server --address 127.0.0.1 --http-port 8011
 ```
 
 配置文件
@@ -110,8 +111,8 @@ index_transactions: true
 index_cache_size: 17179869184
 data_dir: D:\data\ord
 bitcoin_data_dir: D:\data\Bitcoin
-bitcoin_rpc_password: nextdao
-bitcoin_rpc_username: nextdao
+bitcoin_rpc_password: <RPC密码>
+bitcoin_rpc_username: <RPC用户名>
 ```
 
 ### help 输出

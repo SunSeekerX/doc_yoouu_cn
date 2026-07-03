@@ -1,3 +1,5 @@
+# Bitcoin
+
 ## Bitcoin
 
 比特币是怎么工作的？ https://learnmeabitcoin.com/
@@ -97,9 +99,10 @@ server=1
 daemon=1
 txindex=1
 rpccookiefile=.cookie
-rpcauth=nextdao:cca838b4b19bdc6093f4e0312550361c$213834a29e8488804946c196781059a7ee0ac2b48dbf896b4c6852060d9d83dd
-rpcallowip=192.168.0.0/16
-rpcbind=0.0.0.0
+rpcauth=<用户名>:<用 share/rpcauth/rpcauth.py 生成的哈希，勿公开真实值>
+# RPC 仅监听本机；确需局域网访问时按需放行具体 IP，禁止 0.0.0.0 全网卡监听
+rpcallowip=127.0.0.1
+rpcbind=127.0.0.1
 
 addnode=81.68.102.34:8333
 addnode=60.205.205.119:8333
@@ -194,9 +197,9 @@ txindex=1
 listen=1
 # 可选：开启钱包功能
 disablewallet=0
-# 节点绑定的IP地址，0.0.0.0 表示接受任何IP地址的连接
-# 这个设置在生产环境需要谨慎使用
-# rpcbind=0.0.0.0
+# RPC 监听地址，默认仅本机；禁止 0.0.0.0 全网卡监听
+# 确需远程访问时配合防火墙并按需放行具体来源 IP
+# rpcbind=127.0.0.1
 ```
 
 ## Linux - 搭建全节点

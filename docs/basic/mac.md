@@ -307,7 +307,7 @@ iTerm2 -> Make ITerm2 Default Term
 
 ## oh-my-zsh
 
-> macOS 自 Catalina 起默认 shell 即为 zsh，一般无需另装。Linux 下的快速安装见 [linux 文档](https://doc.yoouu.cn/back-end/linux.html#oh-my-zsh-快速安装)。
+> macOS 自 Catalina 起默认 shell 即为 zsh，一般无需另装。Linux 下的快速安装见 [linux 文档](https://doc.yoouu.cn/back_end/linux.html#oh-my-zsh-快速安装)。
 
 ### 安装 zsh
 

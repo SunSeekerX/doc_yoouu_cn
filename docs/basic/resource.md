@@ -97,7 +97,7 @@ AnimeGANv2 - a Hugging Face Space by akhaliq(动漫头像生成) https://hugging
 
 [Gogs](https://github.com/gogs/gogs/blob/master/README_ZH.md) - 一款极易搭建的自助 Git 服务。
 
-[Apizza](极客专属的接口协作管理工具) - 在线接口调试工具
+[Apizza](https://www.apizza.net/) - 极客专属的接口协作管理工具，在线接口调试工具
 
 [FiraCode](https://github.com/tonsky/FiraCode) - Fira 代码:自由等宽字体与连字符
 

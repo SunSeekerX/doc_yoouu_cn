@@ -1,3 +1,5 @@
+# 摩托罗拉 edge s30
+
 ## 构建内核
 
 内核源码地址 https://github.com/MotorolaMobilityLLC/kernel-msm/releases/tag/MMI-S1RXS32.50-13-10
