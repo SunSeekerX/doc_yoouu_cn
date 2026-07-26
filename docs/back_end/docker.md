@@ -636,6 +636,21 @@ docker run --restart=always --network host -d -v /data/docker_data/frps/frps.tom
 # 放开 7000 7070 7071 7443
 ```
 
+升级到最新版本。配置文件是挂载进容器的，`docker pull` 拉新镜像后按原参数重建即可，客户端隧道会在几秒内自动重连。
+
+```shell
+docker pull snowdreamtech/frps:latest
+docker stop frps && docker rm frps
+docker run --restart=always --network host -d -v /data/docker_data/frps/frps.toml:/etc/frp/frps.toml --name frps snowdreamtech/frps
+# 确认版本与启动日志
+docker exec frps frps --version
+docker logs --tail 20 frps
+```
+
+::: tip
+frpc 与 frps 版本建议保持一致。跨小版本一般兼容（0.62 服务端可接受 0.65 客户端），但升级服务端时顺手把客户端也换成同版本更省心。
+:::
+
 ### 0x10 Docker 安装 frpc
 
 frpc.toml
@@ -650,7 +665,7 @@ auth.token = "xxxxxx"
 启动容器
 
 ```shell
-docker run --restart=always --network host -d -v /etc/frp/frpc.ini:/etc/frp/frpc.ini --name frpc snowdreamtech/frpc
+docker run --restart=always --network host -d -v /data/docker_data/frpc/frpc.toml:/etc/frp/frpc.toml --name frpc snowdreamtech/frpc
 # 或者本地下载启动
 ./frpc -c ./frpc.toml
 ```
