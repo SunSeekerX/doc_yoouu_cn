@@ -2506,3 +2506,192 @@ services:
 - 确保挂载卷配置正确，否则容器删除后数据丢失
 - 勿使用 URL 重写进行重定向，应配置反向代理
 - 使用 NGINX 反向代理时需配置 WebSocket 支持（`/ws`）
+
+### 0x41 Docker 安装 Beszel 服务器监控
+
+https://github.com/henrygd/beszel
+
+https://beszel.dev
+
+> 轻量级服务器监控面板，基于 PocketBase，分 Hub（面板 + 数据库）和 Agent（被监控端采集）。无外部数据库依赖，内存占用几十 MB，采集 CPU / 内存 / 磁盘 / 网络 / 温度 / Docker 容器指标，支持阈值告警。
+>
+> Agent 主动向 Hub 建 WebSocket 上报，Hub 不用反向连 Agent，所以被监控机**不必对外开放 45876**，NAT / 内网机器也能接入。
+
+#### 一、Hub 部署（一台机器装一次）
+
+```shell
+# 数据目录
+mkdir -p /data/docker_data/beszel/{data,socket}
+
+# Hub 启动，8090 直接发布到公网（记得防火墙 / 安全组放开 8090）
+docker run -d --name beszel --restart=always \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  -p 8090:8090 \
+  -v /data/docker_data/beszel/data:/beszel_data \
+  -v /data/docker_data/beszel/socket:/beszel_socket \
+  henrygd/beszel:0.18.7
+```
+
+打开 `http://服务器IP:8090` 注册第一个账号（第一个注册的就是管理员），右上角 Add System 生成 token 和公钥，填进下面 Agent 的启动参数。
+
+#### 二、Hub 本机的 Agent（监控 Hub 这台机器自己）
+
+同机两容器网络隔离，填 `localhost:45876` 连不上，共享 socket 目录走 unix socket。
+
+```shell
+mkdir -p /data/docker_data/beszel/agent_data
+
+docker run -d --name beszel-agent --restart=always \
+  --network host \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  -v /data/docker_data/beszel/agent_data:/var/lib/beszel-agent \
+  -v /data/docker_data/beszel/socket:/beszel_socket \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -e LISTEN=/beszel_socket/beszel.sock \
+  -e HUB_URL=http://localhost:8090 \
+  -e TOKEN=面板生成的token \
+  -e KEY='面板生成的公钥' \
+  henrygd/beszel-agent:0.18.7
+```
+
+面板「添加系统」的 **Host / IP** 填 `/beszel_socket/beszel.sock`，不是 IP。
+
+#### 三、Agent 部署（每台被监控机装一次）
+
+```shell
+mkdir -p /data/docker_data/beszel_agent/data
+
+docker run -d --name beszel-agent --restart=always \
+  --network host \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  -v /data/docker_data/beszel_agent/data:/var/lib/beszel-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -e HUB_URL=http://HubIP:8090 \
+  -e TOKEN=面板生成的token \
+  -e KEY='面板生成的公钥' \
+  -e DISABLE_SSH=true \
+  -e LISTEN=127.0.0.1:45876 \
+  henrygd/beszel-agent:0.18.7
+```
+
+按需追加：额外磁盘 `-v /mnt/disk1/.beszel:/extra-filesystems/disk1:ro`，排除容器 `-e EXCLUDE_CONTAINERS='test-*,*-staging'`。
+
+`--network host` 是读宿主机网卡流量的硬要求，代价是 45876 监听在所有网卡上。上面用 `DISABLE_SSH=true` + `LISTEN` 绑回环双保险，防火墙也别放开 45876。
+
+`docker.sock` 挂载（即使 `:ro`）等于给了容器完整的 Docker API 访问权——包括创建/删除容器，`:ro` 只阻止往挂载路径写文件，不限制 socket 上的 API 请求。介意就用 docker-socket-proxy 只开 `CONTAINERS=1`，`DOCKER_HOST` 指向它；不要容器指标直接 `-e DOCKER_HOST=` 留空关掉。
+
+不想用 Docker 就跑官方脚本（Linux only，建 `beszel` 用户 + systemd 服务），面板 Add System 弹窗里有现成命令：
+
+```shell
+curl -sL https://get.beszel.dev -o /tmp/install-agent.sh && chmod +x /tmp/install-agent.sh
+/tmp/install-agent.sh -k '公钥' -t 'token' -url http://HubIP:8090 --china-mirrors
+
+# --china-mirrors 走国内镜像源；--auto-update 每日自动更新；-u 卸载
+```
+
+GPU 监控在上面 Agent 命令基础上改镜像名、在镜像名**前面**加设备参数：
+
+```shell
+# NVIDIA（宿主机需先装 NVIDIA Container Toolkit）
+# 把 henrygd/beszel-agent 改成 henrygd/beszel-agent-nvidia，加 --gpus all
+docker run -d --name beszel-agent --restart=always \
+  --network host \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  --gpus all \
+  -v /data/docker_data/beszel_agent/data:/var/lib/beszel-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -e HUB_URL=http://HubIP:8090 \
+  -e TOKEN=面板生成的token \
+  -e KEY='面板生成的公钥' \
+  -e DISABLE_SSH=true \
+  -e LISTEN=127.0.0.1:45876 \
+  henrygd/beszel-agent-nvidia:0.18.7
+
+# Intel（先 ls /dev/dri 确认实际设备名，intel_gpu_top 只支持单块 Intel GPU）
+# 改镜像名为 henrygd/beszel-agent-intel，加 --cap-add 和 --device
+docker run -d --name beszel-agent --restart=always \
+  --network host \
+  --log-opt max-size=100m --log-opt max-file=2 \
+  --cap-add CAP_PERFMON \
+  --device /dev/dri/card0:/dev/dri/card0 \
+  -v /data/docker_data/beszel_agent/data:/var/lib/beszel-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -e HUB_URL=http://HubIP:8090 \
+  -e TOKEN=面板生成的token \
+  -e KEY='面板生成的公钥' \
+  -e DISABLE_SSH=true \
+  -e LISTEN=127.0.0.1:45876 \
+  henrygd/beszel-agent-intel:0.18.7
+```
+
+#### 四、nginx 反向代理（可选，要上域名 + HTTPS 时用）
+
+必须传 Upgrade 头，漏了 Agent 连不上（Hub 靠 WebSocket）。配好后面板设置里把 Application URL 改成域名，防火墙收回 8090 只留 443。
+
+```nginx
+# map 放 http {} 层级（nginx.conf）
+map $http_upgrade $connection_upgrade { default upgrade; '' close; }
+
+server {
+    listen 443 ssl;
+    server_name beszel.example.com;
+    # 备份/恢复要上传文件，默认 1M 不够
+    client_max_body_size 10M;
+
+    location / {
+        proxy_pass http://127.0.0.1:8090;
+        # 长连接别被切断
+        proxy_read_timeout 360s;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+子路径部署去掉前缀再转发，Application URL 也要带上路径：
+
+```nginx
+location /beszel/ {
+    # 上面那套 proxy_set_header 照抄
+    rewrite /beszel/(.*) /$1 break;
+    proxy_pass http://127.0.0.1:8090;
+}
+```
+
+#### 五、常用环境变量
+
+Hub 端（可加 `BESZEL_HUB_` 前缀）：
+
+- `APP_URL`：面板对外地址，只影响通知链接和 Add System 生成的配置；设了就每次启动覆盖面板里的值，建议不设、直接在面板改
+- `USER_EMAIL` / `USER_PASSWORD`：首次启动自动建管理员，建完删掉
+- `CHECK_UPDATES=true`：面板提示新版本，默认关
+- `DISABLE_PASSWORD_AUTH=true`：只留 OAuth 登录（不是关鉴权）
+- `MFA_OTP=true`：邮箱 OTP 二次验证，需先配 SMTP
+- `SHARE_ALL_SYSTEMS=true`：所有用户可见全部机器，配合 `readonly` 角色给只读账号
+- `TRUSTED_AUTH_HEADER`：外部鉴权透传邮箱头，如 Cloudflare Access 的 `Cf-Access-Authenticated-User-Email`。**必须配合反代使用且防火墙禁止直连 Hub 端口**，否则攻击者可以直接带上该头登录任意账号
+
+Agent 端（可加 `BESZEL_AGENT_` 前缀）：
+
+- `HUB_URL` / `TOKEN` / `KEY`：WebSocket 接入三件套；`TOKEN_FILE` / `KEY_FILE` 可改成从受限权限文件读，避免明文进环境变量
+- `LISTEN`：默认 `45876`，可写 `host:port` 或 unix socket 路径；IPv6 加方括号
+- `DISABLE_SSH=true`：关掉 SSH 服务端只留 WebSocket（0.18.4+）
+- `EXCLUDE_CONTAINERS`：按名字排除容器，逗号分隔支持 `*`
+- `DOCKER_HOST`：指向 socket 代理；留空则关闭 Docker 监控
+- `FILESYSTEM` / `EXTRA_FILESYSTEMS`：指定根盘设备、二进制方式下监控额外磁盘
+- `NICS` / `SENSORS`：网卡、温度传感器白名单，`-` 前缀转黑名单，空字符串关闭该项
+- `SKIP_GPU=true` / `SKIP_SYSTEMD=true`：关 GPU / systemd 服务监控
+- `SMART_INTERVAL`（默认 `1h`）/ `EXCLUDE_SMART`：S.M.A.R.T. 轮询间隔与排除设备
+- `DISK_USAGE_CACHE`：如 `5m`，缓存额外磁盘用量，避免频繁唤醒机械盘
+- `LOG_LEVEL`：`debug` / `info` / `warn` / `error`
+
+注意：
+
+- 镜像钉版本号，Hub 与 Agent 版本保持一致；升级 = 改版本号后 `docker pull` 再删容器重跑
+- `/beszel_data` 是全部数据（含 SQLite），必须挂出来备份；面板「设置 -> 备份」可配 S3
+- 镜像是 `scratch` 构建，无 shell、无 tzdata（`-e TZ` 不生效），要进容器排查换 Agent 的 `alpine` 标签（带 smartmontools）
