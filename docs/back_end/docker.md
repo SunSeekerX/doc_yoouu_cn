@@ -254,6 +254,47 @@ Docker0：`172.18.0.1` 相当于路由器，其他所有启动的镜像都是接
 
 **打通是单向的！**
 
+### 容器的 TCP 拥塞控制不跟随宿主
+
+宿主开了 BBR，容器里可能还是 cubic。`net.ipv4.tcp_congestion_control` 是 network namespace 隔离的参数，容器**只在创建那一刻**快照宿主的值，之后宿主怎么改都不会回溯已经在跑的容器。
+
+这个坑不报错、不崩，唯一症状是慢。在跨洋这类高延迟链路上，cubic 一遇丢包就把速率减半，差距能到几十倍：同一条 RTT 约 75ms 的链路传同一个 78MB 文件，宿主 6.5 秒，容器里 171 秒。
+
+先确认是不是它：
+
+```bash
+# 宿主
+sysctl -n net.ipv4.tcp_congestion_control
+
+# 容器（换成你的容器名）
+nsenter -t $(docker inspect my_container --format '{{.State.Pid}}') -n \
+  sysctl -n net.ipv4.tcp_congestion_control
+```
+
+两边不一致就是中招了。`--net=host` 的容器不会中招，它没有独立 namespace，直接用宿主的值。
+
+修法按场景选：
+
+```bash
+# 已有容器：重启即可，netns 重建时会继承宿主当前的值
+docker restart my_container
+
+# 新建容器：显式指定，不依赖继承
+docker run -d --sysctl net.ipv4.tcp_congestion_control=bbr my_image
+```
+
+::: tip 重启就够持久，不用额外配置
+只要宿主的 BBR 已经写进 `/etc/sysctl.d/`，重启容器就是持久修复：开机时 `systemd-sysctl.service` 排在 `sysinit.target` 之前，而 `docker.service` 依赖 `sysinit.target`，所以宿主参数一定先于任何容器生效。
+
+`--sysctl` 的意义是防「宿主还没调好就起了容器」的时序意外，属于保险。它会写进容器的 `HostConfig`，跨 `docker restart` 保持。
+:::
+
+::: warning daemon.json 里配不了全局默认
+`default-sysctls` 不接受带 namespace 前缀的键，Docker 28.x 和 29.x 实测都会直接报 `directives don't match any configuration option` 拒绝启动。所以没有「一次配好所有容器」的办法，只能逐个容器加 `--sysctl`，或者依赖创建时的继承。
+:::
+
+真正要记住的一句：**热改任何 sysctl 之后，已经在跑的容器都得重启才吃得到，只有新容器自动受益。** 调完宿主顺手 `docker ps` 扫一遍，比事后查「为什么容器里慢」省事得多。
+
 ## 📌 部署服务
 
 ### 0x2. Docker 安装 MariaDB
