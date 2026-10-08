@@ -1744,77 +1744,94 @@ docker run -d --name antigravity_manager \
 
 > 将 Claude Code、Codex、Antigravity、xAI、Kimi 等 AI CLI 工具账号包装成 OpenAI 兼容的 HTTP API 服务（Gemini 现仅支持 API Key 方式，OAuth 登录已移除）
 >
-> 文档：https://help.router-for.me/introduction/quick-start.html
+> 文档：https://help.router-for.me/cn/introduction/quick-start.html
 >
 > GitHub：https://github.com/router-for-me/CLIProxyAPI
 >
 > 镜像：`eceasy/cli-proxy-api:latest`
 
 ```shell
-# 创建目录
-mkdir -p /data/docker_data/cli_proxy_api
+# 创建目录（plugins 挂载后，商店安装的插件重启不丢）
+mkdir -p /data/docker_data/cli_proxy_api/{auth_data,logs,plugins}
 
-# 写入最小启动配置
+# 写入启动配置（占位符请改成自己的值；allow-remote 保持开启）
 cat > /data/docker_data/cli_proxy_api/config.yaml << 'EOF'
 port: 8317
 auth-dir: /root/.cli-proxy-api
+# 客户端调用本代理时携带的 key；不设则入站不鉴权
+api-keys:
+  - "换成你的API密钥"
 remote-management:
+  # 允许非本机访问管理接口/面板（公网务必反代或防火墙限制）
   allow-remote: true
+  # 管理面板密码；留空则禁用管理 API 与面板
+  secret-key: "换成你的管理密码"
 EOF
 
-# 推荐追加安全配置（按需修改后追加到 config.yaml）：
-# api-keys: 客户端调用 API 时需要携带的 key，不设则不鉴权
-# secret-key: 管理面板密码，留空则禁用管理 API
-#
-# api-keys:
-#   - "sk-your-api-key"
-# remote-management:
-#   secret-key: "your_password"
-
 # 启动
-# 端口说明：8317=API服务, 54545=Claude OAuth, 1455=Codex OAuth,
-#          51121=Antigravity OAuth, 56121=xAI OAuth（Kimi 为 device flow，无需端口）
+# 端口说明：8317=API 服务, 54545=Claude OAuth, 1455=Codex OAuth, 51121=Antigravity OAuth
+# xAI / Kimi / Codex device 均为 device code 流程，无需映射回调端口
 docker run -d \
-  --name cli-proxy-api \
+  --name cli_proxy_api \
   --restart=always \
   -p 8317:8317 \
   -p 1455:1455 \
   -p 54545:54545 \
   -p 51121:51121 \
-  -p 56121:56121 \
   -v /data/docker_data/cli_proxy_api/config.yaml:/CLIProxyAPI/config.yaml \
   -v /data/docker_data/cli_proxy_api/auth_data:/root/.cli-proxy-api \
   -v /data/docker_data/cli_proxy_api/logs:/CLIProxyAPI/logs \
+  -v /data/docker_data/cli_proxy_api/plugins:/CLIProxyAPI/plugins \
   eceasy/cli-proxy-api:latest
 ```
 
-登录 AI 服务（按需选，OAuth 回调类打印 URL 到浏览器完成认证；Codex device 与 Kimi 走 device code 流程，打印验证 URL 后在浏览器授权、程序自动等待，无需本地回调端口）：
+登录 AI 服务（按需选）：
+
+- **OAuth 回调类**（Claude / Codex 回调 / Antigravity）：程序在容器内监听 `localhost:端口`，授权完成后浏览器会跳回**浏览器所在机器**的 `http://localhost:端口/...`。本机跑容器时直接打开打印的 URL 即可；**远程服务器上跑容器、浏览器在本机时**，必须先在本机做 SSH 本地端口转发，把本机该端口转到服务器（再进容器映射），否则回调打到本机空端口，登录会超时。程序也会打印隧道提示。
+- **device code 类**（Codex device / xAI / Kimi）：只打印验证 URL/码，浏览器授权后程序自动等待，**无需**回调端口与 SSH 转发。
 
 ```shell
+# 远程 OAuth 时：先在本机（浏览器侧）建 SSH 隧道，再 docker exec 登录；隧道保持到登录成功
+# 把 服务器IP、SSH 端口、用户按实际改；一次只转当前要登录的那个端口即可
+# Claude 54545 / Codex 回调 1455 / Antigravity 51121
+ssh -L 54545:127.0.0.1:54545 用户@服务器IP -p 22
+ssh -L 1455:127.0.0.1:1455 用户@服务器IP -p 22
+ssh -L 51121:127.0.0.1:51121 用户@服务器IP -p 22
+# 有密钥：ssh -i 密钥路径 -L 端口:127.0.0.1:端口 用户@服务器IP -p 22
+
 # Claude Code（OAuth 端口 54545）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --claude-login
+docker exec -it cli_proxy_api /CLIProxyAPI/CLIProxyAPI --no-browser --claude-login
 
 # Codex（OAuth 回调，端口 1455）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --codex-login
+docker exec -it cli_proxy_api /CLIProxyAPI/CLIProxyAPI --no-browser --codex-login
 
-# Codex（device code 流程，无需回调端口；适合无法暴露 1455 的环境）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --codex-device-login
+# Codex（device code，无需 1455 / SSH 转发；适合远程或不想开回调端口）
+docker exec -it cli_proxy_api /CLIProxyAPI/CLIProxyAPI --no-browser --codex-device-login
 
 # Antigravity（OAuth 端口 51121）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --antigravity-login
+docker exec -it cli_proxy_api /CLIProxyAPI/CLIProxyAPI --no-browser --antigravity-login
 
-# xAI / Grok（OAuth 端口 56121）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --no-browser --xai-login
+# xAI / Grok（device code，无需回调端口）
+docker exec -it cli_proxy_api /CLIProxyAPI/CLIProxyAPI --no-browser --xai-login
 
-# Kimi（device code 流程，打印验证 URL，浏览器授权后自动保存）
-docker exec -it cli-proxy-api /CLIProxyAPI/CLIProxyAPI --kimi-login
+# Kimi（device code，无需回调端口）
+docker exec -it cli_proxy_api /CLIProxyAPI/CLIProxyAPI --kimi-login
 ```
 
 登录成功后：
 
-- API 地址：`http://localhost:8317/v1`，兼容 OpenAI 格式，请求时 Header 带 `Authorization: Bearer sk-your-api-key`
-- 管理面板：`http://localhost:8317/management.html`，密码为配置中的 `secret-key`
+- API 地址：`http://localhost:8317/v1`，兼容 OpenAI 格式，请求 Header：`Authorization: Bearer 换成你的API密钥`
+- 管理面板：`http://localhost:8317/management.html`，密码为配置中的 `secret-key`（`换成你的管理密码`）
 - 完整配置参考：https://github.com/router-for-me/CLIProxyAPI/blob/main/config.example.yaml
+
+升级（拉新镜像后按原参数重建；config / auth_data / logs / plugins 在宿主机挂载，凭证与配置不丢，一般不必重新 OAuth）：
+
+```shell
+docker pull eceasy/cli-proxy-api:latest
+docker stop cli_proxy_api && docker rm cli_proxy_api
+docker run -d   --name cli_proxy_api   --restart=always   -p 8317:8317   -p 1455:1455   -p 54545:54545   -p 51121:51121   -v /data/docker_data/cli_proxy_api/config.yaml:/CLIProxyAPI/config.yaml   -v /data/docker_data/cli_proxy_api/auth_data:/root/.cli-proxy-api   -v /data/docker_data/cli_proxy_api/logs:/CLIProxyAPI/logs   -v /data/docker_data/cli_proxy_api/plugins:/CLIProxyAPI/plugins   eceasy/cli-proxy-api:latest
+docker logs --tail 50 cli_proxy_api
+```
 
 ### 0x37 Docker 安装 ClickHouse
 

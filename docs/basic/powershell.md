@@ -429,7 +429,69 @@ Remove-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22"
 
 wt 配置文件
 
-可选：显式指定 commandline，确保 --startingDirectory 能正确跳转到对应目录
+#### 默认终端 vs 右键 wt.exe（两套机制）
+
+右键菜单里的 `WindowsApps\wt.exe` 和系统「默认终端应用程序」不是一回事：
+
+- 自定义右键：看注册表 command 里的 `wt.exe` 路径
+- Win+X / 部分「在终端中打开」/控制台宿主委托：看 `HKCU\Console\%%Startup` 的两个 GUID
+
+稳定版与 Preview 的委托 GUID 不同：
+
+| 版本 | DelegationConsole | DelegationTerminal |
+| ---- | ----------------- | ------------------ |
+| 稳定版 Windows Terminal | `{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}` | `{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}` |
+| Windows Terminal Preview | `{06EC847C-C0A5-46B8-92CB-7C92F6E35CD5}` | `{86633F1F-6454-40EC-89CE-DA4EBA977EE2}` |
+
+检查当前默认终端：
+
+```powershell
+Get-ItemProperty 'HKCU:\Console\%%Startup' | Select-Object DelegationConsole, DelegationTerminal
+```
+
+GUI 改法：Windows Terminal 设置 -> 启动 -> 默认终端应用程序 -> Windows Terminal。
+
+或直接写稳定版 GUID（HKCU 即可；键不存在时先创建，否则会 PathNotFound）：
+
+```powershell
+if (-not (Test-Path 'HKCU:\Console\%%Startup')) { New-Item -Path 'HKCU:\Console\%%Startup' -Force | Out-Null }
+Set-ItemProperty -Path 'HKCU:\Console\%%Startup' -Name DelegationConsole -Value '{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}'
+Set-ItemProperty -Path 'HKCU:\Console\%%Startup' -Name DelegationTerminal -Value '{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}'
+Get-ItemProperty 'HKCU:\Console\%%Startup' | Select-Object DelegationConsole, DelegationTerminal
+```
+
+#### 通用 wt.exe 路径说明
+
+本文右键命令默认使用：
+
+`%LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe`
+
+这是应用执行别名（0 字节 reparse point）。`where wt` / `Get-Command wt` 往往只显示别名路径，**看不出**落到稳定版还是 Preview。安装/修复 Preview 后别名**有可能漂移**。
+
+检查通用 `wt.exe` 实际目标时，**必要检查是读别名文件本身的重解析数据**（不是 App Paths）：
+
+```powershell
+# 必要：应看到 Microsoft.WindowsTerminal_...，不应出现 WindowsTerminalPreview
+fsutil reparsepoint query "$env:LOCALAPPDATA\Microsoft\WindowsApps\wt.exe"
+```
+
+`App Paths` 只是 Shell 查找程序用的注册信息，和 `CreateProcess` 解析 `WindowsApps\wt.exe` 重解析点不是同一套机制；可作辅助对照，**不能**代替上面的 reparse 检查：
+
+```powershell
+# 辅助：不能证明 WindowsApps\wt.exe 的重解析目标
+Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\App Paths\wt.exe' | Select-Object '(default)', Path
+Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wt.exe' -ErrorAction SilentlyContinue | Select-Object '(default)', Path
+```
+
+若要钉死稳定版，可改用包专属路径：
+
+`%LOCALAPPDATA%\Microsoft\WindowsApps\Microsoft.WindowsTerminal_8wekyb3d8bbwe\wt.exe`
+
+日常继续用通用 `wt.exe` 也可以；切换 Preview/正式版后建议复查三件事：右键 command、默认终端 GUID、`fsutil reparsepoint query` 看到的包名。
+
+#### WSL profile 与 --startingDirectory
+
+部分通过商店 `source` 生成的 WSL profile（例如 Canonical 的 Ubuntu 24）在只靠动态启动器时，`--startingDirectory` 可能落不到右键目录。可显式加 `commandline`（对 Ubuntu 24 这类场景是常见绕过，不是说所有动态 profile 缺它都必挂）：
 
 ```json
 // 修改前
@@ -446,9 +508,15 @@ wt 配置文件
     "hidden": false,
     "name": "Ubuntu 24.04.1 LTS",
     "commandline": "wsl.exe -d Ubuntu-24.04",
-    "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
+    "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc",
+    "startingDirectory": null
 }
 ```
+
+补充：
+
+- `profiles.defaults.elevate: true` 表示新开 profile 会主动要管理员；已在提权窗口里开的 tab 仍是管理员，不会自动降权
+- `rendering.software` / `rendering.graphicsAPI` / `rendering.disablePartialInvalidation` 仅作卡顿/花屏排障尝试，官方默认通常不建议长期开软件渲染；是否有效取决于机器，不能当已验证修复
 
 #### 添加 Windows Terminal 到右键(这是老的 也可以用)
 
@@ -847,10 +915,26 @@ $previewWt=Join-Path $env:USERPROFILE 'AppData\Local\Microsoft\WindowsApps\Micro
 Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24' -Recurse -Force -ErrorAction SilentlyContinue
 ```
 
-切回正式版 Windows Terminal：
+切回正式版 Windows Terminal（右键菜单；通用 wt.exe，存在别名漂移可能）：
 
 ```powershell
 $stableWt=Join-Path $env:USERPROFILE 'AppData\Local\Microsoft\WindowsApps\wt.exe'; Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\gitbash-wt\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "Git Bash" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\powershell-wt\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "PowerShell" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl22\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}" --startingDirectory "%V"'); Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\wsl24\command' -Name '(default)' -Value ('"' + $stableWt + '" new-tab -p "{d8e96812-b789-5068-a5ae-10b2fb53e95f}" --startingDirectory "%V"')
+```
+
+同时把系统默认终端也切回稳定版（与右键是两套机制，只改上面不够；缺键时先创建）：
+
+```powershell
+if (-not (Test-Path 'HKCU:\Console\%%Startup')) { New-Item -Path 'HKCU:\Console\%%Startup' -Force | Out-Null }
+Set-ItemProperty -Path 'HKCU:\Console\%%Startup' -Name DelegationConsole -Value '{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}'
+Set-ItemProperty -Path 'HKCU:\Console\%%Startup' -Name DelegationTerminal -Value '{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}'
+Get-ItemProperty 'HKCU:\Console\%%Startup' | Select-Object DelegationConsole, DelegationTerminal
+fsutil reparsepoint query "$env:LOCALAPPDATA\Microsoft\WindowsApps\wt.exe"
+```
+
+若要右键也钉死稳定版包路径，把上面 `$stableWt` 换成：
+
+```powershell
+$stableWt=Join-Path $env:USERPROFILE 'AppData\Local\Microsoft\WindowsApps\Microsoft.WindowsTerminal_8wekyb3d8bbwe\wt.exe'
 ```
 
 恢复 Preview 的旧 settings.json 备份：
